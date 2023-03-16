@@ -1,5 +1,5 @@
 <template>
-  <div id="app2">
+  <div id = "app2" >
     <b-card title="Kick start your project 🚀">
       <b-card-text>All the best for your new project.</b-card-text>
       <b-card-text>Please make sure to read our <b-link
@@ -39,6 +39,6 @@ export default {
   background-size: cover;
 
   position: fixed;
-
+ 
 }
 </style>

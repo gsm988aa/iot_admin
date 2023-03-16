@@ -1,19 +1,12 @@
-<template>
+ <template>
   <b-tab active>
-    <b-card>
-      <div>
-        <b-table
-          striped
-          hover
-          bordered
-          small
-          fixed
-          :items="items"
-        />
-      </div>
+  <b-card>
+    <div>
+      <b-table  striped hover bordered small fixed :items="items"></b-table>
+    </div>
 
-    </b-card>
-    <!--    <b-card-text>{{resp}}</b-card-text>-->
+  </b-card>
+<!--    <b-card-text>{{resp}}</b-card-text>-->
   </b-tab>
 
 </template>
@@ -26,7 +19,7 @@ import {
   BButtonGroup,
   BButton,
   BCard,
-  BTable,
+    BTable,
   BCardHeader,
   BCardText,
   BTabs,
@@ -41,11 +34,12 @@ import {
   BCardFooter,
   BCardBody,
 
-  BCardTitle,
+  BCardTitle
 } from 'bootstrap-vue'
 
+
 export default {
-  name: 'FivePageVue',
+  name: 'FivePage.vue',
 
   components: {
     BCardBody,
@@ -66,11 +60,11 @@ export default {
     BTabs,
     BCardText,
     BTab,
-    BTable,
+    BTable
   },
   directives: {
     Ripple,
-    'b-toggle': VBToggle,
+    'b-toggle': VBToggle
   },
 
   data() {
@@ -79,91 +73,84 @@ export default {
       text5: '',
 
       items: [
-        {
-          Page: 3, Ua: '000.0', Ub: '000.0', Uc: '000.0', Udelta: '000.0', Uout: '000.0', OK: '0', Cancel: '0', Time: '',
-        },
-        {
-          Page: 3, Ua: '000.0', Ub: '000.0', Uc: '000.0', Udelta: '000.0', Uout: '000.0', OK: '0', Cancel: '0', Time: '',
-        },
-        {
-          Page: 3, Ua: '000.0', Ub: '000.0', Uc: '000.0', Udelta: '000.0', Uout: '000.0', OK: '0', Cancel: '0', Time: '',
-        },
-        {
-          Page: 3, Ua: '000.0', Ub: '000.0', Uc: '000.0', Udelta: '000.0', Uout: '000.0', OK: '0', Cancel: '0', Time: '',
-        },
-        {
-          Page: 3, Ua: '000.0', Ub: '000.0', Uc: '000.0', Udelta: '000.0', Uout: '000.0', OK: '0', Cancel: '0', Time: '',
-        },
-        {
-          Page: 3, Ua: '000.0', Ub: '000.0', Uc: '000.0', Udelta: '000.0', Uout: '000.0', OK: '0', Cancel: '0', Time: '',
-        },
-        {
-          Page: 3, Ua: '000.0', Ub: '000.0', Uc: '000.0', Udelta: '000.0', Uout: '000.0', OK: '0', Cancel: '0', Time: '',
-        },
-        {
-          Page: 3, Ua: '000.0', Ub: '000.0', Uc: '000.0', Udelta: '000.0', Uout: '000.0', OK: '0', Cancel: '0', Time: '',
-        },
-        {
-          Page: 3, Ua: '000.0', Ub: '000.0', Uc: '000.0', Udelta: '000.0', Uout: '000.0', OK: '0', Cancel: '0', Time: '',
-        },
-        {
-          Page: 3, Ua: '000.0', Ub: '000.0', Uc: '000.0', Udelta: '000.0', Uout: '000.0', OK: '0', Cancel: '0', Time: '',
-        },
+        { Page: 3, Ua:'000.0',Ub: '000.0',Uc:'000.0',Udelta :'000.0',Uout:'000.0', OK:'0',Cancel:'0' ,Time:'' },
+        { Page: 3, Ua:'000.0',Ub: '000.0',Uc:'000.0',Udelta :'000.0',Uout:'000.0', OK:'0',Cancel:'0' ,Time:'' },
+        { Page: 3, Ua:'000.0',Ub: '000.0',Uc:'000.0',Udelta :'000.0',Uout:'000.0', OK:'0',Cancel:'0' ,Time:'' },
+        { Page: 3, Ua:'000.0',Ub: '000.0',Uc:'000.0',Udelta :'000.0',Uout:'000.0', OK:'0',Cancel:'0' ,Time:'' },
+        { Page: 3, Ua:'000.0',Ub: '000.0',Uc:'000.0',Udelta :'000.0',Uout:'000.0', OK:'0',Cancel:'0' ,Time:'' },
+        { Page: 3, Ua:'000.0',Ub: '000.0',Uc:'000.0',Udelta :'000.0',Uout:'000.0', OK:'0',Cancel:'0' ,Time:'' },
+        { Page: 3, Ua:'000.0',Ub: '000.0',Uc:'000.0',Udelta :'000.0',Uout:'000.0', OK:'0',Cancel:'0' ,Time:'' },
+        { Page: 3, Ua:'000.0',Ub: '000.0',Uc:'000.0',Udelta :'000.0',Uout:'000.0', OK:'0',Cancel:'0' ,Time:'' },
+        { Page: 3, Ua:'000.0',Ub: '000.0',Uc:'000.0',Udelta :'000.0',Uout:'000.0', OK:'0',Cancel:'0' ,Time:'' },
+        { Page: 3, Ua:'000.0',Ub: '000.0',Uc:'000.0',Udelta :'000.0',Uout:'000.0', OK:'0',Cancel:'0' ,Time:'' },
 
-      ],
+      ]
     }
   },
   mounted() {
     setInterval(() => {
       axios.get('http://127.0.0.1:10866/getpage5')
-        .then(response => {
-          const rawresp = response.data.split(',')
-          this.resp5 = rawresp[0]
-          this.respok = rawresp[1]
+          .then(response => {
 
-          // console.log(response.data)
-          if (this.resp5 == '5') {
-            console.log(`${response.data}ok`)
-          } else if (this.resp5 == '4') {
-            // 跳转到第四个页面
-            this.$router.push('/four-page')
-          } else if (this.resp5 == '1') {
-            this.$router.push('/one-page')
-          } else if (this.resp5 == '6') {
-            this.$router.push('/six-page')
-          } else if (this.resp5 == '7') {
-            this.$router.push('/seven-page')
-          } else if (this.resp5 == '8') {
-            this.$router.push('/eight-page')
-          } else if (this.resp5 == '2') {
-            this.$router.push('/two-page')
-          } else if (this.resp5 == '3') {
-            this.$router.push('/')
-          }
-        })
+            var rawresp = response.data.split(",")
+            this.resp5 = rawresp[0]
+            this.respok = rawresp[1]
 
-        .catch(error => {
-          console.log(error)
-        })
+
+            // console.log(response.data)
+            if (this.resp5  == "5") {
+              console.log(response.data+'ok')
+            }
+            else if (this.resp5 == "4") {
+              //跳转到第四个页面
+              this.$router.push('/four-page')
+            }
+            else if (this.resp5  == "1") {
+              this.$router.push('/one-page')
+            }
+            else if (this.resp5  == "6") {
+              this.$router.push('/six-page')
+            }
+            else if (this.resp5  == "7") {
+              this.$router.push('/seven-page')
+            }
+            else if (this.resp5  == "8") {
+              this.$router.push('/eight-page')
+            }
+            else if (this.resp5  == "2") {
+              this.$router.push('/two-page')
+            }
+            else if (this.resp5  == "3") {
+              this.$router.push('/')
+            }
+
+          })
+
+          .catch(error => {
+            console.log(error)
+          })
     }, 1000)
   },
 
+
+
   methods: {
     Send_serial10_1() {
-      const _this = this
-      axios.post('http://localhost:10866/yaokonghezha').then(response => {
+      let _this = this
+      axios.post('http://localhost:10866/yaokonghezha').then(function(response) {
         _this.resp = response.data
       })
+
     },
     Send_serial10_2() {
-      const _this = this
-      axios.post('http://localhost:10866/yaokongfenzha').then(response => {
+      let _this = this
+      axios.post('http://localhost:10866/yaokongfenzha').then(function(response) {
         _this.resp = response.data
       })
     },
     Send_serial10_3() {
-      const _this = this
-      axios.post('http://localhost:10866/yaokongfugui').then(response => {
+      let _this = this
+      axios.post('http://localhost:10866/yaokongfugui').then(function(response) {
         _this.resp = response.data
       })
     },

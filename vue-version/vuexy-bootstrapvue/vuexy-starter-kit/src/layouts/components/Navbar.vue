@@ -19,6 +19,13 @@
     <!-- Left Col -->
     <div class="bookmark-wrapper align-items-center flex-grow-1 d-none d-lg-flex">
       <dark-Toggler class="d-none d-lg-block" />
+
+
+    </div>
+    <div>
+    <h5>
+      本安防爆智能PT+UPS柜
+    </h5>
     </div>
 
     <b-navbar-nav class="nav align-items-center ml-auto">
@@ -30,15 +37,15 @@
         <template #button-content>
           <div class="d-sm-flex d-none user-nav">
             <p class="user-name font-weight-bolder mb-0">
-              John Doe
+              管理员
             </p>
-            <span class="user-status">Admin</span>
+            <span class="user-status">最高权限</span>
           </div>
           <b-avatar
             size="40"
             variant="light-primary"
             badge
-            :src="require('@/assets/images/avatars/13-small.png')"
+            :src="require('@/assets/images/avatars/14-small.jpeg')"
             class="badge-minimal"
             badge-variant="success"
           />

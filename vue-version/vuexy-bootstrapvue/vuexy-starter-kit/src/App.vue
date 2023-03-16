@@ -3,6 +3,7 @@
     id="app"
     class="h-100"
     :class="[skinClasses]"
+	
   >
     <component :is="layout">
       <router-view />
@@ -100,5 +101,6 @@ export default {
 }
 </script>
 <style scoped>
-
+ 
+	
 </style>

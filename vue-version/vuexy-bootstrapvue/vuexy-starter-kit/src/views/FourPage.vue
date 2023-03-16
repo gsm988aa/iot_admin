@@ -2,67 +2,37 @@
   <b-tab active>
 
     <b-card
-      class="text-center"
-      text-variant="white"
-      header="设置"
-      header-bg-variant="success"
-      header-text-variant="white"
-      border-variant="success"
+        class="text-center"
+        text-variant="white"
+        header="设置"
+        header-bg-variant="success"
+        header-text-variant="white"
+        border-variant="success"
     >
-
-      <!--      <b-card bg-variant="secondary" text-variant="white" header="Secondary" class="text-center">-->
-      <!--      <b-card-header>是否要紧急分闸并紧急告警</b-card-header>-->
       <b-card-text>
-
-        <!--        <h1> 是否要紧急分闸并紧急告警? </h1>-->
-        <br>
-        <br>
         <h2> 长按 取消 切换观察员模式 长按 确定 切换管理员模式 </h2>
-        <br>
-        <br>
-
       </b-card-text>
-
     </b-card>
+      <b-row>
+        <b-col cols="6">
+          <b-card>
+            <feather-icon icon="UserPlusIcon" class="font-large-1"></feather-icon>
+            <h4> OK-管理员模式</h4>
+          </b-card>
+        </b-col>
+        <b-col cols="6">
+          <b-card>
+            <feather-icon icon="UserMinusIcon" class="font-large-1"></feather-icon>
+            <h4> CC-观察员模式</h4>
+          </b-card>
 
-    <b-row>
+        </b-col>
+      </b-row>
 
-      <b-col cols="6">
-
-        <b-card>
-          <feather-icon
-            icon="UserPlusIcon"
-            class="font-large-1"
-          />
-          <!--           class="font-large-1"></feather-icon>-->
-          <h4> OK-管理员模式</h4>
-
-        </b-card>
-
-      </b-col>
-
-      <b-col cols="6">
-        <b-card>
-          <feather-icon
-            icon="UserMinusIcon"
-            class="font-large-1"
-          />
-          <h4> CC-观察员模式</h4>
-
-        </b-card>
-
-      </b-col>
-    </b-row>
-
-    <!--    <font-awesome-icon icon="fa-solid fa-ban"/>-->
     <b-card>
-      管理权限：
-      <br>
-      {{ text4 }}
-
+      管理权限： {{ text4 }}
     </b-card>
 
-    <!--    <b-card-text>{{resp}}</b-card-text>-->
   </b-tab>
 
 </template>
@@ -88,11 +58,11 @@ import {
   BTab,
   BTabs,
   VBToggle,
-  VBTogglePlugin,
+  VBTogglePlugin
 } from 'bootstrap-vue'
 
 export default {
-  name: 'FourPageVue',
+  name: 'FourPage.vue',
   components: {
     BCardBody,
     VBTogglePlugin,
@@ -115,7 +85,7 @@ export default {
   },
   directives: {
     Ripple,
-    'b-toggle': VBToggle,
+    'b-toggle': VBToggle
   },
 
   data() {
@@ -132,71 +102,61 @@ export default {
   mounted() {
     setInterval(() => {
       axios.get('http://127.0.0.1:10866/getpage4')
-        .then(response => {
-          const rawresp = response.data.split(',')
-          this.resp4 = rawresp[0]
-          this.respok = rawresp[1]
+          .then(response => {
+            var rawresp = response.data.split(',')
+            this.resp4 = rawresp[0]
+            this.respok = rawresp[1]
 
-          console.log(response.data)
-          if (this.resp4 == '4') {
-            console.log(`${response.data}ok`)
-          } else if (this.resp4 == '1') {
-            // 跳转到第四个页面
-            this.$router.push('/one-page')
-          } else if (this.resp4 == '5') {
-            this.$router.push('/five-page')
-          } else if (this.resp4 == '6') {
-            this.$router.push('/six-page')
-          } else if (this.resp4 == '7') {
-            this.$router.push('/seven-page')
-          } else if (this.resp4 == '8') {
-            this.$router.push('/eight-page')
-          } else if (this.resp4 == '2') {
-            this.$router.push('/two-page')
-          } else if (this.resp4 == '3') {
-            this.$router.push('/')
-          }
+            console.log(response.data)
+            if (this.resp4 == '4') {
+              console.log(response.data + 'ok')
+            } else if (this.resp4 == '1') {
+              //跳转到第四个页面
+              this.$router.push('/one-page')
+            } else if (this.resp4 == '5') {
+              this.$router.push('/five-page')
+            } else if (this.resp4 == '6') {
+              this.$router.push('/six-page')
+            } else if (this.resp4 == '7') {
+              this.$router.push('/seven-page')
+            } else if (this.resp4 == '8') {
+              this.$router.push('/eight-page')
+            } else if (this.resp4 == '2') {
+              this.$router.push('/two-page')
+            } else if (this.resp4 == '3') {
+              this.$router.push('/')
+            }
 
-          // if (this.respok == "1")
-          // {
-          //   let _this = this
-          //   axios.post('http://localhost:10866/hezha').then(function(response) {
-          //     _this.text1 = response.data
-          //     setTimeout(() => {
-          //       this.text1 = '合闸完毕'
-          //
-          //     }, 8000);
-          //   })
-          // }
-        })
+          })
 
-        .catch(error => {
-          console.log(error)
-        })
+          .catch(error => {
+            console.log(error)
+          })
     }, 1000)
   },
 
   methods: {
     Send_serial10_1() {
-      const _this = this
+      let _this = this
       axios.post('http://localhost:10866/yaokonghezha')
-        .then(response => {
-          _this.resp = response.data
-        })
+          .then(function (response) {
+            _this.resp = response.data
+          })
+
     },
     Send_serial10_2() {
-      const _this = this
+      let _this = this
       axios.post('http://localhost:10866/yaokongfenzha')
-        .then(response => {
-          _this.resp = response.data
-        })
+          .then(function (response) {
+            _this.resp = response.data
+          })
     },
     Send_serial10_3() {
-      const _this = this
+      let _this = this
       axios.post('http://localhost:10866/yaokongfugui')
-        .then(response => {
-          _this.resp = response.data
-        })
+          .then(function (response) {
+            _this.resp = response.data
+          })
     },
 
   },

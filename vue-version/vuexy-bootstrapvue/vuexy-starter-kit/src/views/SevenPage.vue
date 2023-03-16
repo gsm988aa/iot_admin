@@ -1,61 +1,35 @@
-<template>
-  <b-tab active>
-    <b-card
-      class="text-center"
-      text-variant="white"
-      header="手车驶出"
-      header-bg-variant="info"
-      header-text-variant="white"
-      border-variant="info"
-    >
-
-      <b-card-text>
-
-        <!--        <h1> 是否要紧急分闸并紧急告警? </h1>-->
-        <br>
-        <br>
-        <h2> 长按 取消 ->中断驶出 长按 确定 ->驶出手车 </h2>
-        <br>
-        <br>
-
-      </b-card-text>
-
-    </b-card>
-    <b-row>
-      <b-col cols="6">
-        <b-card>
-
-          <feather-icon
-            icon="LogOutIcon"
-            class="font-large-1"
-          />
-          <h4> OK-驶出手车</h4>
-        </b-card>
-
-      </b-col>
-      <b-col cols="6">
-        <b-card>
-
-          <feather-icon
-            icon="XCircleIcon"
-            class="font-large-1"
-          />
-          <h4> CC-中断驶出</h4>
-        </b-card>
-
-      </b-col>
-
-    </b-row>
-
-    <!--     <font-awesome-icon icon="fa-solid fa-ban"/>-->
-    <b-card>
-      运行状态：
-      <br>
-      {{ text7 }}
-
-    </b-card>
-    <!--    <b-card-text>{{resp}}</b-card-text>-->
-  </b-tab>
+ <template>
+   <b-tab active>
+     <b-card
+         class="text-center"
+         text-variant="white"
+         header="手车驶出"
+         header-bg-variant="info"
+         header-text-variant="white"
+         border-variant="info">
+       <b-card-text>
+         <h2> 长按 取消 ->中断驶出 长按 确定 ->驶出手车 </h2>
+       </b-card-text>
+     </b-card>
+     <b-row>
+       <b-col cols="6">
+         <b-card>
+           <feather-icon icon="LogOutIcon" class="font-large-1"></feather-icon>
+           <h4> OK-驶出手车</h4>
+         </b-card>
+       </b-col>
+       <b-col cols="6">
+         <b-card>
+           <feather-icon icon="XCircleIcon" class="font-large-1"></feather-icon>
+           <h4> CC-中断驶出</h4>
+         </b-card>
+       </b-col>
+     </b-row>
+     <b-card>
+       运行状态：
+       {{ text7 }}
+     </b-card>
+   </b-tab>
 
 </template>
 
@@ -81,11 +55,12 @@ import {
   BCardFooter,
   BCardBody,
 
-  BCardTitle,
+  BCardTitle
 } from 'bootstrap-vue'
 
+
 export default {
-  name: 'SevenPageVue',
+  name: 'SevenPage.vue',
   components: {
     BCardBody,
     VBTogglePlugin,
@@ -108,13 +83,13 @@ export default {
   },
   directives: {
     Ripple,
-    'b-toggle': VBToggle,
+    'b-toggle': VBToggle
   },
 
   data() {
     return {
       resp7: '',
-      text7: '',
+      text7 : '',
       respok: 0,
       respcc: 0,
 
@@ -123,64 +98,76 @@ export default {
   mounted() {
     setInterval(() => {
       axios.get('http://127.0.0.1:10866/getpage7')
-        .then(response => {
-          const rawresp = response.data.split(',')
-          this.resp7 = rawresp[0]
-          this.respok = rawresp[1]
-          this.respcc = rawresp[2]
+          .then(response => {
+            var rawresp = response.data.split(",")
+            this.resp7 = rawresp[0]
+            this.respok = rawresp[1]
+            this.respcc = rawresp[2]
 
-          if (this.resp7 == '7') {
-            console.log(`${response.data}ok`)
-          } else if (this.resp7 == '4') {
-            // 跳转到第四个页面
-            this.$router.push('/four-page')
-          } else if (this.resp7 == '5') {
-            this.$router.push('/five-page')
-          } else if (this.resp7 == '6') {
-            this.$router.push('/six-page')
-          } else if (this.resp7 == '1') {
-            this.$router.push('/one-page')
-          } else if (this.resp7 == '8') {
-            this.$router.push('/eight-page')
-          } else if (this.resp7 == '2') {
-            this.$router.push('/two-page')
-          } else if (this.resp7 == '3') {
-            this.$router.push('/')
-          }
+            if (this.resp7  == "7") {
+              console.log(response.data+'ok')
+            }
+            else if (this.resp7 == "4") {
+              //跳转到第四个页面
+              this.$router.push('/four-page')
+            }
+            else if (this.resp7  == "5") {
+              this.$router.push('/five-page')
+            }
+            else if (this.resp7  == "6") {
+              this.$router.push('/six-page')
+            }
+            else if (this.resp7  == "1") {
+              this.$router.push('/one-page')
+            }
+            else if (this.resp7  == "8") {
+              this.$router.push('/eight-page')
+            }
+            else if (this.resp7  == "2") {
+              this.$router.push('/two-page')
+            }
+            else if (this.resp7  == "3") {
+              this.$router.push('/')
+            }
 
-          if (this.respok == '1') {
-            const _this = this
-            axios.post('http://localhost:10866/chechu').then(response => {
-              _this.text7 = response.data
-              setTimeout(() => {
-                console.log('chechu_ok')
-              }, 8000)
-            })
-          }
-        })
 
-        .catch(error => {
-          console.log(error)
-        })
+
+            if (this.respok == "1")
+            {
+              let _this = this
+              axios.post('http://localhost:10866/chechu').then(function(response) {
+                _this.text7 = response.data
+                setTimeout(() => {
+                 console.log("chechu_ok")
+                }, 8000);
+              })
+            }
+
+          })
+
+          .catch(error => {
+            console.log(error)
+          })
     }, 1000)
   },
 
   methods: {
     Send_serial10_1() {
-      const _this = this
-      axios.post('http://localhost:10866/yaokonghezha').then(response => {
+      let _this = this
+      axios.post('http://localhost:10866/yaokonghezha').then(function(response) {
         _this.resp = response.data
       })
+
     },
     Send_serial10_2() {
-      const _this = this
-      axios.post('http://localhost:10866/yaokongfenzha').then(response => {
+      let _this = this
+      axios.post('http://localhost:10866/yaokongfenzha').then(function(response) {
         _this.resp = response.data
       })
     },
     Send_serial10_3() {
-      const _this = this
-      axios.post('http://localhost:10866/yaokongfugui').then(response => {
+      let _this = this
+      axios.post('http://localhost:10866/yaokongfugui').then(function(response) {
         _this.resp = response.data
       })
     },

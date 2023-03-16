@@ -12,21 +12,21 @@
 			电流互感器变比
 		</b-button>
 		&nbsp
-		<b-button v-ripple.400="'rgba(186, 191, 199, 0.15)'" variant="outline-secondary" v-on:click="Send_serial1_2()">
-			屏保参数设置
-		</b-button>
+<!--		<b-button v-ripple.400="'rgba(186, 191, 199, 0.15)'" variant="outline-secondary" v-on:click="Send_serial1_2()">-->
+<!--			屏保参数设置-->
+<!--		</b-button>-->
 		&nbsp
 		<b-button v-ripple.400="'rgba(40, 199, 111, 0.15)'" variant="outline-success" v-on:click="Send_serial1_3()">
 			电压互感器变比
 		</b-button>
 		&nbsp
-		<b-button v-ripple.400="'rgba(234, 84, 85, 0.15)'" variant="outline-danger" v-on:click="Send_serial1_4()">
-			合闸继电器脉冲宽度
-		</b-button>
+<!--		<b-button v-ripple.400="'rgba(234, 84, 85, 0.15)'" variant="outline-danger" v-on:click="Send_serial1_4()">-->
+<!--			合闸继电器脉冲宽度-->
+<!--		</b-button>-->
 		&nbsp
-		<b-button v-ripple.400="'rgba(255, 159, 67, 0.15)'" variant="outline-warning" v-on:click="Send_serial1_5()">
-			跳闸继电器脉冲宽度
-		</b-button>
+<!--		<b-button v-ripple.400="'rgba(255, 159, 67, 0.15)'" variant="outline-warning" v-on:click="Send_serial1_5()">-->
+<!--			跳闸继电器脉冲宽度-->
+<!--		</b-button>-->
 		&nbsp
 		<b-button v-ripple.400="'rgba(0, 207, 232, 0.15)'" variant="outline-info" v-on:click="Send_serial1_6()">
 			开入量1滤波时间
@@ -37,39 +37,39 @@
 			开入量2滤波时间
 		</b-button>
 		&nbsp
-		<b-button v-ripple.400="'rgba(113, 102, 240, 0.15)'" variant="outline-primary" v-on:click="Send_serial1_8()">
-			开入量3滤波时间
-		</b-button>
-		&nbsp
-		<b-button v-ripple.400="'rgba(186, 191, 199, 0.15)'" variant="outline-secondary" v-on:click="Send_serial1_9()">
-			开入量4滤波时间
-		</b-button>
-		&nbsp
-		<b-button v-ripple.400="'rgba(40, 199, 111, 0.15)'" variant="outline-success" v-on:click="Send_serial1_10()">
-			开入量5滤波时间
-		</b-button>
-		&nbsp
-		<b-button v-ripple.400="'rgba(234, 84, 85, 0.15)'" variant="outline-danger" v-on:click="Send_serial1_11()">
-			开入量6滤波时间
-		</b-button>
-		&nbsp
-		<b-button v-ripple.400="'rgba(255, 159, 67, 0.15)'" variant="outline-warning" v-on:click="Send_serial1_12()">
-			开入量7滤波时间
-		</b-button>
-		&nbsp
-		<b-button v-ripple.400="'rgba(0, 207, 232, 0.15)'" variant="outline-info" v-on:click="Send_serial1_13()">
-			开入量8滤波时间
-		</b-button>
-		&nbsp
+<!--		<b-button v-ripple.400="'rgba(113, 102, 240, 0.15)'" variant="outline-primary" v-on:click="Send_serial1_8()">-->
+<!--			开入量3滤波时间-->
+<!--		</b-button>-->
+<!--		&nbsp-->
+<!--		<b-button v-ripple.400="'rgba(186, 191, 199, 0.15)'" variant="outline-secondary" v-on:click="Send_serial1_9()">-->
+<!--			开入量4滤波时间-->
+<!--		</b-button>-->
+<!--		&nbsp-->
+<!--		<b-button v-ripple.400="'rgba(40, 199, 111, 0.15)'" variant="outline-success" v-on:click="Send_serial1_10()">-->
+<!--			开入量5滤波时间-->
+<!--		</b-button>-->
+<!--		&nbsp-->
+<!--		<b-button v-ripple.400="'rgba(234, 84, 85, 0.15)'" variant="outline-danger" v-on:click="Send_serial1_11()">-->
+<!--			开入量6滤波时间-->
+<!--		</b-button>-->
+<!--		&nbsp-->
+<!--		<b-button v-ripple.400="'rgba(255, 159, 67, 0.15)'" variant="outline-warning" v-on:click="Send_serial1_12()">-->
+<!--			开入量7滤波时间-->
+<!--		</b-button>-->
+<!--		&nbsp-->
+<!--		<b-button v-ripple.400="'rgba(0, 207, 232, 0.15)'" variant="outline-info" v-on:click="Send_serial1_13()">-->
+<!--			开入量8滤波时间-->
+<!--		</b-button>-->
+<!--		&nbsp-->
 
 		<!-- gsm modified -->
-		<b-button v-ripple.400="'rgba(113, 102, 240, 0.15)'" variant="outline-primary" v-on:click="Send_serial1_14()">
-			CAN通讯波特率
-		</b-button>
-		&nbsp
-		<b-button v-ripple.400="'rgba(186, 191, 199, 0.15)'" variant="outline-secondary" v-on:click="Send_serial1_15()">
-			CAN通讯地址
-		</b-button>
+<!--		<b-button v-ripple.400="'rgba(113, 102, 240, 0.15)'" variant="outline-primary" v-on:click="Send_serial1_14()">-->
+<!--			CAN通讯波特率-->
+<!--		</b-button>-->
+<!--		&nbsp-->
+<!--		<b-button v-ripple.400="'rgba(186, 191, 199, 0.15)'" variant="outline-secondary" v-on:click="Send_serial1_15()">-->
+<!--			CAN通讯地址-->
+<!--		</b-button>-->
 		&nbsp
 		<b-button v-ripple.400="'rgba(40, 199, 111, 0.15)'" variant="outline-success" v-on:click="Send_serial1_16()">
 			电压互感器变比
@@ -93,23 +93,23 @@
 		</b-button>
 		&nbsp
 
-		<!-- gsm modified -->
-		<b-button v-ripple.400="'rgba(113, 102, 240, 0.15)'" variant="outline-primary" v-on:click="Send_serial1_21()">
-			CAN故障录波复归方式
-		</b-button>
-		&nbsp
+<!--		&lt;!&ndash; gsm modified &ndash;&gt;-->
+<!--		<b-button v-ripple.400="'rgba(113, 102, 240, 0.15)'" variant="outline-primary" v-on:click="Send_serial1_21()">-->
+<!--			CAN故障录波复归方式-->
+<!--		</b-button>-->
+<!--		&nbsp-->
 		<b-button v-ripple.400="'rgba(186, 191, 199, 0.15)'" variant="outline-secondary" v-on:click="Send_serial1_22()">
 			参数设定密码
 		</b-button>
-		&nbsp
-		<b-button v-ripple.400="'rgba(40, 199, 111, 0.15)'" variant="outline-success" v-on:click="Send_serial1_23()">
-			Main CPU版本
-		</b-button>
-		&nbsp
-		<b-button v-ripple.400="'rgba(234, 84, 85, 0.15)'" variant="outline-danger" v-on:click="Send_serial1_24()">
-			Com CPU版本
-		</b-button>
-		&nbsp
+<!--		&nbsp-->
+<!--		<b-button v-ripple.400="'rgba(40, 199, 111, 0.15)'" variant="outline-success" v-on:click="Send_serial1_23()">-->
+<!--			Main CPU版本-->
+<!--		</b-button>-->
+<!--		&nbsp-->
+<!--		<b-button v-ripple.400="'rgba(234, 84, 85, 0.15)'" variant="outline-danger" v-on:click="Send_serial1_24()">-->
+<!--			Com CPU版本-->
+<!--		</b-button>-->
+<!--		&nbsp-->
 		<b-button v-ripple.400="'rgba(255, 159, 67, 0.15)'" variant="outline-warning" v-on:click="Send_serial1_25()">
 			电机启动选择
 		</b-button>
@@ -129,22 +129,22 @@
 			绝缘继电器脉冲时间
 		</b-button>
 		&nbsp
-		<b-button v-ripple.400="'rgba(186, 191, 199, 0.15)'" variant="outline-secondary" v-on:click="Send_serial1_29()">
-			功率计算方式
-		</b-button>
-		&nbsp
-		<b-button v-ripple.400="'rgba(40, 199, 111, 0.15)'" variant="outline-success" v-on:click="Send_serial1_30()">
-			单位闭锁时间
-		</b-button>
-		&nbsp
+<!--		<b-button v-ripple.400="'rgba(186, 191, 199, 0.15)'" variant="outline-secondary" v-on:click="Send_serial1_29()">-->
+<!--			功率计算方式-->
+<!--		</b-button>-->
+<!--		&nbsp-->
+<!--		<b-button v-ripple.400="'rgba(40, 199, 111, 0.15)'" variant="outline-success" v-on:click="Send_serial1_30()">-->
+<!--			单位闭锁时间-->
+<!--		</b-button>-->
+<!--		&nbsp-->
 		<b-button v-ripple.400="'rgba(234, 84, 85, 0.15)'" variant="outline-danger" v-on:click="Send_serial1_31()">
 			速断解锁电流
 		</b-button>
 		&nbsp
-		<b-button v-ripple.400="'rgba(255, 159, 67, 0.15)'" variant="outline-warning" v-on:click="Send_serial1_32()">
-			加热除湿继电器脉冲时间
-		</b-button>
-		&nbsp
+<!--		<b-button v-ripple.400="'rgba(255, 159, 67, 0.15)'" variant="outline-warning" v-on:click="Send_serial1_32()">-->
+<!--			加热除湿继电器脉冲时间-->
+<!--		</b-button>-->
+<!--		&nbsp-->
 		<b-button v-ripple.400="'rgba(0, 207, 232, 0.15)'" variant="outline-info" v-on:click="Send_serial1_33()">
 			失压延时继电器脉冲时间
 		</b-button>
@@ -158,26 +158,26 @@
 			硬复位次数
 		</b-button>
 		&nbsp
-		<b-button v-ripple.400="'rgba(186, 191, 199, 0.15)'" variant="outline-secondary" v-on:click="Send_serial1_36()">
-			备用1
-		</b-button>
-		&nbsp
-		<b-button v-ripple.400="'rgba(40, 199, 111, 0.15)'" variant="outline-success" v-on:click="Send_serial1_37()">
-			备用2
-		</b-button>
-		&nbsp
+<!--		<b-button v-ripple.400="'rgba(186, 191, 199, 0.15)'" variant="outline-secondary" v-on:click="Send_serial1_36()">-->
+<!--			备用1-->
+<!--		</b-button>-->
+<!--		&nbsp-->
+<!--		<b-button v-ripple.400="'rgba(40, 199, 111, 0.15)'" variant="outline-success" v-on:click="Send_serial1_37()">-->
+<!--			备用2-->
+<!--		</b-button>-->
+<!--		&nbsp-->
 		<b-button v-ripple.400="'rgba(234, 84, 85, 0.15)'" variant="outline-danger" v-on:click="Send_serial1_38()">
 			故障标志信息
 		</b-button>
 		&nbsp
-		<b-button v-ripple.400="'rgba(255, 159, 67, 0.15)'" variant="outline-warning" v-on:click="Send_serial1_39()">
-			Com Boot版本信息
-		</b-button>
-		&nbsp
-		<b-button v-ripple.400="'rgba(0, 207, 232, 0.15)'" variant="outline-info" v-on:click="Send_serial1_40()">
-			液晶对比度
-		</b-button>
-		&nbsp
+<!--		<b-button v-ripple.400="'rgba(255, 159, 67, 0.15)'" variant="outline-warning" v-on:click="Send_serial1_39()">-->
+<!--			Com Boot版本信息-->
+<!--		</b-button>-->
+<!--		&nbsp-->
+<!--		<b-button v-ripple.400="'rgba(0, 207, 232, 0.15)'" variant="outline-info" v-on:click="Send_serial1_40()">-->
+<!--			液晶对比度-->
+<!--		</b-button>-->
+<!--		&nbsp-->
 
 		<b-button v-ripple.400="'rgba(30, 30, 30, 0.15)'" variant="outline-dark" v-on:click="Send_serial1_41()">
 			故障标志信息2
@@ -185,18 +185,18 @@
 		&nbsp
 
 		<!-- gsm 复制开始 -->
-		<b-button v-ripple.400="'rgba(113, 102, 240, 0.15)'" variant="outline-primary" v-on:click="Send_serial1_42()">
-			合闸次数统计
-		</b-button>
-		&nbsp
-		<b-button v-ripple.400="'rgba(186, 191, 199, 0.15)'" variant="outline-secondary" v-on:click="Send_serial1_43()">
-			分闸次数统计
-		</b-button>
-		&nbsp
-		<b-button v-ripple.400="'rgba(40, 199, 111, 0.15)'" variant="outline-success" v-on:click="Send_serial1_44()">
-			远程电子挂牌
-		</b-button>
-		&nbsp
+<!--		<b-button v-ripple.400="'rgba(113, 102, 240, 0.15)'" variant="outline-primary" v-on:click="Send_serial1_42()">-->
+<!--			合闸次数统计-->
+<!--		</b-button>-->
+<!--		&nbsp-->
+<!--		<b-button v-ripple.400="'rgba(186, 191, 199, 0.15)'" variant="outline-secondary" v-on:click="Send_serial1_43()">-->
+<!--			分闸次数统计-->
+<!--		</b-button>-->
+<!--		&nbsp-->
+<!--		<b-button v-ripple.400="'rgba(40, 199, 111, 0.15)'" variant="outline-success" v-on:click="Send_serial1_44()">-->
+<!--			远程电子挂牌-->
+<!--		</b-button>-->
+<!--		&nbsp-->
 		<b-button v-ripple.400="'rgba(234, 84, 85, 0.15)'" variant="outline-danger" v-on:click="Send_serial1_45()">
 			测量Ia极性取反
 		</b-button>
@@ -205,68 +205,68 @@
 			测量Ic极性取反
 		</b-button>
 		&nbsp
-		<b-button v-ripple.400="'rgba(0, 207, 232, 0.15)'" variant="outline-info" v-on:click="Send_serial1_47()">
-			保护IA极性取反
-		</b-button>
-		&nbsp
+<!--		<b-button v-ripple.400="'rgba(0, 207, 232, 0.15)'" variant="outline-info" v-on:click="Send_serial1_47()">-->
+<!--			保护IA极性取反-->
+<!--		</b-button>-->
+<!--		&nbsp-->
 
-		<b-button v-ripple.400="'rgba(30, 30, 30, 0.15)'" variant="outline-dark" v-on:click="Send_serial1_48()">
-			保护IC极性取反
-		</b-button>
-		&nbsp
+<!--		<b-button v-ripple.400="'rgba(30, 30, 30, 0.15)'" variant="outline-dark" v-on:click="Send_serial1_48()">-->
+<!--			保护IC极性取反-->
+<!--		</b-button>-->
+<!--		&nbsp-->
 		<!-- gsm 复制停止 -->
 		<!-- gsm 复制开始 -->
 		<b-button v-ripple.400="'rgba(113, 102, 240, 0.15)'" variant="outline-primary" v-on:click="Send_serial1_49()">
 			主动发送录波使能
 		</b-button>
 		&nbsp
-		<b-button v-ripple.400="'rgba(186, 191, 199, 0.15)'" variant="outline-secondary" v-on:click="Send_serial1_50()">
-			防越级闭锁持续时间
-		</b-button>
-		&nbsp
-		<b-button v-ripple.400="'rgba(40, 199, 111, 0.15)'" variant="outline-success" v-on:click="Send_serial1_51()">
-			SU31扩展继电器1出口脉冲
-		</b-button>
-		&nbsp
-		<b-button v-ripple.400="'rgba(234, 84, 85, 0.15)'" variant="outline-danger" v-on:click="Send_serial1_52()">
-			SU31扩展继电器2出口脉冲
-		</b-button>
-		&nbsp
-		<b-button v-ripple.400="'rgba(255, 159, 67, 0.15)'" variant="outline-warning" v-on:click="Send_serial1_53()">
-			SU31扩展继电器3出口脉冲
-		</b-button>
-		&nbsp
-		<b-button v-ripple.400="'rgba(0, 207, 232, 0.15)'" variant="outline-info" v-on:click="Send_serial1_54()">
-			SU31扩展继电器4出口脉冲
-		</b-button>
-		&nbsp
-		<b-button v-ripple.400="'rgba(30, 30, 30, 0.15)'" variant="outline-dark" v-on:click="Send_serial1_55()">
-			测量Ib极性取反
-		</b-button>
-		&nbsp
+<!--		<b-button v-ripple.400="'rgba(186, 191, 199, 0.15)'" variant="outline-secondary" v-on:click="Send_serial1_50()">-->
+<!--			防越级闭锁持续时间-->
+<!--		</b-button>-->
+<!--		&nbsp-->
+<!--		<b-button v-ripple.400="'rgba(40, 199, 111, 0.15)'" variant="outline-success" v-on:click="Send_serial1_51()">-->
+<!--			SU31扩展继电器1出口脉冲-->
+<!--		</b-button>-->
+<!--		&nbsp-->
+<!--		<b-button v-ripple.400="'rgba(234, 84, 85, 0.15)'" variant="outline-danger" v-on:click="Send_serial1_52()">-->
+<!--			SU31扩展继电器2出口脉冲-->
+<!--		</b-button>-->
+<!--		&nbsp-->
+<!--		<b-button v-ripple.400="'rgba(255, 159, 67, 0.15)'" variant="outline-warning" v-on:click="Send_serial1_53()">-->
+<!--			SU31扩展继电器3出口脉冲-->
+<!--		</b-button>-->
+<!--		&nbsp-->
+<!--		<b-button v-ripple.400="'rgba(0, 207, 232, 0.15)'" variant="outline-info" v-on:click="Send_serial1_54()">-->
+<!--			SU31扩展继电器4出口脉冲-->
+<!--		</b-button>-->
+<!--		&nbsp-->
+<!--		<b-button v-ripple.400="'rgba(30, 30, 30, 0.15)'" variant="outline-dark" v-on:click="Send_serial1_55()">-->
+<!--			测量Ib极性取反-->
+<!--		</b-button>-->
+<!--		&nbsp-->
 		<!-- gsm 复制停止 -->
 
-		<!-- gsm 复制开始 -->
-		<b-button v-ripple.400="'rgba(113, 102, 240, 0.15)'" variant="outline-primary" v-on:click="Send_serial1_56()">
-			保护IB极性取反
-		</b-button>
-		&nbsp
+<!--		&lt;!&ndash; gsm 复制开始 &ndash;&gt;-->
+<!--		<b-button v-ripple.400="'rgba(113, 102, 240, 0.15)'" variant="outline-primary" v-on:click="Send_serial1_56()">-->
+<!--			保护IB极性取反-->
+<!--		</b-button>-->
+<!--		&nbsp-->
 		<b-button v-ripple.400="'rgba(186, 191, 199, 0.15)'" variant="outline-secondary" v-on:click="Send_serial1_57()">
 			本体扩展继电器1出口脉冲
 		</b-button>
 		&nbsp
-		<b-button v-ripple.400="'rgba(40, 199, 111, 0.15)'" variant="outline-success" v-on:click="Send_serial1_58()">
-			本体扩展继电器2出口脉冲
-		</b-button>
-		&nbsp
-		<b-button v-ripple.400="'rgba(234, 84, 85, 0.15)'" variant="outline-danger" v-on:click="Send_serial1_59()">
-			本体扩展继电器3出口脉冲
-		</b-button>
-		&nbsp
-		<b-button v-ripple.400="'rgba(255, 159, 67, 0.15)'" variant="outline-warning" v-on:click="Send_serial1_60()">
-			本体扩展继电器4出口脉冲
-		</b-button>
-		&nbsp
+<!--		<b-button v-ripple.400="'rgba(40, 199, 111, 0.15)'" variant="outline-success" v-on:click="Send_serial1_58()">-->
+<!--			本体扩展继电器2出口脉冲-->
+<!--		</b-button>-->
+<!--		&nbsp-->
+<!--		<b-button v-ripple.400="'rgba(234, 84, 85, 0.15)'" variant="outline-danger" v-on:click="Send_serial1_59()">-->
+<!--			本体扩展继电器3出口脉冲-->
+<!--		</b-button>-->
+<!--		&nbsp-->
+<!--		<b-button v-ripple.400="'rgba(255, 159, 67, 0.15)'" variant="outline-warning" v-on:click="Send_serial1_60()">-->
+<!--			本体扩展继电器4出口脉冲-->
+<!--		</b-button>-->
+<!--		&nbsp-->
 
 		<!-- gsm 复制停止 -->
 

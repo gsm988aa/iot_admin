@@ -1,15 +1,14 @@
 <template>
   <b-tab active>
-    <!--    <b-card-text>Page:{{resp}}</b-card-text>-->
+<!--    <b-card-text>Page:{{resp}}</b-card-text>-->
 
     <b-card
-      class="text-center"
-      text-variant="white"
-      header="是否要紧急告警"
-      header-bg-variant="primary"
-      header-text-variant="white"
-      border-variant="primary"
-    >
+        class="text-center"
+        text-variant="white"
+        header="是否要紧急告警"
+        header-bg-variant="primary"
+        header-text-variant="white"
+        border-variant="primary">
       <b-card-text>
 
         <br>
@@ -22,29 +21,27 @@
 
     </b-card>
 
-    <b-row>
-      <b-col cols="6">
+      <b-row>
+        <b-col cols="6">
 
-        <b-card>
-          <feather-icon
-            icon="PhoneOutgoingIcon"
-            class="font-large-1"
-          />
-          <h3> OK-紧急告警</h3>
+          <b-card>
+            <feather-icon icon="PhoneOutgoingIcon" class="font-large-1"></feather-icon>
+            <h3> OK-紧急告警</h3>
 
-        </b-card>
+          </b-card>
 
-      </b-col>
+        </b-col>
 
-      <b-col cols="6">
-        <b-card>
-          <br>
-          <br>
-          <br>
+        <b-col cols="6">
+<b-card>
+  <br>
+  <br>
+  <br>
 
-        </b-card>
-      </b-col>
-    </b-row>
+</b-card>
+        </b-col>
+      </b-row>
+
 
     <!--    <font-awesome-icon icon="fa-solid fa-ban"/>-->
     <b-card>
@@ -54,11 +51,13 @@
 
     </b-card>
 
+
+
     <!--<b-card>-->
-    <!--  <b-button @click = "emergency" variant="primary" size="lg" block>OK</b-button>-->
-    <!--&lt;!&ndash;    oks&ndash;&gt;-->
-    <!--&lt;!&ndash;  </b-button>&ndash;&gt;-->
-    <!--</b-card>-->
+<!--  <b-button @click = "emergency" variant="primary" size="lg" block>OK</b-button>-->
+<!--&lt;!&ndash;    oks&ndash;&gt;-->
+<!--&lt;!&ndash;  </b-button>&ndash;&gt;-->
+<!--</b-card>-->
 
   </b-tab>
 
@@ -99,12 +98,13 @@
 //     timer = setTimeout(callback, ms);
 //   };
 // })();
-// 写一个delay函数，用于延迟执行
+//写一个delay函数，用于延迟执行
 // var delay = function(time) {
 //   return function(f) {
 //     setTimeout(f, time)
 //   }
 // }
+
 
 import axios from 'axios'
 import Ripple from 'vue-ripple-directive'
@@ -127,11 +127,10 @@ import {
   BCardFooter,
   BCardBody,
 
-  BCardTitle,
+  BCardTitle
 } from 'bootstrap-vue'
-
 export default {
-  name: 'OnePageVue',
+  name: 'OnePage.vue',
   components: {
     BCardBody,
     VBTogglePlugin,
@@ -154,100 +153,112 @@ export default {
   },
   directives: {
     Ripple,
-    'b-toggle': VBToggle,
+    'b-toggle': VBToggle
   },
-  // 每隔1s向后端发送axios get请求 获取page数据并打印
+  //每隔1s向后端发送axios get请求 获取page数据并打印
 
   data() {
     return {
       resp1: '',
-      text1: '',
+      text1: "",
       respok: 0,
       resp: '',
 
     }
   },
   mounted() {
+
     setInterval(() => {
       axios.get('http://127.0.0.1:10866/getpage1')
-        .then(response => {
-          const rawresp = response.data.split(',')
-          this.resp1 = rawresp[0]
-          this.respok = rawresp[1]
-          // console.log(response.data)
-          //
-          // console.log(this.resp1)
-          // console.log(this.respok)
-          if (this.resp1 == '1') {
-            // console.log(response.data+'ok')
-          } else if (this.resp1 == '4') {
-            // 跳转到第四个页面
-            this.$router.push('/four-page')
-          } else if (this.resp1 == '5') {
-            this.$router.push('/five-page')
-          } else if (this.resp1 == '6') {
-            this.$router.push('/six-page')
-          } else if (this.resp1 == '7') {
-            this.$router.push('/seven-page')
-          } else if (this.resp1 == '8') {
-            this.$router.push('/eight-page')
-          } else if (this.resp1 == '2') {
-            this.$router.push('/two-page')
-          } else if (this.resp1 == '3') {
-            this.$router.push('/')
-          }
+          .then(response => {
+            var rawresp = response.data.split(",")
+            this.resp1 = rawresp[0]
+            this.respok = rawresp[1]
+            // console.log(response.data)
+            //
+            // console.log(this.resp1)
+            // console.log(this.respok)
+            if (this.resp1  == "1") {
+              // console.log(response.data+'ok')
+            }
+            else if (this.resp1 == "4") {
+              //跳转到第四个页面
+              this.$router.push('/four-page')
+            }
+            else if (this.resp1  == "5") {
+              this.$router.push('/five-page')
+            }
+            else if (this.resp1  == "6") {
+              this.$router.push('/six-page')
+            }
+            else if (this.resp1  == "7") {
+              this.$router.push('/seven-page')
+            }
+            else if (this.resp1  == "8") {
+              this.$router.push('/eight-page')
+            }
+            else if (this.resp1  == "2") {
+              this.$router.push('/two-page')
+            }
+            else if (this.resp1  == "3") {
+              this.$router.push('/')
+            }
 
-          if (this.respok == '1') {
-            // let _this = this
-            axios.post('http://localhost:10866/fenzha').then(response => {
-              // _this.text1 = response.data
+            if (this.respok == "1"   )
+            {
+              // let _this = this
+            axios.post('http://localhost:10866/fenzha').then(function(response) {
 
-              setTimeout(() => {
+                  setTimeout(() => {
 
-                // this.text1 = '重启完毕'
-                // alert("rebootok")
+                    // this.text1 = '重启完毕'
+                    // alert("rebootok")
 
-              }, 8000)
-            })
-          }
 
-          // Send_serial10_1() {
-          //   let _this = this
-          //   axios.post('http://localhost:10866/yaokonghezha').then(function(response) {
-          //     _this.resp = response.data
-          //   })
-        })
+                  }, 8000);
 
-        .catch(error => {
-          console.log(error)
-        })
+
+
+                })
+            }
+
+
+          })
+
+          .catch(error => {
+            console.log(error)
+          })
     }, 1000)
   },
 
   methods: {
-    emergency() {
-      console.log('A')
+    emergency(){
+      console.log("A");
 
       setTimeout(() => {
-        this.text1 = 'ok'
-      }, 3000)
+
+       this.text1 = 'ok'
+
+      }, 3000);
+
     },
 
     Send_serial10_1() {
-      const _this = this
-      axios.post('http://localhost:10866/yaokonghezha').then(response => {
+      let _this = this
+      axios.post('http://localhost:10866/yaokonghezha').then(function(response) {
         _this.resp = response.data
       })
+
     },
     Send_serial10_2() {
-      const _this = this
-      axios.post('http://localhost:10866/yaokongfenzha').then(response => {
+      let _this = this
+      axios.post('http://localhost:10866/yaokongfenzha').then(function(response) {
         _this.resp = response.data
       })
     },
     Send_serial10_3() {
-      const _this = this
-      axios.post('http://localhost:10866/yaokongfugui').then(response => {
+      let _this = this
+      axios.post('http://localhost:10866/yaokongfugui').then(function(response) {
         _this.resp = response.data
       })
     },

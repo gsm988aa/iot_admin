@@ -1,44 +1,28 @@
 <template>
-  <div id="app2">
-    <b-card title="Kick start your project 🚀">
-      <b-card-text>All the best for your new project.</b-card-text>
-      <b-card-text>Please make sure to read our <b-link
-        href="https://pixinvent.com/demo/vuexy-vuejs-admin-dashboard-template/documentation/"
-        target="_blank"
-      >
-        Template Documentation
-      </b-link> to understand where to go from here and how to use our template.</b-card-text>
-    </b-card>
-
-    <b-card title="Want to integrate JWT? 🔒">
-      <b-card-text>We carefully crafted JWT flow so you can implement JWT with ease and with minimum efforts.</b-card-text>
-      <b-card-text>Please read our  JWT Documentation to get more out of JWT authentication.</b-card-text>
-    </b-card>
-  </div>
+  <b-card title="Create Awesome 🙌">
+    <b-card-text>This is your second page.</b-card-text>
+    <b-card-text>Chocolate sesame snaps pie carrot cake pastry pie lollipop muffin. Carrot cake dragée chupa chups jujubes. Macaroon liquorice cookie wafer tart marzipan bonbon. Gingerbread jelly-o dragée chocolate.</b-card-text>
+  </b-card>
 </template>
 
+<!--//     const { data } = await $axios.post('http://localhost:10866/getpage')-->
+<!--// if (data.page === '3') {-->
+<!--// redirect('/')-->
 <script>
-import { BCard, BCardText, BLink } from 'bootstrap-vue'
+import { BCard, BCardText } from 'bootstrap-vue'
 
 export default {
   components: {
     BCard,
     BCardText,
-    BLink,
-  },
+  }
+
 }
+
 </script>
 
+
+
 <style>
-#app2{
-    background : url('../assets/images/apple-logo-white2.jpg') no-repeat center ;
-  height: 100%;
 
-  width: 100%;
-
-  background-size: cover;
-
-  position: fixed;
-
-}
 </style>
