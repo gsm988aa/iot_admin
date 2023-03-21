@@ -2,12 +2,19 @@ export default [
   {
     header: 'Apps & Pages',
   },
-
+  {
+    title: 'Shortcuts',
+    route: 'apps-shortcuts',
+    icon: 'CommandIcon',
+  },
   {
     title: 'Emergency opening',
     route: 'apps-emergencyopening',
     icon: 'ToggleRightIcon',
   },
+
+
+
   {
     title: 'Closing/Opening',
     route: 'apps-closingopening',

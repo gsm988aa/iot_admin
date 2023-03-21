@@ -21,7 +21,8 @@ export const getUserData = () => JSON.parse(localStorage.getItem('userData'))
  * @param {String} userRole Role of user
  */
 export const getHomeRouteForLoggedInUser = userRole => {
-  if (userRole === 'admin') return '/'
+  // 修改 过了认证 首页跳转页面
+  if (userRole === 'admin') return { name: 'apps-shortcuts' }
   if (userRole === 'client') return { name: 'access-control' }
   return { name: 'auth-login' }
 }

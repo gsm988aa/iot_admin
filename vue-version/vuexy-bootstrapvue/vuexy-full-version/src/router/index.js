@@ -41,6 +41,7 @@ router.beforeEach((to, _, next) => {
 
   if (!canNavigate(to)) {
     // Redirect to login if not logged in
+    // auth-login  首页跳转
     if (!isLoggedIn) return next({ name: 'auth-login' })
 
     // If logged in => not authorized

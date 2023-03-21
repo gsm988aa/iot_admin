@@ -10,7 +10,7 @@
 <!--   苏ICP备05006520号-2-->
    <a href="https://beian.miit.gov.cn/" target="_blank">无锡市新一代</a>
    &nbsp;&nbsp;&nbsp;&nbsp;
-   <a href="https://beian.miit.gov.cn/" target="_blank">苏ICP备05006520号-2</a>
+<!--   <a href="https://beian.miit.gov.cn/" target="_blank">苏ICP备05006520号-2</a>-->
 
    &nbsp;&nbsp;&nbsp;&nbsp;
    <a href="https://beian.miit.gov.cn/" target="_blank">技术咨询:17625000096</a>

@@ -1,6 +1,6 @@
 <template>
 
-  <b-container class="bv-example-row">
+  <b-container className="bv-example-row">
     <b-row>
       <br>
       <br>
@@ -20,7 +20,7 @@
       <b-col cols="6">
 
         <div style="transform: scale(2);">
-          <b-card >
+          <b-card>
 
             <b-button variant="primary" @click="handleClick1" :disabled="isDisabled">合闸</b-button>
             <br>
@@ -53,9 +53,9 @@
   </b-container>
 
 </template>
- 
+
 <script>
-import { BRow, BCol,BCard ,BContainer,BButton,BButtonGroup,BFormInput} from 'bootstrap-vue'
+import {BRow, BCol, BCard, BContainer, BButton, BButtonGroup, BFormInput} from 'bootstrap-vue'
 
 
 export default {
@@ -68,72 +68,98 @@ export default {
     BFormInput
 
   },
-  data(){
-    return{
-      text:'',
+  data() {
+    return {
+      text: '',
       isDisabled: false
     }
   },
   methods: {
     handleClick1() {
-      if(!this.isDisabled){
+      if (!this.isDisabled) {
         this.isDisabled = true;
         setTimeout(() => {
           console.log('Button clicked!')
           console.log('Button 1 clicked!')
-          this.text = 'Button 1 clicked!'
           this.isDisabled = false;
+
+          this.text = '执行完毕!'
+          axios.post('http://localhost:10866/hezha').then(function (response) {
+          })
         }, 3000);
+        this.text = '执行合闸'
       }
     },
     handleClick2() {
-      if(!this.isDisabled){
+      if (!this.isDisabled) {
         this.isDisabled = true;
         setTimeout(() => {
           console.log('Button 2 clicked!')
-          this.text = 'Button 2 clicked!'
           this.isDisabled = false;
+
+          this.text = '执行完毕'
+          axios.post('http://localhost:10866/fenzha').then(function (response) {
+          })
         }, 3000);
+        this.text = '执行分闸'
       }
     },
     handleClick3() {
-      if(!this.isDisabled){
+      if (!this.isDisabled) {
         this.isDisabled = true;
         setTimeout(() => {
           console.log('Button 3 clicked!')
           this.text = 'Button 3 clicked!'
           this.isDisabled = false;
+          this.text = '执行完毕'
+          axios.post('http://localhost:10866/chuneng').then(function (response) {
+          })
+
         }, 3000);
+        this.text = '执行储能'
       }
     },
     handleClick4() {
-      if(!this.isDisabled){
+      if (!this.isDisabled) {
         this.isDisabled = true;
         setTimeout(() => {
           console.log('Button 4 clicked!')
           this.text = 'Button 4 clicked!'
           this.isDisabled = false;
+          this.text = '发送指令完毕'
+          axios.post('http://localhost:10866/cheru').then(function (response) {
+          })
         }, 3000);
+        this.text = '执行手车驶入'
       }
     },
     handleClick5() {
-      if(!this.isDisabled){
+      if (!this.isDisabled) {
         this.isDisabled = true;
         setTimeout(() => {
           console.log('Button 5 clicked!')
           this.text = 'Button 5 clicked!'
           this.isDisabled = false;
+          this.text = '发送指令完毕'
+          axios.post('http://localhost:10866/chechu').then(function (response) {
+          })
         }, 3000);
+        this.text = '执行手车驶出'
       }
     },
     handleClick6() {
-      if(!this.isDisabled){
+      if (!this.isDisabled) {
         this.isDisabled = true;
         setTimeout(() => {
           console.log('Button 6 clicked!')
           this.text = 'Button 6 clicked!'
           this.isDisabled = false;
+          this.text = '执行完毕'
+          axios.post('http://localhost:10866/reboot').then(function (response) {
+          })
+
         }, 3000);
+        this.text = '执行复位'
       }
     }
   }

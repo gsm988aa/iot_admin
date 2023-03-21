@@ -1,9 +1,15 @@
 export default [
   {
+    path: '/apps/shortcuts',
+    name: 'apps-shortcuts',
+    component: () => import('@/views/apps/shortcuts/shortcuts.vue'),
+  },
+  {
     path: '/apps/emergencyopening',
     name: 'apps-emergencyopening',
     component: () => import('@/views/apps/emergencyopening/emergencyopening.vue'),
   },
+
   {
     path: '/apps/closingopening',
     name: 'apps-closingopening',
