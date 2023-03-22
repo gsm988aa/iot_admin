@@ -5,7 +5,7 @@ const data = {
     general: {
       avatar: require('@/assets/images/portrait/small/avatar-s-11.jpg'),
       username: '江铜',
-      fullName: '江铜集团',
+      fullName: '管理员',
       email: 'jiangtongjituan@hogward.com',
       company: 'jiangtongjituan',
     },

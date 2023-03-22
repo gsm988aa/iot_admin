@@ -5,11 +5,11 @@ const data = {
   users: [
     {
       id: 1,
-      fullName: '江铜集团',
+      fullName: '管理员',
       username: 'johndoe',
       password: 'admin',
       // eslint-disable-next-line global-require
-      avatar: require('@/assets/images/avatars/13-small.png'),
+      avatar: require('@/assets/images/avatars/100100.png'),
       email: 'admin@demo.com',
       role: 'admin',
       ability: [

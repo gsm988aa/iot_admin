@@ -141,6 +141,7 @@ app.get('/:action', function (req, res) {
 
 app.post('/:action', function (req, res) {
 
+
   var action = req.params.action || req.param('action');
 
   if (action == 'led2') {
@@ -153,19 +154,30 @@ app.post('/:action', function (req, res) {
     return res.send("Reboot is on!!!");
   }
   if (action == 'fenzha') {
-    serialport2.write("fenzha");
+    // serialport2.write("fenzha");
+    serialport2.write('b7d6d5a24119', 'hex');
+
     return res.send("fenzha is on!!!");
   }
   if (action == 'hezha') {
-    serialport2.write("hezha");
+    // serialport2.write("hezha");
+    serialport2.write('bacfd5a22ACA', 'hex');
+    
     return res.send("hezha is on!!!");
   }
   if (action == 'cheru') {
-    serialport2.write("cheru");
+    // serialport2.write("cheru");
+    serialport2.write('b3b5c8ebC920', 'hex');
     return res.send("cheru is on!!!");
   }
   if (action == 'chechu') {
-    serialport2.write("chechu");
+    // serialport2.write("chechu");
+    serialport2.write('b3b5b3f630C2', 'hex');
+    return res.send("chechu is on!!!");
+  }
+    if (action == '储能') {
+    // serialport2.write("cheneng");
+    serialport2.write('b4a2c4dc6FD5', 'hex');
     return res.send("chechu is on!!!");
   }
 
