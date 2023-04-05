@@ -19,9 +19,14 @@
 
       <b-col cols="6">
 
-        <div style="transform: scale(2);">
+        <div style="transform: scale(1);">
           <b-card>
-
+            <b-button variant="info" @click="handleClick0x" :disabled="isDisabled">获取文件信息</b-button>
+            <br>
+            <br>
+            <b-button variant="info" @click="handleClick0" :disabled="isDisabled">获取串口信息</b-button>
+            <br>
+            <br>
             <b-button variant="primary" @click="handleClick1" :disabled="isDisabled">合闸</b-button>
             <br>
             <br>
@@ -61,7 +66,8 @@
 
 <script>
 import {BRow, BCol, BCard, BContainer, BButton, BButtonGroup, BFormInput} from 'bootstrap-vue'
-
+// import axios
+import axios from 'axios'
 
 export default {
   components: {
@@ -69,17 +75,61 @@ export default {
     BCol,
     BCard,
     BButton,
+    // eslint-disable-next-line vue/no-unused-components
     BButtonGroup,
+    // b-container
+    BContainer,
     BFormInput
-
   },
   data() {
     return {
       text: '',
+      text2: [],
       isDisabled: false
     }
   },
   methods: {
+    handleClick0() {
+      if (!this.isDisabled) {
+        this.isDisabled = true;
+
+          console.log('Button 0 clicked!')
+          console.log('Button 0 clicked!')
+          this.isDisabled = false;
+          // this.text = '获取串口信息完毕!'
+          // 延迟300ms后将axios getinfo收到的数据传递给text
+           setTimeout(() => {
+            axios.post('http://localhost:10866/getinfo')
+              .then(response => {
+                console.log(response)
+                this.text = response.data
+              })
+              .catch(error => {
+                console.log(error)
+              })
+          }, 1000)
+        // this.text = '获取串口信息'
+      }
+    },
+
+    handleClick0x() {
+      if (!this.isDisabled) {
+        this.isDisabled = true;
+        setTimeout(() => {
+          console.log('Button 0x clicked!')
+          console.log('Button 0x clicked!')
+          this.isDisabled = false;
+
+          // this.text = '执行完毕!'
+          axios.post('http://localhost:10866/gettxt').then(response => {
+            console.log(response)
+          this.text = response.data
+          })
+        }, 10);
+
+        // this.text = '执行合闸'
+      }
+    },
     handleClick1() {
       if (!this.isDisabled) {
         this.isDisabled = true;

@@ -27,6 +27,8 @@ import '@/@fake-db/db'
 Vue.use(ToastPlugin)
 Vue.use(ModalPlugin)
 
+
+
 // Composition API
 Vue.use(VueCompositionAPI)
 
