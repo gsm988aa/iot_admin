@@ -76,40 +76,47 @@ app.use(
 // }
 const fs = require('fs');
 let buffer = '';
+let buffer4 = '';
 // 设置字符串全局变量buf
 let buf = '';
+ 
+
 
 serialport2.on('readable', () => {
-  let data = serialport2.read(8);
-  if (data) {
-    buffer += data.toString();
-    if (buffer.length >= 4 ) {
+// 每100ms判断串口接收数据长度
+  setTimeout(() => {
+    // 清空buf
+        // buf = '';
+    // 读取串口数据
+    const data = serialport2.read();
+    // 如果串口数据不为空
+    if (data) {
+      // 将串口数据转换为字符串
+      const str = data.toString('utf8');
+      // 将字符串拼接到buf中
+      buf = str;
+      // 如果buf中包含换行符
+      if (buf.indexOf('') >= 0) {
+        // 将buf中的数据按换行符分割成数组
+        const lines = buf.split('');
 
-      fs.writeFile('temp2.txt', data, (err) => {
-        if (err) throw err;
-        // console.log('Data was appended to file!');
-      });
-      buf = buffer;
-      buffer = '';
+        // 将数组中的最后一项赋值给buffer
+        buffer = lines[lines.length +1];
+        // console.log(lines);
+        // console.log(lines.slice(0,));
+        // 将数组中的前面的项拼接成字符串
+        const result = lines.slice(0, ).join('');
+        buf = result;
+        // 将字符串打印到控制台
+        console.log(result);
+        // console.log(buffer);
+        console.log(buf);
+        
+      }
     }
-    else {
-      console.log('CRC wrong');
-    }
-  }
+  }, 10);
 });
-
-
-
-
-// open errors will be emitted as an error event
-// serialport2.on('error', function (err) {
-//   console.log('Error:', err.message);
-// })
-
-// serialport2.on('open', function () {
-//   console.log('Serial Port' + ' ttyUSB0 ' + 'is opened.');
-// });
-
+ 
 app.get('/', function (req, res) {
   return res.send('Working');
 })
@@ -131,19 +138,7 @@ app.get('/:action', function (req, res) {
  
 });
 
-// serialport2.on('data', function (data) {
-//   // console.log('Data:', data.toLocaleString());
-//   // Save the received data to the buffer
-//   // 将串口反馈的数据保存到当前目录temp2.txt文档中
-//   fs.writeFile('temp2.txt', data, function (err) {
-//     if (err) {
-//       console.log(err);
-//     }
-//   });
-// });
-
-
-
+ 
 
 app.post('/:action', function (req, res) {
 
@@ -157,15 +152,19 @@ app.post('/:action', function (req, res) {
  
   if (action == 'getinfo') {
     serialport2.write("getinfo");
-    // buffer = '';
-    // 设置一个临时的字符串数组
  
-  // Listen for data on the serial port
-  
-    // buffer += data.toString();
- 
-    // console.log(buffer);
+//  延迟0.1秒
+    setTimeout(function () {
+      console.log(buf);
+      res.send(buf);
+    }, 100);
 
+    // res.send(buffer);
+
+  }
+    if (action == 'getmedia') {
+    serialport2.write("getmedia");
+ 
 //  延迟0.1秒
     setTimeout(function () {
       console.log(buf);
@@ -176,18 +175,7 @@ app.post('/:action', function (req, res) {
 
   }
 
-  if (action == 'gettxt') {
-      // 将temp2.txt文档中反馈的数据fasong到前端
-      fs.readFile('temp2.txt', function (err, data) {
-        if (err) {
-          console.log(err);
-        }
-        res.send(data);
-      });
-  }
-   
-
-
+ 
 
   if (action == 'reboot') {
     serialport2.write('reboot');

@@ -21,7 +21,7 @@
 
         <div style="transform: scale(1);">
           <b-card>
-            <b-button variant="info" @click="handleClick0x" :disabled="isDisabled">获取文件信息</b-button>
+            <b-button variant="info" @click="handleClick0x" :disabled="isDisabled">获取media信息</b-button>
             <br>
             <br>
             <b-button variant="info" @click="handleClick0" :disabled="isDisabled">获取串口信息</b-button>
@@ -107,29 +107,58 @@ export default {
               .catch(error => {
                 console.log(error)
               })
-          }, 1000)
+          }, 500)
+
+
+           setTimeout(() => {
+            axios.post('http://localhost:10866/getinfo')
+              .then(response => {
+                console.log(response)
+                this.text = response.data
+              })
+              .catch(error => {
+                console.log(error)
+              })
+          }, 100)
+        // this.text = '获取串口信息'
+      }
+    },
+  handleClick0x() {
+      if (!this.isDisabled) {
+        this.isDisabled = true;
+
+          console.log('Button 0 clicked!')
+          console.log('Button 0 clicked!')
+          this.isDisabled = false;
+          // this.text = '获取串口信息完毕!'
+          // 延迟300ms后将axios getinfo收到的数据传递给text
+           setTimeout(() => {
+            axios.post('http://localhost:10866/getmedia')
+              .then(response => {
+                console.log(response)
+                this.text = response.data
+              })
+              .catch(error => {
+                console.log(error)
+              })
+          }, 500)
+
+
+           setTimeout(() => {
+            axios.post('http://localhost:10866/getmedia')
+              .then(response => {
+                console.log(response)
+                this.text = response.data
+              })
+              .catch(error => {
+                console.log(error)
+              })
+          }, 100)
         // this.text = '获取串口信息'
       }
     },
 
-    handleClick0x() {
-      if (!this.isDisabled) {
-        this.isDisabled = true;
-        setTimeout(() => {
-          console.log('Button 0x clicked!')
-          console.log('Button 0x clicked!')
-          this.isDisabled = false;
 
-          // this.text = '执行完毕!'
-          axios.post('http://localhost:10866/gettxt').then(response => {
-            console.log(response)
-          this.text = response.data
-          })
-        }, 10);
-
-        // this.text = '执行合闸'
-      }
-    },
     handleClick1() {
       if (!this.isDisabled) {
         this.isDisabled = true;
