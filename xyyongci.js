@@ -10,13 +10,11 @@ const { SerialPort } = require('serialport')
 
 // Linux 
 
-const serialport2 = new SerialPort({ path: '/dev/ttyUSB0', baudRate: 115200 }, function (err) {
+const serialport2 = new SerialPort({ path: '/COM2', baudRate: 115200 }, function (err) {
   if (err) {
     return console.log('Error: ', err.message)
   }
 })
-
-
 
 // Windows
 // const serialport2 = new SerialPort({ path: 'COM2', baudRate: 115200}, function (err) {
@@ -24,8 +22,6 @@ const serialport2 = new SerialPort({ path: '/dev/ttyUSB0', baudRate: 115200 }, f
 //     return console.log('Error: ', err.message)
 //   }
 // })
-
-
 
 // Nodejs 查询sqlite3数据库
 
@@ -40,19 +36,16 @@ app8080.listen(port8080);
 console.log('server started ' + port8080);
 
 
-const sqlite3 = require('sqlite3').verbose();
-const db = new sqlite3.Database('./data/mylite6.db', (err) => {
-  if (err) {
-    console.error(err.message);
-  }
-  console.log('Connected to the mylite6 database.');
-});
+// const sqlite3 = require('sqlite3').verbose();
+// const db = new sqlite3.Database('./data/mylite6.db', (err) => {
+//   if (err) {
+//     console.error(err.message);
+//   }
+//   console.log('Connected to the mylite6 database.');
+// });
   
 let kk = 1
  
-
-
-
 var port = 10866;
 app.use(
   cors({
@@ -83,28 +76,28 @@ app.use(
 //     console.log('send:'+ senddata);
 //   });
 // }
-const fs = require('fs');
+// const fs = require('fs');
 let buffer = '';
 
-serialport2.on('readable', () => {
-  let data = serialport2.read(35);
-  if (data) {
+// serialport2.on('readable', () => {
+//   let data = serialport2.read(35);
+//   if (data) {
 
 
-    buffer += data.toString();
-    if (buffer.length >= 4 && buffer.substr(0, 4) === 'Test') {
+//     buffer += data.toString();
+//     if (buffer.length >= 4 && buffer.substr(0, 4) === 'Test') {
 
-      fs.writeFile('test.txt', data, (err) => {
-        if (err) throw err;
-        // console.log('Data was appended to file!');
-      });
-      buffer = '';
-    }
-    else {
-      console.log('CRC wrong');
-    }
-  }
-});
+//       fs.writeFile('test.txt', data, (err) => {
+//         if (err) throw err;
+//         // console.log('Data was appended to file!');
+//       });
+//       buffer = '';
+//     }
+//     else {
+//       console.log('CRC wrong');
+//     }
+//   }
+// });
 
 
 
@@ -161,23 +154,23 @@ app.post('/:action', function (req, res) {
   }
   if (action == 'hezha') {
     // serialport2.write("hezha");
-    serialport2.write('bacfd5a22ACA', 'hex');
+    serialport2.write('bacfd5a22aca', 'hex');
     
     return res.send("hezha is on!!!");
   }
   if (action == 'cheru') {
     // serialport2.write("cheru");
-    serialport2.write('b3b5c8ebC920', 'hex');
+    serialport2.write('b3b5c8ebc920', 'hex');
     return res.send("cheru is on!!!");
   }
   if (action == 'chechu') {
     // serialport2.write("chechu");
-    serialport2.write('b3b5b3f630C2', 'hex');
+    serialport2.write('b3b5b3f630c2', 'hex');
     return res.send("chechu is on!!!");
   }
-    if (action == '储能') {
+    if (action == 'chuneng') {
     // serialport2.write("cheneng");
-    serialport2.write('b4a2c4dc6FD5', 'hex');
+    serialport2.write('b4a2c4dc6fd5', 'hex');
     return res.send("chechu is on!!!");
   }
 

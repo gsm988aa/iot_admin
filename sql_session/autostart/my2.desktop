@@ -3,3 +3,5 @@
 Type=Application
 
 Exec = /root/.config/start2.sh
+
+

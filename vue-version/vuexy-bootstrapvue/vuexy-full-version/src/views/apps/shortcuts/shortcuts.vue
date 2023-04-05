@@ -40,6 +40,11 @@
             <b-button variant="info" @click="handleClick6" :disabled="isDisabled">控制器复位</b-button>
             <br>
             <br>
+<!--            button打开localhost:8081-->
+            <b-button variant="primary"  :disabled="isDisabled" href="http://localhost:8081">打开摄像头</b-button>
+
+            <br>
+            <br>
             <b-form-input v-model="text"></b-form-input>
           </b-card>
 
@@ -162,6 +167,12 @@ export default {
         this.text = '执行复位'
       }
     }
+    // handleClick7(){
+    //   if (!this.isDisabled) {
+    //   //   打开localhost:8081
+    //
+    //   }
+    // }
   }
 }
 </script>
