@@ -11,7 +11,7 @@ const { SerialPort } = require('serialport')
 // Linux 
 // 串口通信参数波特率115200 延迟0.1秒
 
-const serialport2 = new SerialPort({ path: 'COM9', baudRate: 115200
+const serialport2 = new SerialPort({ path: 'COM2', baudRate: 115200
 }, function (err) {
   if (err) {
     return console.log('Error: ', err.message)
@@ -83,7 +83,7 @@ let buf = '';
 
 
 serialport2.on('readable', () => {
-// 每100ms判断串口接收数据长度
+// 每10ms判断串口接收数据长度
   setTimeout(() => {
     // 清空buf
         // buf = '';
@@ -162,6 +162,14 @@ app.post('/:action', function (req, res) {
     // res.send(buffer);
 
   }
+
+// // 根据action后面加号后面的数据设定串口发送的值value
+// if (action == 'setvalue') {
+//   const value = req.query.value;
+//   serialport2.write(value);
+//   return res.send(`Value ${value} has been set!`);
+// }
+  
     if (action == 'getmedia') {
     serialport2.write("getmedia");
  
@@ -224,10 +232,14 @@ app.post('/:action', function (req, res) {
   }
 
 
-  if (action == 'off') {
-    serialport2.write("off");
-    return res.send("Ledlightisoff!");
-  }
+// 根据post链接后面加号后面的数字设置串口发送的值value
+if (action == "setvalue") {
+  var value = req.query.value;
+  console.log(value);
+  serialport2.write(value);
+  return res.send(`数值 ${value}设置完毕!`);
+}
+  
 
   // return res.send('Action:' + action);
 });

@@ -1,5 +1,5 @@
 <template>
-  <b-card-code title="无锡新一代微机控制">
+  <b-card-code  title="无锡市新一代微机控制">
     <b-tabs>
       <b-tab>
         <template #title>
@@ -7,330 +7,221 @@
           <!-- 附录1 -->
           <span>保护设置</span>
         </template>
-        <!-- gsm modified -->
+
+        <div class="accordion" role="tablist">
+          <b-card no-body class="mb-1">
+            <b-card-header header-tag="header" class="p-1" role="tab">
+              <b-button block v-b-toggle.accordion-1 v-ripple.400="'rgba(113, 102, 240, 0.15)'"
+                        variant="outline-primary" v-on:click="dianliuhuganqibianbi()">电流互感器变比</b-button>
+            </b-card-header>
+            <b-collapse id="accordion-1" accordion="my-accordion" role="tabpanel">
+              <b-card>
+                <b-button v-ripple.400="'rgba(113, 102, 240, 0.15)'" variant="outline-primary"
+                          v-on:click="getvalue('0x120306000003')">读取</b-button>
+                <b-card-body>
+<!--                  0x0001 0000 0002 12 03 00000001  -->
+                  <!--                  0x0001 0000 0006 12 03 06000003  -->
+                  <b-card-text>读取值为:{{ resp }}</b-card-text>
+                </b-card-body>
+              </b-card>
+              <b-card>
+<!--                前缀和后缀的英文拼写分别是 -->
+
+                <b-button v-ripple.400="'rgba(113, 102, 240, 0.15)'" variant="outline-primary"
+                          v-on:click="setvalue(0x000100000002120300000001)">设置</b-button>
+                <b-card-body>
+
+                  <b-form-spinbutton id="sb-vertical" v-model="valueset1" vertical></b-form-spinbutton>
+                  <b-form-spinbutton id="sb-vertical" v-model="valueset2" vertical></b-form-spinbutton>
+                  <b-form-spinbutton id="sb-vertical" v-model="valueset3" vertical></b-form-spinbutton>
+                  <b-form-spinbutton id="sb-vertical" v-model="valueset4" vertical></b-form-spinbutton>
+
+                </b-card-body>
+                <b-form-input v-model="text"></b-form-input>
+              </b-card>
+
+            </b-collapse>
+          </b-card>
+
+          <b-card no-body class="mb-1">
+            <b-card-header header-tag="header" class="p-1" role="tab">
+              <b-button block v-b-toggle.accordion-2 v-ripple.400="'rgba(186, 191, 199, 0.15)'"
+                        variant="outline-secondary" v-on:click="Send_serial10_2()">遥控分闸</b-button>
+            </b-card-header>
+            <b-collapse id="accordion-2" accordion="my-accordion" role="tabpanel">
+              <b-card>
+                <b-button v-ripple.400="'rgba(186, 191, 199, 0.15)'" variant="outline-secondary"
+                          v-on:click="Send_serial10_2()">读取</b-button>
+                <b-card-body>
+                  <b-card-text>读取值为:{{ resp }}</b-card-text>
+                </b-card-body>
+              </b-card>
+            </b-collapse>
+          </b-card>
+
+          <b-card no-body class="mb-1">
+            <b-card-header header-tag="header" class="p-1" role="tab">
+              <b-button block v-b-toggle.accordion-3 v-ripple.400="'rgba(40, 199, 111, 0.15)'"
+                        variant="outline-success" v-on:click="Send_serial10_3()">遥控复归</b-button>
+            </b-card-header>
+            <b-collapse id="accordion-3" accordion="my-accordion" role="tabpanel">
+              <b-card>
+                <b-button v-ripple.400="'rgba(40, 199, 111, 0.15)'" variant="outline-success"
+                          v-on:click="Send_serial10_3()">读取</b-button>
+                <b-card-body>
+                  <b-card-text>读取值为:{{ resp }}</b-card-text>
+                </b-card-body>
+              </b-card>
+            </b-collapse>
+          </b-card>
+
+       </div>
+          <!-- gsm modified -->
         <b-button v-ripple.400="'rgba(113, 102, 240, 0.15)'" variant="outline-primary"
-                  v-on:click="Send_serial1_1()">
+                  v-on:click="dianliuhuganqibianbi()">
           电流互感器变比
         </b-button>
         &nbsp
-<!--        <b-button v-ripple.400="'rgba(186, 191, 199, 0.15)'" variant="outline-secondary"-->
-<!--                  v-on:click="Send_serial1_2()">-->
-<!--          屏保参数设置-->
-<!--        </b-button>-->
-<!--        &nbsp-->
+
         <b-button v-ripple.400="'rgba(40, 199, 111, 0.15)'" variant="outline-success"
-                  v-on:click="Send_serial1_3()">
+                  v-on:click="dianyahuganqibianbi()">
           电压互感器变比
         </b-button>
         &nbsp
-<!--        <b-button v-ripple.400="'rgba(234, 84, 85, 0.15)'" variant="outline-danger"-->
-<!--                  v-on:click="Send_serial1_4()">-->
-<!--          合闸继电器脉冲宽度-->
-<!--        </b-button>-->
-<!--        &nbsp-->
-<!--        <b-button v-ripple.400="'rgba(255, 159, 67, 0.15)'" variant="outline-warning"-->
-<!--                  v-on:click="Send_serial1_5()">-->
-<!--          跳闸继电器脉冲宽度-->
-<!--        </b-button>-->
-<!--        &nbsp-->
+
         <b-button v-ripple.400="'rgba(0, 207, 232, 0.15)'" variant="outline-info"
-                  v-on:click="Send_serial1_6()">
+                  v-on:click="kairuliang1lueboshijian()">
           开入量1滤波时间
         </b-button>
         &nbsp
 
         <b-button v-ripple.400="'rgba(30, 30, 30, 0.15)'" variant="outline-dark"
-                  v-on:click="Send_serial1_7()">
+                  v-on:click="kairuliang2lueboshijian()">
           开入量2滤波时间
         </b-button>
         &nbsp
-<!--        <b-button v-ripple.400="'rgba(113, 102, 240, 0.15)'" variant="outline-primary"-->
-<!--                  v-on:click="Send_serial1_8()">-->
-<!--          开入量3滤波时间-->
-<!--        </b-button>-->
-<!--        &nbsp-->
-<!--        <b-button v-ripple.400="'rgba(186, 191, 199, 0.15)'" variant="outline-secondary"-->
-<!--                  v-on:click="Send_serial1_9()">-->
-<!--          开入量4滤波时间-->
-<!--        </b-button>-->
-<!--        &nbsp-->
-<!--        <b-button v-ripple.400="'rgba(40, 199, 111, 0.15)'" variant="outline-success"-->
-<!--                  v-on:click="Send_serial1_10()">-->
-<!--          开入量5滤波时间-->
-<!--        </b-button>-->
-<!--        &nbsp-->
-<!--        <b-button v-ripple.400="'rgba(234, 84, 85, 0.15)'" variant="outline-danger"-->
-<!--                  v-on:click="Send_serial1_11()">-->
-<!--          开入量6滤波时间-->
-<!--        </b-button>-->
-<!--        &nbsp-->
-<!--        <b-button v-ripple.400="'rgba(255, 159, 67, 0.15)'" variant="outline-warning"-->
-<!--                  v-on:click="Send_serial1_12()">-->
-<!--          开入量7滤波时间-->
-<!--        </b-button>-->
-<!--        &nbsp-->
-<!--        <b-button v-ripple.400="'rgba(0, 207, 232, 0.15)'" variant="outline-info"-->
-<!--                  v-on:click="Send_serial1_13()">-->
-<!--          开入量8滤波时间-->
-<!--        </b-button>-->
-<!--        &nbsp-->
 
-        <!-- gsm modified -->
-<!--        <b-button v-ripple.400="'rgba(113, 102, 240, 0.15)'" variant="outline-primary"-->
-<!--                  v-on:click="Send_serial1_14()">-->
-<!--          CAN通讯波特率-->
-<!--        </b-button>-->
-<!--        &nbsp-->
-<!--        <b-button v-ripple.400="'rgba(186, 191, 199, 0.15)'" variant="outline-secondary"-->
-<!--                  v-on:click="Send_serial1_15()">-->
-<!--          CAN通讯地址-->
-<!--        </b-button>-->
-<!--        &nbsp-->
         <b-button v-ripple.400="'rgba(40, 199, 111, 0.15)'" variant="outline-success"
-                  v-on:click="Send_serial1_16()">
-          电压互感器变比
+                  v-on:click="dianliuhuganqibianbi2()">
+          电压互感器变比2
         </b-button>
         &nbsp
         <b-button v-ripple.400="'rgba(234, 84, 85, 0.15)'" variant="outline-danger"
-                  v-on:click="Send_serial1_17()">
+                  v-on:click="RS485botelue()">
           RS485波特率
         </b-button>
         &nbsp
         <b-button v-ripple.400="'rgba(255, 159, 67, 0.15)'" variant="outline-warning"
-                  v-on:click="Send_serial1_18()">
+                  v-on:click="RS485tongxundizhi()">
           RS485通讯地址
         </b-button>
         &nbsp
         <b-button v-ripple.400="'rgba(0, 207, 232, 0.15)'" variant="outline-info"
-                  v-on:click="Send_serial1_19()">
+                  v-on:click="yougongdiandumochongjishu()">
           有功电度脉冲计数
         </b-button>
         &nbsp
 
         <b-button v-ripple.400="'rgba(30, 30, 30, 0.15)'" variant="outline-dark"
-                  v-on:click="Send_serial1_20()">
+                  v-on:click="wugongdiandumochongjishu()">
           无功电度脉冲计数
         </b-button>
         &nbsp
 
-<!--        &lt;!&ndash; gsm modified &ndash;&gt;-->
-<!--        <b-button v-ripple.400="'rgba(113, 102, 240, 0.15)'" variant="outline-primary"-->
-<!--                  v-on:click="Send_serial1_21()">-->
-<!--          CAN故障录波复归方式-->
-<!--        </b-button>-->
-<!--        &nbsp-->
         <b-button v-ripple.400="'rgba(186, 191, 199, 0.15)'" variant="outline-secondary"
-                  v-on:click="Send_serial1_22()">
+                  v-on:click="canshushedingmima()">
           参数设定密码
         </b-button>
         &nbsp
-<!--        <b-button v-ripple.400="'rgba(40, 199, 111, 0.15)'" variant="outline-success"-->
-<!--                  v-on:click="Send_serial1_23()">-->
-<!--          Main CPU版本-->
-<!--        </b-button>-->
-<!--        &nbsp-->
-<!--        <b-button v-ripple.400="'rgba(234, 84, 85, 0.15)'" variant="outline-danger"-->
-<!--                  v-on:click="Send_serial1_24()">-->
-<!--          Com CPU版本-->
-<!--        </b-button>-->
-<!--        &nbsp-->
+
         <b-button v-ripple.400="'rgba(255, 159, 67, 0.15)'" variant="outline-warning"
-                  v-on:click="Send_serial1_25()">
+                  v-on:click="dianjiqidongxuanze()">
           电机启动选择
         </b-button>
         &nbsp
         <b-button v-ripple.400="'rgba(0, 207, 232, 0.15)'" variant="outline-info"
-                  v-on:click="Send_serial1_26()">
+                  v-on:click="dianjiedingdianliu()">
           电机额定电流
         </b-button>
         &nbsp
 
         <b-button v-ripple.400="'rgba(30, 30, 30, 0.15)'" variant="outline-dark"
-                  v-on:click="Send_serial1_27()">
+                  v-on:click="loudianjidianqimochongshijian()">
           漏电继电器脉冲时间
         </b-button>
         &nbsp
 
         <!-- gsm modified -->
         <b-button v-ripple.400="'rgba(113, 102, 240, 0.15)'" variant="outline-primary"
-                  v-on:click="Send_serial1_28()">
+                  v-on:click="jueyuanjidianqimochongshijian()">
           绝缘继电器脉冲时间
         </b-button>
-<!--        &nbsp-->
-<!--        <b-button v-ripple.400="'rgba(186, 191, 199, 0.15)'" variant="outline-secondary"-->
-<!--                  v-on:click="Send_serial1_29()">-->
-<!--          功率计算方式-->
-<!--        </b-button>-->
-<!--        &nbsp-->
-<!--        <b-button v-ripple.400="'rgba(40, 199, 111, 0.15)'" variant="outline-success"-->
-<!--                  v-on:click="Send_serial1_30()">-->
-<!--          单位闭锁时间-->
-<!--        </b-button>-->
+
         &nbsp
         <b-button v-ripple.400="'rgba(234, 84, 85, 0.15)'" variant="outline-danger"
-                  v-on:click="Send_serial1_31()">
+                  v-on:click="suduanjiesuodianliu()">
           速断解锁电流
         </b-button>
         &nbsp
-<!--        <b-button v-ripple.400="'rgba(255, 159, 67, 0.15)'" variant="outline-warning"-->
-<!--                  v-on:click="Send_serial1_32()">-->
-<!--          加热除湿继电器脉冲时间-->
-<!--        </b-button>-->
-<!--        &nbsp-->
+
         <b-button v-ripple.400="'rgba(0, 207, 232, 0.15)'" variant="outline-info"
-                  v-on:click="Send_serial1_33()">
+                  v-on:click="shiyayanshijidianqimochongshijian()">
           失压延时继电器脉冲时间
         </b-button>
         &nbsp
         <b-button v-ripple.400="'rgba(30, 30, 30, 0.15)'" variant="outline-dark"
-                  v-on:click="Send_serial1_34()">
+                  v-on:click="ruanfuweicishu()">
           软复位次数
         </b-button>
         &nbsp
         <!-- gsm modified -->
         <b-button v-ripple.400="'rgba(113, 102, 240, 0.15)'" variant="outline-primary"
-                  v-on:click="Send_serial1_35()">
+                  v-on:click="yingfuweicishu()">
           硬复位次数
         </b-button>
         &nbsp
         <b-button v-ripple.400="'rgba(186, 191, 199, 0.15)'" variant="outline-secondary"
-                  v-on:click="Send_serial1_36()">
+                  v-on:click="beiyong1()">
           备用1
         </b-button>
         &nbsp
         <b-button v-ripple.400="'rgba(40, 199, 111, 0.15)'" variant="outline-success"
-                  v-on:click="Send_serial1_37()">
+                  v-on:click="beiyong2()">
           备用2
         </b-button>
         &nbsp
         <b-button v-ripple.400="'rgba(234, 84, 85, 0.15)'" variant="outline-danger"
-                  v-on:click="Send_serial1_38()">
+                  v-on:click="guzhangbiaozhixinxi()">
           故障标志信息
         </b-button>
-<!--        &nbsp-->
-<!--        <b-button v-ripple.400="'rgba(255, 159, 67, 0.15)'" variant="outline-warning"-->
-<!--                  v-on:click="Send_serial1_39()">-->
-<!--          Com Boot版本信息-->
-<!--        </b-button>-->
-<!--        &nbsp-->
-<!--        <b-button v-ripple.400="'rgba(0, 207, 232, 0.15)'" variant="outline-info"-->
-<!--                  v-on:click="Send_serial1_40()">-->
-<!--          液晶对比度-->
-<!--        </b-button>-->
-        &nbsp
 
         <b-button v-ripple.400="'rgba(30, 30, 30, 0.15)'" variant="outline-dark"
-                  v-on:click="Send_serial1_41()">
+                  v-on:click="guzhangbiaozhixinxi2()">
           故障标志信息2
         </b-button>
         &nbsp
 
-<!--        &lt;!&ndash; gsm 复制开始 &ndash;&gt;-->
-<!--        <b-button v-ripple.400="'rgba(113, 102, 240, 0.15)'" variant="outline-primary"-->
-<!--                  v-on:click="Send_serial1_42()">-->
-<!--          合闸次数统计-->
-<!--        </b-button>-->
-<!--        &nbsp-->
-<!--        <b-button v-ripple.400="'rgba(186, 191, 199, 0.15)'" variant="outline-secondary"-->
-<!--                  v-on:click="Send_serial1_43()">-->
-<!--          分闸次数统计-->
-<!--        </b-button>-->
-<!--        &nbsp-->
-<!--        <b-button v-ripple.400="'rgba(40, 199, 111, 0.15)'" variant="outline-success"-->
-<!--                  v-on:click="Send_serial1_44()">-->
-<!--          远程电子挂牌-->
-<!--        </b-button>-->
-<!--        &nbsp-->
         <b-button v-ripple.400="'rgba(234, 84, 85, 0.15)'" variant="outline-danger"
-                  v-on:click="Send_serial1_45()">
+                  v-on:click="celiangIajixingqufan()">
           测量Ia极性取反
         </b-button>
         &nbsp
         <b-button v-ripple.400="'rgba(255, 159, 67, 0.15)'" variant="outline-warning"
-                  v-on:click="Send_serial1_46()">
+                  v-on:click="celiangIcjixingqufan()">
           测量Ic极性取反
         </b-button>
-<!--        &nbsp-->
-<!--        <b-button v-ripple.400="'rgba(0, 207, 232, 0.15)'" variant="outline-info"-->
-<!--                  v-on:click="Send_serial1_47()">-->
-<!--          保护IA极性取反-->
-<!--        </b-button>-->
-<!--        &nbsp-->
 
-<!--        <b-button v-ripple.400="'rgba(30, 30, 30, 0.15)'" variant="outline-dark"-->
-<!--                  v-on:click="Send_serial1_48()">-->
-<!--          保护IC极性取反-->
-<!--        </b-button>-->
         &nbsp
-        <!-- gsm 复制停止 -->
-        <!-- gsm 复制开始 -->
         <b-button v-ripple.400="'rgba(113, 102, 240, 0.15)'" variant="outline-primary"
-                  v-on:click="Send_serial1_49()">
+                  v-on:click="zhudongfasongluboshineng()">
           主动发送录波使能
         </b-button>
-<!--        &nbsp-->
-<!--        <b-button v-ripple.400="'rgba(186, 191, 199, 0.15)'" variant="outline-secondary"-->
-<!--                  v-on:click="Send_serial1_50()">-->
-<!--          防越级闭锁持续时间-->
-<!--        </b-button>-->
-<!--        &nbsp-->
-<!--        <b-button v-ripple.400="'rgba(40, 199, 111, 0.15)'" variant="outline-success"-->
-<!--                  v-on:click="Send_serial1_51()">-->
-<!--          SU31扩展继电器1出口脉冲-->
-<!--        </b-button>-->
-<!--        &nbsp-->
-<!--        <b-button v-ripple.400="'rgba(234, 84, 85, 0.15)'" variant="outline-danger"-->
-<!--                  v-on:click="Send_serial1_52()">-->
-<!--          SU31扩展继电器2出口脉冲-->
-<!--        </b-button>-->
-<!--        &nbsp-->
-<!--        <b-button v-ripple.400="'rgba(255, 159, 67, 0.15)'" variant="outline-warning"-->
-<!--                  v-on:click="Send_serial1_53()">-->
-<!--          SU31扩展继电器3出口脉冲-->
-<!--        </b-button>-->
-<!--        &nbsp-->
-<!--        <b-button v-ripple.400="'rgba(0, 207, 232, 0.15)'" variant="outline-info"-->
-<!--                  v-on:click="Send_serial1_54()">-->
-<!--          SU31扩展继电器4出口脉冲-->
-<!--        </b-button>-->
-<!--        &nbsp-->
-<!--        <b-button v-ripple.400="'rgba(30, 30, 30, 0.15)'" variant="outline-dark"-->
-<!--                  v-on:click="Send_serial1_55()">-->
-<!--          测量Ib极性取反-->
-<!--        </b-button>-->
-<!--        &nbsp-->
-        <!-- gsm 复制停止 -->
 
-<!--        &lt;!&ndash; gsm 复制开始 &ndash;&gt;-->
-<!--        <b-button v-ripple.400="'rgba(113, 102, 240, 0.15)'" variant="outline-primary"-->
-<!--                  v-on:click="Send_serial1_56()">-->
-<!--          保护IB极性取反-->
-<!--        </b-button>-->
         &nbsp
         <b-button v-ripple.400="'rgba(186, 191, 199, 0.15)'" variant="outline-secondary"
-                  v-on:click="Send_serial1_57()">
+                  v-on:click="bentikuozhanjidianqi1chukoumochong()">
           本体扩展继电器1出口脉冲
         </b-button>
-<!--        &nbsp-->
-<!--        <b-button v-ripple.400="'rgba(40, 199, 111, 0.15)'" variant="outline-success"-->
-<!--                  v-on:click="Send_serial1_58()">-->
-<!--          本体扩展继电器2出口脉冲-->
-<!--        </b-button>-->
-<!--        &nbsp-->
-<!--        <b-button v-ripple.400="'rgba(234, 84, 85, 0.15)'" variant="outline-danger"-->
-<!--                  v-on:click="Send_serial1_59()">-->
-<!--          本体扩展继电器3出口脉冲-->
-<!--        </b-button>-->
-<!--        &nbsp-->
-<!--        <b-button v-ripple.400="'rgba(255, 159, 67, 0.15)'" variant="outline-warning"-->
-<!--                  v-on:click="Send_serial1_60()">-->
-<!--          本体扩展继电器4出口脉冲-->
-<!--        </b-button>-->
-<!--        &nbsp-->
-
-        <!-- gsm 复制停止 -->
-
-
 
         <br>
         <br>
@@ -403,16 +294,7 @@
           零序过流保护时间定值
         </b-button>
         &nbsp
-<!--        <b-button v-ripple.400="'rgba(234, 84, 85, 0.15)'" variant="outline-danger"-->
-<!--                  v-on:click="Send_serial2_11()">-->
-<!--          NULL1-->
-<!--        </b-button>-->
-<!--        &nbsp-->
-<!--        <b-button v-ripple.400="'rgba(255, 159, 67, 0.15)'" variant="outline-warning"-->
-<!--                  v-on:click="Send_serial2_12()">-->
-<!--          NULL2-->
-<!--        </b-button>-->
-        &nbsp
+
         <b-button v-ripple.400="'rgba(0, 207, 232, 0.15)'" variant="outline-info"
                   v-on:click="Send_serial2_13()">
           功率方向零序过流保护定值
@@ -459,9 +341,7 @@
           绝缘电阻监测电阻低定值
         </b-button>
         &nbsp
-        <!-- gsm 复制停止 -->
 
-        <!-- gsm 复制开始 -->
         <b-button v-ripple.400="'rgba(113, 102, 240, 0.15)'" variant="outline-primary"
                   v-on:click="Send_serial2_22()">
           绝缘电阻监测时间定值
@@ -477,11 +357,7 @@
           开入保护延时定值
         </b-button>
         &nbsp
-<!--        <b-button v-ripple.400="'rgba(234, 84, 85, 0.15)'" variant="outline-danger"-->
-<!--                  v-on:click="Send_serial2_25()">-->
-<!--          附录2NULL-->
-<!--        </b-button>-->
-<!--        &nbsp-->
+
         <b-button v-ripple.400="'rgba(255, 159, 67, 0.15)'" variant="outline-warning"
                   v-on:click="Send_serial2_26()">
           高温跳闸保护温度定值
@@ -496,9 +372,7 @@
           加热除湿保护湿度定值
         </b-button>
         &nbsp
-        <!-- gsm 复制停止 -->
 
-        <!-- gsm 复制开始 -->
         <b-button v-ripple.400="'rgba(113, 102, 240, 0.15)'" variant="outline-primary"
                   v-on:click="Send_serial2_29()">
           失压保护电压定值
@@ -529,13 +403,7 @@
           功率方向闭锁零序
         </b-button>
         &nbsp
-<!--        <b-button v-ripple.400="'rgba(30, 30, 30, 0.15)'" variant="outline-dark" v-on:click="Send_serial2_35()">-->
-<!--          附录2备用-->
-<!--        </b-button>-->
-<!--        &nbsp-->
-        <!-- gsm 复制停止 -->
 
-        <!-- gsm 复制开始 -->
         <b-button v-ripple.400="'rgba(113, 102, 240, 0.15)'" variant="outline-primary"
                   v-on:click="Send_serial2_36()">
           2次谐波闭锁速断
@@ -556,10 +424,6 @@
           二次谐波闭锁系数
         </b-button>
         &nbsp
-        <!-- gsm 复制停止 -->
-
-
-
 
         <b-card-text>{{resp}}</b-card-text>
         <b-card-text>{{resp}}</b-card-text>
@@ -634,57 +498,11 @@
         </b-button>
         &nbsp
 
-        <!-- gsm 复制停止 -->
-
-
         <b-card-text>{{resp}}</b-card-text>
         <b-card-text>{{resp}}</b-card-text>
       </b-tab>
       <!-- 附录4 -->
-      <b-tab>
-        <template #title>
-          <feather-icon icon="WatchIcon" />
-          <span>时间</span>
-        </template>
-        <!-- gsm 复制开始 -->
-        <b-button v-ripple.400="'rgba(113, 102, 240, 0.15)'" variant="outline-primary"
-                  v-on:click="Send_serial1_x()">
-          改中文
-        </b-button>
-        &nbsp
-        <b-button v-ripple.400="'rgba(186, 191, 199, 0.15)'" variant="outline-secondary"
-                  v-on:click="Send_serial1_x()">
-          改中文
-        </b-button>
-        &nbsp
-        <b-button v-ripple.400="'rgba(40, 199, 111, 0.15)'" variant="outline-success"
-                  v-on:click="Send_serial1_x()">
-          改中文
-        </b-button>
-        &nbsp
-        <b-button v-ripple.400="'rgba(234, 84, 85, 0.15)'" variant="outline-danger"
-                  v-on:click="Send_serial1_x()">
-          改中文
-        </b-button>
-        &nbsp
-        <b-button v-ripple.400="'rgba(255, 159, 67, 0.15)'" variant="outline-warning"
-                  v-on:click="Send_serial1_x()">
-          改中文
-        </b-button>
-        &nbsp
-        <b-button v-ripple.400="'rgba(0, 207, 232, 0.15)'" variant="outline-info" v-on:click="Send_serial1_x()">
-          改中文
-        </b-button>
-        &nbsp
-        <b-button v-ripple.400="'rgba(30, 30, 30, 0.15)'" variant="outline-dark" v-on:click="Send_serial1_x()">
-          改中文
-        </b-button>
-        &nbsp
-        <!-- gsm 复制停止 -->
 
-        <b-card-text>{{resp}}</b-card-text>
-        <b-card-text>{{resp}}</b-card-text>
-      </b-tab>
       <!-- 附录5 -->
       <b-tab>
         <template #title>
@@ -725,9 +543,6 @@
           第0次事件时间——故障录波号（高字节）+月（低字节）
         </b-button>
         &nbsp
-        <!-- gsm 复制停止 -->
-
-        <!-- gsm 复制开始 -->
         <b-button v-ripple.400="'rgba(113, 102, 240, 0.15)'" variant="outline-primary"
                   v-on:click="Send_serial5_8()">
           第0次事件时间——年
@@ -767,9 +582,7 @@
           第30次事件时间——故障录波号（高字节）+月（低字节）
         </b-button>
         &nbsp
-        <!-- gsm 复制停止 -->
 
-        <!-- gsm 复制开始 -->
         <b-button v-ripple.400="'rgba(113, 102, 240, 0.15)'" variant="outline-primary"
                   v-on:click="Send_serial5_16()">
           第30次事件时间——年
@@ -780,10 +593,6 @@
           当前最新事件指针
         </b-button>
         &nbsp
-
-        <!-- gsm 复制停止 -->
-
-
         <b-card-text>{{resp}}</b-card-text>
         <b-card-text>{{resp}}</b-card-text>
       </b-tab>
@@ -793,7 +602,7 @@
           <feather-icon icon="GitMergeIcon" />
           <span>故障事件记录</span>
         </template>
-        <!-- gsm 复制开始 -->
+
         <b-button v-ripple.400="'rgba(113, 102, 240, 0.15)'" variant="outline-primary"
                   v-on:click="Send_serial6_1()">
           第0次系统事件码
@@ -827,9 +636,7 @@
           第0次事件时间――故障录波号（高字节）+月（低字节）
         </b-button>
         &nbsp
-        <!-- gsm 复制停止 -->
 
-        <!-- gsm 复制开始 -->
         <b-button v-ripple.400="'rgba(113, 102, 240, 0.15)'" variant="outline-primary"
                   v-on:click="Send_serial6_8()">
           第0次故障时间――年
@@ -864,9 +671,7 @@
           第30次事件时间――故障录波号（低字节）+日期（低字节）
         </b-button>
         &nbsp
-        <!-- gsm 复制停止 -->
 
-        <!-- gsm 复制开始 -->
         <b-button v-ripple.400="'rgba(113, 102, 240, 0.15)'" variant="outline-primary"
                   v-on:click="Send_serial6_15()">
           第30次事件时间――故障录波号（高字节）+月（低字节）
@@ -883,8 +688,6 @@
         </b-button>
         &nbsp
 
-        <!-- gsm 复制停止 -->
-
         <b-card-text>{{resp}}</b-card-text>
         <b-card-text>{{resp}}</b-card-text>
       </b-tab>
@@ -894,7 +697,7 @@
           <feather-icon icon="AlignLeftIcon" />
           <span>测量值</span>
         </template>
-        <!-- gsm 复制开始 -->
+
         <b-button v-ripple.400="'rgba(113, 102, 240, 0.15)'" variant="outline-primary"
                   v-on:click="Send_serial7_1()">
           A相测量电流
@@ -928,9 +731,7 @@
           AB线测量电压
         </b-button>
         &nbsp
-        <!-- gsm 复制停止 -->
 
-        <!-- gsm 复制开始 -->
         <b-button v-ripple.400="'rgba(113, 102, 240, 0.15)'" variant="outline-primary"
                   v-on:click="Send_serial7_8()">
           BC线测量电压
@@ -1010,7 +811,6 @@
         </b-button>
         &nbsp
         <!-- gsm 复制停止 -->
-
         <b-card-text>{{resp}}</b-card-text>
         <b-card-text>{{resp}}</b-card-text>
       </b-tab>
@@ -1054,8 +854,6 @@
           改中文
         </b-button>
         &nbsp
-        <!-- gsm 复制停止 -->
-
         <b-card-text>{{resp}}</b-card-text>
         <b-card-text>{{resp}}</b-card-text>
       </b-tab>
@@ -1065,8 +863,6 @@
           <feather-icon icon="ToolIcon" />
           <span>控制命令</span>
         </template>
-
-        <!-- gsm 复制开始 -->
         <b-button v-ripple.400="'rgba(113, 102, 240, 0.15)'" variant="outline-primary"
                   v-on:click="Send_serial10_1()">
           遥控合闸
@@ -1101,9 +897,7 @@
           过流试验命令
         </b-button>
         &nbsp
-        <!-- gsm 复制停止 -->
 
-        <!-- gsm 复制开始 -->
         <b-button v-ripple.400="'rgba(113, 102, 240, 0.15)'" variant="outline-primary"
                   v-on:click="Send_serial10_8()">
           漏电试验命令
@@ -1119,11 +913,6 @@
           清电度命令
         </b-button>
         &nbsp
-<!--        <b-button v-ripple.400="'rgba(234, 84, 85, 0.15)'" variant="outline-danger"-->
-<!--                  v-on:click="Send_serial10_11()">-->
-<!--          防越级仿真试验命令-->
-<!--        </b-button>-->
-<!--        &nbsp-->
         <b-button v-ripple.400="'rgba(255, 159, 67, 0.15)'" variant="outline-warning"
                   v-on:click="Send_serial10_12()">
           GSE告警复归命令
@@ -1134,32 +923,12 @@
           SU31开出1
         </b-button>
         &nbsp
-<!--        <b-button v-ripple.400="'rgba(30, 30, 30, 0.15)'" variant="outline-dark"-->
-<!--                  v-on:click="Send_serial10_14()">-->
-<!--          SU31开出2-->
-<!--        </b-button>-->
-<!--        &nbsp-->
-<!--        &lt;!&ndash; gsm 复制停止 &ndash;&gt;-->
 
-<!--        &lt;!&ndash; gsm 复制开始 &ndash;&gt;-->
-<!--        <b-button v-ripple.400="'rgba(113, 102, 240, 0.15)'" variant="outline-primary"-->
-<!--                  v-on:click="Send_serial10_15()">-->
-<!--          SU31开出3-->
-<!--        </b-button>-->
-<!--        &nbsp-->
-<!--        <b-button v-ripple.400="'rgba(113, 102, 240, 0.15)'" variant="outline-primary"-->
-<!--                  v-on:click="Send_serial10_16()">-->
-<!--          SU31开出4-->
-<!--        </b-button>-->
-<!--        &nbsp-->
         <b-button v-ripple.400="'rgba(186, 191, 199, 0.15)'" variant="outline-secondary"
                   v-on:click="Send_serial10_17()">
           所有录波重传命令
         </b-button>
         &nbsp
-
-        <!-- gsm 复制停止 -->
-
         <b-card-text>{{resp}}</b-card-text>
         <b-card-text>{{resp}}</b-card-text>
       </b-tab>
@@ -1203,8 +972,6 @@
           改中文
         </b-button>
         &nbsp
-        <!-- gsm 复制停止 -->
-
         <b-card-text>{{resp}}</b-card-text>
       </b-tab>
       <!-- 附录12 -->
@@ -1249,9 +1016,7 @@
           附录12B相测量电压
         </b-button>
         &nbsp
-        <!-- gsm 复制停止 -->
 
-        <!-- gsm 复制开始 -->
         <b-button v-ripple.400="'rgba(113, 102, 240, 0.15)'" variant="outline-primary"
                   v-on:click="Send_serial12_8()">
           附录12C相测量电压
@@ -1287,8 +1052,7 @@
           附录12B相保护电流
         </b-button>
         &nbsp
-        <!-- gsm 复制停止 -->
-        <!-- gsm 复制开始 -->
+
         <b-button v-ripple.400="'rgba(113, 102, 240, 0.15)'" variant="outline-primary"
                   v-on:click="Send_serial12_15()">
           附录12绝缘电阻
@@ -1309,8 +1073,6 @@
           扩展功能使能
         </b-button>
         &nbsp
-        <!-- gsm 复制停止 -->
-
 
         <b-card-text>{{resp}}</b-card-text>
         <b-card-text>{{resp}}</b-card-text>
@@ -1321,62 +1083,43 @@
           <feather-icon icon="WifiIcon" />
           <span>以太网参数</span>
         </template>
-
         <b-card-text>{{resp}}</b-card-text>
         <b-card-text>{{resp}}</b-card-text>
       </b-tab>
-      <!-- 附录13_不写不读 -->
-      <!--
-        <b-tab>
-          <template #title>
-            <feather-icon icon="InfoIcon" />
-            <span>内部测试信息</span>
-          </template>
-
-          <b-card-text>
-
-          </b-card-text>
-          <b-card-text>
-
-          </b-card-text>
-        </b-tab>
-      </b-tabs>
-       -->
     </b-tabs>
-
-
-  </b-card-code>
+  </b-card-code >
 </template>
 
 <script>
 import axios from 'axios'
 import {
   BButtonGroup,
-  BButton
+  BButton, VBTogglePlugin, BSidebar, VBToggle, BCollapse
 } from 'bootstrap-vue'
-
-import Ripple from 'vue-ripple-directive'
-
-import BCardCode from '@core/components/b-card-code'
 import {
+  BCard,
+  BCardHeader,
+  BCardText,
   BTabs,
   BTab,
-  BCardText,
   BRow,
   BCol,
   BCardGroup,
-  BCard,
   BCardFooter,
   BCardBody,
+  BFormInput,
   BCardTitle
 } from 'bootstrap-vue'
-
+import Ripple from 'vue-ripple-directive'
+import { BFormSpinbutton } from 'bootstrap-vue'
+import BCardCode from '@core/components/b-card-code'
 
 export default {
   components: {
     BButtonGroup,
     BButton,
     BCardGroup,
+    BFormSpinbutton,
     BRow,
     BCol,
     BCardFooter,
@@ -1385,28 +1128,82 @@ export default {
     BTabs,
     BCardText,
     BTab,
+    BCardBody,
+    VBTogglePlugin,
+    BSidebar,
+    VBToggle,
+    BCollapse,
+    BCardHeader,
+    BCard,
+    BFormInput
   },
   directives: {
     Ripple,
+    'b-toggle': VBToggle
   },
   data() {
     return {
       resp: '',
+      valueset1: 9,
+      valueset2: 9,
+      valueset3: 9,
+      valueset4: 9,
+      Prefix: '0x00',
+      text: ''
 
     }
   },
 
   methods: {
-    // 附录1
-    Send_serial1_1() {
-      let _this = this
-
-      axios.post('http://localhost:10866/dianliuhuganqibianbi').then(function(response) {
-        _this.resp = response.data
+    // 单个写入
+    setvalue(Prefix){
+      var valuesum = 0;
+      valuesum = this.valueset1 * 1000 + this.valueset2 * 100 + this.valueset3 * 10 + this.valueset4;
+      axios.post('http://localhost:10866/setvalue/?prefix='+Prefix+'&value='+valuesum).then(response => {
+        console.log(response)
+        this.text = response.data
       })
-
+      .catch(error => {
+        console.log(error)
+      })
     },
-    Send_serial1_2() {
+    // 多个写入
+    setvalues(Prefix){
+      var valuesum = 0;
+      valuesum = this.valueset1 * 1000 + this.valueset2 * 100 + this.valueset3 * 10 + this.valueset4;
+      axios.post('http://localhost:10866/setvalues/?value='+valuesum).then(response => {
+        console.log(response)
+        this.text = response.data
+      })
+          .catch(error => {
+            console.log(error)
+          })
+    },
+    getvalue(Prefix){
+      var valuesum = 0;
+      valuesum = this.valueset1 * 1000 + this.valueset2 * 100 + this.valueset3 * 10 + this.valueset4;
+      axios.post('http://localhost:10866/getvalue/?prefix='+Prefix).then(response => {
+        console.log(response)
+        this.text = response.data
+      })
+      .catch(error => {
+        console.log(error)
+      })
+    },
+
+    // 附录1
+    dianliuhuganqibianbi() {
+      let _this = this
+      axios.post('http://localhost:10866/dianliuhuganqibianbi').then(response => {
+        console.log(response)
+        this.text = response.data
+      })
+      .catch(error => {
+        console.log(error)
+      })
+    },
+
+    pingbaocanshushezhi() {
       let _this = this
 
       axios.post('http://localhost:10866/pingbaocanshushezhi').then(function(response) {
@@ -1414,7 +1211,7 @@ export default {
       })
 
     },
-    Send_serial1_3() {
+    dianyahuganqibianbi() {
       let _this = this
 
       axios.post('http://localhost:10866/dianyahuganqibianbi').then(function(response) {
@@ -1422,7 +1219,7 @@ export default {
       })
 
     },
-    Send_serial1_4() {
+    hezhajidianqimochongkuandu() {
       let _this = this
 
       axios.post('http://localhost:10866/hezhajidianqimochongkuandu').then(function(response) {
@@ -1430,7 +1227,7 @@ export default {
       })
 
     },
-    Send_serial1_5() {
+    tiaozhajidianqimochongkuandu() {
       let _this = this
 
       axios.post('http://localhost:10866/tiaozhajidianqimochongkuandu').then(function(response) {
@@ -1438,7 +1235,7 @@ export default {
       })
 
     },
-    Send_serial1_6() {
+    kairuliang1lueboshijian() {
       let _this = this
 
       axios.post('http://localhost:10866/kairuliang1lueboshijian').then(function(response) {
@@ -1446,7 +1243,7 @@ export default {
       })
 
     },
-    Send_serial1_7() {
+    kairuliang2lueboshijian() {
       let _this = this
 
       axios.post('http://localhost:10866/kairuliang2lueboshijian').then(function(response) {
@@ -1454,7 +1251,7 @@ export default {
       })
 
     },
-    Send_serial1_8() {
+    kairuliang3lueboshijian() {
       let _this = this
 
       axios.post('http://localhost:10866/kairuliang3lueboshijian').then(function(response) {
@@ -1462,7 +1259,7 @@ export default {
       })
 
     },
-    Send_serial1_9() {
+    kairuliang4lueboshijian() {
       let _this = this
 
       axios.post('http://localhost:10866/kairuliang4lueboshijian').then(function(response) {
@@ -1470,7 +1267,7 @@ export default {
       })
 
     },
-    Send_serial1_10() {
+    kairuliang5lueboshijian() {
       let _this = this
 
       axios.post('http://localhost:10866/kairuliang5lueboshijian').then(function(response) {
@@ -1478,7 +1275,7 @@ export default {
       })
 
     },
-    Send_serial1_11() {
+    kairuliang6lueboshijian() {
       let _this = this
 
       axios.post('http://localhost:10866/kairuliang6lueboshijian').then(function(response) {
@@ -1486,7 +1283,7 @@ export default {
       })
 
     },
-    Send_serial1_12() {
+    kairuliang7lueboshijian() {
       let _this = this
 
       axios.post('http://localhost:10866/kairuliang7lueboshijian').then(function(response) {
@@ -1494,7 +1291,7 @@ export default {
       })
 
     },
-    Send_serial1_13() {
+    kairuliang8lueboshijian() {
       let _this = this
 
       axios.post('http://localhost:10866/kairuliang8lueboshijian').then(function(response) {
@@ -1502,7 +1299,7 @@ export default {
       })
 
     },
-    Send_serial1_14() {
+    CANtongxunbotelue() {
       let _this = this
 
       axios.post('http://localhost:10866/CANtongxunbotelue').then(function(response) {
@@ -1510,7 +1307,7 @@ export default {
       })
 
     },
-    Send_serial1_15() {
+    CANtongxundizhi() {
       let _this = this
 
       axios.post('http://localhost:10866/CANtongxundizhi').then(function(response) {
@@ -1518,7 +1315,15 @@ export default {
       })
 
     },
-    Send_serial1_16() {
+    dianyahuganqibianbi2() {
+      let _this = this
+
+      axios.post('http://localhost:10866/dianyahuganqibianbi2').then(function(response) {
+        _this.resp = response.data
+      })
+
+    },
+    RS485botelue() {
       let _this = this
 
       axios.post('http://localhost:10866/RS485botelue').then(function(response) {
@@ -1526,7 +1331,7 @@ export default {
       })
 
     },
-    Send_serial1_17() {
+    RS485tongxundizhi() {
       let _this = this
 
       axios.post('http://localhost:10866/RS485tongxundizhi').then(function(response) {
@@ -1534,7 +1339,7 @@ export default {
       })
 
     },
-    Send_serial1_18() {
+    yougongdiandumochongjishu() {
       let _this = this
 
       axios.post('http://localhost:10866/yougongdiandumochongjishu').then(function(response) {
@@ -1542,7 +1347,7 @@ export default {
       })
 
     },
-    Send_serial1_19() {
+    wugongdiandumochongjishu() {
       let _this = this
 
       axios.post('http://localhost:10866/wugongdiandumochongjishu').then(function(response) {
@@ -1550,7 +1355,7 @@ export default {
       })
 
     },
-    Send_serial1_20() {
+    guzhanglubofuguifangshi() {
       let _this = this
 
       axios.post('http://localhost:10866/guzhanglubofuguifangshi').then(function(response) {
@@ -1558,7 +1363,7 @@ export default {
       })
 
     },
-    Send_serial1_21() {
+    canshushedingmima() {
       let _this = this
 
       axios.post('http://localhost:10866/canshushedingmima').then(function(response) {
@@ -1566,14 +1371,15 @@ export default {
       })
 
     },
-    Send_serial1_22() {
+    MainCPUbanben() {
       let _this = this
 
       axios.post('http://localhost:10866/MainCPUbanben').then(function(response) {
         _this.resp = response.data
       })
 
-    },			Send_serial1_23() {
+    },
+    ComCPUbanben() {
       let _this = this
 
       axios.post('http://localhost:10866/ComCPUbanben').then(function(response) {
@@ -1581,14 +1387,15 @@ export default {
       })
 
     },
-    Send_serial1_24() {
+    dianjiqidongxuanze() {
       let _this = this
 
       axios.post('http://localhost:10866/dianjiqidongxuanze').then(function(response) {
         _this.resp = response.data
       })
 
-    },			Send_serial1_25() {
+    },
+    dianjiedingdianliu() {
       let _this = this
 
       axios.post('http://localhost:10866/dianjiedingdianliu').then(function(response) {
@@ -1596,7 +1403,7 @@ export default {
       })
 
     },
-    Send_serial1_26() {
+    loudianjidianqimochongshijian() {
       let _this = this
 
       axios.post('http://localhost:10866/loudianjidianqimochongshijian').then(function(response) {
@@ -1604,7 +1411,7 @@ export default {
       })
 
     },
-    Send_serial1_27() {
+    jueyuanjidianqimochongshijian() {
       let _this = this
 
       axios.post('http://localhost:10866/jueyuanjidianqimochongshijian').then(function(response) {
@@ -1612,7 +1419,7 @@ export default {
       })
 
     },
-    Send_serial1_28() {
+    gongluejisuanfangshi() {
       let _this = this
 
       axios.post('http://localhost:10866/gongluejisuanfangshi').then(function(response) {
@@ -1620,7 +1427,7 @@ export default {
       })
 
     },
-    Send_serial1_29() {
+    danweibisuoshijian() {
       let _this = this
 
       axios.post('http://localhost:10866/danweibisuoshijian').then(function(response) {
@@ -1628,7 +1435,7 @@ export default {
       })
 
     },
-    Send_serial1_30() {
+    suduanjiesuodianliu() {
       let _this = this
 
       axios.post('http://localhost:10866/suduanjiesuodianliu').then(function(response) {
@@ -1636,7 +1443,7 @@ export default {
       })
 
     },
-    Send_serial1_31() {
+    jiarechushijidianqimochongshijian() {
       let _this = this
 
       axios.post('http://localhost:10866/jiarechushijidianqimochongshijian').then(function(response) {
@@ -1644,7 +1451,7 @@ export default {
       })
 
     },
-    Send_serial1_32() {
+    shiyayanshijidianqimochongshijian() {
       let _this = this
 
       axios.post('http://localhost:10866/shiyayanshijidianqimochongshijian').then(function(response) {
@@ -1652,7 +1459,7 @@ export default {
       })
 
     },
-    Send_serial1_33() {
+    ruanfuweicishu() {
       let _this = this
 
       axios.post('http://localhost:10866/ruanfuweicishu').then(function(response) {
@@ -1660,7 +1467,7 @@ export default {
       })
 
     },
-    Send_serial1_34() {
+    yingfuweicishu() {
       let _this = this
 
       axios.post('http://localhost:10866/yingfuweicishu').then(function(response) {
@@ -1668,7 +1475,7 @@ export default {
       })
 
     },
-    Send_serial1_35() {
+    beiyong1() {
       let _this = this
 
       axios.post('http://localhost:10866/beiyong1').then(function(response) {
@@ -1676,7 +1483,7 @@ export default {
       })
 
     },
-    Send_serial1_36() {
+    beiyong2() {
       let _this = this
 
       axios.post('http://localhost:10866/beiyong2').then(function(response) {
@@ -1684,7 +1491,7 @@ export default {
       })
 
     },
-    Send_serial1_37() {
+    guzhangbiaozhixinxi() {
       let _this = this
 
       axios.post('http://localhost:10866/guzhangbiaozhixinxi').then(function(response) {
@@ -1692,7 +1499,7 @@ export default {
       })
 
     },
-    Send_serial1_38() {
+    PDPbanbenxinxi() {
       let _this = this
 
       axios.post('http://localhost:10866/PDPbanbenxinxi').then(function(response) {
@@ -1700,7 +1507,7 @@ export default {
       })
 
     },
-    Send_serial1_39() {
+    ComBootbanbenxinxi() {
       let _this = this
 
       axios.post('http://localhost:10866/ComBootbanbenxinxi').then(function(response) {
@@ -1708,7 +1515,7 @@ export default {
       })
 
     },
-    Send_serial1_40() {
+    yejingduibidu() {
       let _this = this
 
       axios.post('http://localhost:10866/yejingduibidu').then(function(response) {
@@ -1716,7 +1523,7 @@ export default {
       })
 
     },
-    Send_serial1_41() {
+    guzhangbiaozhixinxi() {
       let _this = this
 
       axios.post('http://localhost:10866/guzhangbiaozhixinxi').then(function(response) {
@@ -1724,7 +1531,7 @@ export default {
       })
 
     },
-    Send_serial1_42() {
+    hezhacishutongji() {
       let _this = this
 
       axios.post('http://localhost:10866/hezhacishutongji').then(function(response) {
@@ -1732,7 +1539,7 @@ export default {
       })
 
     },
-    Send_serial1_43() {
+    fenzhacishutongji() {
       let _this = this
 
       axios.post('http://localhost:10866/fenzhacishutongji').then(function(response) {
@@ -1740,7 +1547,7 @@ export default {
       })
 
     },
-    Send_serial1_44() {
+    yuanchengdianziguapai() {
       let _this = this
 
       axios.post('http://localhost:10866/yuanchengdianziguapai').then(function(response) {
@@ -1748,7 +1555,7 @@ export default {
       })
 
     },
-    Send_serial1_45() {
+    celiangIajixingqufan() {
       let _this = this
 
       axios.post('http://localhost:10866/celiangIajixingqufan').then(function(response) {
@@ -1756,7 +1563,7 @@ export default {
       })
 
     },
-    Send_serial1_46() {
+    celiangIcjixingqufan() {
       let _this = this
 
       axios.post('http://localhost:10866/celiangIcjixingqufan').then(function(response) {
@@ -1764,7 +1571,7 @@ export default {
       })
 
     },
-    Send_serial1_47() {
+    baohuIAjixingqufan() {
       let _this = this
 
       axios.post('http://localhost:10866/baohuIAjixingqufan').then(function(response) {
@@ -1772,7 +1579,7 @@ export default {
       })
 
     },
-    Send_serial1_48() {
+    baohuICjixingqufan() {
       let _this = this
 
       axios.post('http://localhost:10866/baohuICjixingqufan').then(function(response) {
@@ -1780,7 +1587,7 @@ export default {
       })
 
     },
-    Send_serial1_49() {
+    zhudongfasongluboshineng() {
       let _this = this
 
       axios.post('http://localhost:10866/zhudongfasongluboshineng').then(function(response) {
@@ -1788,7 +1595,7 @@ export default {
       })
 
     },
-    Send_serial1_50() {
+    fangyuejibisuochixushijian() {
       let _this = this
 
       axios.post('http://localhost:10866/fangyuejibisuochixushijian').then(function(response) {
@@ -1796,7 +1603,7 @@ export default {
       })
 
     },
-    Send_serial1_51() {
+    SU31kuozhanjidianqi1chukoumochong() {
       let _this = this
 
       axios.post('http://localhost:10866/SU31kuozhanjidianqi1chukoumochong').then(function(response) {
@@ -1804,7 +1611,7 @@ export default {
       })
 
     },
-    Send_serial1_52() {
+    SU31kuozhanjidianqi2chukoumochong() {
       let _this = this
 
       axios.post('http://localhost:10866/SU31kuozhanjidianqi2chukoumochong').then(function(response) {
@@ -1812,7 +1619,7 @@ export default {
       })
 
     },
-    Send_serial1_53() {
+    SU31kuozhanjidianqi3chukoumochong() {
       let _this = this
 
       axios.post('http://localhost:10866/SU31kuozhanjidianqi3chukoumochong').then(function(response) {
@@ -1820,7 +1627,7 @@ export default {
       })
 
     },
-    Send_serial1_54() {
+    SU31kuozhanjidianqi4chukoumochong() {
       let _this = this
 
       axios.post('http://localhost:10866/SU31kuozhanjidianqi4chukoumochong').then(function(response) {
@@ -1828,7 +1635,7 @@ export default {
       })
 
     },
-    Send_serial1_55() {
+    celiangIbjixingqufan() {
       let _this = this
 
       axios.post('http://localhost:10866/celiangIbjixingqufan').then(function(response) {
@@ -1836,7 +1643,7 @@ export default {
       })
 
     },
-    Send_serial1_56() {
+    baohuIBjixingqufan() {
       let _this = this
 
       axios.post('http://localhost:10866/baohuIBjixingqufan').then(function(response) {
@@ -1844,7 +1651,7 @@ export default {
       })
 
     },
-    Send_serial1_57() {
+    bentikuozhanjidianqi1chukoumochong() {
       let _this = this
 
       axios.post('http://localhost:10866/bentikuozhanjidianqi1chukoumochong').then(function(response) {
@@ -1852,7 +1659,7 @@ export default {
       })
 
     },
-    Send_serial1_58() {
+    bentikuozhanjidianqi2chukoumochong() {
       let _this = this
 
       axios.post('http://localhost:10866/bentikuozhanjidianqi2chukoumochong').then(function(response) {
@@ -1860,7 +1667,7 @@ export default {
       })
 
     },
-    Send_serial1_59() {
+    bentikuozhanjidianqi3chukoumochong() {
       let _this = this
 
       axios.post('http://localhost:10866/bentikuozhanjidianqi3chukoumochong').then(function(response) {
@@ -1868,7 +1675,7 @@ export default {
       })
 
     },
-    Send_serial1_60() {
+    bentikuozhanjidianqi4chukoumochong() {
       let _this = this
 
       axios.post('http://localhost:10866/bentikuozhanjidianqi4chukoumochong').then(function(response) {

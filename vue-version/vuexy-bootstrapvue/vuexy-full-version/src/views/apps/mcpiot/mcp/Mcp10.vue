@@ -54,11 +54,6 @@
 				</b-collapse>
 			</b-card>
 
-
-
-
-
-
 		</div>
 
 		<b-card-text>{{resp}}</b-card-text>

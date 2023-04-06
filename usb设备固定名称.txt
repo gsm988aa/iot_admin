@@ -1,0 +1,51 @@
+您可以使用udev规则来固定这两个设备的名称和波特率。以下是一个示例规则：
+
+1  首先，打开终端并输入以下命令创建udev规则文件：
+sudo nano /etc/udev/rules.d/99-usb-serial.rules
+
+2  在打开的文件中，添加以下内容：
+CH341 - 9600 baud
+SUBSYSTEM=="tty", ATTRS{idVendor}=="1a86", ATTRS{idProduct}=="7523", ATTRS{serial}=="*", SYMLINK+="ttyUSB0", MODE="0666", RUN+="/bin/stty -F /dev/%k 9600"
+
+CH341 - 115200 baud
+SUBSYSTEM=="tty", ATTRS{idVendor}=="1a86", ATTRS{idProduct}=="7523", ATTRS{serial}=="*", SYMLINK+="ttyUSB1", MODE="0666", RUN+="/bin/stty -F /dev/%k 115200"
+
+3  保存并关闭文件。
+
+4  重新加载udev规则：
+
+sudo udevadm control --reload-rules
+
+现在，当您连接两个CH341时，它们应该分别显示为/dev/ttyUSB0和/dev/ttyUSB1，其波特率分别为9600和115200。请注意，如果您使用的是不同的串口转USB设备，您需要相应地更改idVendor和idProduct值。
+
+
+
+
+------------------------------------------------------------------
+
+要固定USB摄像头在每次开机时都作为/dev/video1设备，可以按照以下步骤操作：
+
+确定USB摄像头的ID号码，可以使用lsusb命令查看，例如：
+复制
+$ lsusb
+Bus 001 Device 002: ID 046d:0825 Logitech, Inc. Webcam C270
+上述输出中，USB摄像头的ID号码为046d:0825。
+
+创建一个udev规则文件，命名为/etc/udev/rules.d/99-webcam.rules（如果该文件夹不存在，则需要先创建）：
+复制
+$ sudo nano /etc/udev/rules.d/99-webcam.rules
+在该文件中添加以下行：
+复制
+SUBSYSTEM=="video4linux", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="0825", SYMLINK+="video1"
+其中，idVendor和idProduct分别为USB摄像头的ID号码，这里以上述例子为例。
+
+保存并关闭文件。
+
+重新加载udev规则：
+
+复制
+$ sudo udevadm control --reload-rules
+拔出USB摄像头并重新插入，此时它应该被创建为/dev/video1设备。
+
+重启系统，USB摄像头应该仍然被创建为/dev/video1设备。
+
