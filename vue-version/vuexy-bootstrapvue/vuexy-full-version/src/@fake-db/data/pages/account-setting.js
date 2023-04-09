@@ -4,7 +4,7 @@ const data = {
   accountSetting: {
     general: {
       avatar: require('@/assets/images/portrait/small/avatar-s-11.jpg'),
-      username: '江铜',
+      username: 'xyd管理员',
       fullName: '管理员',
       email: 'jiangtongjituan@hogward.com',
       company: 'jiangtongjituan',

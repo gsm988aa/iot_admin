@@ -69,11 +69,11 @@ export default [
   //   route: 'apps-email',
   //   icon: 'MailIcon',
   // },
-  // {
-  //   title: 'Chat',
-  //   route: 'apps-chat',
-  //   icon: 'MessageSquareIcon',
-  // },
+  {
+    title: 'Chat',
+    route: 'apps-chat',
+    icon: 'MessageSquareIcon',
+  },
   // {
   //   title: 'Todo',
   //   route: 'apps-todo',

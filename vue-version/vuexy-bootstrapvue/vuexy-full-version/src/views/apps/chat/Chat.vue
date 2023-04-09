@@ -136,7 +136,7 @@
           <b-input-group class="input-group-merge form-send-message mr-1">
             <b-form-input
               v-model="chatInputMessage"
-              placeholder="Enter your message"
+              placeholder="请输入您的对话内容"
             />
           </b-input-group>
           <b-button

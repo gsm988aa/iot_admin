@@ -7,11 +7,6 @@
       <br>
       <br>
       <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
     </b-row>
     <b-row>
       <b-col cols="3">
@@ -19,14 +14,12 @@
 
       <b-col cols="6">
 
-        <div style="transform: scale(1);">
+        <div style="transform: scale(1.5);">
           <b-card>
-            <b-button variant="info" @click="handleClick0x" :disabled="isDisabled">获取media信息</b-button>
-            <br>
-            <br>
-            <b-button variant="info" @click="handleClick0" :disabled="isDisabled">获取串口信息</b-button>
-            <br>
-            <br>
+
+<!--            <b-button variant="info" @click="handleClick0" :disabled="isDisabled">获取串口信息</b-button>-->
+<!--            <br>-->
+<!--            <br>-->
             <b-button variant="primary" @click="handleClick1" :disabled="isDisabled">合闸</b-button>
             <br>
             <br>
@@ -42,11 +35,32 @@
             <b-button variant="warning" @click="handleClick5" :disabled="isDisabled">手车驶出</b-button>
             <br>
             <br>
-            <b-button variant="info" @click="handleClick6" :disabled="isDisabled">控制器复位</b-button>
+            <b-button variant="info" @click="handleClick5" :disabled="isDisabled">一件顺控送电/断电</b-button>
             <br>
             <br>
-<!--            button打开localhost:8081-->
-            <b-button variant="primary"  :disabled="isDisabled" href="http://localhost:8081">打开摄像头</b-button>
+            <b-button variant="primary" @click="handleClick6" :disabled="isDisabled">控制器复位</b-button>
+            <br>
+            <br>
+<!--            button打开localhost:8084/5-->
+<!--            <b-button variant="secondary"  :disabled="isDisabled" href="http://192.168.3.19:8084">打开摄像头</b-button>-->
+
+            <!--            VUE嵌入localhost:8085网页 缩放为30% 分辨率是640*480-->
+<!--            <iframe src="http://192.168.3.19:8085" width="640" height="480" style="transform: scale(0.5);"></iframe>-->
+            <div>
+<!--              <b-button v-b-toggle.collapse-1 variant="success">摄像头开关</b-button>-->
+              <b-button
+                  :class="visible ? null : 'collapsed'"
+                  :aria-expanded="visible ? 'true' : 'false'"
+                  aria-controls="collapse-4"
+                  @click="visible = !visible"
+              >
+                摄像头开关
+              </b-button>
+              <b-collapse id="collapse-4" v-model="visible" class="mt-2">
+                <iframe src="http://192.168.3.19:8085" width="645" height="486" style="transform: scale(1);"></iframe>
+
+              </b-collapse>
+            </div>
 
             <br>
             <br>
@@ -68,7 +82,7 @@
 import {BRow, BCol, BCard, BContainer, BButton, BButtonGroup, BFormInput} from 'bootstrap-vue'
 // import axios
 import axios from 'axios'
-
+import { BCollapse } from 'bootstrap-vue'
 export default {
   components: {
     BRow,
@@ -79,13 +93,15 @@ export default {
     BButtonGroup,
     // b-container
     BContainer,
-    BFormInput
+    BFormInput,
+    BCollapse
   },
   data() {
     return {
       text: '',
       text2: [],
-      isDisabled: false
+      isDisabled: false,
+      visible: false
     }
   },
   methods: {
@@ -123,40 +139,45 @@ export default {
         // this.text = '获取串口信息'
       }
     },
-  handleClick0x() {
-      if (!this.isDisabled) {
-        this.isDisabled = true;
-
-          console.log('Button 0 clicked!')
-          console.log('Button 0 clicked!')
-          this.isDisabled = false;
-          // this.text = '获取串口信息完毕!'
-          // 延迟300ms后将axios getinfo收到的数据传递给text
-           setTimeout(() => {
-            axios.post('http://localhost:10866/getmedia')
-              .then(response => {
-                console.log(response)
-                this.text = response.data
-              })
-              .catch(error => {
-                console.log(error)
-              })
-          }, 500)
-
-
-           setTimeout(() => {
-            axios.post('http://localhost:10866/getmedia')
-              .then(response => {
-                console.log(response)
-                this.text = response.data
-              })
-              .catch(error => {
-                console.log(error)
-              })
-          }, 100)
-        // this.text = '获取串口信息'
-      }
+    toggleIframe() {
+      const iframe = document.getElementById('my-iframe');
+      iframe.style.display = iframe.style.display === 'none' ? 'block' : 'none';
     },
+
+  // handleClick0x() {
+  //     if (!this.isDisabled) {
+  //       this.isDisabled = true;
+  //
+  //         console.log('Button 0 clicked!')
+  //         console.log('Button 0 clicked!')
+  //         this.isDisabled = false;
+  //         // this.text = '获取串口信息完毕!'
+  //         // 延迟300ms后将axios getinfo收到的数据传递给text
+  //          setTimeout(() => {
+  //           axios.post('http://localhost:10866/getmedia')
+  //             .then(response => {
+  //               console.log(response)
+  //               this.text = response.data
+  //             })
+  //             .catch(error => {
+  //               console.log(error)
+  //             })
+  //         }, 500)
+
+    //
+    //        setTimeout(() => {
+    //         axios.post('http://localhost:10866/getmedia')
+    //           .then(response => {
+    //             console.log(response)
+    //             this.text = response.data
+    //           })
+    //           .catch(error => {
+    //             console.log(error)
+    //           })
+    //       }, 100)
+    //     // this.text = '获取串口信息'
+    //   }
+    // },
 
 
     handleClick1() {
