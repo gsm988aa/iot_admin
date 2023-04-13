@@ -19,10 +19,13 @@
     <!-- Left Col -->
 <!--     顶栏功能按键-->
     <div class="bookmark-wrapper align-items-center flex-grow-1 d-none d-lg-flex">
-      <b-button variant="outline-primary">A相不带电</b-button>&nbsp;
-      <b-button variant="outline-primary">B相不带电</b-button>&nbsp;
-      <b-button variant="outline-primary">C相不带电</b-button>&nbsp;&nbsp;&nbsp;
-      <b-button  variant="danger">紧急分闸</b-button>&nbsp;
+      <b-button variant="outline-primary"  href="/dashboard/deviceinfos">A相</b-button>&nbsp;
+      <b-button variant="outline-primary" href="/dashboard/deviceinfos">B相</b-button>&nbsp;
+      <b-button variant="outline-primary" href="/dashboard/deviceinfos" >C相</b-button>&nbsp;&nbsp;&nbsp;
+<!--      按钮链接到emergencyopening页面-->
+      <b-button  variant="danger" href="/apps/emergencyopening">紧急分闸</b-button>&nbsp;
+
+<!--      <b-button  variant="danger">紧急分闸</b-button>&nbsp;-->
       <b-button variant="outline-primary">自检:无故障</b-button>&nbsp;&nbsp;&nbsp;
       <!-- Bookmarks Container -->
 <!--      <bookmarks />-->

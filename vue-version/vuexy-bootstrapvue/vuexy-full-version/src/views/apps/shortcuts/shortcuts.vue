@@ -57,7 +57,7 @@
                 摄像头开关
               </b-button>
               <b-collapse id="collapse-4" v-model="visible" class="mt-2">
-                <iframe src="http://192.168.3.19:8085" width="645" height="486" style="transform: scale(1);"></iframe>
+                <iframe src="http://192.168.3.15:8085" width="645" height="486" style="transform: scale(1);"></iframe>
 
               </b-collapse>
             </div>

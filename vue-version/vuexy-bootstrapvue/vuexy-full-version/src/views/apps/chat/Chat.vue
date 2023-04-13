@@ -25,7 +25,7 @@
           class="sidebar-toggle start-chat-text"
           @click="startConversation"
         >
-          Start Conversation
+          开始chatGPT 生成式AI对话
         </h4>
       </div>
 

@@ -4,6 +4,11 @@ export default [
     name: 'apps-shortcuts',
     component: () => import('@/views/apps/shortcuts/shortcuts.vue'),
   },
+      {
+    path: '/apps/shortcuts/',
+    name: 'apps-shortcuts',
+    component: () => import('@/views/apps/shortcuts/shortcuts.vue'),
+  },
   {
     path: '/apps/emergencyopening',
     name: 'apps-emergencyopening',

@@ -23,7 +23,7 @@ const data = {
       id: 1,
       fullName: '智能柜ChatGPT3.5',
       role: 'Frontend Developer',
-      about: 'Cake pie jelly jelly beans. Marzipan lemon drops halvah cake. Pudding cookie lemon drops icing',
+      about: '请将您需要了解的内容输入到聊天框',
       avatar: require('@/assets/images/avatars/1.png'),
       status: 'offline',
     },
@@ -32,7 +32,7 @@ const data = {
       fullName: 'GPT4.0',
       role: 'UI/UX Designer',
       about:
-        'Toffee caramels jelly-o tart gummi bears cake I love ice cream lollipop. Sweet liquorice croissant candy danish dessert icing. Cake macaroon gingerbread toffee sweet.',
+        '我可以生成更精确的回答',
       avatar: require('@/assets/images/avatars/2.png'),
       status: 'busy',
     },
