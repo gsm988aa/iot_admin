@@ -5,7 +5,7 @@ const fs = require('fs');
 const cors = require("cors")
 const { SerialPort } = require('serialport')
 
-const serialport2 = new SerialPort({ path: 'COM2', baudRate: 115200}, function (err) {
+const serialport2 = new SerialPort({ path: 'COM2', baudRate: 9600}, function (err) {
   if (err) {
     return console.log('Error: ', err.message)
   }
@@ -20,21 +20,23 @@ app.use(
 
 let buffer = '';
 let buf = '';
+let hexdata = '';
 let auto485flag = 1;
+let guzhang = '' ;
 
-// 如果全局变量flag为1则串口每3秒发送十六进制数据'0xff'
-// 如果全局变量flag为0则串口每3秒发送十六进制数据'0x00'
+
 setInterval(() => {
   if (auto485flag == 1) {
-    serialport2.write('01 03 08 01 00 01 D7 AA', 'hex');
+    serialport2.write('010308010001D7AA', 'hex');
   } 
-}, 3000);
+}, 2000);
 
 serialport2.on('readable', () => { 
   setTimeout(() => {
     const data = serialport2.read();
     if (data) {
       const str = data.toString('utf8');
+      hexdata =  data.toString('hex');
       buf = str;
       if (buf.indexOf('') >= 0) {
         const lines = buf.split('');
@@ -69,7 +71,85 @@ app.post('/:action', function (req, res) {
 
   if (action == 'autoflagenable') {
     auto485flag = 1;
-    // console.log(auto485flag);
+    console.log( '485flag=' +  auto485flag);
+  }
+
+  if (action == 'geterror') {
+    // 将hexdata最后两个字节删除
+    const buf2hex = Buffer.from(hexdata.slice(0, -4), 'hex');
+
+// 判断buf2hex最后一个字节的第一位是不是1，如果是1则buf为'总合闸'
+    if (buf2hex[1] & 0x01) {
+      guzhang = guzhang + '0总跳闸故障  '; 
+    }
+
+    // buf2hex最后一个字节第一位如果是1则buf为'总跳闸'
+    if (buf2hex[1] & 0x02) {
+      guzhang  = guzhang + '1速断保护故障  ';
+    }
+
+    if (buf2hex[1] & 0x03) {
+      guzhang  = guzhang + '2限时速断故障  ';
+    }
+
+    if (buf2hex[1] & 0x04) {
+      guzhang  = guzhang + '3定时限过流故障  ';
+    }
+
+    if (buf2hex[1] & 0x05) {
+      guzhang  = guzhang + '4反时限过流故障  ';
+    }
+
+    if (buf2hex[1] & 0x06) {
+      guzhang  = guzhang + '5零序过流故障  ';
+    }
+
+    if (buf2hex[1] & 0x07) {
+      guzhang  = guzhang + '6功率方向零序故障  ';
+    }
+
+    if (buf2hex[1] & 0x08) {
+      guzhang  = guzhang + '7低电压保护故障';
+    }
+
+    if (buf2hex[1] & 0x09) {
+      guzhang  = guzhang + '8过电压保护故障';
+    }
+
+    
+    if (buf2hex[1] & 0x0a) {
+      guzhang  = guzhang + '9零序过电压故障';
+    }
+
+    if (buf2hex[1] & 0x0a) {
+      guzhang  = guzhang + '10绝缘电阻监测故障';
+    }
+
+    if (buf2hex[1] & 0x0b) {
+      guzhang  = guzhang + '11开入保护故障';
+    }
+
+    if (buf2hex[1] & 0x0c) {
+      guzhang  = guzhang + '12高温保护故障';
+    }
+
+    if (buf2hex[1] & 0x0d) {
+      guzhang  = guzhang + '13湿度高除湿故障';
+    }
+
+    if (buf2hex[1] & 0x0e) {
+      guzhang  = guzhang + '14失压延时故障';
+    }
+
+    if (buf2hex[1] & 0x0f) {
+      guzhang  = guzhang + '15线圈接地零序保护故障';
+    }
+ 
+    res.send(guzhang);    
+    // console.log(buf);
+    hexdata = '';
+    guzhang = '';
+    buf = '';
   }
   
   if (action == 'reboot') {
@@ -120,9 +200,6 @@ app.post('/:action', function (req, res) {
     var value = req.query.value;
     var prefix  = req.query.prefix;
 // 待修改
-
-
-
 
     serialport2.write(value);
     return res.send(`数值 ${value}写入完毕!`);

@@ -1,6 +1,12 @@
 <template>
 
   <b-container className="bv-example-row">
+<!-- 加入一个bootstrap-vue的modal,如果errorinfo不是空字符串，自动打开一个Modal，并显示errorinfo -->
+<b-button hidden @click="showModal">Open Modal</b-button>
+<b-modal v-model="show" title="Modal Title">
+  {{ errorinfo }}
+</b-modal>
+    </b-modal>
     <b-row>
       <br>
       <br>
@@ -17,9 +23,6 @@
         <div style="transform: scale(1.5);">
           <b-card>
 
-<!--            <b-button variant="info" @click="handleClick0" :disabled="isDisabled">获取串口信息</b-button>-->
-<!--            <br>-->
-<!--            <br>-->
             <b-button variant="primary" @click="handleClick1" :disabled="isDisabled">合闸</b-button>
             <br>
             <br>
@@ -57,7 +60,7 @@
                 摄像头开关
               </b-button>
               <b-collapse id="collapse-4" v-model="visible" class="mt-2">
-                <iframe src="http://192.168.3.15:8085" width="645" height="486" style="transform: scale(1);"></iframe>
+                <iframe src="http://192.168.3.15:8085" width="322" height="243" style="transform: scale(0.5);"></iframe>
 
               </b-collapse>
             </div>
@@ -79,7 +82,7 @@
 </template>
 
 <script>
-import {BRow, BCol, BCard, BContainer, BButton, BButtonGroup, BFormInput} from 'bootstrap-vue'
+import {BRow, BCol, BCard, BContainer, BButton, BButtonGroup, BFormInput, BModal } from 'bootstrap-vue'
 // import axios
 import axios from 'axios'
 import { BCollapse } from 'bootstrap-vue'
@@ -94,17 +97,58 @@ export default {
     // b-container
     BContainer,
     BFormInput,
+    BModal,
     BCollapse
   },
   data() {
     return {
       text: '',
       text2: [],
+      auto485flag : 1,
+      errorinfo: '',
       isDisabled: false,
+      show: false,
       visible: false
     }
   },
+  created() {
+    axios.post('http://localhost:10866/autoflagenable')
+        .then(response => {
+          console.log(response)
+        })
+        .catch(error => {
+          console.log(error)
+        })
+  },
+
+// 每秒钟向10086端口发送一个post
+  mounted() {
+    if (this.auto485flag == 1) {
+      setInterval(() => {
+      axios.post('http://localhost:10866/geterror')
+          .then(response => {
+            if (this.errorinfo  != response.data) {
+              if (response.data != '') {
+                this.errorinfo = response.data
+              }
+            }
+            else {
+              this.errorinfo = ''
+            }
+              
+            console.log(response)
+          })
+          .catch(error => {
+            console.log(error)
+          })
+      }, 2000)
+    } 
+  
+  },
+
   methods: {
+
+
     handleClick0() {
       if (!this.isDisabled) {
         this.isDisabled = true;
@@ -143,43 +187,7 @@ export default {
       const iframe = document.getElementById('my-iframe');
       iframe.style.display = iframe.style.display === 'none' ? 'block' : 'none';
     },
-
-  // handleClick0x() {
-  //     if (!this.isDisabled) {
-  //       this.isDisabled = true;
-  //
-  //         console.log('Button 0 clicked!')
-  //         console.log('Button 0 clicked!')
-  //         this.isDisabled = false;
-  //         // this.text = '获取串口信息完毕!'
-  //         // 延迟300ms后将axios getinfo收到的数据传递给text
-  //          setTimeout(() => {
-  //           axios.post('http://localhost:10866/getmedia')
-  //             .then(response => {
-  //               console.log(response)
-  //               this.text = response.data
-  //             })
-  //             .catch(error => {
-  //               console.log(error)
-  //             })
-  //         }, 500)
-
-    //
-    //        setTimeout(() => {
-    //         axios.post('http://localhost:10866/getmedia')
-    //           .then(response => {
-    //             console.log(response)
-    //             this.text = response.data
-    //           })
-    //           .catch(error => {
-    //             console.log(error)
-    //           })
-    //       }, 100)
-    //     // this.text = '获取串口信息'
-    //   }
-    // },
-
-
+ 
     handleClick1() {
       if (!this.isDisabled) {
         this.isDisabled = true;
@@ -266,13 +274,15 @@ export default {
         }, 3000);
         this.text = '执行复位'
       }
-    }
-    // handleClick7(){
-    //   if (!this.isDisabled) {
-    //   //   打开localhost:8081
-    //
-    //   }
-    // }
+    },
+    showModal()
+    { this.show = true; } }, watch: { 
+      errorinfo(newVal) {
+       if (newVal) 
+       { this.show = true; } 
+      }
+   
+ 
   }
 }
 </script>
