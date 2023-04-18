@@ -32,10 +32,10 @@
                 >写入
                 </b-button>
                 <b-card-body>
-                  <b-form-spinbutton id="sb-vertical" v-model="valueset1" vertical></b-form-spinbutton>
-                  <b-form-spinbutton id="sb-vertical" v-model="valueset2" vertical></b-form-spinbutton>
-                  <b-form-spinbutton id="sb-vertical" v-model="valueset3" vertical></b-form-spinbutton>
-                  <b-form-spinbutton id="sb-vertical" v-model="valueset4" vertical></b-form-spinbutton>
+                  <b-form-spinbutton id="sb-vertical" min="0"  max="9" v-model="valueset1" vertical></b-form-spinbutton>
+                  <b-form-spinbutton id="sb-vertical" min="0"  max="9" v-model="valueset2" vertical></b-form-spinbutton>
+                  <b-form-spinbutton id="sb-vertical" min="0"  max="9" v-model="valueset3" vertical></b-form-spinbutton>
+                  <b-form-spinbutton id="sb-vertical" min="0"  max="9" v-model="valueset4" vertical></b-form-spinbutton>
                   <b-card-text>写入值为:{{ valuesum }}</b-card-text>
                 </b-card-body>
               </b-card>
@@ -136,7 +136,7 @@
           漏电继电器脉冲时间
         </b-button>
         &nbsp;
- 
+
         <b-button v-ripple.400="'rgba(113, 102, 240, 0.15)'" variant="outline-primary"
                   v-b-toggle.accordion-1
                   v-on:click="changeProp('绝缘继电器脉冲时间','0x1203001A0001')"
@@ -166,7 +166,7 @@
         >
           软复位次数
         </b-button>
-        &nbsp; 
+        &nbsp;
         <b-button v-ripple.400="'rgba(113, 102, 240, 0.15)'" variant="outline-primary"
                   v-b-toggle.accordion-1
                   v-on:click="changeProp('硬复位次数','0x120300210001')"
@@ -264,10 +264,10 @@
                 >写入
                 </b-button>
                 <b-card-body>
-                  <b-form-spinbutton id="sb-vertical" v-model="valueset1" vertical></b-form-spinbutton>
-                  <b-form-spinbutton id="sb-vertical" v-model="valueset2" vertical></b-form-spinbutton>
-                  <b-form-spinbutton id="sb-vertical" v-model="valueset3" vertical></b-form-spinbutton>
-                  <b-form-spinbutton id="sb-vertical" v-model="valueset4" vertical></b-form-spinbutton>
+                  <b-form-spinbutton id="sb-vertical" min="0"  max="9" v-model="valueset1" vertical></b-form-spinbutton>
+                  <b-form-spinbutton id="sb-vertical" min="0"  max="9" v-model="valueset2" vertical></b-form-spinbutton>
+                  <b-form-spinbutton id="sb-vertical" min="0"  max="9" v-model="valueset3" vertical></b-form-spinbutton>
+                  <b-form-spinbutton id="sb-vertical" min="0"  max="9" v-model="valueset4" vertical></b-form-spinbutton>
                   <b-card-text>写入值为:{{ valuesum }}</b-card-text>
                 </b-card-body>
               </b-card>
@@ -558,10 +558,10 @@
                 >写入
                 </b-button>
                 <b-card-body>
-                  <b-form-spinbutton id="sb-vertical" v-model="valueset1" vertical></b-form-spinbutton>
-                  <b-form-spinbutton id="sb-vertical" v-model="valueset2" vertical></b-form-spinbutton>
-                  <b-form-spinbutton id="sb-vertical" v-model="valueset3" vertical></b-form-spinbutton>
-                  <b-form-spinbutton id="sb-vertical" v-model="valueset4" vertical></b-form-spinbutton>
+                  <b-form-spinbutton id="sb-vertical" min="0"  max="9" v-model="valueset1" vertical></b-form-spinbutton>
+                  <b-form-spinbutton id="sb-vertical" min="0"  max="9" v-model="valueset2" vertical></b-form-spinbutton>
+                  <b-form-spinbutton id="sb-vertical" min="0"  max="9" v-model="valueset3" vertical></b-form-spinbutton>
+                  <b-form-spinbutton id="sb-vertical" min="0"  max="9" v-model="valueset4" vertical></b-form-spinbutton>
                   <b-card-text>写入值为:{{ valuesum }}</b-card-text>
                 </b-card-body>
               </b-card>
@@ -687,10 +687,10 @@
                 >写入
                 </b-button>
                 <b-card-body>
-                  <b-form-spinbutton id="sb-vertical" v-model="valueset1" vertical></b-form-spinbutton>
-                  <b-form-spinbutton id="sb-vertical" v-model="valueset2" vertical></b-form-spinbutton>
-                  <b-form-spinbutton id="sb-vertical" v-model="valueset3" vertical></b-form-spinbutton>
-                  <b-form-spinbutton id="sb-vertical" v-model="valueset4" vertical></b-form-spinbutton>
+                  <b-form-spinbutton id="sb-vertical" min="0"  max="9" v-model="valueset1" vertical></b-form-spinbutton>
+                  <b-form-spinbutton id="sb-vertical" min="0"  max="9" v-model="valueset2" vertical></b-form-spinbutton>
+                  <b-form-spinbutton id="sb-vertical" min="0"  max="9" v-model="valueset3" vertical></b-form-spinbutton>
+                  <b-form-spinbutton id="sb-vertical" min="0"  max="9" v-model="valueset4" vertical></b-form-spinbutton>
                   <b-card-text>写入值为:{{ valuesum }}</b-card-text>
                 </b-card-body>
               </b-card>
@@ -699,121 +699,121 @@
         </div>
         <b-button v-ripple.400="'rgba(113, 102, 240, 0.15)'" variant="outline-primary"
                   v-b-toggle.accordion-1
-                  v-on:click="changeProp('第0次事件码','0x120304000001')"        
+                  v-on:click="changeProp('第0次事件码','0x120304000001')"
         >
           第0次事件码
         </b-button>
         &nbsp;
         <b-button v-ripple.400="'rgba(186, 191, 199, 0.15)'" variant="outline-secondary"
         v-b-toggle.accordion-1
-                  v-on:click="changeProp('第0次事件返回值','0x120304010001')"        
+                  v-on:click="changeProp('第0次事件返回值','0x120304010001')"
         >
           第0次事件返回值
         </b-button>
         &nbsp;
         <b-button v-ripple.400="'rgba(40, 199, 111, 0.15)'" variant="outline-success"
         v-b-toggle.accordion-1
-                  v-on:click="changeProp('第0次事件时间——毫秒','0x120304020001')"        
+                  v-on:click="changeProp('第0次事件时间——毫秒','0x120304020001')"
                 >
           第0次事件时间——毫秒
         </b-button>
         &nbsp;
         <b-button v-ripple.400="'rgba(234, 84, 85, 0.15)'" variant="outline-danger"
         v-b-toggle.accordion-1
-                  v-on:click="changeProp('第0次事件时间——分钟','0x120304030001')"        
+                  v-on:click="changeProp('第0次事件时间——分钟','0x120304030001')"
                 >
           第0次事件时间——分钟
         </b-button>
         &nbsp;
         <b-button v-ripple.400="'rgba(255, 159, 67, 0.15)'" variant="outline-warning"
                   v-b-toggle.accordion-1
-                  v-on:click="changeProp('第0次事件时间——小时','0x120304040001')"        
+                  v-on:click="changeProp('第0次事件时间——小时','0x120304040001')"
                 >
           第0次事件时间——小时
         </b-button>
         &nbsp;
-        <b-button v-ripple.400="'rgba(0, 207, 232, 0.15)'" variant="outline-info"     
+        <b-button v-ripple.400="'rgba(0, 207, 232, 0.15)'" variant="outline-info"
             v-b-toggle.accordion-1
                   v-on:click="changeProp('第0次事件时间——故障录波号（低字节）+日期（低字节）','0x120304005001')"    >
           第0次事件时间——故障录波号（低字节）+日期（低字节）
         </b-button>
         &nbsp;
-        <b-button v-ripple.400="'rgba(30, 30, 30, 0.15)'" variant="outline-dark" 
+        <b-button v-ripple.400="'rgba(30, 30, 30, 0.15)'" variant="outline-dark"
         v-b-toggle.accordion-1
-                  v-on:click="changeProp('第0次事件时间——故障录波号（高字节）+月（低字节）','0x120304060001')"        
+                  v-on:click="changeProp('第0次事件时间——故障录波号（高字节）+月（低字节）','0x120304060001')"
                 >
           第0次事件时间——故障录波号（高字节）+月（低字节）
         </b-button>
         &nbsp;
         <b-button v-ripple.400="'rgba(113, 102, 240, 0.15)'" variant="outline-primary"
         v-b-toggle.accordion-1
-                  v-on:click="changeProp('第0次事件时间——年','0x120304070001')"        
+                  v-on:click="changeProp('第0次事件时间——年','0x120304070001')"
                 >
           第0次事件时间——年
         </b-button>
         &nbsp;
         <b-button v-ripple.400="'rgba(186, 191, 199, 0.15)'" variant="outline-secondary"
         v-b-toggle.accordion-1
-                  v-on:click="changeProp('第30次事件码','0x120304F00001')"        
+                  v-on:click="changeProp('第30次事件码','0x120304F00001')"
                 >
           第30次事件码
         </b-button>
         &nbsp;
         <b-button v-ripple.400="'rgba(186, 191, 199, 0.15)'" variant="outline-secondary"
         v-b-toggle.accordion-1
-                  v-on:click="changeProp('第30次事件返回值','0x120304F10001')"        
+                  v-on:click="changeProp('第30次事件返回值','0x120304F10001')"
         >
           第30次事件返回值
         </b-button>
         &nbsp;
         <b-button v-ripple.400="'rgba(40, 199, 111, 0.15)'" variant="outline-success"
         v-b-toggle.accordion-1
-                  v-on:click="changeProp('第30次事件时间——毫秒','0x120304F20001')"        
+                  v-on:click="changeProp('第30次事件时间——毫秒','0x120304F20001')"
                 >
           第30次事件时间——毫秒
         </b-button>
         &nbsp;
         <b-button v-ripple.400="'rgba(234, 84, 85, 0.15)'" variant="outline-danger"
         v-b-toggle.accordion-1
-                  v-on:click="changeProp('第30次事件时间——分钟','0x120304F30001')"        
+                  v-on:click="changeProp('第30次事件时间——分钟','0x120304F30001')"
                 >
           第30次事件时间——分钟
         </b-button>
         &nbsp;
         <b-button v-ripple.400="'rgba(255, 159, 67, 0.15)'" variant="outline-warning"
                   v-b-toggle.accordion-1
-                  v-on:click="changeProp('第30次事件时间——小时','0x120304F40001')"        
+                  v-on:click="changeProp('第30次事件时间——小时','0x120304F40001')"
                 >
           第30次事件时间——小时
         </b-button>
         &nbsp;
-        <b-button v-ripple.400="'rgba(0, 207, 232, 0.15)'" variant="outline-info"     
+        <b-button v-ripple.400="'rgba(0, 207, 232, 0.15)'" variant="outline-info"
             v-b-toggle.accordion-1
                   v-on:click="changeProp('第30次事件时间——故障录波号（低字节）+日期（低字节）','0x120304F50001')"    >
           第30次事件时间——故障录波号（低字节）+日期（低字节）
         </b-button>
         &nbsp;
-        <b-button v-ripple.400="'rgba(30, 30, 30, 0.15)'" variant="outline-dark" 
+        <b-button v-ripple.400="'rgba(30, 30, 30, 0.15)'" variant="outline-dark"
         v-b-toggle.accordion-1
-                  v-on:click="changeProp('第30次事件时间——故障录波号（高字节）+月（低字节）','0x120304F60001')"        
+                  v-on:click="changeProp('第30次事件时间——故障录波号（高字节）+月（低字节）','0x120304F60001')"
                 >
           第30次事件时间——故障录波号（高字节）+月（低字节）
         </b-button>
         &nbsp;
         <b-button v-ripple.400="'rgba(113, 102, 240, 0.15)'" variant="outline-primary"
         v-b-toggle.accordion-1
-                  v-on:click="changeProp('第30次事件时间——年','0x120304F70001')"        
+                  v-on:click="changeProp('第30次事件时间——年','0x120304F70001')"
         >
           第30次事件时间——年
         </b-button>
         &nbsp;
         <b-button v-ripple.400="'rgba(186, 191, 199, 0.15)'" variant="outline-secondary"
         v-b-toggle.accordion-1
-                  v-on:click="changeProp('当前最新事件指针','0x120304F80001')"    
+                  v-on:click="changeProp('当前最新事件指针','0x120304F80001')"
         >
           当前最新事件指针
         </b-button>
-        &nbsp; 
+        &nbsp;
       </b-tab>
       <!-- 附录6 -->
       <b-tab v-on:click = "changeTabname('故障事件记录')">
@@ -845,10 +845,10 @@
                 >写入
                 </b-button>
                 <b-card-body>
-                  <b-form-spinbutton id="sb-vertical" v-model="valueset1" vertical></b-form-spinbutton>
-                  <b-form-spinbutton id="sb-vertical" v-model="valueset2" vertical></b-form-spinbutton>
-                  <b-form-spinbutton id="sb-vertical" v-model="valueset3" vertical></b-form-spinbutton>
-                  <b-form-spinbutton id="sb-vertical" v-model="valueset4" vertical></b-form-spinbutton>
+                  <b-form-spinbutton id="sb-vertical" min="0"  max="9" v-model="valueset1" vertical></b-form-spinbutton>
+                  <b-form-spinbutton id="sb-vertical" min="0"  max="9" v-model="valueset2" vertical></b-form-spinbutton>
+                  <b-form-spinbutton id="sb-vertical" min="0"  max="9" v-model="valueset3" vertical></b-form-spinbutton>
+                  <b-form-spinbutton id="sb-vertical" min="0"  max="9" v-model="valueset4" vertical></b-form-spinbutton>
                   <b-card-text>写入值为:{{ valuesum }}</b-card-text>
                 </b-card-body>
               </b-card>
@@ -857,7 +857,7 @@
         </div>
         <b-button v-ripple.400="'rgba(113, 102, 240, 0.15)'" variant="outline-primary"
         v-b-toggle.accordion-1
-                  v-on:click="changeProp('第0次系统事件码','0x120305000001')"        
+                  v-on:click="changeProp('第0次系统事件码','0x120305000001')"
         >
           第0次系统事件码
         </b-button>
@@ -886,20 +886,20 @@
           第0次故障时间――小时
         </b-button>
         &nbsp;
-        <b-button v-ripple.400="'rgba(30, 30, 30, 0.15)'" variant="outline-dark" 
-        v-b-toggle.accordion-1 v-on:click="changeProp('第0次事件时间――故障录波号（低字节）+日期（低字节）','0x120305050001')"    
+        <b-button v-ripple.400="'rgba(30, 30, 30, 0.15)'" variant="outline-dark"
+        v-b-toggle.accordion-1 v-on:click="changeProp('第0次事件时间――故障录波号（低字节）+日期（低字节）','0x120305050001')"
                 >
           第0次事件时间――故障录波号（低字节）+日期（低字节）
         </b-button>
         &nbsp;
 
         <b-button v-ripple.400="'rgba(113, 102, 240, 0.15)'" variant="outline-primary"
-        v-b-toggle.accordion-1 v-on:click="changeProp('第0次事件时间――故障录波号（高字节）+月（低字节）','0x120305060001')"    
+        v-b-toggle.accordion-1 v-on:click="changeProp('第0次事件时间――故障录波号（高字节）+月（低字节）','0x120305060001')"
                 >
           第0次事件时间――故障录波号（高字节）+月（低字节）
         </b-button>
         &nbsp;
-        
+
         <b-button v-ripple.400="'rgba(113, 102, 240, 0.15)'" variant="outline-primary"
         v-b-toggle.accordion-1
                   v-on:click="changeProp('第0次故障时间――年','0x120305070001')"          >
@@ -925,38 +925,38 @@
         </b-button>
         &nbsp;
         <b-button v-ripple.400="'rgba(255, 159, 67, 0.15)'" variant="outline-warning"
-        v-b-toggle.accordion-1 v-on:click="changeProp('第30次故障时间――分钟','0x120305F30001')"          
+        v-b-toggle.accordion-1 v-on:click="changeProp('第30次故障时间――分钟','0x120305F30001')"
         >
           第30次故障时间――分钟
         </b-button>
         &nbsp;
         <b-button v-ripple.400="'rgba(0, 207, 232, 0.15)'" variant="outline-info"
-        v-b-toggle.accordion-1 v-on:click="changeProp('第30次故障时间――小时','0x120305F40001')"    
+        v-b-toggle.accordion-1 v-on:click="changeProp('第30次故障时间――小时','0x120305F40001')"
                 >
           第30次故障时间――小时
         </b-button>
         &nbsp;
-        <b-button v-ripple.400="'rgba(30, 30, 30, 0.15)'" variant="outline-dark" 
-        v-b-toggle.accordion-1 v-on:click="changeProp('第30次事件时间――故障录波号（低字节）+日期（低字节）','0x120305F50001')"    
+        <b-button v-ripple.400="'rgba(30, 30, 30, 0.15)'" variant="outline-dark"
+        v-b-toggle.accordion-1 v-on:click="changeProp('第30次事件时间――故障录波号（低字节）+日期（低字节）','0x120305F50001')"
                 >
           第30次事件时间――故障录波号（低字节）+日期（低字节）
         </b-button>
         &nbsp;
 
         <b-button v-ripple.400="'rgba(113, 102, 240, 0.15)'" variant="outline-primary"
-        v-b-toggle.accordion-1 v-on:click="changeProp('第30次事件时间――故障录波号（高字节）+月（低字节）','0x120305F60001')"    
+        v-b-toggle.accordion-1 v-on:click="changeProp('第30次事件时间――故障录波号（高字节）+月（低字节）','0x120305F60001')"
                 >
           第30次事件时间――故障录波号（高字节）+月（低字节）
         </b-button>
         &nbsp;
         <b-button v-ripple.400="'rgba(186, 191, 199, 0.15)'" variant="outline-secondary"
-        v-b-toggle.accordion-1 v-on:click="changeProp('第30次故障时间――年','0x120305F70001')"    
+        v-b-toggle.accordion-1 v-on:click="changeProp('第30次故障时间――年','0x120305F70001')"
                 >
           第30次故障时间――年
         </b-button>
         &nbsp;
         <b-button v-ripple.400="'rgba(40, 199, 111, 0.15)'" variant="outline-success"
-        v-b-toggle.accordion-1 v-on:click="changeProp('当前最新事件指针','0x120305F80001')"    
+        v-b-toggle.accordion-1 v-on:click="changeProp('当前最新事件指针','0x120305F80001')"
                 >
           当前最新事件指针
         </b-button>
@@ -993,10 +993,10 @@
                 >写入
                 </b-button>
                 <b-card-body>
-                  <b-form-spinbutton id="sb-vertical" v-model="valueset1" vertical></b-form-spinbutton>
-                  <b-form-spinbutton id="sb-vertical" v-model="valueset2" vertical></b-form-spinbutton>
-                  <b-form-spinbutton id="sb-vertical" v-model="valueset3" vertical></b-form-spinbutton>
-                  <b-form-spinbutton id="sb-vertical" v-model="valueset4" vertical></b-form-spinbutton>
+                  <b-form-spinbutton id="sb-vertical" min="0"  max="9" v-model="valueset1" vertical></b-form-spinbutton>
+                  <b-form-spinbutton id="sb-vertical" min="0"  max="9" v-model="valueset2" vertical></b-form-spinbutton>
+                  <b-form-spinbutton id="sb-vertical" min="0"  max="9" v-model="valueset3" vertical></b-form-spinbutton>
+                  <b-form-spinbutton id="sb-vertical" min="0"  max="9" v-model="valueset4" vertical></b-form-spinbutton>
                   <b-card-text>写入值为:{{ valuesum }}</b-card-text>
                 </b-card-body>
               </b-card>
@@ -1004,86 +1004,86 @@
           </b-card>
         </div>
         <b-button v-ripple.400="'rgba(113, 102, 240, 0.15)'" variant="outline-primary"
-        v-b-toggle.accordion-1 v-on:click="changeProp('A相测量电流','0x120306000001')"    
+        v-b-toggle.accordion-1 v-on:click="changeProp('A相测量电流','0x120306000001')"
         >
           A相测量电流
         </b-button>
         &nbsp;
         <b-button v-ripple.400="'rgba(186, 191, 199, 0.15)'" variant="outline-secondary"
-        v-b-toggle.accordion-1 v-on:click="changeProp('B相测量电流','0x120306010001')"    
+        v-b-toggle.accordion-1 v-on:click="changeProp('B相测量电流','0x120306010001')"
         >
           B相测量电流
         </b-button>
         &nbsp;
         <b-button v-ripple.400="'rgba(40, 199, 111, 0.15)'" variant="outline-success"
-        v-b-toggle.accordion-1 v-on:click="changeProp('C相测量电流','0x120306020001')"    
+        v-b-toggle.accordion-1 v-on:click="changeProp('C相测量电流','0x120306020001')"
         >
           C相测量电流
         </b-button>
         &nbsp;
         <b-button v-ripple.400="'rgba(234, 84, 85, 0.15)'" variant="outline-danger"
-        v-b-toggle.accordion-1 v-on:click="changeProp('A相测量电压','0x120306030001')"    
+        v-b-toggle.accordion-1 v-on:click="changeProp('A相测量电压','0x120306030001')"
         >
           A相测量电压
         </b-button>
         &nbsp;
         <b-button v-ripple.400="'rgba(255, 159, 67, 0.15)'" variant="outline-warning"
-        v-b-toggle.accordion-1 v-on:click="changeProp('B相测量电压','0x120306040001')"    
+        v-b-toggle.accordion-1 v-on:click="changeProp('B相测量电压','0x120306040001')"
         >
           B相测量电压
         </b-button>
         &nbsp;
-        <b-button v-ripple.400="'rgba(0, 207, 232, 0.15)'" variant="outline-info" 
-        v-b-toggle.accordion-1 v-on:click="changeProp('C相测量电压','0x120306050001')"    
+        <b-button v-ripple.400="'rgba(0, 207, 232, 0.15)'" variant="outline-info"
+        v-b-toggle.accordion-1 v-on:click="changeProp('C相测量电压','0x120306050001')"
         >
           C相测量电压
         </b-button>
         &nbsp;
-        <b-button v-ripple.400="'rgba(30, 30, 30, 0.15)'" variant="outline-dark" 
-        v-b-toggle.accordion-1 v-on:click="changeProp('AB线测量电压','0x120306060001')"    
+        <b-button v-ripple.400="'rgba(30, 30, 30, 0.15)'" variant="outline-dark"
+        v-b-toggle.accordion-1 v-on:click="changeProp('AB线测量电压','0x120306060001')"
         >
           AB线测量电压
         </b-button>
         &nbsp;
 
         <b-button v-ripple.400="'rgba(113, 102, 240, 0.15)'" variant="outline-primary"
-        v-b-toggle.accordion-1 v-on:click="changeProp('BC线测量电压','0x120306070001')"    
+        v-b-toggle.accordion-1 v-on:click="changeProp('BC线测量电压','0x120306070001')"
         >
           BC线测量电压
         </b-button>
         &nbsp;
         <b-button v-ripple.400="'rgba(186, 191, 199, 0.15)'" variant="outline-secondary"
-        v-b-toggle.accordion-1 v-on:click="changeProp('CA线测量电压','0x120306080001')"    
+        v-b-toggle.accordion-1 v-on:click="changeProp('CA线测量电压','0x120306080001')"
         >
           CA线测量电压
         </b-button>
         &nbsp;
         <b-button v-ripple.400="'rgba(40, 199, 111, 0.15)'" variant="outline-success"
-        v-b-toggle.accordion-1 v-on:click="changeProp('U0测量电压','0x120306090001')"    
+        v-b-toggle.accordion-1 v-on:click="changeProp('U0测量电压','0x120306090001')"
         >
           U0测量电压
         </b-button>
         &nbsp;
         <b-button v-ripple.400="'rgba(234, 84, 85, 0.15)'" variant="outline-danger"
-        v-b-toggle.accordion-1 v-on:click="changeProp('漏电测量电流','0x1203060A0001')"    
+        v-b-toggle.accordion-1 v-on:click="changeProp('漏电测量电流','0x1203060A0001')"
         >
           漏电测量电流
         </b-button>
         &nbsp;
         <b-button v-ripple.400="'rgba(255, 159, 67, 0.15)'" variant="outline-warning"
-        v-b-toggle.accordion-1 v-on:click="changeProp('测量有功功率','0x1203060B0001')"    
+        v-b-toggle.accordion-1 v-on:click="changeProp('测量有功功率','0x1203060B0001')"
         >
           测量有功功率
         </b-button>
         &nbsp;
         <b-button v-ripple.400="'rgba(0, 207, 232, 0.15)'" variant="outline-info"
-        v-b-toggle.accordion-1 v-on:click="changeProp('测量无功功率','0x1203060C0001')"    
+        v-b-toggle.accordion-1 v-on:click="changeProp('测量无功功率','0x1203060C0001')"
         >
           测量无功功率
         </b-button>
         &nbsp;
-        <b-button v-ripple.400="'rgba(30, 30, 30, 0.15)'" variant="outline-dark" 
-        v-b-toggle.accordion-1 v-on:click="changeProp('测量视在功率','0x1203060D0001')"    
+        <b-button v-ripple.400="'rgba(30, 30, 30, 0.15)'" variant="outline-dark"
+        v-b-toggle.accordion-1 v-on:click="changeProp('测量视在功率','0x1203060D0001')"
         >
           测量视在功率
         </b-button>
@@ -1111,7 +1111,7 @@
                 >读取
                 </b-button>
                 <b-card-body>
-                  <b-card-text>读取值为:{{ resp }} 
+                  <b-card-text>读取值为:{{ resp }}
                     <br>{{ Notepad_context }}</b-card-text>
                 </b-card-body>
               </b-card>
@@ -1121,10 +1121,10 @@
                 >写入
                 </b-button>
                 <b-card-body>
-                  <b-form-spinbutton id="sb-vertical" v-model="valueset1" vertical></b-form-spinbutton>
-                  <b-form-spinbutton id="sb-vertical" v-model="valueset2" vertical></b-form-spinbutton>
-                  <b-form-spinbutton id="sb-vertical" v-model="valueset3" vertical></b-form-spinbutton>
-                  <b-form-spinbutton id="sb-vertical" v-model="valueset4" vertical></b-form-spinbutton>
+                  <b-form-spinbutton id="sb-vertical" min="0"  max="9" v-model="valueset1" vertical></b-form-spinbutton>
+                  <b-form-spinbutton id="sb-vertical" min="0"  max="9" v-model="valueset2" vertical></b-form-spinbutton>
+                  <b-form-spinbutton id="sb-vertical" min="0"  max="9" v-model="valueset3" vertical></b-form-spinbutton>
+                  <b-form-spinbutton id="sb-vertical" min="0"  max="9" v-model="valueset4" vertical></b-form-spinbutton>
                   <b-card-text>写入值为:{{ valuesum }}</b-card-text>
                 </b-card-body>
               </b-card>
@@ -1132,42 +1132,42 @@
           </b-card>
         </div>
         <b-button v-ripple.400="'rgba(113, 102, 240, 0.15)'" variant="outline-primary"
-          v-b-toggle.accordion-1 v-on:click="changeProps('跳闸使能0位-15位','0x120307000001',0)"    
+          v-b-toggle.accordion-1 v-on:click="changeProps('跳闸使能0位-15位','0x120307000001',0)"
         >
           跳闸使能0位-15位
         </b-button>
         &nbsp;
         <b-button v-ripple.400="'rgba(186, 191, 199, 0.15)'" variant="outline-secondary"
-        v-b-toggle.accordion-1 v-on:click="changeProps('告警使能0位-15位','0x120307010001',1)"    
+        v-b-toggle.accordion-1 v-on:click="changeProps('告警使能0位-15位','0x120307010001',1)"
         >
         告警使能0位-15位
         </b-button>
         &nbsp;
         <b-button v-ripple.400="'rgba(40, 199, 111, 0.15)'" variant="outline-success"
-        v-b-toggle.accordion-1 v-on:click="changeProps('开入定义0位-15位','0x120307020001',2)"    
+        v-b-toggle.accordion-1 v-on:click="changeProps('开入定义0位-15位','0x120307020001',2)"
         >
         开入定义0位-15位
         </b-button>
         &nbsp;
         <b-button v-ripple.400="'rgba(234, 84, 85, 0.15)'" variant="outline-danger"
-        v-b-toggle.accordion-1 v-on:click="changeProps('开入定义0位-15位(取反)','0x120307030001',3)"    
+        v-b-toggle.accordion-1 v-on:click="changeProps('开入定义0位-15位(取反)','0x120307030001',3)"
         >
           开入定义0位-15位(取反)
         </b-button>
         &nbsp;
         <b-button v-ripple.400="'rgba(255, 159, 67, 0.15)'" variant="outline-warning"
-          v-b-toggle.accordion-1 v-on:click="changeProps('录播上传开入定义0位-15位','0x120307040001',4)"    
+          v-b-toggle.accordion-1 v-on:click="changeProps('录播上传开入定义0位-15位','0x120307040001',4)"
         >
           录播上传开入定义0位-15位
         </b-button>
         &nbsp;
-        <b-button v-ripple.400="'rgba(0, 207, 232, 0.15)'" variant="outline-info" 
-        v-b-toggle.accordion-1 v-on:click="changeProps('扩展跳闸','0x120307050001',5)"    
+        <b-button v-ripple.400="'rgba(0, 207, 232, 0.15)'" variant="outline-info"
+        v-b-toggle.accordion-1 v-on:click="changeProps('扩展跳闸','0x120307050001',5)"
         >
           扩展跳闸
         </b-button>
         &nbsp;
-       
+
       </b-tab>
       <!-- 附录9 -->
       <b-tab v-on:click = "changeTabname('系统状态')">
@@ -1190,7 +1190,7 @@
                 >读取
                 </b-button>
                 <b-card-body>
-                  <b-card-text>读取值为:{{ resp }} 
+                  <b-card-text>读取值为:{{ resp }}
                     <br>{{ Notepad_context }}</b-card-text>
                 </b-card-body>
               </b-card>
@@ -1200,10 +1200,10 @@
                 >写入
                 </b-button>
                 <b-card-body>
-                  <b-form-spinbutton id="sb-vertical" v-model="valueset1" vertical></b-form-spinbutton>
-                  <b-form-spinbutton id="sb-vertical" v-model="valueset2" vertical></b-form-spinbutton>
-                  <b-form-spinbutton id="sb-vertical" v-model="valueset3" vertical></b-form-spinbutton>
-                  <b-form-spinbutton id="sb-vertical" v-model="valueset4" vertical></b-form-spinbutton>
+                  <b-form-spinbutton id="sb-vertical" min="0"  max="9" v-model="valueset1" vertical></b-form-spinbutton>
+                  <b-form-spinbutton id="sb-vertical" min="0"  max="9" v-model="valueset2" vertical></b-form-spinbutton>
+                  <b-form-spinbutton id="sb-vertical" min="0"  max="9" v-model="valueset3" vertical></b-form-spinbutton>
+                  <b-form-spinbutton id="sb-vertical" min="0"  max="9" v-model="valueset4" vertical></b-form-spinbutton>
                   <b-card-text>写入值为:{{ valuesum }}</b-card-text>
                 </b-card-body>
               </b-card>
@@ -1211,55 +1211,55 @@
           </b-card>
         </div>
         <b-button v-ripple.400="'rgba(113, 102, 240, 0.15)'" variant="outline-primary"
-        v-b-toggle.accordion-1 v-on:click="changeProps('开入状态','0x120308000001',6)"    
+        v-b-toggle.accordion-1 v-on:click="changeProps('开入状态','0x120308000001',6)"
         >
           开入状态
         </b-button>
         &nbsp;
         <b-button v-ripple.400="'rgba(186, 191, 199, 0.15)'" variant="outline-secondary"
-        v-b-toggle.accordion-1 v-on:click="changeProps('跳闸状态','0x120308010001',7)"    
+        v-b-toggle.accordion-1 v-on:click="changeProps('跳闸状态','0x120308010001',7)"
         >
           跳闸状态
         </b-button>
         &nbsp;
         <b-button v-ripple.400="'rgba(40, 199, 111, 0.15)'" variant="outline-success"
-        v-b-toggle.accordion-1 v-on:click="changeProps('告警状态','0x120308020001',8)"    
+        v-b-toggle.accordion-1 v-on:click="changeProps('告警状态','0x120308020001',8)"
         >
           告警状态
         </b-button>
         &nbsp;
         <b-button v-ripple.400="'rgba(234, 84, 85, 0.15)'" variant="outline-danger"
-        v-b-toggle.accordion-1 v-on:click="changeProps('系统标志','0x120308030001',9)"    
+        v-b-toggle.accordion-1 v-on:click="changeProps('系统标志','0x120308030001',9)"
         >
           系统标志
         </b-button>
         &nbsp;
         <b-button v-ripple.400="'rgba(255, 159, 67, 0.15)'" variant="outline-warning"
-        v-b-toggle.accordion-1 v-on:click="changeProps('以太网状态','0x120308040001',10)"    
+        v-b-toggle.accordion-1 v-on:click="changeProps('以太网状态','0x120308040001',10)"
         >
           以太网状态
         </b-button>
         &nbsp;
-        <b-button v-ripple.400="'rgba(0, 207, 232, 0.15)'" variant="outline-info" 
-        v-b-toggle.accordion-1 v-on:click="changeProps('闭锁信号输出','0x120308050001',11)"    
+        <b-button v-ripple.400="'rgba(0, 207, 232, 0.15)'" variant="outline-info"
+        v-b-toggle.accordion-1 v-on:click="changeProps('闭锁信号输出','0x120308050001',11)"
         >
           闭锁信号输出
         </b-button>
         &nbsp;
-        <b-button v-ripple.400="'rgba(30, 30, 30, 0.15)'" variant="outline-dark" 
-        v-b-toggle.accordion-1 v-on:click="changeProps('闭锁信号输入','0x120308060001',12)"    
+        <b-button v-ripple.400="'rgba(30, 30, 30, 0.15)'" variant="outline-dark"
+        v-b-toggle.accordion-1 v-on:click="changeProps('闭锁信号输入','0x120308060001',12)"
         >
           闭锁信号输入
         </b-button>
         &nbsp;
         <b-button v-ripple.400="'rgba(113, 102, 240, 0.15)'" variant="outline-primary"
-        v-b-toggle.accordion-1 v-on:click="changeProps('RS485通讯状态标志','0x120308070001',13)"    
+        v-b-toggle.accordion-1 v-on:click="changeProps('RS485通讯状态标志','0x120308070001',13)"
         >
         RS485通讯状态标志
         </b-button>
         &nbsp;
         <b-button v-ripple.400="'rgba(186, 191, 199, 0.15)'" variant="outline-secondary"
-        v-b-toggle.accordion-1 v-on:click="changeProps('扩展跳闸状态','0x120308080001',14)"    
+        v-b-toggle.accordion-1 v-on:click="changeProps('扩展跳闸状态','0x120308080001',14)"
         >
         扩展跳闸状态
         </b-button>
@@ -1293,86 +1293,86 @@
           </b-card>
         </div>
         <b-button v-ripple.400="'rgba(113, 102, 240, 0.15)'" variant="outline-primary"
-        v-b-toggle.accordion-1 v-on:click="changeProp('遥控合闸','0x12050900FF00')"    
+        v-b-toggle.accordion-1 v-on:click="changeProp('遥控合闸','0x12050900FF00')"
         >
           遥控合闸
         </b-button>
         &nbsp;
         <b-button v-ripple.400="'rgba(186, 191, 199, 0.15)'" variant="outline-secondary"
-        v-b-toggle.accordion-1 v-on:click="changeProp('遥控分闸','0x12050901FF00')"    
+        v-b-toggle.accordion-1 v-on:click="changeProp('遥控分闸','0x12050901FF00')"
         >
           遥控分闸
         </b-button>
         &nbsp;
         <b-button v-ripple.400="'rgba(40, 199, 111, 0.15)'" variant="outline-success"
-        v-b-toggle.accordion-1 v-on:click="changeProp('遥控复归','0x12050902FF00')"    
+        v-b-toggle.accordion-1 v-on:click="changeProp('遥控复归','0x12050902FF00')"
         >
           遥控复归
         </b-button>
         &nbsp;
         <b-button v-ripple.400="'rgba(234, 84, 85, 0.15)'" variant="outline-danger"
-        v-b-toggle.accordion-1 v-on:click="changeProp('遥控故障录波重起','0x12050903FF00')"    
+        v-b-toggle.accordion-1 v-on:click="changeProp('遥控故障录波重起','0x12050903FF00')"
         >
           遥控故障录波重起
         </b-button>
         &nbsp;
         <b-button v-ripple.400="'rgba(255, 159, 67, 0.15)'" variant="outline-warning"
-        v-b-toggle.accordion-1 v-on:click="changeProp('加热除湿出口命令','0x1205090AFF00')"    
+        v-b-toggle.accordion-1 v-on:click="changeProp('加热除湿出口命令','0x1205090AFF00')"
         >
           加热除湿出口命令
         </b-button>
         &nbsp;
         <b-button v-ripple.400="'rgba(0, 207, 232, 0.15)'" variant="outline-info"
-        v-b-toggle.accordion-1 v-on:click="changeProp('失压延时出口命令','0x1205090BFF00')"    
+        v-b-toggle.accordion-1 v-on:click="changeProp('失压延时出口命令','0x1205090BFF00')"
         >
           失压延时出口命令
         </b-button>
         &nbsp;
-        <b-button v-ripple.400="'rgba(30, 30, 30, 0.15)'" variant="outline-dark" 
-        v-b-toggle.accordion-1 v-on:click="changeProp('过流试验命令','0x1205090CFF00')"    
+        <b-button v-ripple.400="'rgba(30, 30, 30, 0.15)'" variant="outline-dark"
+        v-b-toggle.accordion-1 v-on:click="changeProp('过流试验命令','0x1205090CFF00')"
         >
           过流试验命令
         </b-button>
         &nbsp;
 
         <b-button v-ripple.400="'rgba(113, 102, 240, 0.15)'" variant="outline-primary"
-        v-b-toggle.accordion-1 v-on:click="changeProp('漏电试验命令','0x1205090DFF00')"    
+        v-b-toggle.accordion-1 v-on:click="changeProp('漏电试验命令','0x1205090DFF00')"
         >
           漏电试验命令
         </b-button>
         &nbsp;
         <b-button v-ripple.400="'rgba(186, 191, 199, 0.15)'" variant="outline-secondary"
-        v-b-toggle.accordion-1 v-on:click="changeProp('绝缘试验命令','0x1205090EFF00')"    
+        v-b-toggle.accordion-1 v-on:click="changeProp('绝缘试验命令','0x1205090EFF00')"
         >
           绝缘试验命令
         </b-button>
         &nbsp;
         <b-button v-ripple.400="'rgba(40, 199, 111, 0.15)'" variant="outline-success"
-        v-b-toggle.accordion-1 v-on:click="changeProp('清电度命令','0x1205090FFF00')"    
+        v-b-toggle.accordion-1 v-on:click="changeProp('清电度命令','0x1205090FFF00')"
         >
           清电度命令
         </b-button>
         &nbsp;
         <b-button v-ripple.400="'rgba(255, 159, 67, 0.15)'" variant="outline-warning"
-        v-b-toggle.accordion-1 v-on:click="changeProp('GSE告警复归命令','0x12050911FF00')"    
+        v-b-toggle.accordion-1 v-on:click="changeProp('GSE告警复归命令','0x12050911FF00')"
         >
           GSE告警复归命令
         </b-button>
         &nbsp;
         <b-button v-ripple.400="'rgba(0, 207, 232, 0.15)'" variant="outline-info"
-        v-b-toggle.accordion-1 v-on:click="changeProp('SU31开出1','0x12050912FF00')"    
+        v-b-toggle.accordion-1 v-on:click="changeProp('SU31开出1','0x12050912FF00')"
         >
           SU31开出1
         </b-button>
         &nbsp;
 
         <b-button v-ripple.400="'rgba(186, 191, 199, 0.15)'" variant="outline-secondary"
-        v-b-toggle.accordion-1 v-on:click="changeProp('所有录波重传命令','0x12050916FF00')"    
+        v-b-toggle.accordion-1 v-on:click="changeProp('所有录波重传命令','0x12050916FF00')"
         >
           所有录波重传命令
         </b-button>
         &nbsp;
-      
+
       </b-tab>
       <b-tab v-on:click = "changeTabname('故障录波')">
         <!-- 附录11 -->
@@ -1404,10 +1404,10 @@
                 >读取指定录波
                 </b-button>
                 <b-card-body>
-                  <b-form-spinbutton id="sb-vertical" v-model="valueset1" vertical></b-form-spinbutton>
-                  <b-form-spinbutton id="sb-vertical" v-model="valueset2" vertical></b-form-spinbutton>
-                  <b-form-spinbutton id="sb-vertical" v-model="valueset3" vertical></b-form-spinbutton>
-                  <b-form-spinbutton id="sb-vertical" v-model="valueset4" vertical></b-form-spinbutton>
+                  <b-form-spinbutton id="sb-vertical" min="0"  max="9" v-model="valueset1" vertical></b-form-spinbutton>
+                  <b-form-spinbutton id="sb-vertical" min="0"  max="9" v-model="valueset2" vertical></b-form-spinbutton>
+                  <b-form-spinbutton id="sb-vertical" min="0"  max="9" v-model="valueset3" vertical></b-form-spinbutton>
+                  <b-form-spinbutton id="sb-vertical" min="0"  max="9" v-model="valueset4" vertical></b-form-spinbutton>
                   <b-card-text>写入值为:{{ valuesum }}</b-card-text>
                 </b-card-body>
               </b-card>
@@ -1415,43 +1415,43 @@
           </b-card>
         </div>
         <b-button v-ripple.400="'rgba(113, 102, 240, 0.15)'" variant="outline-primary"
-        v-b-toggle.accordion-1 v-on:click="changeProp('是否有故障录波','0x120307020001')"    
+        v-b-toggle.accordion-1 v-on:click="changeProp('是否有故障录波','0x120307020001')"
         >
           是否有故障录波(BIT14)
         </b-button>
         &nbsp;
         <b-button v-ripple.400="'rgba(186, 191, 199, 0.15)'" variant="outline-secondary"
-        v-b-toggle.accordion-1 v-on:click="changeProp('上电后是否产生新录波','0x120307020001')"    
+        v-b-toggle.accordion-1 v-on:click="changeProp('上电后是否产生新录波','0x120307020001')"
         >
           上电后是否产生新录波(BIT15)
         </b-button>
         &nbsp;
         <b-button v-ripple.400="'rgba(40, 199, 111, 0.15)'" variant="outline-success"
-        v-b-toggle.accordion-1 v-on:click="changeProp('读取未上传录波序号','0x120307020001')"    
+        v-b-toggle.accordion-1 v-on:click="changeProp('读取未上传录波序号','0x120307020001')"
         >
           读取未上传录波序号(BIT0-9)
         </b-button>
         &nbsp;
         <b-button v-ripple.400="'rgba(234, 84, 85, 0.15)'" variant="outline-danger"
-        v-b-toggle.accordion-1 v-on:click="changeProp('故障录波数据信息段-当前最新录波序号','0x01110B00')"    
+        v-b-toggle.accordion-1 v-on:click="changeProp('故障录波数据信息段-当前最新录波序号','0x01110B00')"
         >
           故障录波数据信息段-当前最新录波序号
         </b-button>
         &nbsp;
         <b-button v-ripple.400="'rgba(255, 159, 67, 0.15)'" variant="outline-warning"
-        v-b-toggle.accordion-1 v-on:click="changeProp('读取最新录波数据段的配置文件长度和录波数据长度','0x01110B01')"    
+        v-b-toggle.accordion-1 v-on:click="changeProp('读取最新录波数据段的配置文件长度和录波数据长度','0x01110B01')"
         >
           读取最新录波数据段的配置文件长度和录波数据长度
         </b-button>
         &nbsp;
         <b-button v-ripple.400="'rgba(0, 207, 232, 0.15)'" variant="outline-info"
-        v-b-toggle.accordion-1 v-on:click="changeProp('读取最新录波数据段的配置文件','0x01110B02')"    
+        v-b-toggle.accordion-1 v-on:click="changeProp('读取最新录波数据段的配置文件','0x01110B02')"
         >
           读取最新录波数据段的配置文件
         </b-button>
         &nbsp;
-        <b-button v-ripple.400="'rgba(30, 30, 30, 0.15)'" variant="outline-dark" 
-        v-b-toggle.accordion-1 v-on:click="changeProp('读取最新录波数据段的录波数据','0x01110B03')"    
+        <b-button v-ripple.400="'rgba(30, 30, 30, 0.15)'" variant="outline-dark"
+        v-b-toggle.accordion-1 v-on:click="changeProp('读取最新录波数据段的录波数据','0x01110B03')"
         >
           读取最新录波数据段的录波数据
         </b-button>
@@ -1488,10 +1488,10 @@
                 >写入
                 </b-button>
                 <b-card-body>
-                  <b-form-spinbutton id="sb-vertical" v-model="valueset1" vertical></b-form-spinbutton>
-                  <b-form-spinbutton id="sb-vertical" v-model="valueset2" vertical></b-form-spinbutton>
-                  <b-form-spinbutton id="sb-vertical" v-model="valueset3" vertical></b-form-spinbutton>
-                  <b-form-spinbutton id="sb-vertical" v-model="valueset4" vertical></b-form-spinbutton>
+                  <b-form-spinbutton id="sb-vertical" min="0"  max="9" v-model="valueset1" vertical></b-form-spinbutton>
+                  <b-form-spinbutton id="sb-vertical" min="0"  max="9" v-model="valueset2" vertical></b-form-spinbutton>
+                  <b-form-spinbutton id="sb-vertical" min="0"  max="9" v-model="valueset3" vertical></b-form-spinbutton>
+                  <b-form-spinbutton id="sb-vertical" min="0"  max="9" v-model="valueset4" vertical></b-form-spinbutton>
                   <b-card-text>写入值为:{{ valuesum }}</b-card-text>
                 </b-card-body>
               </b-card>
@@ -1499,110 +1499,110 @@
           </b-card>
         </div>
         <b-button v-ripple.400="'rgba(113, 102, 240, 0.15)'" variant="outline-primary"
-        v-b-toggle.accordion-1 v-on:click="changeProp('A相保护电流','0x12030A000001')"    
+        v-b-toggle.accordion-1 v-on:click="changeProp('A相保护电流','0x12030A000001')"
         >
           A相保护电流
         </b-button>
         &nbsp;
         <b-button v-ripple.400="'rgba(186, 191, 199, 0.15)'" variant="outline-secondary"
-        v-b-toggle.accordion-1 v-on:click="changeProp('C相保护电流','0x12030A010001')"    
+        v-b-toggle.accordion-1 v-on:click="changeProp('C相保护电流','0x12030A010001')"
         >
           C相保护电流
         </b-button>
         &nbsp;
         <b-button v-ripple.400="'rgba(40, 199, 111, 0.15)'" variant="outline-success"
-        v-b-toggle.accordion-1 v-on:click="changeProp('A相测量电流','0x12030A020001')"    
+        v-b-toggle.accordion-1 v-on:click="changeProp('A相测量电流','0x12030A020001')"
         >
           A相测量电流
         </b-button>
         &nbsp;
         <b-button v-ripple.400="'rgba(234, 84, 85, 0.15)'" variant="outline-danger"
-        v-b-toggle.accordion-1 v-on:click="changeProp('B相测量电流','0x12030A030001')"    
+        v-b-toggle.accordion-1 v-on:click="changeProp('B相测量电流','0x12030A030001')"
         >
           B相测量电流
         </b-button>
         &nbsp;
         <b-button v-ripple.400="'rgba(255, 159, 67, 0.15)'" variant="outline-warning"
-        v-b-toggle.accordion-1 v-on:click="changeProp('C相测量电流','0x12030A040001')"    
+        v-b-toggle.accordion-1 v-on:click="changeProp('C相测量电流','0x12030A040001')"
         >
           C相测量电流
         </b-button>
         &nbsp;
         <b-button v-ripple.400="'rgba(0, 207, 232, 0.15)'" variant="outline-info"
-        v-b-toggle.accordion-1 v-on:click="changeProp('A相测量电压','0x12030A050001')"    
+        v-b-toggle.accordion-1 v-on:click="changeProp('A相测量电压','0x12030A050001')"
         >
           A相测量电压
         </b-button>
         &nbsp;
         <b-button v-ripple.400="'rgba(30, 30, 30, 0.15)'" variant="outline-dark"
-        v-b-toggle.accordion-1 v-on:click="changeProp('B相测量电压','0x12030A060001')"    
+        v-b-toggle.accordion-1 v-on:click="changeProp('B相测量电压','0x12030A060001')"
         >
           B相测量电压
         </b-button>
         &nbsp;
 
         <b-button v-ripple.400="'rgba(113, 102, 240, 0.15)'" variant="outline-primary"
-        v-b-toggle.accordion-1 v-on:click="changeProp('C相测量电压','0x12030A070001')"    
+        v-b-toggle.accordion-1 v-on:click="changeProp('C相测量电压','0x12030A070001')"
         >
           C相测量电压
         </b-button>
         &nbsp;
         <b-button v-ripple.400="'rgba(186, 191, 199, 0.15)'" variant="outline-secondary"
-        v-b-toggle.accordion-1 v-on:click="changeProp('AB线测量电压','0x12030A080001')"    
+        v-b-toggle.accordion-1 v-on:click="changeProp('AB线测量电压','0x12030A080001')"
         >
           AB线测量电压
         </b-button>
         &nbsp;
         <b-button v-ripple.400="'rgba(40, 199, 111, 0.15)'" variant="outline-success"
-        v-b-toggle.accordion-1 v-on:click="changeProp('BC线测量电压','0x12030A090001')"    
+        v-b-toggle.accordion-1 v-on:click="changeProp('BC线测量电压','0x12030A090001')"
         >
           BC线测量电压
         </b-button>
         &nbsp;
         <b-button v-ripple.400="'rgba(234, 84, 85, 0.15)'" variant="outline-danger"
-        v-b-toggle.accordion-1 v-on:click="changeProp('CA线测量电压','0x12030A0A0001')"    
+        v-b-toggle.accordion-1 v-on:click="changeProp('CA线测量电压','0x12030A0A0001')"
         >
           CA线测量电压
         </b-button>
         &nbsp;
         <b-button v-ripple.400="'rgba(255, 159, 67, 0.15)'" variant="outline-warning"
-        v-b-toggle.accordion-1 v-on:click="changeProp('零序保护电压','0x12030A0B0001')"    
+        v-b-toggle.accordion-1 v-on:click="changeProp('零序保护电压','0x12030A0B0001')"
         >
           零序保护电压
         </b-button>
         &nbsp;
         <b-button v-ripple.400="'rgba(0, 207, 232, 0.15)'" variant="outline-info"
-        v-b-toggle.accordion-1 v-on:click="changeProp('零序保护电流','0x12030A0C0001')"    
+        v-b-toggle.accordion-1 v-on:click="changeProp('零序保护电流','0x12030A0C0001')"
         >
           零序保护电流
         </b-button>
         &nbsp;
         <b-button v-ripple.400="'rgba(30, 30, 30, 0.15)'" variant="outline-dark"
-        v-b-toggle.accordion-1 v-on:click="changeProp('B相保护电流','0x12030A0D0001')"    
+        v-b-toggle.accordion-1 v-on:click="changeProp('B相保护电流','0x12030A0D0001')"
         >
           B相保护电流
         </b-button>
         &nbsp;
 
         <b-button v-ripple.400="'rgba(113, 102, 240, 0.15)'" variant="outline-primary"
-        v-b-toggle.accordion-1 v-on:click="changeProp('绝缘电阻','0x12030A0E0001')"    
+        v-b-toggle.accordion-1 v-on:click="changeProp('绝缘电阻','0x12030A0E0001')"
         >
           绝缘电阻
         </b-button>
         &nbsp;
         <b-button v-ripple.400="'rgba(186, 191, 199, 0.15)'" variant="outline-secondary"
-        v-b-toggle.accordion-1 v-on:click="changeProp('备用','0x12030A0F0001')"    
+        v-b-toggle.accordion-1 v-on:click="changeProp('备用','0x12030A0F0001')"
         >
           备用
         </b-button>
         &nbsp;
         <b-button v-ripple.400="'rgba(40, 199, 111, 0.15)'" variant="outline-success"
-        v-b-toggle.accordion-1 v-on:click="changeProp('扩展功能使能','0x12030A100001')"    
+        v-b-toggle.accordion-1 v-on:click="changeProp('扩展功能使能','0x12030A100001')"
         >
           扩展功能使能
         </b-button>
         &nbsp;
- 
+
 
       </b-tab>
       <!-- 附录14 -->
@@ -1704,8 +1704,8 @@ export default {
       resp: '',
       // 定义一个字符串数组strarray
       Notepad_context: new Array(),
-  
-      
+
+
       valueset1: 5,
       valueset2: 5,
       valueset3: 5,
@@ -1715,8 +1715,18 @@ export default {
       fcnname: '命令',
       fcnvalueprefix: '0x00',
       text_area: '0x01A100000005FEE1D2C3B4',
-      valuesum: 0 
+      valuesum: 0
     }
+  },
+  // 在加载这个.vue页面时，设置data中flag=1
+  created() {
+    axios.post('http://localhost:10866/autoflagdisable')
+        .then(response => {
+          console.log(response)
+        })
+        .catch(error => {
+          console.log(error)
+        })
   },
 
   methods: {
@@ -1766,7 +1776,7 @@ export default {
     },
 
     changeTabname(Fcnn) {
-      this.fcnname = Fcnn 
+      this.fcnname = Fcnn
       this.fcnvalueprefix = '0x00'
       },
     changeProp(Fcnn, Addr) {

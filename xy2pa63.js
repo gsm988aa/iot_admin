@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const { crc8, crc16, crc32 } = require('easy-crc');
+const { crc16 } = require('easy-crc');
 const fs = require('fs');
 const cors = require("cors")
 const { SerialPort } = require('serialport')
@@ -17,9 +17,18 @@ app.use(
     origin: ["http://localhost:10866", "http://localhost:8080", "http://127.0.0.1:8080", "http://192.168.3.231:8080", "http://192.168.3.103:8080"]
   })
 );
- 
+
 let buffer = '';
 let buf = '';
+let auto485flag = 1;
+
+// 如果全局变量flag为1则串口每3秒发送十六进制数据'0xff'
+// 如果全局变量flag为0则串口每3秒发送十六进制数据'0x00'
+setInterval(() => {
+  if (auto485flag == 1) {
+    serialport2.write('01 03 08 01 00 01 D7 AA', 'hex');
+  } 
+}, 3000);
 
 serialport2.on('readable', () => { 
   setTimeout(() => {
@@ -32,6 +41,7 @@ serialport2.on('readable', () => {
         buffer = lines[lines.length +1];
         const result = lines.slice(0, ).join('');
         buf = result;
+        
         // console.log(result);
         // console.log(buf);
       }
@@ -48,19 +58,20 @@ app.post('/:action', function (req, res) {
   if (action == 'getinfo') {
     serialport2.write("getinfo");
     setTimeout(function () {
-      // console.log(buf);
       res.send(buf);
     }, 100);
   }
 
-  if (action == 'getmedia') {
-    serialport2.write("getmedia");
-    setTimeout(function () {
-    console.log(buf);
-    res.send(buf);
-     }, 100);
+  if (action == 'autoflagdisable') {
+    auto485flag = 0;
+    // console.log(auto485flag);
   }
 
+  if (action == 'autoflagenable') {
+    auto485flag = 1;
+    // console.log(auto485flag);
+  }
+  
   if (action == 'reboot') {
     serialport2.write('reboot');
     return res.send("Reboot is on!!!");
@@ -102,7 +113,7 @@ app.post('/:action', function (req, res) {
     setTimeout(function () {
       console.log(buf);
       res.send(buf);
-       }, 100);
+      }, 100);
   }
 
   if (action == "setvalue") {

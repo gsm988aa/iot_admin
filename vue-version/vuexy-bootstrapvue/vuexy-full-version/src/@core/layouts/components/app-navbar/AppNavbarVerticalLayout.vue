@@ -26,7 +26,7 @@
       <b-button  variant="danger" href="/apps/emergencyopening">紧急分闸</b-button>&nbsp;
 
 <!--      <b-button  variant="danger">紧急分闸</b-button>&nbsp;-->
-      <b-button variant="outline-primary">自检:无故障</b-button>&nbsp;&nbsp;&nbsp;
+      <b-button variant="outline-primary">自检：开</b-button>&nbsp;&nbsp;&nbsp;
       <!-- Bookmarks Container -->
 <!--      <bookmarks />-->
 
@@ -55,11 +55,12 @@ import DarkToggler from './components/DarkToggler.vue'
 import CartDropdown from './components/CartDropdown.vue'
 import NotificationDropdown from './components/NotificationDropdown.vue'
 import UserDropdown from './components/UserDropdown.vue'
+import axios from 'axios'
 
 export default {
   components: {
     BLink,
-     BButton,
+    BButton,
     // Navbar Components
     BNavbarNav,
     Bookmarks,
@@ -70,6 +71,13 @@ export default {
     NotificationDropdown,
     UserDropdown,
   },
+  data() {
+    return {
+      guzhang_data: '无故障',
+    }
+  },
+  // 在加载这个.vue页面时，设置data中flag=1
+
   props: {
     toggleVerticalMenuActive: {
       type: Function,
