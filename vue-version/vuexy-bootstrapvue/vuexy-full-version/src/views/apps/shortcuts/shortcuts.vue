@@ -1,9 +1,9 @@
 <template>
 
   <b-container className="bv-example-row">
-<!-- 加入一个bootstrap-vue的modal,如果errorinfo不是空字符串，自动打开一个Modal，并显示errorinfo -->
-<b-button hidden @click="showModal">Open Modal</b-button>
-<b-modal v-model="show" title="Modal Title">
+<!-- Error_info按钮平时隐藏，show2为true时 显示 -->
+ <b-button hidden @click="showModal">Err_info</b-button>
+<b-modal v-model="showmodal" title="故障信息" cancel-disabled ok-only   @ok="handleOk">
   {{ errorinfo }}
 </b-modal>
     </b-modal>
@@ -29,9 +29,11 @@
             <b-button variant="secondary" @click="handleClick2" :disabled="isDisabled">分闸</b-button>
             <br>
             <br>
+
             <b-button variant="success" @click="handleClick3" :disabled="isDisabled">电机储能</b-button>
             <br>
             <br>
+
             <b-button variant="danger" @click="handleClick4" :disabled="isDisabled">手车驶入</b-button>
             <br>
             <br>
@@ -59,6 +61,7 @@
               >
                 摄像头开关
               </b-button>
+
               <b-collapse id="collapse-4" v-model="visible" class="mt-2">
                 <iframe src="http://192.168.3.15:8085" width="322" height="243" style="transform: scale(0.5);"></iframe>
 
@@ -69,6 +72,7 @@
             <br>
             <b-form-input v-model="text"></b-form-input>
           </b-card>
+          <b-button v-if="!showenable" variant="primary" @click ="changeshowenable">显示故障信息</b-button>
 
         </div>
 
@@ -104,10 +108,11 @@ export default {
     return {
       text: '',
       text2: [],
-      auto485flag : 1,
+      auto485flag: 1,
       errorinfo: '',
+      showenable: true,
       isDisabled: false,
-      show: false,
+      showmodal: false,
       visible: false
     }
   },
@@ -121,73 +126,34 @@ export default {
         })
   },
 
-// 每秒钟向10086端口发送一个post
   mounted() {
-    if (this.auto485flag == 1) {
+    if (this.auto485flag === 1) {
       setInterval(() => {
-      axios.post('http://localhost:10866/geterror')
-          .then(response => {
-            if (this.errorinfo  != response.data) {
-              if (response.data != '') {
-                this.errorinfo = response.data
+        axios.post('http://localhost:10866/geterror')
+             .then(response => {
+              if (response.data.length !== 0) {
+                this.text = response.data
+                if (this.showenable === true) {
+                  this.errorinfo = response.data
+                  this.showmodal = true
+                }
               }
-            }
-            else {
-              this.errorinfo = ''
-            }
-              
-            console.log(response)
-          })
-          .catch(error => {
-            console.log(error)
-          })
-      }, 2000)
-    } 
-  
-  },
-
+            })
+            .catch(error => {
+              console.log(error)
+            });
+      }, 3000);
+    }
+  } ,
   methods: {
-
-
-    handleClick0() {
-      if (!this.isDisabled) {
-        this.isDisabled = true;
-
-          console.log('Button 0 clicked!')
-          console.log('Button 0 clicked!')
-          this.isDisabled = false;
-          // this.text = '获取串口信息完毕!'
-          // 延迟300ms后将axios getinfo收到的数据传递给text
-           setTimeout(() => {
-            axios.post('http://localhost:10866/getinfo')
-              .then(response => {
-                console.log(response)
-                this.text = response.data
-              })
-              .catch(error => {
-                console.log(error)
-              })
-          }, 500)
-
-
-           setTimeout(() => {
-            axios.post('http://localhost:10866/getinfo')
-              .then(response => {
-                console.log(response)
-                this.text = response.data
-              })
-              .catch(error => {
-                console.log(error)
-              })
-          }, 100)
-        // this.text = '获取串口信息'
-      }
+    changeshowenable() {
+      this.showenable = true
     },
-    toggleIframe() {
-      const iframe = document.getElementById('my-iframe');
-      iframe.style.display = iframe.style.display === 'none' ? 'block' : 'none';
+    // eslint-disable-next-line no-unused-vars
+    handleOk(bvModalEvt) {
+      this.showenable = false
     },
- 
+
     handleClick1() {
       if (!this.isDisabled) {
         this.isDisabled = true;
@@ -199,21 +165,20 @@ export default {
           this.text = '执行完毕!'
           axios.post('http://localhost:10866/hezha').then(function (response) {
           })
-        }, 3000);
+        }, 3000)
         this.text = '执行合闸'
       }
     },
     handleClick2() {
       if (!this.isDisabled) {
-        this.isDisabled = true;
+        this.isDisabled = true
         setTimeout(() => {
           console.log('Button 2 clicked!')
-          this.isDisabled = false;
-
+          this.isDisabled = false
           this.text = '执行完毕'
           axios.post('http://localhost:10866/fenzha').then(function (response) {
           })
-        }, 3000);
+        }, 3000)
         this.text = '执行分闸'
       }
     },
@@ -276,13 +241,13 @@ export default {
       }
     },
     showModal()
-    { this.show = true; } }, watch: { 
+    { this.show = true; } }, watch: {
       errorinfo(newVal) {
-       if (newVal) 
-       { this.show = true; } 
+       if (newVal)
+       { this.show = true; }
       }
-   
- 
+
+
   }
 }
 </script>

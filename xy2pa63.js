@@ -76,75 +76,116 @@ app.post('/:action', function (req, res) {
 
   if (action == 'geterror') {
     // 将hexdata最后两个字节删除
-    const buf2hex = Buffer.from(hexdata.slice(0, -4), 'hex');
+    let buf2hex = Buffer.from(hexdata.slice(-8, -4), 'hex');
+    // const buf2hex = parseInt(hexdata.substr(-6, 2), 16);
+    let buf2hexstr  = buf2hex.toString('hex');
+    const num = 0x0401;
+    // 将buf2hexstr转换为二进制字符串
+    const errorbin =  parseInt(buf2hexstr, 16).toString(2).padStart(16, '0');
+    // const errorbin = buf2hexstr.toString(2).padStart(16, '0');
+    
+    const b16 = errorbin.charAt(0);
+    const b15 = errorbin.charAt(1);
+    const b14 = errorbin.charAt(2);
+    const b13 = errorbin.charAt(3);
+    const b12 = errorbin.charAt(4);
+    const b11 = errorbin.charAt(5);
+    const b10 = errorbin.charAt(6);
+    const b9 = errorbin.charAt(7);
+    const b8 = errorbin.charAt(8);
+    const b7 = errorbin.charAt(9);
+    const b6 = errorbin.charAt(10);
+    const b5 = errorbin.charAt(11);
+    const b4 = errorbin.charAt(12);
+    const b3 = errorbin.charAt(13);
+    const b2 = errorbin.charAt(14);
+    const b1 = errorbin.charAt(15);
+    
+    // console.log(`b1: ${b1}`);
+    // console.log(`b2: ${b2}`);
+    // console.log(`b3: ${b3}`);
+    // console.log(`b4: ${b4}`);
+    // console.log(`b5: ${b5}`);
+    // console.log(`b6: ${b6}`);
+    // console.log(`b7: ${b7}`);
+    // console.log(`b8: ${b8}`);
+    // console.log(`b9: ${b9}`);
+    // console.log(`b10: ${b10}`);
+    // console.log(`b11: ${b11}`);
+    // console.log(`b12: ${b12}`);
+    // console.log(`b13: ${b13}`);
+    // console.log(`b14: ${b14}`);
+    // console.log(`b15: ${b15}`);
+    // console.log(`b16: ${b16}`);
 
-// 判断buf2hex最后一个字节的第一位是不是1，如果是1则buf为'总合闸'
-    if (buf2hex[1] & 0x01) {
-      guzhang = guzhang + '0总跳闸故障  '; 
+
+    if (b1 == 1) {
+      guzhang  = guzhang + '0总跳闸有故障  ';
+       
     }
-
-    // buf2hex最后一个字节第一位如果是1则buf为'总跳闸'
-    if (buf2hex[1] & 0x02) {
+  
+    // buf2hex最后一个字节第二位如果是1则故障添加'总跳闸'
+    if (b2 == 1) {
       guzhang  = guzhang + '1速断保护故障  ';
     }
-
-    if (buf2hex[1] & 0x03) {
+    
+    if (b3 == 1) {
       guzhang  = guzhang + '2限时速断故障  ';
     }
 
-    if (buf2hex[1] & 0x04) {
+    if (b4 == 1) {
       guzhang  = guzhang + '3定时限过流故障  ';
     }
 
-    if (buf2hex[1] & 0x05) {
+    if (b5 == 1) {
       guzhang  = guzhang + '4反时限过流故障  ';
     }
 
-    if (buf2hex[1] & 0x06) {
+    if (b6 == 1) {
       guzhang  = guzhang + '5零序过流故障  ';
-    }
+    } 
 
-    if (buf2hex[1] & 0x07) {
+    if (b7 == 1) {
       guzhang  = guzhang + '6功率方向零序故障  ';
     }
 
-    if (buf2hex[1] & 0x08) {
-      guzhang  = guzhang + '7低电压保护故障';
+    if (b8 == 1) {
+      guzhang  = guzhang + '7低电压保护故障  ';
     }
 
-    if (buf2hex[1] & 0x09) {
-      guzhang  = guzhang + '8过电压保护故障';
+    if (b9 == 1) {
+      guzhang  = guzhang + '8过电压保护故障  ';
     }
-
     
-    if (buf2hex[1] & 0x0a) {
-      guzhang  = guzhang + '9零序过电压故障';
+    if (b10 == 1) {
+      guzhang  = guzhang + '9零序过电压保护故障  ';
+    }
+    
+    if (b11 == 1) {
+      guzhang  = guzhang + '10绝缘电阻监测故障  ';
     }
 
-    if (buf2hex[1] & 0x0a) {
-      guzhang  = guzhang + '10绝缘电阻监测故障';
+    if (b12 == 1) {
+      guzhang  = guzhang + '11开入保护故障  ';
     }
 
-    if (buf2hex[1] & 0x0b) {
-      guzhang  = guzhang + '11开入保护故障';
+
+    if (b13 == 1) {
+      guzhang  = guzhang + '12高温保护故障  ';
     }
 
-    if (buf2hex[1] & 0x0c) {
-      guzhang  = guzhang + '12高温保护故障';
+
+    if (b14 == 1) {
+      guzhang  = guzhang + '13湿度高除湿故障  ';
     }
 
-    if (buf2hex[1] & 0x0d) {
-      guzhang  = guzhang + '13湿度高除湿故障';
+    if (b15 == 1) {
+      guzhang  = guzhang + '14欠压延时故障  ';
     }
 
-    if (buf2hex[1] & 0x0e) {
-      guzhang  = guzhang + '14失压延时故障';
+    if (b16 == 1) {
+      guzhang  = guzhang + '15线圈接地零序保护故障  ';
     }
-
-    if (buf2hex[1] & 0x0f) {
-      guzhang  = guzhang + '15线圈接地零序保护故障';
-    }
- 
     res.send(guzhang);    
     // console.log(buf);
     hexdata = '';
