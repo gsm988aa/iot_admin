@@ -5,7 +5,7 @@ const fs = require('fs');
 const cors = require("cors")
 const { SerialPort } = require('serialport')
 
-const serialport2 = new SerialPort({ path: 'COM2', baudRate: 9600}, function (err) {
+const serialport2 = new SerialPort({ path: '/dev/ttyUSB0', baudRate: 9600}, function (err) {
   if (err) {
     return console.log('Error: ', err.message)
   }
@@ -23,6 +23,16 @@ let buf = '';
 let hexdata = '';
 let auto485flag = 1;
 let guzhang = '' ;
+
+
+
+const app8080 = express();
+app8080.use(express.static('dist'));
+
+const port8080 = 8080;
+app8080.listen(port8080);
+console.log('server started ' + port8080);
+
 
 
 setInterval(() => {
@@ -126,6 +136,7 @@ app.post('/:action', function (req, res) {
   
     // buf2hex最后一个字节第二位如果是1则故障添加'总跳闸'
     if (b2 == 1) {
+      // !短路
       guzhang  = guzhang + '1速断保护故障  ';
     }
     
@@ -136,23 +147,24 @@ app.post('/:action', function (req, res) {
     if (b4 == 1) {
       guzhang  = guzhang + '3定时限过流故障  ';
     }
-
+// ！ 反时限过流故障
     if (b5 == 1) {
-      guzhang  = guzhang + '4反时限过流故障  ';
+      guzhang  = guzhang + '4过载-反时限故障  ';
     }
 
+// !
     if (b6 == 1) {
       guzhang  = guzhang + '5零序过流故障  ';
     } 
-
+// ！功率方向型漏电
     if (b7 == 1) {
       guzhang  = guzhang + '6功率方向零序故障  ';
     }
-
+// !
     if (b8 == 1) {
       guzhang  = guzhang + '7低电压保护故障  ';
     }
-
+// !
     if (b9 == 1) {
       guzhang  = guzhang + '8过电压保护故障  ';
     }
@@ -160,27 +172,29 @@ app.post('/:action', function (req, res) {
     if (b10 == 1) {
       guzhang  = guzhang + '9零序过电压保护故障  ';
     }
-    
+// ！
     if (b11 == 1) {
-      guzhang  = guzhang + '10绝缘电阻监测故障  ';
+      guzhang  = guzhang + '绝缘电阻监测故障 （低于上限-并联） ';
     }
+
+// 11开入保护故障
 
     if (b12 == 1) {
-      guzhang  = guzhang + '11开入保护故障  ';
+      guzhang  = guzhang + '绝缘电阻监测故障（超过上限-串联）  ';
     }
 
-
+// 12高温保护故障
     if (b13 == 1) {
-      guzhang  = guzhang + '12高温保护故障  ';
+      guzhang  = guzhang + '瓦斯闭锁故障  ';
     }
 
-
+// 13湿度高除湿故障
     if (b14 == 1) {
-      guzhang  = guzhang + '13湿度高除湿故障  ';
+      guzhang  = guzhang + '风电闭锁故障  ';
     }
-
+// 14欠压延时故障
     if (b15 == 1) {
-      guzhang  = guzhang + '14欠压延时故障  ';
+      guzhang  = guzhang + '功率方向型漏电故障  ';
     }
 
     if (b16 == 1) {
@@ -217,6 +231,12 @@ app.post('/:action', function (req, res) {
     serialport2.write('b4a2c4dc6fd5', 'hex');
     return res.send("chechu is on!!!");
   }
+
+
+  if (action == 'remotereset') {
+      serialport2.write('01050902FF00662E', 'hex');
+      return res.send("Remotereset is on!!!");
+    }
 
   if (action == "getvalue") {
     var prefix  = req.query.prefix;
