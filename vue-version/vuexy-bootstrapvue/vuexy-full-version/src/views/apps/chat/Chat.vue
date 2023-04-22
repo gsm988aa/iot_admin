@@ -184,13 +184,21 @@ import VuePerfectScrollbar from 'vue-perfect-scrollbar'
 // import { formatDate } from '@core/utils/filter'
 import { $themeBreakpoints } from '@themeConfig'
 import { useResponsiveAppLeftSidebarVisibility } from '@core/comp-functions/ui/app'
+// eslint-disable-next-line import/no-unresolved
+
 import ChatLeftSidebar from './ChatLeftSidebar.vue'
 import chatStoreModule from './chatStoreModule'
 import ChatActiveChatContentDetailsSidedbar from './ChatActiveChatContentDetailsSidedbar.vue'
 import ChatLog from './ChatLog.vue'
 import useChat from './useChat'
+ // 2D API
+// eslint-disable-next-line no-unused-vars,no-undef,import/extensions,import/no-unresolved
+
+// eslint-disable-next-line no-unused-vars
+
 
 export default {
+
   components: {
 
     // BSV
@@ -210,6 +218,15 @@ export default {
     ChatActiveChatContentDetailsSidedbar,
     ChatLog,
   },
+    data() {
+    return {
+      message: '',
+      messages: [],
+    };
+  },
+
+
+
   setup() {
     const CHAT_APP_STORE_MODULE_NAME = 'app-chat'
 
