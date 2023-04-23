@@ -7,6 +7,19 @@
 node_modules
 /dist
 
+
+*.jar
+*.o
+*.pyc
+*.dll
+*.zip
+
+/bin
+/build
+/dist
+/target
+
+
 # local env files
 .env.local
 .env.*.local
