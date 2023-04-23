@@ -2,20 +2,14 @@
   <b-card title="ChatGPT解决专业问题">
 
     <b-card-text>
-<!--改变这个card的颜色-->
-
 
     <h6>GPT 人工智能回复：</h6>
       <b-card
-
         text-variant="dark"
         border-variant="info"
         class="mb-2"
       >
-
             <b-card-text>
-<!--           字体加粗-->
-
 
               <br>
                 <b-spinner variant="primary" label="Spinning"  v-if="status !== 1"></b-spinner>
@@ -24,8 +18,6 @@
 
             </b-card-text>
       </b-card>
-
-
 
     </b-card-text>
           <br>
@@ -48,12 +40,10 @@
 
   </b-card>
 
-
 <!--&lt;!&ndash;      写一个可以输入的文本框&ndash;&gt;-->
 <!--      <input type="text" v-model="message" />-->
 <!--&lt;!&ndash;      点击按钮发送&ndash;&gt;-->
 <!--      <button @click="send">发送</button>-->
-
 
 </template>
 

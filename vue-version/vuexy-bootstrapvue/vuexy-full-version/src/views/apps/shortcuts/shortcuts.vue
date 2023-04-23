@@ -105,10 +105,11 @@ variant="primary"
                 @click="visible = !visible"
               >
                 摄像头开关
-              </b-button>
+              </b-button>.
+
 
               <b-collapse id="collapse-4" v-model="visible" class="mt-2" >
-                <iframe src="http://192.168.3.15:8085" width="322" height="243" style="transform: scale(1);" />
+                <iframe src="http://localhost:8085" width="320" height="240" style="transform: scale(1);" />
               </b-collapse>
             </div>
             <br>
