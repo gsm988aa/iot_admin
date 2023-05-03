@@ -1,6 +1,10 @@
 -- LuaTools需要PROJECT和VERSION这两个信息
-PROJECT = "yong ci all small solidRelay without chuneng xuan niu"
-VERSION = "1.0.1"
+--PROJECT = "yong ci all small solidRelay without chuneng xuan niu"
+
+PROJECT = "KYN28"
+
+VERSION = "1.0.2"
+
 log.info("esp32", PROJECT, VERSION)
 -- 引入必要的库文件(lua编写), 内部库不需要require
 -- 104 -  103+
@@ -29,19 +33,19 @@ sys.taskInit(function()
         bootime = bootime + 1
     end
     fdb.kv_set("boottime", bootime)
-    -- 默认1000ms反转时间
+    -- 默认车入230ms反转时间
     fanzhuanshijian = fdb.kv_get("fanzhuanshijian")
     if fanzhuanshijian == nil or type(fanzhuanshijian) ~= "number" then
         fanzhuanshijian = 230
     end
     fdb.kv_set("fanzhuanshijian", fanzhuanshijian)
-    -- 默认最大堵转电流阈值为3000
+    -- 默认车出30ms反转时间
     fanzhuanshijian_chechu = fdb.kv_get("fanzhuanshijian_chechu")
     if fanzhuanshijian_chechu == nil or type(fanzhuanshijian_chechu) ~= "number" then
         fanzhuanshijian_chechu = 30
     end
     fdb.kv_set("fanzhuanshijian_chechu", fanzhuanshijian_chechu)
-
+    -- 默认堵转电流为3000
     adcdomain = fdb.kv_get("adcdomain")
     if adcdomain == nil or type(adcdomain) ~= "number" then adcdomain = 3000 end
     fdb.kv_set("adcdomain", adcdomain)
@@ -98,6 +102,7 @@ IO05(0) --1HP
 IO06(0) --M_CH0
 IO07(0) --M_CH1
 
+IO08(0) --pwm04 Emotor
 IO11(0) --jiedidao
 IO19(0) --chuneng
 
@@ -124,7 +129,7 @@ sys.taskInit(function()
         sys.wait(1000) -- 重试间隔
     until (err == 0)
     wlan_connected = 1
-    len2 = socket.send(sock, "hello wuxixinyidai")
+    len2 = socket.send(sock, "hello Wuxixinyidai")
     log.info("socket", "sendlen", len2)
     local wifi_count = 0
 
@@ -133,8 +138,8 @@ sys.taskInit(function()
         if data ~= nil and len > 0 then
             log.info("socket", "recv", data)
             if string.startsWith(data, "fa") then
-                -- 反转时间为0000到9900  倍率为100  比如反转3000ms 直接写入fa300
-                fdb.kv_set("fanzhuanshijian", (tonumber(data:sub(3, 5))) * 10)
+                -- 车入的反转时间为0000到9999  倍率为1  比如车入反转3000ms 直接写入fa3000
+                fdb.kv_set("fanzhuanshijian", tonumber(data:sub(3, 6)))
                 fanzhuanshijian = fdb.kv_get("fanzhuanshijian")
                 log.info("fanzhuanshijian_new", fanzhuanshijian)
                 log.info("fanzhuanshijian_db", fdb.kv_get("fanzhuanshijian"))
@@ -143,9 +148,9 @@ sys.taskInit(function()
                 end
 
             elseif string.startsWith(data, "fc") then
-                -- 最大堵转电流为0000到9999  倍率为100 比如最大堵转电流阈值3000  直接写入ad300
-                fdb.kv_set("fanzhuanshijian_chechu", (tonumber(data:sub(3, 5))) * 100)
-                adcdomain = fdb.kv_get("fanzhuanshijian_chechu")
+                -- 车出的反转时间为0000到9999  倍率为1 比如车出反转时间为500ms  直接写入fc0500
+                fdb.kv_set("fanzhuanshijian_chechu", tonumber(data:sub(3, 6)))
+                fanzhuanshijian_chechu = fdb.kv_get("fanzhuanshijian_chechu")
                 log.info("fanzhuanshijian_chechu_new", fanzhuanshijian_chechu)
                 log.info("fanzhuanshijian_chechu_db", fdb.kv_get("fanzhuanshijian_chechu"))
                 if wlan_connected == 1 then
@@ -153,8 +158,8 @@ sys.taskInit(function()
                 end
 
             elseif string.startsWith(data, "ad") then
-                -- 最大堵转电流为0000到9999  倍率为100 比如最大堵转电流阈值3000  直接写入ad30
-                fdb.kv_set("adcdomain", (tonumber(data:sub(3, 4))) * 100)
+                -- 最大堵转电流为0000到9999  倍率为1 比如最大堵转电流阈值3000  直接写入ad3000
+                fdb.kv_set("adcdomain", tonumber(data:sub(3, 6)))
                 adcdomain = fdb.kv_get("adcdomain")
                 log.info("adcdomain_new", adcdomain)
                 log.info("adcdomain_db", fdb.kv_get("adcdomain"))
@@ -162,8 +167,8 @@ sys.taskInit(function()
                     socket.send(sock, "adcdomain_changed")
                 end
             elseif string.startsWith(data, "rc") then
-                -- 最大周期为000到990  倍率为10 比如旋转周期50  直接写入rc05
-                fdb.kv_set("runcycle", (tonumber(data:sub(3, 4))) * 10)
+                -- 最大运行周期为0000到9999  倍率为1 比如旋转周期500  直接写入rc0500
+                fdb.kv_set("runcycle", tonumber(data:sub(3, 6)))
                 runcycle = fdb.kv_get("runcycle")
                 log.info("runcycle_new", runcycle)
                 log.info("runcycle_db", fdb.kv_get("runcycle"))
@@ -177,22 +182,11 @@ sys.taskInit(function()
                 socket.close(sock)
                 log.info("socket", "close")
             end
-            if data == "adcopen" then
-                sys.publish("ADC4_START")
-                log.info("adc", "open")
-            end
-            if data == "wificlose" then socket.close(sock) end
             if data == "gets" then
                 local IO12val = gpio.get(12)
                 local IO13val = gpio.get(13)
                 local IO18val = gpio.get(18)
                 local IO10val = gpio.get(10)
-                local IO02val = gpio.get(2)
-                local IO03val = gpio.get(3)
-                local IO05val = gpio.get(5)
-                local IO06val = gpio.get(6)
-                local IO07val = gpio.get(7)
-                local IO09val = gpio.get(9)
                 if wlan_connected == 1 then
                     socket.send(sock,
                                 "Input_state____\n" .. "IO18_shiyan:\t" ..
@@ -200,8 +194,6 @@ sys.taskInit(function()
                                     "\nIO12_duanlu\t" .. IO12val ..
                                     "\nIO10_chuneng\t" .. IO10val .. "\n")
                     sys.wait(1000)
-                    -- socket.send(sock, "output_state____".."IO02hezha\n"..IO02val.."\nIO03fenzha\n"..IO03val.."\nIO05qudong\n"..IO05val.."\nIO06Ch0\n"..IO06val.."\nIO07Ch1\n"..IO07val.."\nIO09chuneng\n"..IO09val.."\n")
-                    -- sys.wait(1000)
                 end
             end
             if data == "io02h" then
@@ -278,7 +270,29 @@ sys.taskInit(function()
                     socket.send(sock, "io07l done")
                 end
             end
-
+            if data == "io07h" then
+                IO06(0)
+                sys.wait(100)
+                IO07(1)
+                sys.wait(3000)
+                if wlan_connected == 1 then
+                    socket.send(sock, "io07h done")
+                end
+            end
+            if data == "io08h" then
+                IO08(1)
+                sys.wait(3000)
+                if wlan_connected == 1 then
+                    socket.send(sock, "io08h done")
+                end
+            end
+            if data == "io08l" then
+                IO08(0)
+                sys.wait(3000)
+                if wlan_connected == 1 then
+                    socket.send(sock, "io08l done")
+                end
+            end
             if data == "io10h" then
                 IO10(1)
                 sys.wait(3000)
@@ -293,7 +307,6 @@ sys.taskInit(function()
                     socket.send(sock, "io10l done")
                 end
             end
-
             if data == "io11h" then
                 IO11(1)
                 sys.wait(3000)
@@ -332,10 +345,10 @@ sys.taskInit(function()
             if data == "fenzha" then
                 sys.publish("DoSomething", 16665)
             end
-            if data == "hezha" then sys.publish("DoSomething", 10954) end
+            if data == "hezha" then
+                sys.publish("DoSomething", 10954)
+            end
             if data == "cheru" then
-                -- IO05(1)
-                -- IO06(1)
                 sys.publish("DoSomething", 51488)
             end
             if data == "chechu" then
@@ -350,14 +363,9 @@ sys.taskInit(function()
             if data == "yiduan" then
                 sys.publish("DoSomething2", 19839)
             end
-            if data == "adcopen" then
-                sys.publish("ADC4_START")
-                log.info("adc", "open")
-            end
-            sys.wait(1000)
+
         elseif len == 0 then
             log.info("socket", "recv", "elseif no data")
-            -- wifi_count  = wifi_count + 1
             sys.wait(1000)
         elseif len == -1 or wifi_count >= 10000 then
             log.info("socket", "recv", "error")
@@ -369,7 +377,7 @@ sys.taskInit(function()
         end
     end
     socket.close(sock)
-    -- socket.close(sock)
+
 end)
 
 sys.subscribe("WLAN_AP_START", function() log.info("wlan", "WLAN_AP_START") end)
@@ -402,7 +410,7 @@ sys.taskInit(
             --停止位
         )
         log.info("uart-setup", result)
-        uart.write(1, "xydesp32\n")
+        uart.write(1, "xyd_esp32\n")
         uart.on(1, "receive", function(uid, length)
             local s
             while true do -- 保证读完不能丢包
@@ -441,28 +449,28 @@ sys.subscribe(recvReady, function()
     log.info("uartTask.read length", #str)
     sendQueue = {}
     if string.startsWith(str, "fa") then
-        fdb.kv_set("fanzhuanshijian", (tonumber(str:sub(3, 5))) * 10)
+        fdb.kv_set("fanzhuanshijian", tonumber(str:sub(3, 6)))
         fanzhuanshijian = fdb.kv_get("fanzhuanshijian")
         log.info("fanzhuanshijian_new", fanzhuanshijian)
         log.info("fanzhuanshijian_db", fdb.kv_get("fanzhuanshijian"))
     end
     if string.startsWith(str, "fc") then
-        fdb.kv_set("fanzhuanshijian_chechu", (tonumber(str:sub(3, 5))) * 10)
-        fanzhuanshijian = fdb.kv_get("fanzhuanshijian_chechu")
+        fdb.kv_set("fanzhuanshijian_chechu", tonumber(str:sub(3, 6)))
+        fanzhuanshijian_chechu = fdb.kv_get("fanzhuanshijian_chechu")
         log.info("fanzhuanshijian_chechu_new", fanzhuanshijian_chechu)
         log.info("fanzhuanshijian_chechu_db", fdb.kv_get("fanzhuanshijian_chechu"))
     end
 
     if string.startsWith(str, "reboot") then rtos.reboot() end
     if string.startsWith(str, "ad") then
-        fdb.kv_set("adcdomain", (tonumber(str:sub(3, 4))) * 100)
+        fdb.kv_set("adcdomain", tonumber(str:sub(3, 6)))
         adcdomain = fdb.kv_get("adcdomain")
         log.info("adcdomain_new", adcdomain)
         log.info("adcdomain_db", fdb.kv_get("adcdomain"))
     end
 
     if string.startsWith(str, "rc") then
-        fdb.kv_set("runcycle", (tonumber(str:sub(3, 4))) * 10)
+        fdb.kv_set("runcycle", tonumber(str:sub(3, 6)))
         runcycle = fdb.kv_get("runcycle")
         log.info("runcycle_new", runcycle)
         log.info("runcycle_db", fdb.kv_get("runcycle"))
@@ -470,66 +478,44 @@ sys.subscribe(recvReady, function()
 
     if string.startsWith(str, "io19h") then
         IO19(1)
-
         log.info("io19h done ")
     end
     if string.startsWith(str, "io19l") then
         IO19(0)
-
         log.info("io19l done ")
-
     end
     if string.startsWith(str, "io02h") then
         IO02(1)
-
         log.info("io02h done ")
     end
     if string.startsWith(str, "io02l") then
         IO02(0)
-
         log.info("io02l done ")
-
     end
-
     if string.startsWith(str, "io03h") then
         IO03(1)
-
         log.info("io03h done ")
     end
     if string.startsWith(str, "io03l") then
         IO03(0)
-
         log.info("io03l done ")
-
     end
-
-    -- 注意打印会影响运行速度，调试完注释掉
     log.info("uartTask.read length", #str, str:sub(1, 4))
-    -- uart.write(UART_ID,str:sub(1,4))
-    -- 在这里处理接收到的数据，这是例子
-    -- local datax =string:sub(1,1)
     local _, datax, crcx = pack.unpack(str, ">LH") -- 解包成short (2字节)
-
     if datax then
-
         local datay = pack.pack('>L', datax)
         log.info("crcx=", crcx)
-
         local crcy = crypto.crc16_modbus(datay)
         log.info("crcy = ", crcy)
-
         if crcy == crcx then
             -- 初始化所有输出
             IO05(0) -- GPIO_ot8    驱动板220VAC交流总开关
             IO02(0) -- GPIO_ot5    110VAC合闸线圈
             IO03(0) -- GPIO_ot6    110VAC分闸线圈
             IO09(0) -- GPIO_ot7    110VAC储能线圈
-            -- pwm.open(pin.PA10, 10000, 0)
-            -- pwm2.setFadeWithTime(pwm2ch, 0, 5, 1) -- GPIO_pwm  驱动板ch2
         else
             log.info("without crc")
         end
-
         -- 分闸线圈动作 B7D6D5A2        4119     16665
         if crcy == 16665 then sys.publish("DoSomething", 16665) end
         -- 合闸线圈动作 BACFD5A2        2ACA     10954
@@ -557,13 +543,10 @@ sys.subscribe("OperationOk", function()
     IO07(0) -- GPIO_ot8    正反转ch1
     IO02(0) -- GPIO_ot6    110VAC合闸线圈
     IO03(0) -- GPIO_ot7    110VAC分闸线圈
+    IO08(0) -- GPIO_ot8    Emotor线圈
     IO19(0) -- GPIO_ot12    110VAC储能线圈
-    -- IO11(0) -- GPIO_otx    接地刀线圈
-    -- pwm.open(pin.PA10, 10000, 0)
+    IO11(0) -- GPIO_ot11    接地刀线圈
     adc.close(4)
-    -- pwm2.setFadeWithTime(pwm2ch, 0, 5, 1) -- GPIO_pwm  驱动板ch2
-    -- IO11(0)    -- gpio.set(pin.PB04, 0)   -- GPIO_ot9   未来接地刀
-    -- gpio.set(pin.PA13, 0)   -- GPIO_ot12  未来备用
     log.info("重置完毕")
     if wlan_connected == 1 then socket.send(sock, "重置完毕") end
 end)
@@ -585,7 +568,6 @@ sys.taskInit(function()
                     socket.send(sock, "分闸操作完毕")
                 end
                 log.info("分闸操作完毕")
-                sys.publish("Fenzha_finish")
                 sys.publish("OperationOk")
                 sys.wait(3000)
                 -- -- -- -- -- -- --
@@ -598,7 +580,6 @@ sys.taskInit(function()
                 if wlan_connected == 1 then
                     socket.send(sock, "jinru_hezha_hanshu")
                 end
-
                 -- 获取试验位置
                 local val_shiyan = gpio.get(18)
                 -- 获取工作位置
@@ -678,50 +659,6 @@ sys.taskInit(function()
                 IO19(1)
                 sys.wait(15000)
                 IO19(0)
-                -- -- 获取未储能位置
-                -- local val_weichuneng = gpio.get(10)
-                -- sys.wait(10)
-                -- -- 获取未储能位置2
-                -- local val_weichuneng2 = gpio.get(10)
-                -- -- 如果 未储能位置和未储能位置2不一致
-                -- if val_weichuneng ~= val_weichuneng2 then
-                --     sys.wait(100)
-                --     -- 获取未储能位置3
-                --     local val_weichuneng3 = gpio.get(10)
-                --     -- 如果 未储能位置3和未储能位置2不一致
-                --     if val_weichuneng3 ~= val_weichuneng2 then
-                --         if wlan_connected == 1 then
-                --             socket.send(sock, "error_chunengstate")
-                --         end
-                --         log.info("error_储能状态错误")
-                --     else
-                --         -- if val_weichuneng2 == 1 then  --应为1 只用于测试
-                --         -- 如果未储能位置是0(未储能)
-                --         if val_weichuneng2 == 0 then
-                --             -- if val_weichuneng2 == 1 then
-                --             -- 执行储能操作
-                --             IO19(1) -- GPIO_ot7    110VAC储能线圈
-                --             sys.wait(1000)
-                --             if wlan_connected == 1 then
-                --                 socket.send(sock, "chuneng_finish")
-                --             end
-                --             log.info("储能操作完毕")
-                --         end
-                --     end
-                -- else
-                --     sys.wait(10)
-                --     -- 如果未储能位置是0(未储能)
-                --     if val_weichuneng2 == 0 then -- 应为1 只用于测试
-                --         -- if val_weichuneng2 == 1 then
-                --         -- 执行储能操作
-                --         IO19(1) -- GPIO_ot7    110VAC储能线圈
-                --         sys.wait(1000)
-                --         if wlan_connected == 1 then
-                --             socket.send(sock, "chuneng_finish")
-                --         end
-                --         log.info("储能操作完毕")
-                --     end
-                -- end
                 sys.publish("OperationOk")
                 sys.wait(3000)
                 -- -- -- -- -- -- --
@@ -736,7 +673,6 @@ sys.taskInit(function()
                 if wlan_connected == 1 then
                     socket.send(sock, "jinru_cheru_hanshu")
                 end
-
                 sys.wait(10)
                 -- 获取试验位置
                 local val_gongzuo = gpio.get(13) -- GPIO_in2 工作位置
@@ -869,17 +805,6 @@ sys.taskInit(function()
                                             sys.wait(10)
                                             IO06(1)
                                             sys.wait(fanzhuanshijian)
-
-                                            -- IO06(0)
-                                            -- -- yigong
-                                            -- sys.wait(3000)
-                                            -- local val_duanlux = gpio.get(12)
-                                            -- local val_gongzuox = gpio.get(13)
-                                            -- if val_duanlux == 1 and val_gongzuox == 0 then
-
-                                            -- IO02(1)
-                                            -- end
-
                                             sys.publish("OperationOk")
                                         end
                                     end
@@ -909,8 +834,6 @@ sys.taskInit(function()
                 --                --
                 -- -- -- -- -- -- --
             elseif titlex == 12482 then -- 车出过程  不在试验位置 必须分闸
-                -- log.info("车出过程")
-                -- uart.write(1,"uart chechu")
                 sys.wait(10)
                 -- 获取试验位置
                 local val_gongzuo = gpio.get(13) -- GPIO_in2 工作位置
@@ -941,7 +864,6 @@ sys.taskInit(function()
                     -- 获取试验位置为1 且 断路器合闸为1
                     if val_shiyan2 == 1 -- and val_duanlu2 == 1
                     then
-                        -- yyyyyyyyyy
                         log.info("开始车出")
                         local _, adc_cov = adc.read(4) -- PA01
                         -- 如果ADC值大于adcdomain
@@ -1005,7 +927,7 @@ sys.taskInit(function()
                                                     val_shiyan6 + gpio.get(18)
                                                 sys.wait(10)
                                                 local _, adc_cov7 = adc.read(4) -- PA01
-                                                -- log.info("runstate__".. i ..":" .. val_shiyan3 .. "v:" ..val_shiyan7..adc_cov3..adc_cov4..adc_cov5..adc_cov6..adc_cov6..adc_cov7)
+
                                                 if wlan_connected == 1 then
                                                     socket.send(sock,
                                                                 "runstate__" ..
@@ -1068,123 +990,10 @@ sys.taskInit(function()
             else
                 log.info("错误串口/网络信息")
             end -- 动作完
-            -- 分闸线圈动作 b7d6d5a2        4119     16665 sys.publish("DoSomething", 16665)
-            -- 合闸线圈动作 bacfd5a2        2ACA     10954
-            -- 车入线圈动作 b3b5c8eb        C920     51488
-            -- 车出线圈动作 b3b5b3f6        30C2     12482
-            -- 储能线圈动作 b4a2c4dc        6FD5     28629
-            -- 一键供电动作 D2BBB9A9        97FA     38906
-            -- 一键断电动作 D2BBB6CF        4D7F     19839
         end -- message非空完
     end -- while完
 end) -- function完
--- sys.taskInit(function()
---     while true do
---         local messagey, titley = sys.waitUntil("DoSomething2", 10000)
---         -- -- -- -- -- -- --
---         --                --
---         --      一供      --
---         --                --
---         -- -- -- -- -- -- --
---         -- 断路器分闸 接地刀断开 车入 储能 断路器合闸
---         if messagey == true then
---             if titley ==38906 then
---                 log.info("一供：执行一键供电")
---                 -- 断路器分闸
---                 -- sys.publish("DoSomething", 16665)
---                 -- sys.wait(1000)
---                 -- log.info("一供：分闸完成")
---                 -- -- 接地刀断开
---                 -- --车入
---                 if wlan_connected == 1 then
---                     socket.send(sock, "fenzhawancheng")
---                 end
---                 sys.publish("DoSomething", 51488)
---                 sys.wait(1000)
---                 -- log.info("一供：车入完成")
---                 if wlan_connected == 1 then
---                     socket.send(sock, "cheruwancheng")
---                 end
---                 -- 储能   (一会儿写)
---                 -- sys.publish("DoSomething", 28629)
---                 -- sys.wait(1000)
---                 -- log.info("一供：储能完成")
---                 local k=0
---                 repeat
---                     k=k+1
---                     local resultx = sys.waitUntil("Cheru_finish",1000)
---                     if resultx == true then
---                         -- 断路器合闸
---                         sys.publish("DoSomething", 10954)
---                         log.info("一供：合闸完成")
---                         if wlan_connected == 1 then
---                             socket.send(sock, "hezhawancheng")
---                         end
---                     else
---                         log.info("一供：车入超时")
---                         if wlan_connected == 1 then
---                             socket.send(sock, "cheruchao")
---                         end
---                     end
---                 until resultx == true or k >=300
---                 if k>300 then
---                     if wlan_connected == 1 then
---                         socket.send(sock, "cheruchaoshi")
---                     end
---                 end
---                 k=0
---                 sys.wait(3000)
---         -- -- -- -- -- -- --
---         --                --
---         --      一断      --
---         --                --
---         -- -- -- -- -- -- --
---         -- 断路器分闸 车出 接地刀接通
---             elseif titley == 19839 then
---                 log.info("一断：执行一键断电")
---                 -- 断路器分闸
---                 sys.publish("DoSomething", 16665)
---                 sys.wait(1000)
---                 log.info("一断：分闸完成")
---                 local k=0
---                 repeat
---                     k=k+1
---                     local resultx = sys.waitUntil("Fenzha_finish",3000)
---                     if resultx == true then
---                         -- 断路器合闸
---                         sys.publish("DoSomething", 12482)
---                         log.info("一供：合闸完成")
---                         if wlan_connected == 1 then
---                             socket.send(sock, "hezhawancheng")
---                         end
---                     else
---                         log.info("一供：车入超时")
---                         if wlan_connected == 1 then
---                             socket.send(sock, "cheruchao")
---                         end
---                     end
---                 until resultx == true or k >=60
---                 if k >= 60 then
---                     if wlan_connected == 1 then
---                         socket.send(sock, "fenzhachaoshi")
---                     end
---                 end
---                 k=0
---                 sys.wait(3000)
---                 -- 车出
---                 -- sys.publish("DoSomething", 12482)
---                 -- sys.wait(1000)
---                 -- log.info("一断：车出完成")
---                 -- 接地刀接通
 
---                 -- log.info("一断：一键断电完成")
---             else
---                 log.info("错误信号")
---             end
-
---         end -- messagey完
---     end -- while完
--- end)
 -- 用户代码已结束---------------------------------------------
 -- 结尾总是这一句
 sys.run()
