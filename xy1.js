@@ -214,7 +214,7 @@ app.post('/:action', function (req, res) {
     if (action == 'chuneng') {
     // serialport2.write("cheneng");
     serialport2.write('b4a2c4dc6fd5', 'hex');
-    return res.send("chechu is on!!!");
+    return res.send("chuneng is on!!!");
   }
 
 

@@ -26,7 +26,7 @@
     <h6>请输入问题</h6>
     <b-form-input
       v-model="message"
-      placeholder="请输入问题"
+      placeholder="金川集团优秀"
     />
           <br>
 
@@ -37,6 +37,45 @@
 
       发送
     </b-button>
+<!-- 加入空格 -->
+
+  &nbsp
+  &nbsp
+  &nbsp
+  <br>
+  举例：
+  <br>
+
+    <b-button
+      variant="secondary" pill
+      @click="send2"
+    >
+
+      10kV高压开关柜常用的速断整定值是多少
+    </b-button>
+    &nbsp
+  &nbsp
+  &nbsp
+  
+    <b-button
+      variant="info" pill
+      @click="send3"
+    >
+
+      10kV高压开关柜常用的定时限整定值是多少
+    </b-button>
+
+    &nbsp
+  &nbsp
+  &nbsp
+  
+    <b-button
+      variant="dark" pill
+      @click="send4"
+    >
+      无锡的美景有哪些
+    </b-button>
+
 
   </b-card>
 
@@ -50,7 +89,7 @@
 <script>
 
 import {
- BRow, BCol, BCard, BContainer, BButton, BButtonGroup, BFormInput, BModal,BSpinner
+ BRow, BCol, BCard, BContainer, BButton, BButtonGroup, BFormInput, BModal,BSpinner,BCardText
 , BCollapse } from 'bootstrap-vue'
 // import axios
 import axios from 'axios'
@@ -61,6 +100,7 @@ export default {
     BRow,
     BCol,
     BCard,
+    BCardText,
     BButton,
     // eslint-disable-next-line vue/no-unused-components
     BButtonGroup,
@@ -72,7 +112,7 @@ export default {
   },
   data() {
     return {
-      message: '',
+      message: '金川集团钼矿镍矿优秀',
       status: 1,
       posts: ''
     };
@@ -102,7 +142,79 @@ export default {
           .catch(error => {
             console.log(error);
           });
-    }
+    },
+    send2() {
+      axios.post('https://openai.api2d.net/v1/chat/completions', {
+        model: 'gpt-3.5-turbo',
+        messages: [{role: 'user', content: '10kV高压柜常用微机综保的速断整定值是多少，一般是多少，请举例'}]
+      }, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer fk192265-ZSVj6ZJGVn2Na3lm0Ouz5S0PZ7NrMRxA'
+        }
+      }).then(response => {
+        // 等待5s
+        setTimeout(() => {
+          this.status = 1
+          this.posts = response.data.choices[0].message.content
+          console.log(response.data.choices[0].message.content)
+          // console.log(response.data)
+        }, 3000);
+        this.status = 0
+
+      })
+          .catch(error => {
+            console.log(error);
+          });
+    },
+    send3() {
+      axios.post('https://openai.api2d.net/v1/chat/completions', {
+        model: 'gpt-3.5-turbo',
+        messages: [{role: 'user', content:  "10kV高压开关柜常用的定时限整定值是多少，一般是多少，请举例"}]
+      }, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer fk192265-ZSVj6ZJGVn2Na3lm0Ouz5S0PZ7NrMRxA'
+        }
+      }).then(response => {
+        // 等待5s
+        setTimeout(() => {
+          this.status = 1
+          this.posts = response.data.choices[0].message.content
+          console.log(response.data.choices[0].message.content)
+          // console.log(response.data)
+        }, 3000);
+        this.status = 0
+
+      })
+          .catch(error => {
+            console.log(error);
+          });
+    },
+    send4() {
+      axios.post('https://openai.api2d.net/v1/chat/completions', {
+        model: 'gpt-3.5-turbo',
+        messages: [{role: 'user', content: '无锡的美景有哪些，请安排一日游行程'}]
+      }, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer fk192265-ZSVj6ZJGVn2Na3lm0Ouz5S0PZ7NrMRxA'
+        }
+      }).then(response => {
+        // 等待5s
+        setTimeout(() => {
+          this.status = 1
+          this.posts = response.data.choices[0].message.content
+          console.log(response.data.choices[0].message.content)
+          // console.log(response.data)
+        }, 3000);
+        this.status = 0
+
+      })
+          .catch(error => {
+            console.log(error);
+          });
+    },
 }
 
 };

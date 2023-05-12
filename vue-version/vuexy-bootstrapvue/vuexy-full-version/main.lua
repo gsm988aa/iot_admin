@@ -3,7 +3,7 @@
 
 PROJECT = "KYN28"
 
-VERSION = "1.0.2"
+VERSION = "1.0.3"
 
 log.info("esp32", PROJECT, VERSION)
 -- 引入必要的库文件(lua编写), 内部库不需要require
@@ -17,7 +17,6 @@ end
 --定义daowei=0
 daowei = 0
 meidaowei = 1
-
 sys.taskInit(function()
     sys.wait(100) -- 免得日志刷了, 生产环境不需要
     -- 检查一下当前固件是否支持fdb
@@ -46,7 +45,7 @@ sys.taskInit(function()
     -- 默认车出30ms反转时间
     fanzhuanshijian_chechu = fdb.kv_get("fanzhuanshijian_chechu")
     if fanzhuanshijian_chechu == nil or type(fanzhuanshijian_chechu) ~= "number" then
-        fanzhuanshijian_chechu = 30
+        fanzhuanshijian_chechu = 230
     end
     fdb.kv_set("fanzhuanshijian_chechu", fanzhuanshijian_chechu)
     -- 默认堵转电流为3000
@@ -92,8 +91,8 @@ IO19 = gpio.setup(19, 0, gpio.PULLDOWN) -- 储能
 -- 平时高电平 检测低电平
 IO12 = gpio.setup(12, nil, gpio.PULLUP) -- IN1 shiyan
 IO13 = gpio.setup(13, nil, gpio.PULLUP) -- IN2 gongzou
-IO18 = gpio.setup(18, nil, gpio.PULLUP) -- IN3 duanluqi
-IO10 = gpio.setup(10, nil, gpio.PULLUP) -- IN4 chuneng
+IO18 = gpio.setup(18, nil, gpio.PULLUP) -- IN3 duanluqi/Jiedidaofen
+IO10 = gpio.setup(10, nil, gpio.PULLUP) -- IN4 chuneng/Jiedidaohe
 -- adc.open(4)
 -- IO00(0)
 -- IO01(0)
@@ -103,7 +102,7 @@ IO03(0) --fenzha
 IO05(0) --1HP
 IO06(0) --M_CH0
 IO07(0) --M_CH1
---IO08(0) --pwm04 Emotor
+--IO08(0) --pwm04
 IO11(0) --jiedidao
 IO19(0) --chuneng
 
@@ -192,8 +191,8 @@ sys.taskInit(function()
                     socket.send(sock,
                                 "Input_state____\n" .. "IO18_shiyan:\t" ..
                                     IO18val .. "\nIO13_gongzuo\t" .. IO13val ..
-                                    "\nIO12_duanlu\t" .. IO12val ..
-                                    "\nIO10_chuneng\t" .. IO10val .. "\n")
+                                    "\nIO12_duanlu_daofen\t" .. IO12val ..
+                                    "\nIO10_daohe\t" .. IO10val .. "\n")
                     sys.wait(1000)
                 end
             end
@@ -254,8 +253,8 @@ sys.taskInit(function()
                 end
             end
             if data == "io07h" then
-                IO06(0)
-                sys.wait(100)
+                -- IO06(0)
+                -- sys.wait(100)
                 IO07(1)
                 sys.wait(3000)
                 if wlan_connected == 1 then
@@ -263,8 +262,8 @@ sys.taskInit(function()
                 end
             end
             if data == "io07l" then
-                IO06(0)
-                sys.wait(100)
+                -- IO06(0)
+                -- sys.wait(100)
                 IO07(0)
                 sys.wait(3000)
                 if wlan_connected == 1 then
@@ -272,8 +271,8 @@ sys.taskInit(function()
                 end
             end
             if data == "io07h" then
-                IO06(0)
-                sys.wait(100)
+                -- IO06(0)
+                -- sys.wait(100)
                 IO07(1)
                 sys.wait(3000)
                 if wlan_connected == 1 then
@@ -343,35 +342,42 @@ sys.taskInit(function()
             -- 储能线圈动作 b4a2c4dc        6FD5     28629
             -- 一键供电动作 D2BBB9A9        97FA     38906
             -- 一键断电动作 D2BBB6CF        4D7F     19839
-            if data == "fenzha" then
-                sys.publish("DoSomething", 16665)
-            end
-            if data == "hezha" then
-                sys.publish("DoSomething", 10954)
-            end
-            if data == "cheru" then
-                sys.publish("DoSomething", 51488)
-            end
-            if data == "chechu" then
-                sys.publish("DoSomething", 12482)
-            end
-            if data == "chuneng" then
-                sys.publish("DoSomething", 28629)
-            end
-            if data == "yigong" then
-                sys.publish("DoSomething2", 38906)
-            end
-            if data == "yiduan" then
-                sys.publish("DoSomething2", 19839)
-            end
 
-        elseif len == 0 then
-            log.info("socket", "recv", "elseif no data")
-            sys.wait(1000)
-        elseif len == -1 or wifi_count >= 10000 then
-            log.info("socket", "recv", "error")
-            sys.wait(1000)
-            wifi_count = 0
+        if data == "fenzha" then
+            sys.publish("DoSomething", 16665)
+        end
+        if data == "hezha" then
+            sys.publish("DoSomething", 10954)
+        end
+        if data == "cheru" then
+            sys.publish("DoSomething", 51488)
+        end
+        if data == "chechu" then
+            sys.publish("DoSomething", 12482)
+        end
+        if data == "chuneng" then
+            sys.publish("DoSomething", 28629)
+        end
+        if data == "yigong" then
+            sys.publish("DoSomething", 38906)
+        end
+        if data == "yiduan" then
+            sys.publish("DoSomething", 19839)
+        end
+        if data == "daofen" then
+            sys.publish("DoSomething", 16848)
+            end
+        if data == "daohe" then
+            sys.publish("DoSomething", 47154)
+        end
+            
+        -- elseif len == 0 then
+        --     log.info("socket", "recv", "elseif no data")
+        --     sys.wait(1000)
+        -- elseif len == -1 or wifi_count >= 10000 then
+        --     log.info("socket", "recv", "error")
+        --     sys.wait(1000)
+        --     wifi_count = 0
         else
             log.info("socket", "recv", "else no data2")
             sys.wait(1000)
@@ -399,7 +405,7 @@ local uartimeout, recvReady = 1000, "UART_RECV_ID"
 -- 初始化
 sys.taskInit(
     function()
-        local result =   uart.setup(1,  9600,  8, 1  )
+        local result =   uart.setup(1,  115200,  8, 1  )
         log.info("uart-setup", result)
         uart.write(1, "xyd_esp32\n")
         uart.on(1, "receive", function(uid, length)
@@ -474,6 +480,48 @@ sys.subscribe(recvReady, function()
         IO03(0)
         log.info("io03l done ")
     end
+
+    if string.startsWith(str, "io05h") then
+        IO05(1)
+        log.info("io05h done ")
+    end
+    if string.startsWith(str, "io05l") then
+        IO05(0)
+        log.info("io05l done ")
+    end
+    if string.startsWith(str, "io06h") then
+        IO06(1)
+        log.info("io06h done ")
+    end
+    if string.startsWith(str, "io06l") then
+        IO06(0)
+        log.info("io06l done ")
+    end
+    if string.startsWith(str, "io07h") then
+        IO07(1)
+        log.info("io07h done ")
+    end
+    if string.startsWith(str, "io07l") then
+        IO07(0)
+        log.info("io07l done ")
+    end
+    if string.startsWith(str, "io11h") then
+        IO11(1)
+        log.info("io11h done ")
+    end
+    if string.startsWith(str, "io11l") then
+        IO11(0)
+        log.info("io11l done ")
+    end
+
+    if string.startsWith(str, "gets2") then
+        local IO12val = gpio.get(12)
+                local IO13val = gpio.get(13)
+                local IO18val = gpio.get(18)
+                local IO10val = gpio.get(10)
+               uart.write(1,IO12val..IO13val..IO18val..IO10val.."\n")   -- fen gong shi he
+    end
+
     log.info("uartTask.read length", #str, str:sub(1, 4))
     local _, datax, crcx = pack.unpack(str, ">LH") -- 解包成short (2字节)
     if datax then
@@ -509,9 +557,9 @@ sys.subscribe(recvReady, function()
         if crcy == 47154 then sys.publish("DoSomething", 47154) end
 
         -- 一供  D2BBB9A997FA 38906
-        -- if crcy == 38906 then sys.publish("DoSomething2", 38906) end
+        if crcy == 38906 then sys.publish("DoSomething", 38906) end
         -- 一断 D2BBB6CF4D7F 19839
-        -- if crcy == 19839 then sys.publish("DoSomething2", 19839) end
+        if crcy == 19839 then sys.publish("DoSomething", 19839) end
     end
 end)
 sys.subscribe("OperationOk", function()
@@ -523,7 +571,7 @@ sys.subscribe("OperationOk", function()
     IO19(0) -- 110VAC储能线圈
     IO11(0) -- 接地刀线圈
     adc.close(4)
-    log.info("OperationDone")
+    -- log.info("OperationDone")
     if wlan_connected == 1 then socket.send(sock, "OperationDone") end
 end)
 
@@ -535,421 +583,551 @@ sys.taskInit(function()
         --      分闸       --
         --                --
         -- -- -- -- -- -- --
-        if message == true then
-            if titlex == 16665 then -- 分闸过程
+        local function fcn1fenzha()
                 -- 执行分闸操作
                 IO03(1) -- GPIO_ot6    110VAC分闸线圈
                 sys.wait(2000)
                 if wlan_connected == 1 then
-                    socket.send(sock, "分闸操作完毕")
+                    socket.send(sock, "FenZha_is_OK")
                 end
                 log.info("分闸操作完毕")
                 sys.publish("OperationOk")
-                sys.wait(3000)
-            end
-            -- -- -- -- -- -- --
-            --                --
-            --      合闸      --
-            --                --
-            -- -- -- -- -- -- --
-            if titlex == 10954 then -- 合闸过程
+                sys.wait(1000)
+        end
+        -- -- -- -- -- -- --
+        --                --
+        --      合闸      --
+        --                --
+        -- -- -- -- -- -- --
+        local function fcn2hezha()
                 sys.wait(10)
-                if wlan_connected == 1 then
-                    socket.send(sock, "jinru hezha hanshu")
-                end
                 -- 获取试验位置
                 local val_shiyan = gpio.get(18)
                 -- 获取工作位置
                 local val_gongzuo = gpio.get(13)
                 -- 获取断路器位置
                 local val_duanlu = gpio.get(12)
+                -- 获取接地刀合位状态
+                local val_jddhe = gpio.get(10) -- GPIO_in4 接地刀合位 
                 sys.wait(10)
                 -- 如果试验位置和工作位置都是0（代表到位了），断路器位置是1，那么执行合闸操作
-                if val_shiyan == daowei or val_gongzuo == daowei and val_duanlu == meidaowei
+                if val_shiyan == daowei or val_gongzuo == daowei and val_jddhe == meidaowei 
                 then
                     IO02(1) -- GPIO_ot6    110VAC合闸线圈
                     sys.wait(1000)
                     if wlan_connected == 1 then
-                        socket.send(sock, "hezha_finish")
+                        socket.send(sock, "HeZha_is_OK")
                     end
                     log.info("hezha_finish")
                 end
                 sys.publish("OperationOk")
-                sys.wait(3000)
-            end
-                -- -- -- -- -- -- --
-                --                --
-                --      储能      --
-                --                --
-                -- -- -- -- -- -- --
-            if titlex == 28629 then -- 储能过程
+                sys.wait(1000)
+        end
+        -- -- -- -- -- -- --
+        --                --
+        --      储能      --
+        --                --
+        -- -- -- -- -- -- --
+        local function fcn3chuneng()
                 sys.wait(10)
                 IO19(1)
-                sys.wait(15000)
+                sys.wait(10000)
                 IO19(0)
                 sys.publish("OperationOk")
                 if wlan_connected == 1 then
-                    socket.send(sock, "hezha_finish")
+                    socket.send(sock, "chuneng_finish")
                 end
                 log.info("chuneng_finish")
-                sys.wait(3000)
-            end
-                -- -- -- -- -- -- --
-                --                --
-                --      车入      --
-                --                --
-                -- -- -- -- -- -- --
-            if titlex == 51488 then -- 车入过程
-                log.info("cheru start")
+                sys.wait(1000)
+        end
+        -- -- -- -- -- -- --
+        --                --
+        --      车入      --
+        --                --
+        -- -- -- -- -- -- --
+        local function fcn4cheru()
+            IO11(0)
+            IO05(0)
+            IO06(0)
+
+            log.info("cheru start")
+            sys.wait(100)
+            -- 获取试验位置
+            local val_gongzuo = gpio.get(13) -- GPIO_in2 工作位置
+            -- 获取试验位置
+            local val_shiyan = gpio.get(18) -- GPIO_in1 试验位置
+            -- 获取断路器状态
+            local val_duanlu =  gpio.get(12) -- GPIO_in3 断路器合闸位置
+            -- 获取接地刀合位状态
+            local val_jddhe = gpio.get(10) -- GPIO_in4 接地刀合位 
+            sys.wait(100)
+            local val_gongzuo2 = gpio.get(13) -- GPIO_in2 工作位置
+            -- 获取试验位置
+            local val_shiyan2 = gpio.get(18) -- GPIO_in1 试验位置
+            -- 获取断路器状态
+            local val_duanlu2 =  gpio.get(12) -- GPIO_in3 断路器合闸位置
+            -- 获取接地刀合位状态
+            local val_jddhe2 = gpio.get(10) -- GPIO_in4 接地刀合位 
+            adc.open(4)
+            -- 如果试验位置和试验位置2不等
+            if val_gongzuo ~= val_gongzuo2 or val_shiyan ~= val_shiyan2  or val_jddhe2 ~= val_jddhe
+            then
+                sys.wait(100)
                 if wlan_connected == 1 then
-                    socket.send(sock, "jinru_cheru_hanshu")
+                    socket.send(sock, "wrong_state" .. val_shiyan2 ..  val_gongzuo2 .. val_duanlu2 )
                 end
+            else
                 sys.wait(10)
-                -- 获取试验位置
-                local val_gongzuo = gpio.get(13) -- GPIO_in2 工作位置
-                -- 获取试验位置
-                local val_shiyan = gpio.get(18) -- GPIO_in1 试验位置
-                -- 获取断路器状态
-                local val_duanlu =  gpio.get(12) -- GPIO_in3 断路器合闸位置
-                sys.wait(10)
-                local val_gongzuo2 = gpio.get(13) -- GPIO_in2 工作位置
-                -- 获取试验位置
-                local val_shiyan2 = gpio.get(18) -- GPIO_in1 试验位置
-                -- 获取断路器状态
-                local val_duanlu2 =  gpio.get(12) -- GPIO_in3 断路器合闸位置
-                adc.open(4)
-                -- 如果试验位置和试验位置2不等
-                if val_gongzuo ~= val_gongzuo2 or val_shiyan ~= val_shiyan2  or val_duanlu ~= val_duanlu2
+                --到位是0 没到位是1
+                if val_shiyan2 == daowei and val_gongzuo2 == meidaowei and val_jddhe2 == meidaowei
                 then
-                    sys.wait(100)
-                    if wlan_connected == 1 then
-                        socket.send(sock, "wrong_state" .. val_shiyan2 ..  val_gongzuo2 .. val_duanlu2)
-                    end
-                else
-                    sys.wait(10)
-                    --到位是0 没到位是1
-                    if val_shiyan2 == daowei and val_gongzuo2 == meidaowei and val_duanlu2 == meidaowei
-                    then
-                        log.info("开始车入")
-                        local _, adc_cov = adc.read(4) -- PA01
-                        -- 如果ADC值大于adcdomain
-                        if adc_cov >= adcdomain then
-                            log.info("error adc状态错误")
-                            sys.publish("OperationOk")
-                        else
-                            IO06(1) -- GPIO_ot10   驱动板ch0 底盘车开关
-                            IO11(0) -- GPIO_ot11   接地刀线圈
-                            IO07(0) -- GPIO_ot11   驱动板ch1  0=正转
-                            sys.wait(10)
-                            IO05(1) -- GPIO_ot8    驱动板220VAC交流总开关
-                            sys.wait(10)
-                            local _, adc_cov = adc.read(4) -- PA01
-                            if adc_cov >= adcdomain then
-                                log.info("error adc状态错误")
-                                sys.publish("OperationOk") --急停
-                            else
-                                local i = 0
-                                repeat
-                                    i = i + 1
-                                    local val_gongzuo3 =   gpio.get(13)
-                                    --这里是 检测间隔 为ms
-                                    sys.wait(20)
-                                    local _, adc_cov3 = adc.read(4)
-                                    local val_gongzuo4 =
-                                    val_gongzuo3 + gpio.get(13)
-                                    sys.wait(20)
-                                    local _, adc_cov4 = adc.read(4)
-                                    local val_gongzuo5 =
-                                    val_gongzuo4 + gpio.get(13)
-                                    sys.wait(20)
-                                    local _, adc_cov5 = adc.read(4)
-                                    local val_gongzuo6 =
-                                    val_gongzuo5 + gpio.get(13)
-                                    sys.wait(20)
-                                    local _, adc_cov6 = adc.read(4)
-                                    local val_gongzuo7 = val_gongzuo6 + gpio.get(13)
-                                    sys.wait(20)
-                                    local _, adc_cov7 = adc.read(4)
-                                    if wlan_connected == 1 then
-                                        socket.send(sock,"runstate__" .. i .. ":\t" .. val_gongzuo3 ..
-                                                        "\t" .. "v:\t" .. val_gongzuo7 .. "\t" .. adc_cov3 ..
-                                                        "\t" .. adc_cov4 .. "\t" .. adc_cov5 .. "\t" ..
-                                                        adc_cov6 .. "\t" .. adc_cov7)
-                                    end
-                                    adc_cov_sum = adc_cov3 + adc_cov4 + adc_cov5 + adc_cov6 + adc_cov7
-                                    log.info("i = ", i)
-                                --  0是到位  val_gongzuo7 是灵敏度 1是极端灵敏，2是灵敏，3是正常，4是不灵敏，5是极端不灵敏
-                                until (val_gongzuo7 <= 1 or i >=  runcycle or adc_cov_sum >= adcdomain * 5)
-                                log.info("ibrack = ", i)
-                                IO05(0)  -- GPIO_ot8    驱动板220VAC交流总开关
-                                sys.wait(100)
-                                -- 防堵转 电机反转
-                                IO07(1) -- 防抱死
-                                sys.wait(10)
-                                IO05(1) -- GPIO_ot8    驱动板220VAC交流总开关
-                                sys.wait(fanzhuanshijian)
-                                IO06(0) -- GPIO_ot10   驱动板ch0 底盘车开关
-                                IO05(0) -- GPIO_ot8    驱动板220VAC交流总开关
-                                sys.publish("OperationOk")
-                            end
-                        end
-                        adc.close(4)
-                        if wlan_connected == 1 then
-                            socket.send(sock, "cheru_finish2")
-                        end
-                        log.info("车入操作完毕2")
+                    log.info("开始车入")
+                    local _, adc_cov = adc.read(4) -- PA01
+                    -- 如果ADC值大于adcdomain
+                    if adc_cov >= adcdomain then
+                        log.info("error adc状态错误")
+                        sys.publish("OperationOk")
                     else
-                        --对应可以车入的状态完全对了
-                        if wlan_connected == 1 then
-                            socket.send(sock, "error_cherustate2")
-                        end
-                        log.info("error 车入状态错误2")
-                    end
-                --    对应采集没有偏差
-                end
-                adc.close(4)
-                log.info("车入跑完")
-                sys.publish("Cheru_finish")
-                sys.publish("OperationOk")
-                sys.wait(3000)
-            end
-                -- -- -- -- -- -- --
-                --                --
-                --      车出      --
-                --                --
-                -- -- -- -- -- -- --
-            if titlex == 12482 then -- 车出过程  不在试验位置 必须分闸
-                sys.wait(10)
-                -- 获取试验位置
-                local val_gongzuo = gpio.get(13) -- GPIO_in2 工作位置
-                -- 获取试验位置
-                local val_shiyan = gpio.get(18) -- GPIO_in1 试验位置
-                -- 获取断路器状态
-                local val_duanlu =  gpio.get(12) -- GPIO_in3 断路器合闸
-                sys.wait(10)
-                -- 获取工作位置2
-                local val_gongzuo2 = gpio.get(13) -- GPIO_in2 工作位置
-                -- 获取试验位置2
-                local val_shiyan2 = gpio.get(18) -- GPIO_in1 试验位置
-                -- 获取断路器状态2
-                local val_duanlu2 =  gpio.get(12) -- GPIO_in3 断路器合闸
-                adc.open(4)
-                -- 如果试验位置和试验位置2不等
-                if val_gongzuo ~= val_gongzuo2 or val_shiyan ~= val_shiyan2 or val_duanlu ~= val_duanlu2
-                then
-                    sys.wait(100)
-                    if wlan_connected == 1 then
-                        socket.send(sock, "wrong_state" .. val_shiyan2 ..   val_gongzuo2 .. val_duanlu2)
-                    end
-                else
-                    -- 第二次捕获状态已经可以和第一次一致，直接运行
-                    sys.wait(10)
-                    -- 0代表到位 1代表没到位  获取试验位置 且 断路器合闸为0
-                    if val_shiyan2 == meidaowei  and val_duanlu2 == meidaowei
-                    then
-                        log.info("开始车出")
+                        IO06(1) -- GPIO_ot10   驱动板ch0 底盘车开关
+                        sys.wait(1500)
+                        IO06(1) -- GPIO_ot10   驱动板ch0 底盘车开关
+                        sys.wait(1500)
+                        IO06(1) -- GPIO_ot10   驱动板ch0 底盘车开关
+                        sys.wait(500)
+                        
+                        IO11(0) -- GPIO_ot11   接地刀线圈
+                        IO07(0) -- GPIO_ot11   驱动板ch1  0=正转 车入
+                        sys.wait(10)
+                        IO05(1) -- GPIO_ot8    驱动板220VAC交流总开关
+                        sys.wait(10)
                         local _, adc_cov = adc.read(4) -- PA01
-                        -- 如果ADC值大于adcdomain
                         if adc_cov >= adcdomain then
                             log.info("error adc状态错误")
-                            sys.publish("OperationOk")
+                            sys.publish("OperationOk") --急停
                         else
-                            IO07(1) -- 驱动板ch1  1=反转
-                            IO11(0) -- 接地刀线圈
-                            IO06(1) -- 驱动板ch0
-                            sys.wait(10)
-                            IO05(1) --  驱动板220VAC交流总开关
-                            sys.wait(10)
-                            local _, adc_cov = adc.read(4) -- PA01
-                            if adc_cov >= adcdomain then
-                                log.info("error adc状态错误")
-                                IO05(0)
-                                sys.publish("OperationOk")
-                            else
-                                sys.wait(20)
-                                -- 如果没到试验位置
-                                local i = 0
-                                repeat
+                            local i = 0
+                            repeat
                                 i = i + 1
-                                local val_shiyan3 = gpio.get(18)
-                                sys.wait(10)
+                                local val_gongzuo3 =   gpio.get(13)
+                                --这里是 检测间隔 为ms
+                                sys.wait(30)
                                 local _, adc_cov3 = adc.read(4)
-                                local val_shiyan4 = val_shiyan3 + gpio.get(18)
-                                sys.wait(10)
+                                local val_gongzuo4 =
+                                val_gongzuo3 + gpio.get(13)
+                                sys.wait(30)
                                 local _, adc_cov4 = adc.read(4)
-                                local val_shiyan5 = val_shiyan4 + gpio.get(18)
-                                sys.wait(10)
+                                local val_gongzuo5 =
+                                val_gongzuo4 + gpio.get(13)
+                                sys.wait(30)
                                 local _, adc_cov5 = adc.read(4)
-                                local val_shiyan6 = val_shiyan5 + gpio.get(18)
-                                sys.wait(10)
+                                local val_gongzuo6 =
+                                val_gongzuo5 + gpio.get(13)
+                                sys.wait(30)
                                 local _, adc_cov6 = adc.read(4)
-                                local val_shiyan7 = val_shiyan6 + gpio.get(18)
-                                sys.wait(10)
+                                local val_gongzuo7 = val_gongzuo6 + gpio.get(13)
+                                sys.wait(30)
                                 local _, adc_cov7 = adc.read(4)
                                 if wlan_connected == 1 then
-                                    socket.send(sock,"runstate__" .. i .. ":\t" .. val_shiyan3 .. "\t" .. "v:\t"
-                                            .. val_shiyan7 .. "\t" .. adc_cov3 .. "\t" .. adc_cov4 .. "\t" .. adc_cov5
-                                            .. "\t" .. adc_cov6 .. "\t" .. adc_cov7)
+                                    socket.send(sock,"cheru_runstate__" .. i .. val_gongzuo7  .. "v:\t"   .. adc_cov3 ..
+                                                    "\t" .. adc_cov4 .. "\t" .. adc_cov5 .. "\t" ..
+                                                    adc_cov6 .. "\t" .. adc_cov7)
                                 end
                                 adc_cov_sum = adc_cov3 + adc_cov4 + adc_cov5 + adc_cov6 + adc_cov7
                                 log.info("i = ", i)
-                                --  0是到位  val_gongzuo7 是灵敏度 1是极端灵敏，2是灵敏，3是正常，4是不灵敏，5是极端不灵敏
-                            until (val_shiyan7 <= 1 or i >=  runcycle or adc_cov_sum >= adcdomain *  5)
-                                log.info("ibrack = ", i)
-                                IO05(0)  -- GPIO_ot8    驱动板220VAC交流总开关
-                                sys.wait(100)
-                                -- 防堵转 电机正转
-                                IO07(0) -- 防抱死
-                                sys.wait(10)
-                                IO05(1)
-                                IO06(0)
-                                sys.wait(fanzhuanshijian_chechu)
-                                sys.publish("OperationOk")
-                            end
+                            --  0是到位  val_gongzuo7 是灵敏度 1是极端灵敏，2是灵敏，3是正常，4是不灵敏，5是极端不灵敏
+                            until (val_gongzuo7 == 0 or i >=  runcycle or adc_cov_sum >= adcdomain * 5)
+                            log.info("ibrack = ", i)
+                            IO05(0)  -- GPIO_ot8    驱动板220VAC交流总开关
+                            IO06(1) -- GPIO_ot10   驱动板ch0 底盘车开关
+                            sys.wait(3000)
+                            -- 防堵转 电机反转
+                            IO07(1) -- 防抱死
+                            IO06(1) 
+                            sys.wait(2000)
+                            sys.wait(100)
+                            IO05(1) -- GPIO_ot8    驱动板220VAC交流总开关
+                            sys.wait(fanzhuanshijian)
+                            IO06(0) -- GPIO_ot10   驱动板ch0 底盘车开关
+                            IO05(0) -- GPIO_ot8    驱动板220VAC交流总开关
+                            sys.publish("OperationOk")
                         end
-                        adc.close(4)
-                        if wlan_connected == 1 then
-                            socket.send(sock, "chechu_finish2")
-                        end
-                        log.info("车出操作完毕2")
-                    else
-                        -- 如果可以车出的位置不对
-                        if wlan_connected == 1 then
-                            socket.send(sock, "error_chechustate2")
-                        end
-                        log.info("error 车出状态错误2")
                     end
+                    adc.close(4)
+                    if wlan_connected == 1 then
+                        socket.send(sock, "cheru_finish2")
+                    end
+                    log.info("车入操作完毕2")
+                else
+                    --对应可以车入的状态不对
+                    if wlan_connected == 1 then
+                        socket.send(sock, "error_cherustate2")
+                    end
+                    log.info("error 车入状态错误2")
                 end
-                adc.close(4)
-                log.info("车出跑完")
-                sys.publish("OperationOk")
-                sys.wait(3000)
+            --    对应采集没有偏差
+            end
+            adc.close(4)
+            log.info("车入跑完")
+            sys.publish("Cheru_finish")
+            sys.publish("OperationOk")
+            sys.wait(1000)
+        end
+        -- -- -- -- -- -- --
+        --                --
+        --      车出      --
+        --                --
+        -- -- -- -- -- -- --
+        local function fcn5chechu()
+            IO11(0)
+            sys.wait(10)
+            -- 获取试验位置
+            local val_gongzuo = gpio.get(13) -- GPIO_in2 工作位置
+            -- 获取试验位置
+            local val_shiyan = gpio.get(18) -- GPIO_in1 试验位置
+            -- 获取断路器状态
+            local val_duanlu =  gpio.get(12) -- GPIO_in3 断路器合闸
+            -- 获取接地刀合位状态
+            local val_jddhe = gpio.get(10) -- GPIO_in4 接地刀合位 
+            sys.wait(10)
+            -- 获取工作位置2
+            local val_gongzuo2 = gpio.get(13) -- GPIO_in2 工作位置
+            -- 获取试验位置2
+            local val_shiyan2 = gpio.get(18) -- GPIO_in1 试验位置
+            -- 获取断路器状态2
+            local val_duanlu2 =  gpio.get(12) -- GPIO_in3 断路器合闸
+            -- 获取接地刀合位状态
+            local val_jddhe2 = gpio.get(10) -- GPIO_in4 接地刀合位 
+            adc.open(4)
+            -- 如果试验位置和试验位置2不等
+            if val_gongzuo ~= val_gongzuo2 or val_shiyan ~= val_shiyan2 or val_jddhe ~= val_jddhe2
+            then
+                sys.wait(100)
+                if wlan_connected == 1 then
+                    socket.send(sock, "wrong_state" .. val_shiyan2 ..   val_gongzuo2 .. val_jddhe2)
+                end
+            else
+                -- 第二次捕获状态已经可以和第一次一致，直接运行
+                sys.wait(10)
+                -- 0代表到位 1代表没到位  获取试验位置 且 断路器合闸为0
+                if val_shiyan2 == meidaowei and val_jddhe2 == meidaowei
+                then
+                    log.info("开始车出")
+                    local _, adc_cov = adc.read(4) -- PA01
+                    -- 如果ADC值大于adcdomain
+                    if adc_cov >= adcdomain then
+                        log.info("error adc状态错误")
+                        sys.publish("OperationOk")
+                    else
+                        IO07(1) -- 驱动板ch1  1=反转 车出
+                        sys.wait(1500)
+                        IO11(0) -- 接地刀线圈
+                        IO06(1) -- 驱动板ch0
+                        sys.wait(1500)
+                        IO06(1) -- 驱动板ch0
+                        sys.wait(10)
+                        IO05(1) --  驱动板220VAC交流总开关
+                        sys.wait(10)
+                        local _, adc_cov = adc.read(4) -- PA01
+                        if adc_cov >= adcdomain then
+                            log.info("error adc状态错误")
+                            IO05(0)
+                            sys.publish("OperationOk")
+                        else
+                            sys.wait(20)
+                            -- 如果没到试验位置
+                            local i = 0
+                            repeat
+                            
+                            i = i + 1
+                            local val_shiyan3 = gpio.get(18)
+                            sys.wait(30)
+                            local _, adc_cov3 = adc.read(4)
+                            local val_shiyan4 = val_shiyan3 + gpio.get(18)
+                            sys.wait(30)
+                            local _, adc_cov4 = adc.read(4)
+                            local val_shiyan5 = val_shiyan4 + gpio.get(18)
+                            sys.wait(30)
+                            local _, adc_cov5 = adc.read(4)
+                            local val_shiyan6 = val_shiyan5 + gpio.get(18)
+                            sys.wait(30)
+                            local _, adc_cov6 = adc.read(4)
+                            local val_shiyan7 = val_shiyan6 + gpio.get(18)
+                            sys.wait(30)
+                            local _, adc_cov7 = adc.read(4)
+                            if wlan_connected == 1 then
+                                socket.send(sock,"chechu_runstate__" .. i .. ":\t" .. val_shiyan7  .. "v:\t"
+                                         .. "\t" .. adc_cov3 .. "\t" .. adc_cov4 .. "\t" .. adc_cov5
+                                        .. "\t" .. adc_cov6 .. "\t" .. adc_cov7)
+                            end
+                            adc_cov_sum = adc_cov3 + adc_cov4 + adc_cov5 + adc_cov6 + adc_cov7
+                            log.info("i = ", i)
+                            --  0是到位  val_gongzuo7 是灵敏度 1是极端灵敏，2是灵敏，3是正常，4是不灵敏，5是极端不灵敏
+                        until (val_shiyan7 <= 1 or i >=  runcycle or adc_cov_sum >= adcdomain *  5)
+                            log.info("ibrack = ", i)
+                            IO05(0)  -- GPIO_ot8    驱动板220VAC交流总开关
+                            sys.wait(5000)
+                            -- 防堵转 电机正转
+                            IO07(0) -- 防抱死
+                            sys.wait(10)
+                            IO06(1)
+                            sys.wait(300)
+                            IO05(1)
+                            
+                            sys.wait(fanzhuanshijian_chechu)
+                            sys.publish("OperationOk")
+                        end
+                    end
+                    adc.close(4)
+                    if wlan_connected == 1 then
+                        socket.send(sock, "chechu_finish2")
+                    end
+                    log.info("车出操作完毕2")
+                else
+                    -- 如果可以车出的位置不对
+                    if wlan_connected == 1 then
+                        socket.send(sock, "error_chechustate2")
+                    end
+                    log.info("error 车出状态错误2")
+                end
+            end
+            adc.close(4)
+            log.info("车出跑完")
+            sys.publish("OperationOk")
+            sys.wait(1000)
+        end
+        -- -- -- -- -- -- --
+        --                --
+        --      刀分      --
+        --                --
+        -- -- -- -- -- -- --
+        local function fcn6daofen()
+            sys.wait(10)
+            IO06(0)
+            IO05(0) --  驱动板220VAC交流总开关
+            IO07(0) -- 正转
+            -- 获取工作位置
+            local val_gongzuo = gpio.get(13) -- GPIO_in2 工作位置
+            -- 获取试验位置
+            local val_shiyan = gpio.get(18) -- GPIO_in1 试验位置
+            -- 获取接地刀分位状态
+            local val_jddfen =  gpio.get(12) -- GPIO_in3 接地刀分位
+            -- 获取接地刀合位状态
+            local val_jddhe = gpio.get(10) -- GPIO_in4 接地刀合位 
+            sys.wait(10)
+            -- 获取试验位置2
+            local val_gongzuo2 = gpio.get(13) -- GPIO_in2 工作位置
+            -- 获取试验位置2
+            local val_shiyan2 = gpio.get(18) -- GPIO_in1 试验位置
+            -- 获取接地刀分位状态2
+            local val_jddfen2 =  gpio.get(12) -- GPIO_in3 接地刀分位
+            -- 获取接地刀合位状态2
+            local val_jddhe2 = gpio.get(10) -- GPIO_in4 接地刀合位 
+            adc.open(4)
+            sys.wait(10)
+            if val_gongzuo ~= val_gongzuo2 or val_shiyan ~= val_shiyan2 or val_jddfen2 ~= val_jddfen2 or val_jddhe2 ~= val_jddhe
+            then
+                log.info("两次捕获不一致")
+                if wlan_connected == 1 then     socket.send(sock,"daorustate__error")     end
+            else
+                if val_shiyan2 == daowei and val_jddfen2 == meidaowei then
+                    IO11(1)
+                    IO07(0)
+                    sys.wait(500)
+                    IO11(1)
+                    IO07(0)
+                    sys.wait(500)
+                    IO05(1)
+                    local i = 0
+                    repeat
+                        i = i + 1
+                        local val_jddfen3 = gpio.get(12)
+                        sys.wait(30)
+                        local _, adc_cov3 = adc.read(4)
+                        local val_jddfen4 = val_jddfen3 + gpio.get(12)
+                        sys.wait(30)
+                        local _, adc_cov4 = adc.read(4)
+                        local val_jddfen5 = val_jddfen4 + gpio.get(12)
+                        sys.wait(30)
+                        local _, adc_cov5 = adc.read(4)
+                        local val_jddfen6 = val_jddfen5 + gpio.get(12)
+                        sys.wait(30)
+                        local _, adc_cov6 = adc.read(4)
+                        local val_jddfen7 = val_jddfen6 + gpio.get(12)
+                        sys.wait(30)
+                        local _, adc_cov7 = adc.read(4)
+                        if wlan_connected == 1 then
+                                socket.send(sock,"daofen_runstate__"  .. i .. "\t".. val_jddfen7  ..  "now=:\t" .. adc_cov3 .. "\t" .. adc_cov4 .. "\t" .. adc_cov5
+                                        .. "\t" .. adc_cov6 .. "\t" .. adc_cov7)
+                        end
+                        adc_cov_sum = adc_cov3 + adc_cov4 + adc_cov5 + adc_cov6 + adc_cov7
+                        log.info("i = ", i)
+                        --  0是到位  val_gongzuo7 是灵敏度 1是极端灵敏，2是灵敏，3是正常，4是不灵敏，5是极端不灵敏
+                    until (val_jddfen7 <= 1 or  i >=  runcycle or adc_cov_sum >= adcdomain *  5)
+                    log.info("ibrack = ", i)
+                    IO05(0)
+                    sys.wait(100)
+                    IO07(0)
+                    IO06(0)
+                    -- 可以加反转
+                    IO11(0)
+                    sys.wait(100)
+                    sys.publish("OperationOk")
+                end -- 刀入符合的end
+            end -- 捕获不一致的end
+            sys.publish("OperationOk")
+            sys.wait(1000)
+        end
+        -- -- -- -- -- -- --
+        --                --
+        --      刀合      --
+        --                --
+        -- -- -- -- -- -- --
+        local function fcn7daohe() 
+            sys.wait(10)
+            IO06(0)
+            IO05(0) --  驱动板220VAC交流总开关
+            IO07(1) -- 正转
+            -- 获取工作位置
+            local val_gongzuo = gpio.get(13) -- GPIO_in2 工作位置
+            -- 获取试验位置
+            local val_shiyan = gpio.get(18) -- GPIO_in1 试验位置
+            -- 获取接地刀分位状态
+            local val_jddfen =  gpio.get(12) -- GPIO_in3 接地刀分位
+            -- 获取接地刀合位状态
+            local val_jddhe = gpio.get(10) -- GPIO_in4 接地刀合位 
+            sys.wait(10)
+            -- 获取试验位置2
+            local val_gongzuo2 = gpio.get(13) -- GPIO_in2 工作位置
+            -- 获取试验位置2
+            local val_shiyan2 = gpio.get(18) -- GPIO_in1 试验位置
+            -- 获取接地刀分位状态2
+            local val_jddfen2 =  gpio.get(12) -- GPIO_in3 接地刀分位
+            -- 获取接地刀合位状态2
+            local val_jddhe2 = gpio.get(10) -- GPIO_in4 接地刀合位 
+            adc.open(4)
+            sys.wait(10)
+            if val_gongzuo ~= val_gongzuo2 or val_shiyan ~= val_shiyan2  or val_jddfen2 ~= val_jddfen2 or val_jddhe2 ~= val_jddhe
+            then
+                log.info("两次捕获不一致")
+                if wlan_connected == 1 then  socket.send(sock,"daohestate__error")  end
+            else
+                if val_shiyan2 == daowei and val_jddhe2 == meidaowei then
+                    IO11(1)
+                    IO07(1)
+                    sys.wait(500)
+                    IO11(1)
+                    IO07(1)
+                    sys.wait(500)
+                    
+                    IO05(1)
+                    local i = 0
+                    repeat
+                        i = i + 1
+                        local val_jddhe3 = gpio.get(10)
+                        sys.wait(30)
+                        local _, adc_cov3 = adc.read(4)
+                        local val_jddhe4 = val_jddhe3 + gpio.get(10)
+                        sys.wait(30)
+                        local _, adc_cov4 = adc.read(4)
+                        local val_jddhe5 = val_jddhe4 + gpio.get(10)
+                        sys.wait(30)
+                        local _, adc_cov5 = adc.read(4)
+                        local val_jddhe6 = val_jddhe5 + gpio.get(10)
+                        sys.wait(30)
+                        local _, adc_cov6 = adc.read(4)
+                        local val_jddhe7 = val_jddhe6 + gpio.get(10)
+                        sys.wait(30)
+                        local _, adc_cov7 = adc.read(4)
+                        if wlan_connected == 1 then
+                                socket.send(sock,"daohe_runstate__" .. i .. ":\t" .. val_jddhe7 .. "v:\t" .. adc_cov3 .. "\t" .. adc_cov4 .. "\t" .. adc_cov5
+                                        .. "\t" .. adc_cov6 .. "\t" .. adc_cov7)
+                        end
+                        adc_cov_sum = adc_cov3 + adc_cov4 + adc_cov5 + adc_cov6 + adc_cov7
+                        log.info("i = ", i)
+                        --  0是到位  val_gongzuo7 是灵敏度 1是极端灵敏，2是灵敏，3是正常，4是不灵敏，5是极端不灵敏
+                    until (val_jddhe7 <=1 or i >=  runcycle or adc_cov_sum >= adcdomain *  5)
+                    log.info("ibrack = ", i)
+                    IO05(0)
+                    IO11(0)
+                    IO07(0)
+                    
+                end -- 刀出符合的end
+            end -- 捕获不一致的end
+            sys.publish("OperationOk")
+            sys.wait(1000)
+        end
+        if message == true then
+            if titlex == 16665 then -- 分闸过程
+                fcn1fenzha()
+            end
+            if titlex == 10954 then -- 合闸过程
+                fcn2hezha()
+            end
+
+            if titlex == 28629 then -- 储能过程
+                fcn3chuneng()
+            end
+
+            if titlex == 51488 then -- 车入过程
+                fcn4cheru()
+            end
+            if titlex == 12482 then -- 车出过程  不在试验位置 必须分闸
+                fcn5chechu()
             end -- 车出完
+            if titlex == 16848 then -- 刀分过程
+                fcn6daofen()
+            end --刀入完
+            if titlex == 47154 then -- 刀合过程
+                fcn7daohe()
+            end--刀出完
+
             -- -- -- -- -- -- --
             --                --
-            --      刀入      --
+            --      一供      --
             --                --
             -- -- -- -- -- -- --
-            if titlex == 16848 then
-                sys.wait(10)
-                IO05(0) --  驱动板220VAC交流总开关
-                IO07(0) -- 正转
-                -- 获取试验位置
-                local val_gongzuo = gpio.get(13) -- GPIO_in2 工作位置
-                -- 获取试验位置
-                local val_shiyan = gpio.get(18) -- GPIO_in1 试验位置
-                -- 获取断路器状态
-                local val_duanlu =  gpio.get(12) -- GPIO_in3 断路器合闸
-                sys.wait(10)
-                -- 获取试验位置2
-                local val_gongzuo2 = gpio.get(13) -- GPIO_in2 工作位置
-                -- 获取试验位置2
-                local val_shiyan2 = gpio.get(18) -- GPIO_in1 试验位置
-                -- 获取断路器状态2
-                local val_duanlu2 =  gpio.get(12) -- GPIO_in3 断路器合闸
-                sys.wait(10)
-                if val_gongzuo ~= val_gongzuo2 or val_shiyan ~= val_shiyan2 or val_duanlu ~= val_duanlu2
-                then
-                    log.info("两次捕获不一致")
-                else
-                    if val_duanlu2 == meidaowei and val_shiyan2 == daowei and val_gongzuo2 == meidaowei then
-                        IO11(1)
-                        IO07(0)
-                        sys.wait(10)
-                        IO05(1)
-                        local i = 0
-                        repeat
-                            i = i + 1
-                            sys.wait(10)
-                            local _, adc_cov3 = adc.read(4)
-                            sys.wait(10)
-                            local _, adc_cov4 = adc.read(4)
-                            sys.wait(10)
-                            local _, adc_cov5 = adc.read(4)
-                            sys.wait(10)
-                            local _, adc_cov6 = adc.read(4)
-                            sys.wait(10)
-                            local _, adc_cov7 = adc.read(4)
-                            if wlan_connected == 1 then
-                                socket.send(sock,"runstate__" .. i .. ":\t" .. adc_cov3 .. "\t" .. adc_cov4 .. "\t"
-                                        .. adc_cov5 .. "\t" .. adc_cov6 .. "\t" .. adc_cov7)
-                            end
-                            adc_cov_sum = adc_cov3 + adc_cov4 + adc_cov5 + adc_cov6 + adc_cov7
-                            log.info("i = ", i)
-                            --  0是到位  val_gongzuo7 是灵敏度 1是极端灵敏，2是灵敏，3是正常，4是不灵敏，5是极端不灵敏
-                        until (i >=  runcycle or adc_cov_sum >= adcdomain *  5)
-                        log.info("ibrack = ", i)
-                        IO05(0)
-                        IO11(0)
-                        sys.wait(100)
-                        sys.publish("OperationOk")
-                    end -- 刀入符合的end
-                end -- 捕获不一致的end
-                sys.publish("OperationOk")
-            end
+            if titlex == 38906 then
+                fcn1fenzha()
+                sys.wait(1000)
+                fcn6daofen()
+                if wlan_connected == 1 then  socket.send(sock,"DaoFen_is_ok")  end
+                sys.wait(10000)
+                -- sys.publish("OperationOk")
+                fcn4cheru()
+                if wlan_connected == 1 then  socket.send(sock,"CheRu_is_ok")  end
+                sys.wait(1000)
+                fcn3chuneng()
+                if wlan_connected == 1 then  socket.send(sock,"ChuNeng_is_ok")  end
+                sys.wait(1000)
+                fcn2hezha()
+
+                sys.wait(500)
+                if wlan_connected == 1 then  socket.send(sock,"YiGong_is_ok")  end
+
+                
+            -- 分闸 -- 刀分 -- 车入 -- 储能 -- 合闸
+            end--一供函数
+
             -- -- -- -- -- -- --
             --                --
-            --      刀出      --
+            --      一断      --
             --                --
             -- -- -- -- -- -- --
-            if titlex == 16848 then
-                sys.wait(10)
-                IO05(0) --  驱动板220VAC交流总开关
-                IO07(0) -- 正转
-                -- 获取试验位置
-                local val_gongzuo = gpio.get(13) -- GPIO_in2 工作位置
-                -- 获取试验位置
-                local val_shiyan = gpio.get(18) -- GPIO_in1 试验位置
-                -- 获取断路器状态
-                local val_duanlu =  gpio.get(12) -- GPIO_in3 断路器合闸
-                sys.wait(10)
-                -- 获取试验位置2
-                local val_gongzuo2 = gpio.get(13) -- GPIO_in2 工作位置
-                -- 获取试验位置2
-                local val_shiyan2 = gpio.get(18) -- GPIO_in1 试验位置
-                -- 获取断路器状态2
-                local val_duanlu2 =  gpio.get(12) -- GPIO_in3 断路器合闸
-                sys.wait(10)
-                if val_gongzuo ~= val_gongzuo2 or val_shiyan ~= val_shiyan2 or val_duanlu ~= val_duanlu2
-                then
-                    log.info("两次捕获不一致")
-                else
-                    if val_duanlu2 == meidaowei and val_shiyan2 == daowei and val_gongzuo2 == meidaowei then
-                        IO11(1)
-                        IO07(1)
-                        sys.wait(10)
-                        IO05(1)
-                        local i = 0
-                        repeat
-                            i = i + 1
-                            sys.wait(10)
-                            local _, adc_cov3 = adc.read(4)
-                            sys.wait(10)
-                            local _, adc_cov4 = adc.read(4)
-                            sys.wait(10)
-                            local _, adc_cov5 = adc.read(4)
-                            sys.wait(10)
-                            local _, adc_cov6 = adc.read(4)
-                            sys.wait(10)
-                            local _, adc_cov7 = adc.read(4)
-                            if wlan_connected == 1 then
-                                socket.send(sock,"runstate__" .. i .. ":\t" .. adc_cov3 .. "\t" .. adc_cov4 .. "\t"
-                                        .. adc_cov5 .. "\t" .. adc_cov6 .. "\t" .. adc_cov7)
-                            end
-                            adc_cov_sum = adc_cov3 + adc_cov4 + adc_cov5 + adc_cov6 + adc_cov7
-                            log.info("i = ", i)
-                            --  0是到位  val_gongzuo7 是灵敏度 1是极端灵敏，2是灵敏，3是正常，4是不灵敏，5是极端不灵敏
-                        until (i >=  runcycle or adc_cov_sum >= adcdomain *  5)
-                        log.info("ibrack = ", i)
-                        IO05(0)
-                        IO11(0)
-                        IO07(0)
-                        sys.wait(100)
-                        sys.publish("OperationOk")
-                    end -- 刀出符合的end
-                end -- 捕获不一致的end
-                sys.publish("OperationOk")
-            end
+            if titlex == 19839 then
+                fcn1fenzha()
+                sys.wait(1000)
+                fcn5chechu()
+                if wlan_connected == 1 then  socket.send(sock,"CheChu_is_ok")  end
+                sys.wait(10000)
+                -- sys.publish("OperationOk")
+                fcn7daohe()
+                if wlan_connected == 1 then  socket.send(sock,"DaoHe_is_ok")  end
+                sys.wait(600)
+                if wlan_connected == 1 then  socket.send(sock,"YiDuan_is_ok")  end
+            -- 分闸 -- 车出 -- 刀合
+            end--一断函数
+            
+
 
         end -- message非空完
     end -- while完
