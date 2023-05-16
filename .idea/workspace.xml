@@ -5,7 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="91036d36-d2ab-466a-a5ad-eee88f80c62d" name="变更" comment="change workspace">
+      <change afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/vuexy-full-version/src/views/apps/breaker/mydatabase.db" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/vuexy-full-version/src/views/apps/breaker/test.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/vuexy-full-version/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/vuexy-full-version/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/vuexy-full-version/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/vuexy-full-version/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/vuexy-full-version/src/views/apps/breaker/breaker.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/vuexy-full-version/src/views/apps/breaker/breaker.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/vuexy-full-version/src/views/apps/shortcuts/shortcuts.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/vuexy-full-version/src/views/apps/shortcuts/shortcuts.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -15,6 +20,7 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="HARD" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -27,28 +33,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/gs/Desktop/iot_admin&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;项目&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/Han/Desktop/Task",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "项目",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "preferences.editor",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
-  <component name="RunManager" selected="npm.serve">
+}]]></component>
+  <component name="RunManager" selected="npm.serve (1)">
     <configuration name="xy3.js" type="NodeJSConfigurationType" nameIsGenerated="true" path-to-js-file="xy3.js" working-dir="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/vuexy-starter-kit/src/@core/layouts/sql_session">
       <method v="2" />
     </configuration>
@@ -75,6 +80,16 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="serve (1)" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/vuexy-full-version/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="serve" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
     <configuration name="serve" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/vuexy-starter-kit/package.json" />
       <command value="run" />
@@ -87,10 +102,12 @@
     </configuration>
     <list>
       <item itemvalue="Node.js.xy3.js" />
+      <item itemvalue="npm.serve (1)" />
       <item itemvalue="npm.serve" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.serve (1)" />
         <item itemvalue="npm.serve" />
       </list>
     </recent_temporary>
@@ -107,6 +124,10 @@
       <workItem from="1673296542295" duration="1038000" />
       <workItem from="1684111798654" duration="122000" />
       <workItem from="1684111928166" duration="777000" />
+      <workItem from="1684120012084" duration="2185000" />
+      <workItem from="1684200152569" duration="1922000" />
+      <workItem from="1684214186010" duration="7935000" />
+      <workItem from="1684225139466" duration="2332000" />
     </task>
     <task id="LOCAL-00001" summary="change workspace">
       <created>1684112004864</created>
@@ -120,6 +141,10 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.configurationType" implementationName="PythonConfigurationType" />
+    <option featureType="dependencySupport" implementationName="javascript:npm:vue" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">

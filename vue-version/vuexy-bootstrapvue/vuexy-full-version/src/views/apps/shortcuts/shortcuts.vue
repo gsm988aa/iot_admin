@@ -25,9 +25,6 @@
 
         <div style                                                        = "transform: scale(1);">
           <b-card>
-<!--              添加一个按钮-->
-            <b-button v-if                                                  = "showenable" variant="primary" @click="changeshowenable" >
-              隐藏故障信息
 
             <b-button
 variant                                                                   = "primary"
