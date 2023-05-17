@@ -3,13 +3,7 @@ const {SerialPort} = require('serialport')
 const express = require('express');
 const app = express();
 const cors = require('cors');
-// 10866是端口号
-var port = 10866;
-app.use(
-    cors({
-        origin: ["http://localhost:10866", "http://localhost:8080", "http://127.0.0.1:8080", "http://192.168.3.231:8080", "http://192.168.3.103:8080"]
-    })
-);
+const { ReadlineParser } = require('@serialport/parser-readline')
 
 
 const serialport3 = new SerialPort({path: 'COM3', baudRate: 115200}, function (err) {
@@ -17,6 +11,16 @@ const serialport3 = new SerialPort({path: 'COM3', baudRate: 115200}, function (e
         return console.log('Error: ', err.message)
     }
 })
+const parser = serialport3.pipe(new ReadlineParser({ delimiter: '\n' }));
+
+// 10866是后端服务器端口号
+var port = 10866;
+app.use(
+    cors({
+        origin: ["http://localhost:10866", "http://localhost:8080", "http://127.0.0.1:8080", "http://192.168.3.231:8080", "http://192.168.3.103:8080"]
+    })
+);
+
 
 require('events').EventEmitter.defaultMaxListeners = 0;
 
@@ -51,31 +55,39 @@ db.serialize(function () {
 // 创建一个数组
 const temperature = [];
 let k = 1;
-serialport3.on('data', (data) => {
-    // 将data根据换行符分割成数组
-    const dataArr = data.toString().split('\n');
+
+
+
+// serialport3.on('data', (data) => {
+
+parser.on('data', chunk => {
+    // 将chunk转换成字符串
+    const dataArr = chunk.toString();
     // console.log(dataArr);
     // 如果dataArr非空 将dataArr逗号后面的数据取出来
     if (dataArr) {
-        for (let i = 0; i < dataArr.length; i++) {
-            temperature.push(dataArr[i].split(',')[1]);
-            console.log("temperature", i, "=", temperature[i]);
+
+        for (let i = 0; i < 9; i++) {
+            // 将dataArr逗号后面的数字赋值给temperature数组
+            temperature[i] = dataArr.split(',')[i + 1];
 
         }
-    }
-    if (k <= 100) {
+        if (k <= 100) {
 
-        // 将数据temperature更新到数据库第k行中
-        db.run('UPDATE users SET data1 = ?, data2 = ?, data3 = ?, data4 = ?, data5 = ?, data6 = ?, data7 = ?, data8 = ?, data9 = ?, currenttime = ? WHERE id = ?', [temperature[0], temperature[1], temperature[2], temperature[3], temperature[4], temperature[5], temperature[6], temperature[7], temperature[8], new Date().toLocaleString(), k], (err) => {
-            if (err) {
-                console.error(err.message);
-            }
-        });
-        k = k + 1;
+            // 将数据temperature更新到数据库第k行中
+            db.run('UPDATE users SET data1 = ?, data2 = ?, data3 = ?, data4 = ?, data5 = ?, data6 = ?, data7 = ?, data8 = ?, data9 = ?, currenttime = ? WHERE id = ?', [temperature[0], temperature[1], temperature[2], temperature[3], temperature[4], temperature[5], temperature[6], temperature[7], temperature[8], new Date().toLocaleString(), k], (err) => {
+                if (err) {
+                    console.error(err.message);
+                }
+            });
+            k = k + 1;
+        }
+        else {
+            k = 1;
+        }
+
     }
-    else {
-        k = 1;
-    }
+
 } );
 // const dataArr2 = dataArr[0].split(',');
     // console.log(dataArr2);
