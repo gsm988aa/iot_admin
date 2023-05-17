@@ -46,13 +46,15 @@ export default {
     methods: {
 
         handleClick1() {
-            axios.post('http://localhost:10866/gettemp').then((response) => {
-            })
 
-          this.text   =  response.data ;
-      },
+            axios.get('http://localhost:10866/getdbtemperature').then((response) => {
+                this.text = response.data
+            })
         },
-}
+
+      },
+  }
+
 </script>
 
 

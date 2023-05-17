@@ -37,47 +37,74 @@ db.serialize(function () {
         if (err) {
             console.error(err.message);
         }
-        //输出内容到控制台
-        console.log('Table created successfully.');
-    })
-});
+    });
+        // 一次性插入100行全是0的数据
+        for (let i = 0; i < 100; i++) {
+            db.run('INSERT INTO users(data1, data2, data3, data4, data5, data6, data7, data8, data9, currenttime) VALUES(?,?,?,?,?,?,?,?,?,?)', [0, 0, 0, 0, 0, 0, 0, 0, 0, new Date().toLocaleString()], (err) => {
+                if (err) {
+                    console.error(err.message);
+                }
+            });
+        };
+    });
+
 // 创建一个数组
 const temperature = [];
-
-// 每 3 秒读取一次串口数据
-setInterval(() => {
-    serialport3.on('data', (data) => {
-        // 将data根据换行符分割成数组
-        const dataArr = data.toString().split('\n');
-           // console.log(dataArr);
-        // 将dataArr逗号后面的数据取出来
+let k = 1;
+serialport3.on('data', (data) => {
+    // 将data根据换行符分割成数组
+    const dataArr = data.toString().split('\n');
+    // console.log(dataArr);
+    // 如果dataArr非空 将dataArr逗号后面的数据取出来
+    if (dataArr) {
         for (let i = 0; i < dataArr.length; i++) {
             temperature.push(dataArr[i].split(',')[1]);
             console.log("temperature", i, "=", temperature[i]);
 
         }
-        db.run('INSERT INTO users(data1, data2, data3, data4, data5, data6, data7, data8, data9, currenttime) VALUES(?,?,?,?,?,?,?,?,?,?)', [temperature[0], temperature[1], temperature[2], temperature[3], temperature[4], temperature[5], temperature[6], temperature[7], temperature[8], new Date().toLocaleString()], (err) => {
+    }
+    if (k <= 100) {
+
+        // 将数据temperature更新到数据库第k行中
+        db.run('UPDATE users SET data1 = ?, data2 = ?, data3 = ?, data4 = ?, data5 = ?, data6 = ?, data7 = ?, data8 = ?, data9 = ?, currenttime = ? WHERE id = ?', [temperature[0], temperature[1], temperature[2], temperature[3], temperature[4], temperature[5], temperature[6], temperature[7], temperature[8], new Date().toLocaleString(), k], (err) => {
+            if (err) {
+                console.error(err.message);
+            }
         });
-        // const dataArr2 = dataArr[0].split(',');
-        // console.log(dataArr2);
+        k = k + 1;
+    }
+    else {
+        k = 1;
+    }
+} );
+// const dataArr2 = dataArr[0].split(',');
+    // console.log(dataArr2);
 
 
+// 将数据库的根据时间排序最近的10个数据发送到前端
+app.get('/getdbtemperature', (req, res) => {
+    db.all('SELECT * FROM users ORDER BY currenttime DESC LIMIT 10', (err, rows) => {
+        if (err) {
+            console.error(err.message);
+            res.status(500).send('Internal Server Error');
+        } else {
+            res.json(rows);
+        }
     });
-}, 30000);
+});
 
 
 app.get('/:action', function (req, res) {
 
-  var action = req.params.action || req.param('action');
+    var action = req.params.action || req.param('action');
 
-  if (action == 'gettemp') {
-    return res.send( temperature[0], temperature[1], temperature[2], temperature[3], temperature[4], temperature[5], temperature[6], temperature[7], temperature[8]);
-  }
+    if (action == 'gettemp') {
+        return res.send(temperature[0], temperature[1], temperature[2], temperature[3], temperature[4], temperature[5], temperature[6], temperature[7], temperature[8]);
+    }
 });
 app.listen(port, function () {
     console.log('Example applistening on port http://127.0.0.1:' + port + '!');
 });
-
 
 
 // 获取所有用户数据
