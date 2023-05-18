@@ -66,10 +66,10 @@ parser.on('data', chunk => {
     // console.log(dataArr);
     // 如果dataArr非空 将dataArr逗号后面的数据取出来
     if (dataArr) {
-        // 清空temperature数组
-        // temperature.length = 0;
+        //清空temperature数组
+        temperature.length = 0;
 
-        // 将dataArr逗号后面的数据取出来 第一次给temperature[0] 第二次给temperature[1] 以此类推
+        //将dataArr逗号后面的数据取出来 第一次给temperature[0] 第二次给temperature[1] 以此类推
         if (j<9) {
             temperature[j] = dataArr.split(',')[1];
             j = j+1;
@@ -82,6 +82,7 @@ parser.on('data', chunk => {
         console.log(temperature[0] + temperature[1] +  temperature[2] +  temperature[3] +  temperature[4] +  temperature[5] +  temperature[6] +  temperature[7] +  temperature[8]);
 
     }
+
     if (k <= 100) {
 
         // 将数据temperature更新到数据库第k行中
