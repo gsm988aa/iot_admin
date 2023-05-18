@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import { ToastPlugin, ModalPlugin } from 'bootstrap-vue'
+import {ToastPlugin, ModalPlugin, BFormTextarea} from 'bootstrap-vue'
 import VueCompositionAPI from '@vue/composition-api'
 
 import i18n from '@/libs/i18n'
@@ -22,10 +22,13 @@ import '@/libs/tour'
 
 // Axios Mock Adapter
 import '@/@fake-db/db'
+import {Icon} from "leaflet";
 
 // BSV Plugin Registration
 Vue.use(ToastPlugin)
 Vue.use(ModalPlugin)
+
+
 
 
 

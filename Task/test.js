@@ -3,6 +3,19 @@ const {SerialPort} = require('serialport')
 const express = require('express');
 const app = express();
 const cors = require('cors');
+const {ReadlineParser} = require('@serialport/parser-readline')
+
+
+const serialport3 = new SerialPort({path: 'COM3', baudRate: 115200}, function (err) {
+    if (err) {
+        return console.log('Error: ', err.message)
+    }
+})
+
+// 以 \r\n 分隔处理数据
+
+const parser = serialport3.pipe(new ReadlineParser({delimiter: '\r\n'}))
+
 // 10866是端口号
 var port = 10866;
 app.use(
@@ -11,12 +24,6 @@ app.use(
     })
 );
 
-
-const serialport3 = new SerialPort({path: 'COM3', baudRate: 115200}, function (err) {
-    if (err) {
-        return console.log('Error: ', err.message)
-    }
-})
 
 require('events').EventEmitter.defaultMaxListeners = 0;
 
@@ -38,30 +45,42 @@ db.serialize(function () {
             console.error(err.message);
         }
     });
-        // 一次性插入100行全是0的数据
-        for (let i = 0; i < 100; i++) {
-            db.run('INSERT INTO users(data1, data2, data3, data4, data5, data6, data7, data8, data9, currenttime) VALUES(?,?,?,?,?,?,?,?,?,?)', [0, 0, 0, 0, 0, 0, 0, 0, 0, new Date().toLocaleString()], (err) => {
-                if (err) {
-                    console.error(err.message);
-                }
-            });
-        };
-    });
+    // 一次性插入100行全是0的数据
+    for (let i = 0; i < 100; i++) {
+        db.run('INSERT INTO users(data1, data2, data3, data4, data5, data6, data7, data8, data9, currenttime) VALUES(?,?,?,?,?,?,?,?,?,?)', [0, 0, 0, 0, 0, 0, 0, 0, 0, new Date().toLocaleString()], (err) => {
+            if (err) {
+                console.error(err.message);
+            }
+        });
+    }
+    ;
+});
 
-// 创建一个数组
-const temperature = [];
+// 创建一个9个数的数组
+const temperature = new Array(9);
+let j = 0;
 let k = 1;
-serialport3.on('data', (data) => {
+parser.on('data', chunk => {
     // 将data根据换行符分割成数组
-    const dataArr = data.toString().split('\n');
+    const dataArr = chunk.toString();
     // console.log(dataArr);
     // 如果dataArr非空 将dataArr逗号后面的数据取出来
     if (dataArr) {
-        for (let i = 0; i < dataArr.length; i++) {
-            temperature.push(dataArr[i].split(',')[1]);
-            console.log("temperature", i, "=", temperature[i]);
+        // 清空temperature数组
+        // temperature.length = 0;
 
+        // 将dataArr逗号后面的数据取出来 第一次给temperature[0] 第二次给temperature[1] 以此类推
+        if (j<9) {
+            temperature[j] = dataArr.split(',')[1];
+            j = j+1;
         }
+        else
+        {
+            j = 0;
+        }
+        // temperature.push(dataArr.split(',')[1]);
+        console.log(temperature[0] + temperature[1] +  temperature[2] +  temperature[3] +  temperature[4] +  temperature[5] +  temperature[6] +  temperature[7] +  temperature[8]);
+
     }
     if (k <= 100) {
 
@@ -72,13 +91,12 @@ serialport3.on('data', (data) => {
             }
         });
         k = k + 1;
-    }
-    else {
+    } else {
         k = 1;
     }
-} );
+});
 // const dataArr2 = dataArr[0].split(',');
-    // console.log(dataArr2);
+// console.log(dataArr2);
 
 
 // 将数据库的根据时间排序最近的10个数据发送到前端
