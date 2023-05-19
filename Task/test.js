@@ -62,36 +62,32 @@ let j = 0;
 let k = 1;
 parser.on('data', chunk => {
     // 将data根据换行符分割成数组
-    const dataArr = chunk.toString();
-    // console.log(dataArr);
-    // 如果dataArr非空 将dataArr逗号后面的数据取出来
-    if (dataArr) {
-        //清空temperature数组
-        temperature.length = 0;
+    // 如果chunk以回车结尾
+    // if (chunk.endsWith('\n')) { }
 
-        //将dataArr逗号后面的数据取出来 第一次给temperature[0] 第二次给temperature[1] 以此类推
-        if (j<9) {
-            temperature[j] = dataArr.split(',')[1];
-            j = j+1;
-        }
-        else
-        {
-            j = 0;
-        }
-        // temperature.push(dataArr.split(',')[1]);
-        console.log(temperature[0] + temperature[1] +  temperature[2] +  temperature[3] +  temperature[4] +  temperature[5] +  temperature[6] +  temperature[7] +  temperature[8]);
+    const  dataArr = chunk.toString().split('\r\n');
+    // 如果dataArr长度大于30
+    // if (dataArr.length > 30) {}
 
+    if (j <= 7) {
+        temperature[j] = dataArr[0].split(',')[1];
+        j = j + 1;
+    } else {
+        temperature[j] = chunk.toString().split(',')[1];
+        j = 0;
     }
 
+    // 如果j==9且k==1，将数据temperature插入到数据库第k行中
     if (k <= 100) {
-
         // 将数据temperature更新到数据库第k行中
-        db.run('UPDATE users SET data1 = ?, data2 = ?, data3 = ?, data4 = ?, data5 = ?, data6 = ?, data7 = ?, data8 = ?, data9 = ?, currenttime = ? WHERE id = ?', [temperature[0], temperature[1], temperature[2], temperature[3], temperature[4], temperature[5], temperature[6], temperature[7], temperature[8], new Date().toLocaleString(), k], (err) => {
-            if (err) {
-                console.error(err.message);
-            }
-        });
-        k = k + 1;
+        if (j ===0 ){
+            db.run('UPDATE temperature SET data1 = ?, data2 = ?, data3 = ?, data4 = ?, data5 = ?, data6 = ?, data7 = ?, data8 = ?, data9 = ?, currenttime = ? WHERE id = ?', [temperature[0], temperature[1], temperature[2], temperature[3], temperature[4], temperature[5], temperature[6], temperature[7], temperature[8], new Date().toLocaleString(), k], (err) => {
+                if (err) {
+                    console.error(err.message);
+                }
+            });
+            k = k + 1;
+        }
     } else {
         k = 1;
     }

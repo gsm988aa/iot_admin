@@ -4,43 +4,122 @@
         11111
      </section> -->
 <!--      <v-chart :options="chartOptions"></v-chart>-->
-    <div>
+    <b-container class="bv-example-row">
+
+        <b-row>
+            <b-col  cols="4">
+                <b-row id="ec1">
+                    <br>
+                    <br>
+                    第一个图
+                </b-row>
+                <b-row id="ec4">
+                    <br>
+                    <br>
+                    第四个图
+                </b-row>
+            </b-col>
+            <b-col  cols="4">
+                <b-row id="ec2">
+                    <br>
+                    <br>
+                    第二个图
+                </b-row>
+                <b-row id="ec5">
+                    <br>
+                    <br>
+                    第五个图
+                </b-row>
+            </b-col>
+            <b-col  cols="4">
+                <b-row id="ec3">
+                    <br>
+                    <br>
+                    第三个图
+                </b-row>
+                <b-row id="ec6">
+                    <br>
+                    <br>
+                    第六个图
+                </b-row>
+            </b-col>
+        </b-row>
+
         <div>
-            <div ref="chart" style="width: 100%; height: 400px;"></div>
+
+            <b-button @click="hideCharts = !hideCharts">{{ hideCharts ? '显示图表' : '隐藏图表' }}</b-button>
+
+            <b-collapse v-model="hideCharts">
+                <b-row>
+                    <b-col  cols="4">
+                        <b-row id="hi1">
+                            <br>
+                            <br>
+                        </b-row>
+                    </b-col>
+                    <b-col cols="4">
+                        <b-row id="hi2">
+                            <br>
+                            <br>
+                        </b-row>
+                    </b-col>
+                    <b-col cols="4">
+                        <b-row id="hi3">
+                            <br>
+                            <br>
+                        </b-row>
+                    </b-col>
+                </b-row>
+            </b-collapse>
         </div>
-        <b-button @click =  "handleClick1" variant="primary">
-            获取九点测温温度值
-        </b-button>
 
-        <b-form-textarea
-                id="textarea"
-                v-model="text"
-                placeholder="Enter something..."
-                rows="3"
-                max-rows="6">
-            {{text}}
-        </b-form-textarea>
 
-    </div>
+    </b-container>
 
 </template>
 
+
+<script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js">
+</script>
+
+<script src="echarts.min.js"></script>
+
 <script>
 import {
-    BRow, BCol, BCardGroup, BCard, BCardText,BButton , BFormTextarea
+    BRow, BCol, BCardGroup, BCard, BCardText,BButton , BFormTextarea, BContainer
 } from 'bootstrap-vue'
 import echarts from 'echarts';
-import  axios from 'axios'
+import  axios from 'axios';
+import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap/dist/js/bootstrap.min.js'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
+import 'bootstrap-vue/dist/bootstrap-vue.js'
+
 
 export default {
     components: {
         BFormTextarea,
         BButton,
-
+        BRow,
+        BCol,
+        BContainer,
     },
+
+    props: {
+        option: {
+            type: Object,
+            required: true
+        }
+    },
+
 
     data() {
         return {
+
+            // 记录是否隐藏最后三张图表
+            hideCharts: true,
+
+            charts: [],
             text: 'information',
             temperature1: [],
             temperature2: [],
@@ -51,24 +130,23 @@ export default {
             temperature7: [],
             temperature8: [],
             temperature9: [],
-            currenttime : [],
+            currenttime: [],
 
-            chartData: {
-                color: ['#80FFA5', '#00DDFF', '#37A2FF', '#FF0087', '#FFBF00'],
-                paddingLeft: 0,
-                title: {
-                    text: 'Gradient Stacked Area Chart'
-                },
-                tooltip: {
-                    trigger: 'axis',
-                    axisPointer: {
-                        type: 'cross',
-                        label: {
-                            backgroundColor: '#6a7985'
-                        }
-                    }
-                },
-
+            ec1: {
+                // color: ['#FFBF00'],
+                // paddingLeft: 0,
+                // title: {
+                //     text: 'Gradient Stacked Area Chart'
+                // },
+                // tooltip: {
+                //     trigger: 'axis',
+                //     axisPointer: {
+                //         type: 'cross',
+                //         label: {
+                //             backgroundColor: '#6a7985'
+                //         }
+                //     }
+                // },
 
                 // options: {
                 //     backgroundColor: '#fff',
@@ -78,317 +156,455 @@ export default {
                 //     }
                 // },
 
-
-                legend: {
-                    data: ['Line 1', 'Line 2', 'Line 3', 'Line 4', 'Line 5','Line 6','Line 7','Line 8','Line 9']
-                },
-                toolbox: {
-                    feature: {
-                        saveAsImage: {}
-                    }
-                },
-                grid: {
-                    left: '3%',
-                    right: '4%',
-                    bottom: '3%',
-                    containLabel: true
-                },
-                xAxis: [
-                    {
-                        type: 'category',
-                        boundaryGap: false,
-                        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-                        // axisLabel: {
-                        //     formatter: function (value, index) {
-                        //         var date = new Date(value);
-                        //         return date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
-                        //     }
-                        // }
-                    }
-                ],
-                yAxis: [
-                    {
-                        type: 'value'
-                    }
-                ],
-                series: [
-                    // {data: [
-                    //         [new Date('2022/01/01 00:00:00').getTime(), 10],
-                    //         [new Date('2022/01/01 00:01:00').getTime(), 20],
-                    //         [new Date('2022/01/01 00:02:00').getTime(), 30],
-                    //         [new Date('2022/01/01 00:03:00').getTime(), 40],
-                    //         [new Date('2022/01/01 00:04:00').getTime(), 50]
-                    //     ],
-                    //     type: 'line'},
-                    {
-                        name: 'Line 1',
-                        type: 'line',
-                        stack: 'Total',
-                        smooth: true,
-                        lineStyle: {
-                            width: 0
-                        },
-                        showSymbol: false,
-                        areaStyle: {
-                            opacity: 0.8,
-                            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                                {
-                                    offset: 0,
-                                    color: 'rgb(128, 255, 165)'
-                                },
-                                {
-                                    offset: 1,
-                                    color: 'rgb(1, 191, 236)'
-                                }
-                            ])
-                        },
-                        emphasis: {
-                            focus: 'series'
-                        },
-                        data: [140, 232, 101, 264, 90, 340, 250]
-                    },
-                    {
-                        name: 'Line 2',
-                        type: 'line',
-                        stack: 'Total',
-                        smooth: true,
-                        lineStyle: {
-                            width: 0
-                        },
-                        showSymbol: false,
-                        areaStyle: {
-                            opacity: 0.8,
-                            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                                {
-                                    offset: 0,
-                                    color: 'rgb(0, 221, 255)'
-                                },
-                                {
-                                    offset: 1,
-                                    color: 'rgb(77, 119, 255)'
-                                }
-                            ])
-                        },
-                        emphasis: {
-                            focus: 'series'
-                        },
-                        data: [120, 282, 111, 234, 220, 340, 310]
-                    },
-                    {
-                        name: 'Line 3',
-                        type: 'line',
-                        stack: 'Total',
-                        smooth: true,
-                        lineStyle: {
-                            width: 0
-                        },
-                        showSymbol: false,
-                        areaStyle: {
-                            opacity: 0.8,
-                            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                                {
-                                    offset: 0,
-                                    color: 'rgb(55, 162, 255)'
-                                },
-                                {
-                                    offset: 1,
-                                    color: 'rgb(116, 21, 219)'
-                                }
-                            ])
-                        },
-                        emphasis: {
-                            focus: 'series'
-                        },
-                        data: [320, 132, 201, 334, 190, 130, 220]
-                    },
-                    {
-                        name: 'Line 4',
-                        type: 'line',
-                        stack: 'Total',
-                        smooth: true,
-                        lineStyle: {
-                            width: 0
-                        },
-                        showSymbol: false,
-                        areaStyle: {
-                            opacity: 0.8,
-                            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                                {
-                                    offset: 0,
-                                    color: 'rgb(255, 0, 135)'
-                                },
-                                {
-                                    offset: 1,
-                                    color: 'rgb(135, 0, 157)'
-                                }
-                            ])
-                        },
-                        emphasis: {
-                            focus: 'series'
-                        },
-                        data: [220, 402, 231, 134, 190, 230, 120]
-                    },
-                    {
-                        name: 'Line 5',
-                        type: 'line',
-                        stack: 'Total',
-                        smooth: true,
-                        lineStyle: {
-                            width: 0
-                        },
-                        showSymbol: false,
-                        label: {
-                            show: true,
-                            position: 'top'
-                        },
-                        areaStyle: {
-                            opacity: 0.8,
-                            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                                {
-                                    offset: 0,
-                                    color: 'rgb(255, 191, 0)'
-                                },
-                                {
-                                    offset: 1,
-                                    color: 'rgb(224, 62, 76)'
-                                }
-                            ])
-                        },
-                        emphasis: {
-                            focus: 'series'
-                        },
-                        data:[220, 302, 181, 234, 210, 290, 150]
-                    },
-                    {
-                        name: 'Line 6',
-                        type: 'line',
-                        stack: 'Total',
-                        smooth: true,
-                        lineStyle: {
-                            width: 0
-                        },
-                        showSymbol: false,
-                        label: {
-                            show: true,
-                            position: 'top'
-                        },
-                        areaStyle: {
-                            opacity: 0.8,
-                            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                                {
-                                    offset: 0,
-                                    color: 'rgb(255, 160, 122)'
-                                },
-                                {
-                                    offset: 1,
-                                    color: 'rgb(224, 62, 76)'
-                                }
-                            ])
-                        },
-                        emphasis: {
-                            focus: 'series'
-                        },
-                        data:[220, 302, 181, 234, 210, 290, 150]
-                    },
-                    {
-                        name: 'Line 7',
-                        type: 'line',
-                        stack: 'Total',
-                        smooth: true,
-                        lineStyle: {
-                            width: 0
-                        },
-                        showSymbol: false,
-                        label: {
-                            show: true,
-                            position: 'top'
-                        },
-                        areaStyle: {
-                            opacity: 0.8,
-                            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                                {
-                                    offset: 0,
-                                    color: 'rgb(255, 192, 203)'
-                                },
-                                {
-                                    offset: 1,
-                                    color: 'rgb(224, 62, 76)'
-                                }
-                            ])
-                        },
-                        emphasis: {
-                            focus: 'series'
-                        },
-                        data:[220, 322, 181, 234, 210, 290, 150]
-                    },
-                    {
-                        name: 'Line 8',
-                        type: 'line',
-                        stack: 'Total',
-                        smooth: true,
-                        lineStyle: {
-                            width: 0
-                        },
-                        showSymbol: false,
-                        label: {
-                            show: true,
-                            position: 'top'
-                        },
-                        areaStyle: {
-                            opacity: 0.8,
-                            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                                {
-                                    offset: 0,
-                                    color: 'rgb(95, 158, 160)'
-                                },
-                                {
-                                    offset: 1,
-                                    color: 'rgb(188, 143, 143)'
-                                }
-                            ])
-                        },
-                        emphasis: {
-                            focus: 'series'
-                        },
-                        data:[220, 282, 181, 234, 210, 290, 150]
-                    },
-                    {
-                        name: 'Line 9',
-                        type: 'line',
-                        stack: 'Total',
-                        smooth: true,
-                        lineStyle: {
-                            width: 0
-                        },
-                        showSymbol: false,
-                        label: {
-                            show: true,
-                            position: 'top'
-                        },
-                        areaStyle: {
-                            opacity: 0.8,
-                            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                                {
-                                    offset: 0,
-                                    color: 'rgb(128, 128, 0)'
-                                },
-                                {
-                                    offset: 1,
-                                    color: 'rgb(240,230, 140)'
-                                }
-                            ])
-                        },
-                        emphasis: {
-                            focus: 'series'
-                        },
-                        data:[220, 342, 181, 234, 210, 290, 150]
-                    },
-                ]
+                // legend: {
+                //     data: ['Line 1']
+                // },
+                // toolbox: {
+                //     feature: {
+                //         saveAsImage: {}
+                //     }
+                // },
+                // grid: {
+                //     left: '3%',
+                //     right: '4%',
+                //     bottom: '3%',
+                //     containLabel: true
+                // },
+                // xAxis: [
+                //     {
+                //         type: 'category',
+                //         boundaryGap: false,
+                //         data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                //         // axisLabel: {
+                //         //     formatter: function (value, index) {
+                //         //         var date = new Date(value);
+                //         //         return date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
+                //         //     }
+                //         // }
+                //     }
+                // ],
+                // yAxis: [
+                //     {
+                //         type: 'value'
+                //     }
+                // ],
+                // series: [
+                //     {
+                //         name: 'Line 1',
+                //         type: 'line',
+                //         stack: 'Total',
+                //         smooth: true,
+                //         lineStyle: {
+                //             width: 0
+                //         },
+                //         showSymbol: false,
+                //         areaStyle: {
+                //             opacity: 0.8,
+                //             color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                //                 {
+                //                     offset: 0,
+                //                     color: 'rgb(128, 255, 165)'
+                //                 },
+                //                 {
+                //                     offset: 1,
+                //                     color: 'rgb(1, 191, 236)'
+                //                 }
+                //             ])
+                //         },
+                //         emphasis: {
+                //             focus: 'series'
+                //         },
+                //         data: [120, 132, 101, 134, 90, 230, 210]
+                //     },
+                //     ]
             }
-
         }
     },
+
+
+    beforeDestroy() {
+        this.chart.dispose()
+    },
+
     mounted() {
+        // 初始化 Echarts 实例
+        const chart1 = echarts.init(document.getElementById('ec1'));
+        const chart2 = echarts.init(document.getElementById('ec2'));
+        const chart3 = echarts.init(document.getElementById('ec3'));
+        const chart4 = echarts.init(document.getElementById('ec4'));
+        const chart5 = echarts.init(document.getElementById('ec5'));
+        const chart6 = echarts.init(document.getElementById('ec6'));
+        const chart7 = echarts.init(document.getElementById('hi1'));
+        const chart8 = echarts.init(document.getElementById('hi2'));
+        const chart9 = echarts.init(document.getElementById('hi3'));
+
+        // 根据不同的图表类型创建不同的 option 对象
+        const option1 = {
+            title: {
+                text: '测温数据1'
+            },
+            tooltip: {},
+            legend: {
+                data: ['data1']
+            },
+            xAxis: {
+                data: ["周一", "周二", "周三", "周四", "周五", "周六", "周日"]
+            },
+            yAxis: {},
+            series: [{
+                smooth: true,
+                name: 'data1',
+                type: 'line',
+                data: [5, 20, 36, 10, 10, 20, 5],
+                areaStyle: {
+                    normal: {
+                        color: new echarts.graphic.LinearGradient(
+                            0, 0, 0, 1,
+                            [
+                                {offset: 0, color: '#FFDAB9'},
+                                {offset: 0.5, color: 'pink'},
+                                {offset: 1, color: '#ffffff'}
+                            ]
+                        )
+                    }
+                },
+            }],
+
+        };
+        const option2 = {
+            title: {
+                text: '测温数据2'
+            },
+            tooltip: {},
+            legend: {
+                data: ['data2']
+            },
+            xAxis: {
+                data: ["周一", "周二", "周三", "周四", "周五", "周六", "周日"]
+            },
+            yAxis: {},
+            series: [{
+                smooth: true,
+                name: 'data2',
+                type: 'line',
+                data: [5, 20, 36, 10, 10, 20, 5],
+                lineStyle: {
+                    normal: {
+                        color: '#9370DB',
+                        width: 2,
+                    }
+                },
+                areaStyle: {
+                    normal: {
+                        color: new echarts.graphic.LinearGradient(
+                            0, 0, 0, 1,
+                            [
+                                {offset: 0, color: '#E0EEEE'},
+                                {offset: 0.5, color: '#EED2EE'},
+                                {offset: 1, color: '#ffffff'}
+                            ]
+                        )
+                    }
+                },
+            }]
+        };
+        const option3 = {
+            title: {
+                text: '测温数据3'
+            },
+            tooltip: {},
+            legend: {
+                data: ['data3']
+            },
+            xAxis: {
+                data: ["周一", "周二", "周三", "周四", "周五", "周六", "周日"]
+            },
+            yAxis: {},
+            series: [{
+                smooth: true,
+                name: 'data3',
+                type: 'line',
+                data: [5, 20, 36, 10, 10, 20, 5],
+                lineStyle: {
+                    normal: {
+                        color: '#FFA500',
+                        width: 2,
+                    }
+                },
+                areaStyle: {
+                    normal: {
+                        color: new echarts.graphic.LinearGradient(
+                            0, 0, 0, 1,
+                            [
+                                {offset: 0, color: '#FFF8DC'},
+                                {offset: 0.5, color: '#FFA54F'},
+                                {offset: 1, color: '#ffffff'}
+                            ]
+                        )
+                    }
+                },
+            }]
+        };
+        const option4 = {
+            title: {
+                text: '测温数据4'
+            },
+            tooltip: {},
+            legend: {
+                data: ['data4']
+            },
+            xAxis: {
+                data: ["周一", "周二", "周三", "周四", "周五", "周六", "周日"]
+            },
+            yAxis: {},
+            series: [{
+                smooth: true,
+                name: 'data4',
+                type: 'line',
+                data: [5, 20, 36, 10, 10, 20, 5],
+                lineStyle: {
+                    normal: {
+                        color: '#FFB90F',
+                        width: 2,
+                    }
+                },
+                areaStyle: {
+                    normal: {
+                        color: new echarts.graphic.LinearGradient(
+                            0, 0, 0, 1,
+                            [
+                                {offset: 0, color: '#FFF68F'},
+                                {offset: 0.5, color: '#FFD700'},
+                                {offset: 1, color: '#ffffff'}
+                            ]
+                        )
+                    }
+                },
+            }]
+        };
+        const option5 = {
+            title: {
+                text: '测温数据5'
+            },
+            tooltip: {},
+            legend: {
+                data: ['data5']
+            },
+            xAxis: {
+                data: ["周一", "周二", "周三", "周四", "周五", "周六", "周日"]
+            },
+            yAxis: {},
+            series: [{
+                smooth: true,
+                name: 'data5',
+                type: 'line',
+                data: [5, 20, 36, 10, 10, 20, 5],
+                lineStyle: {
+                    normal: {
+                        color: '#9ACD32',
+                        width: 2,
+                    }
+                },
+                areaStyle: {
+                    normal: {
+                        color: new echarts.graphic.LinearGradient(
+                            0, 0, 0, 1,
+                            [
+                                {offset: 0, color: '#FFFFF0'},
+                                {offset: 0.5, color: '#BCEE68'},
+                                {offset: 1, color: '#ffffff'}
+                            ]
+                        )
+                    }
+                },
+            }]
+        };
+        const option6 = {
+            title: {
+                text: '测温数据6'
+            },
+            tooltip: {},
+            legend: {
+                data: ['data6']
+            },
+            xAxis: {
+                data: ["周一", "周二", "周三", "周四", "周五", "周六", "周日"]
+            },
+            yAxis: {},
+            series: [{
+                smooth: true,
+                name: 'data6',
+                type: 'line',
+                data: [5, 20, 36, 10, 10, 20, 5],
+                lineStyle: {
+                    normal: {
+                        color: '#696969',
+                        width: 2,
+                    }
+                },
+                areaStyle: {
+                    normal: {
+                        color: new echarts.graphic.LinearGradient(
+                            0, 0, 0, 1,
+                            [
+                                {offset: 0, color: '#FFE4E1'},
+                                {offset: 0.5, color: '#CFCFCF'},
+                                {offset: 1, color: '#ffffff'}
+                            ]
+                        )
+                    }
+                },
+            }]
+        };
+        const option7 = {
+            title: {
+                text: '测温数据7'
+            },
+            tooltip: {},
+            legend: {
+                data: ['data7']
+            },
+            xAxis: {
+                data: ["周一", "周二", "周三", "周四", "周五", "周六", "周日"]
+            },
+            yAxis: {},
+            series: [{
+                smooth: true,
+                name: 'data7',
+                type: 'line',
+                data: [5, 20, 36, 10, 10, 20, 5],
+                lineStyle: {
+                    normal: {
+                        color: '#8B4513',
+                        width: 2,
+                    }
+                },
+                areaStyle: {
+                    normal: {
+                        color: new echarts.graphic.LinearGradient(
+                            0, 0, 0, 1,
+                            [
+                                {offset: 0, color: '#DEB887'},
+                                {offset: 0.5, color: '#CD853F'},
+                                {offset: 1, color: '#ffffff'}
+                            ]
+                        )
+                    }
+                },
+            }]
+        };
+        const option8 = {
+            title: {
+                text: '测温数据8'
+            },
+            tooltip: {},
+            legend: {
+                data: ['data8']
+            },
+            xAxis: {
+                data: ["周一", "周二", "周三", "周四", "周五", "周六", "周日"]
+            },
+            yAxis: {},
+            series: [{
+                smooth: true,
+                name: 'data8',
+                type: 'line',
+                data: [5, 20, 36, 10, 10, 20, 5],
+                lineStyle: {
+                    normal: {
+                        color: '#006400',
+                        width: 2,
+                    }
+                },
+                areaStyle: {
+                    normal: {
+                        color: new echarts.graphic.LinearGradient(
+                            0, 0, 0, 1,
+                            [
+                                {offset: 0, color: '#EEE8AA'},
+                                {offset: 0.5, color: '#BDB76B'},
+                                {offset: 1, color: '#ffffff'}
+                            ]
+                        )
+                    }
+                },
+            }]
+        };
+        const option9 = {
+            title: {
+                text: '测温数据9'
+            },
+            tooltip: {},
+            legend: {
+                data: ['data9']
+            },
+            xAxis: {
+                data: ["周一", "周二", "周三", "周四", "周五", "周六", "周日"]
+            },
+            yAxis: {},
+            series: [{
+                smooth: true,
+                name: 'data9',
+                type: 'line',
+                data: [5, 20, 36, 10, 10, 20, 5],
+                lineStyle: {
+                    normal: {
+                        color: '#1E90FF',
+                        width: 2,
+                    }
+                },
+                areaStyle: {
+                    normal: {
+                        color: new echarts.graphic.LinearGradient(
+                            0, 0, 0, 1,
+                            [
+                                {offset: 0, color: '#B0C4DE'},
+                                {offset: 0.5, color: '#48D1CC'},
+                                {offset: 1, color: '#ffffff'}
+                            ]
+                        )
+                    }
+                },
+            }]
+        };
+
+
+        // 使用配置项显示图表
+        chart1.setOption(option1);
+        chart2.setOption(option2);
+        chart3.setOption(option3);
+        chart4.setOption(option4);
+        chart5.setOption(option5);
+        chart6.setOption(option6);
+        chart7.setOption(option7);
+        chart8.setOption(option8);
+        chart9.setOption(option9);
+
+// 循环更新数据
+        for (let i = 1; i <= 9; i++) {
+            const chart = echarts.init(document.getElementById(`ec${i}`));
+            const option = {
+                title: {
+                    text: `测温数据${i}`
+                },
+                // ...
+            };
+            chart.setOption(option);
+        }
+
+
+
+// 获取按钮
+        const button = document.getElementById("btn");
+// 绑定click事件
+        button.addEventListener("click", function () {
+            // 点击按钮后执行的代码
+        });
+
+
+
+
+
         const chart = echarts.init(this.$refs.chart);
         chart.setOption(this.chartData);
         setInterval(() => {
@@ -396,55 +612,39 @@ export default {
             // chart.setOption(this.chartData);
 
           // 生成新的数据
-            const newData = this.generateData();
+            const newData1 = this.generateData1();
+            const newData2 = this.generateData2();
+            const newData3 = this.generateData3();
+            const newData4 = this.generateData4();
+            const newData5 = this.generateData5();
+            const newData6 = this.generateData6();
+            const newData7 = this.generateData7();
+            const newData8 = this.generateData8();
+            const newData9 = this.generateData9();
+            const newcurrenttime = this.generatecurrenttime();
+
+
             chart.setOption({
                 series: [{
                     data: newData
                 }
-                    // {
-                    //     data1: this.temperature1
-                    // },
-                    // {
-                    //     data2: this.temperature2
-                    // },
-                    // {
-                    //     data3: this.temperature3
-                    // },
-                    // {
-                    //     data4: this.temperature4
-                    // },
-                    // {
-                    //     data5: this.temperature5
-                    // },
-                    // {
-                    //     data6: this.temperature6
-                    // },
-                    // {
-                    //     data7: this.temperature7
-                    // },
-                    // {
-                    //     data8: this.temperature8
-                    // },
-                    // {
-                    //     data9: this.temperature9
-                    // },
-                    // {
-                    //     currenttime: this.currenttime
-                    // },
                 ]
             });
             // 更新温度数据
             this.temperature1[0] = newData[0].value;
         }, 3000);
+
+
+        this.showCharts([0, 1, 2, 3, 4, 5]);
+
     },
     methods: {
-
-        handleClick1() {
-
-            axios.get('http://localhost:10866/getdbtemperature').then((response) => {
-                this.text = response.data
-            })
-        },
+        // handleClick1() {
+        //
+        //     axios.get('http://localhost:10866/getdbtemperature').then((response) => {
+        //         this.text = response.data
+        //     })
+        // },
         generateData() {
             // const data = [];
             // for (let i = 0; i < 7; i++) {
@@ -452,95 +652,75 @@ export default {
             // }
 
             axios.get('http://localhost:10866/getdbtemperature').then((response) => {
-                // this.temperature1[0] = response.data[0].data1
-                // this.temperature1[1] = response.data[1].data1
-                // this.temperature1[2] = response.data[2].data1
-                // this.temperature1[3] = response.data[3].data1
-                // this.temperature1[4] = response.data[4].data1
-                // this.temperature1[5] = response.data[5].data1
-                // this.temperature1[6] = response.data[6].data1
-                //
-                // this.temperature2[0] = response.data[0].data2
-                // this.temperature2[1] = response.data[1].data2
-                // this.temperature2[2] = response.data[2].data2
-                // this.temperature2[3] = response.data[3].data2
-                // this.temperature2[4] = response.data[4].data2
-                // this.temperature2[5] = response.data[5].data2
-                // this.temperature2[6] = response.data[6].data2
-                //
-                // this.temperature3[0] = response.data[0].data3
-                // this.temperature3[1] = response.data[1].data3
-                // this.temperature3[2] = response.data[2].data3
-                // this.temperature3[3] = response.data[3].data3
-                // this.temperature3[4] = response.data[4].data3
-                // this.temperature3[5] = response.data[5].data3
-                // this.temperature3[6] = response.data[6].data3
-                //
-                // this.temperature4[0] = response.data[0].data4
-                // this.temperature4[1] = response.data[1].data4
-                // this.temperature4[2] = response.data[2].data4
-                // this.temperature4[3] = response.data[3].data4
-                // this.temperature4[4] = response.data[4].data4
-                // this.temperature4[5] = response.data[5].data4
-                // this.temperature4[6] = response.data[6].data4
-                //
-                // this.temperature5[0] = response.data[0].data5
-                // this.temperature5[1] = response.data[1].data5
-                // this.temperature5[2] = response.data[2].data5
-                // this.temperature5[3] = response.data[3].data5
-                // this.temperature5[4] = response.data[4].data5
-                // this.temperature5[5] = response.data[5].data5
-                // this.temperature5[6] = response.data[6].data5
-                //
-                // this.temperature6[0] = response.data[0].data6
-                // this.temperature6[1] = response.data[1].data6
-                // this.temperature6[2] = response.data[2].data6
-                // this.temperature6[3] = response.data[3].data6
-                // this.temperature6[4] = response.data[4].data6
-                // this.temperature6[5] = response.data[5].data6
-                // this.temperature6[6] = response.data[6].data6
-                //
-                // this.temperature7[0] = response.data[0].data7
-                // this.temperature7[1] = response.data[1].data7
-                // this.temperature7[2] = response.data[2].data7
-                // this.temperature7[3] = response.data[3].data7
-                // this.temperature7[4] = response.data[4].data7
-                // this.temperature7[5] = response.data[5].data7
-                // this.temperature7[6] = response.data[6].data7
-                //
-                // this.temperature8[0] = response.data[0].data8
-                // this.temperature8[1] = response.data[1].data8
-                // this.temperature8[2] = response.data[2].data8
-                // this.temperature8[3] = response.data[3].data8
-                // this.temperature8[4] = response.data[4].data8
-                // this.temperature8[5] = response.data[5].data8
-                // this.temperature8[6] = response.data[6].data8
-                //
-                // this.temperature9[0] = response.data[0].data9
-                // this.temperature9[1] = response.data[1].data9
-                // this.temperature9[2] = response.data[2].data9
-                // this.temperature9[3] = response.data[3].data9
-                // this.temperature9[4] = response.data[4].data9
-                // this.temperature9[5] = response.data[5].data9
-                // this.temperature9[6] = response.data[6].data9
-                //
-                // this.currenttime[0] = response.data[0].currenttime
-                // this.currenttime[1] = response.data[1].currenttime
-                // this.currenttime[2] = response.data[2].currenttime
-                // this.currenttime[3] = response.data[3].currenttime
-                // this.currenttime[4] = response.data[4].currenttime
-                // this.currenttime[5] = response.data[5].currenttime
-                // this.currenttime[6] = response.data[6].currenttime
 
-                this.temperature6 = response.data.map(item => item.data6);
+                this.temperature1 = response.data.map(item => item.ec1);
+                this.temperature2 = response.data.map(item => item.ec2);
+                this.temperature3 = response.data.map(item => item.ec3);
+                this.temperature4 = response.data.map(item => item.ec4);
+                this.temperature5 = response.data.map(item => item.ec5);
+                this.temperature6 = response.data.map(item => item.ec6);
+                this.temperature7 = response.data.map(item => item.ec7);
+                this.temperature8 = response.data.map(item => item.ec8);
+                this.temperature9 = response.data.map(item => item.ec9);
+                this.currenttime = response.data.map(item => item.currenttime);
             });
+            return this.temperature1;
+            return this.temperature2;
+            return this.temperature3;
+            return this.temperature4;
+            return this.temperature5;
             return this.temperature6;
+        },
+
+        showCharts(indexes) {
+            this.charts.forEach((chart, index) => {
+                if (indexes.includes(index)) {
+                    chart.setOption({hide: 'none'});
+                } else {
+                    chart.setOption({show: 'none'});
+                }
+            });
+        },
+        showAllCharts() {
+            this.showCharts([0, 1, 2, 3, 4, 5]);
         }
+
     },
+
 
 }
 
 </script>
+<style>
+#ec1, #ec2, #ec3,#ec4, #ec5, #ec6 {
+    width: 100%;
 
+    height: 400px;
+
+}
+#hi1, #hi2, #hi3{
+    width: 100%;
+
+    height: 400px;
+
+}
+.bv-example-row {
+    position: relative;
+}
+
+
+hideCharts{
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    transform: translateX(-100%);
+    transition: transform 0.5s ease;
+}
+
+button {
+    display: block;
+    margin-top: 20px;
+}
+</style>
 
 
