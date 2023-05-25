@@ -98,7 +98,7 @@ parser.on('data', chunk => {
 
 // 将数据库的根据时间排序最近的10个数据发送到前端
 app.get('/getdbtemperature', (req, res) => {
-    db.all('SELECT * FROM users ORDER BY currenttime DESC LIMIT 10', (err, rows) => {
+    db.all('SELECT * FROM temperature ORDER BY currenttime DESC LIMIT 10', (err, rows) => {
         if (err) {
             console.error(err.message);
             res.status(500).send('Internal Server Error');

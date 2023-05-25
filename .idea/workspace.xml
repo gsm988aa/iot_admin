@@ -4,15 +4,44 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="91036d36-d2ab-466a-a5ad-eee88f80c62d" name="变更" comment="change workspace" />
+    <list default="true" id="91036d36-d2ab-466a-a5ad-eee88f80c62d" name="变更" comment="change workspace">
+      <change afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/vuexy-full-version/src/views/apps/breaker/MyChart.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/32b4b35d-6ce4-4627-aaa6-3376b4f0462f.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Task/mydatabase.db" beforeDir="false" afterPath="$PROJECT_DIR$/Task/mydatabase.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Task/test.js" beforeDir="false" afterPath="$PROJECT_DIR$/Task/test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/vuexy-full-version/src/views/apps/breaker/breaker.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/vuexy-full-version/src/views/apps/breaker/breaker.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/vuexy-full-version/src/views/apps/breaker/mydatabase.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/vuexy-full-version/src/views/apps/breaker/test.js" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Vue Class API Component" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RESET_MODE" value="HARD" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="92ab91e1-0ae3-4272-8ede-e37c15520f64" />
+        <option name="url" value="git@github.com:gsm988aa/iot_admin.git" />
+      </UrlAndAccount>
+    </option>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -44,6 +73,11 @@
     "project.structure.side.proportion": "0.0",
     "settings.editor.selected.configurable": "preferences.editor",
     "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "vue.recent.templates": [
+      "Vue Class API Component"
+    ]
   }
 }]]></component>
   <component name="RunManager" selected="npm.serve (1)">
@@ -125,6 +159,8 @@
       <workItem from="1684456569429" duration="8210000" />
       <workItem from="1684464928652" duration="3030000" />
       <workItem from="1684473045583" duration="11055000" />
+      <workItem from="1684975023069" duration="7835000" />
+      <workItem from="1684982996213" duration="16807000" />
     </task>
     <task id="LOCAL-00001" summary="change workspace">
       <created>1684112004864</created>

@@ -1,126 +1,168 @@
 <template>
-
-  <!--   <section id="dashboard-deviceinfos" class = "deviceinfos">
-        11111
-     </section> -->
-<!--      <v-chart :options="chartOptions"></v-chart>-->
-    <b-container class="bv-example-row">
+    <b-container fluid>
 
         <b-row>
-            <b-col  cols="4">
-                <b-row id="ec1">
-                    <br>
-                    <br>
-                    第一个图
-                </b-row>
-                <b-row id="ec4">
-                    <br>
-                    <br>
-                    第四个图
-                </b-row>
-            </b-col>
-            <b-col  cols="4">
-                <b-row id="ec2">
-                    <br>
-                    <br>
-                    第二个图
-                </b-row>
-                <b-row id="ec5">
-                    <br>
-                    <br>
-                    第五个图
-                </b-row>
-            </b-col>
-            <b-col  cols="4">
-                <b-row id="ec3">
-                    <br>
-                    <br>
-                    第三个图
-                </b-row>
-                <b-row id="ec6">
-                    <br>
-                    <br>
-                    第六个图
-                </b-row>
+            <b-col cols="12">
+                <b-card className="center">
+                    <b-form-checkbox v-model="checkedstatus">增加卡尔曼滤波器温度预测</b-form-checkbox>
+                </b-card>
             </b-col>
         </b-row>
 
+        <b-row>
+            <b-col cols="4">
+                <b-card>
+                    <div ref="chart1" style="width: 100%; height: 400px;">
+                    </div>
+
+                </b-card>
+            </b-col>
+            <b-col cols="4">
+                <b-card>
+                    <div ref="chart2" style="width: 100%; height: 400px;">
+                    </div>
+
+                </b-card>
+            </b-col>
+            <b-col cols="4">
+                <b-card>
+                    <div ref="chart3" style="width: 100%; height: 400px;">
+                    </div>
+
+                </b-card>
+            </b-col>
+
+        </b-row>
+
+
+        <b-row>
+            <b-col cols="4">
+                <b-card>
+                    <div ref="chart4" style="width: 100%; height: 400px;">
+                    </div>
+                </b-card>
+            </b-col>
+            <b-col cols="4">
+                <b-card>
+                    <div ref="chart5" style="width: 100%; height: 400px;">
+                    </div>
+                </b-card>
+            </b-col>
+            <b-col cols="4">
+                <b-card>
+                    <div ref="chart6" style="width: 100%; height: 400px;">
+                    </div>
+                </b-card>
+            </b-col>
+        </b-row>
+
+
+        <b-row>
+            <b-col cols="4">
+                <b-card>
+                    <div ref="chart7" style="width: 100%; height: 400px;">
+                    </div>
+                </b-card>
+            </b-col>
+            <b-col cols="4">
+                <b-card>
+                    <div ref="chart8" style="width: 100%; height: 400px;">
+                    </div>
+                </b-card>
+            </b-col>
+
+            <b-col cols="4">
+                <b-card>
+                    <div ref="chart9" style="width: 100%; height: 400px;">
+                    </div>
+                </b-card>
+            </b-col>
+        </b-row>
+
+
         <div>
-
-            <b-button @click="hideCharts = !hideCharts">{{ hideCharts ? '显示图表' : '隐藏图表' }}</b-button>
-
-            <b-collapse v-model="hideCharts">
-                <b-row>
-                    <b-col  cols="4">
-                        <b-row id="hi1">
-                            <br>
-                            <br>
-                        </b-row>
-                    </b-col>
-                    <b-col cols="4">
-                        <b-row id="hi2">
-                            <br>
-                            <br>
-                        </b-row>
-                    </b-col>
-                    <b-col cols="4">
-                        <b-row id="hi3">
-                            <br>
-                            <br>
-                        </b-row>
-                    </b-col>
-                </b-row>
-            </b-collapse>
+            <ul>
+                <li v-for="(state, index) in chartStates" :key="index">
+                    <label>
+                        <input type="checkbox" v-model="state.visible">
+                        {{ state.name }}
+                    </label>
+                </li>
+            </ul>
+            <div v-for="(state, index) in chartStates" :key="index">
+                <div :id="state.name"></div>
+            </div>
         </div>
-
 
     </b-container>
 
 </template>
 
-
-<script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js">
-</script>
-
-<script src="echarts.min.js"></script>
-
 <script>
 import {
-    BRow, BCol, BCardGroup, BCard, BCardText,BButton , BFormTextarea, BContainer
+    BRow, BCol, BCardGroup, BCard, BCardText, BButton, BFormTextarea, BContainer, BFormSelect, BFormCheckbox
 } from 'bootstrap-vue'
 import echarts from 'echarts';
-import  axios from 'axios';
-import 'bootstrap/dist/css/bootstrap.min.css'
-import 'bootstrap/dist/js/bootstrap.min.js'
-import 'bootstrap-vue/dist/bootstrap-vue.css'
-import 'bootstrap-vue/dist/bootstrap-vue.js'
+import axios from 'axios';
 
 
 export default {
     components: {
-        BFormTextarea,
-        BButton,
+        BContainer,
         BRow,
         BCol,
-        BContainer,
-    },
+        BCard,
+        BFormTextarea,
+        BButton,
 
-    props: {
-        option: {
-            type: Object,
-            required: true
-        }
+        BFormCheckbox,
+        BCardGroup,
+        BCardText,
+
+
     },
 
 
     data() {
         return {
+            chartStates: [
+                { name: 'chart1', visible: true },
+                { name: 'chart2', visible: true },
+                { name: 'chart3', visible: true },
+                { name: 'chart4', visible: true },
+                { name: 'chart5', visible: true },
+                { name: 'chart6', visible: true },
+                { name: 'chart7', visible: true },
+                { name: 'chart8', visible: true },
+                { name: 'chart9', visible: true },
+            ],
+            checkedstatus: false,
+            nowtemp: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            x: [10, 10, 10, 10, 10, 10, 10, 10, 10, 10],
+            x_pred: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            p_pred: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            z: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            p: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+            q: [0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01],
+            r: [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1],
+            k: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+            x_update: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            p_update: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 
-            // 记录是否隐藏最后三张图表
-            hideCharts: true,
+            switch6: true,
+            switch9: true,
+            newdata: [],
+            // 预测温度
+            predictdata1: [0, 0, 0, 0, 0, 0, 0],
+            predictdata2: [0, 0, 0, 0, 0, 0, 0],
+            predictdata3: [0, 0, 0, 0, 0, 0, 0],
+            predictdata4: [0, 0, 0, 0, 0, 0, 0],
+            predictdata5: [0, 0, 0, 0, 0, 0, 0],
+            predictdata6: [0, 0, 0, 0, 0, 0, 0],
+            predictdata7: [0, 0, 0, 0, 0, 0, 0],
+            predictdata8: [0, 0, 0, 0, 0, 0, 0],
+            predictdata9: [0, 0, 0, 0, 0, 0, 0],
 
-            charts: [],
-            text: 'information',
             temperature1: [],
             temperature2: [],
             temperature3: [],
@@ -132,595 +174,908 @@ export default {
             temperature9: [],
             currenttime: [],
 
-            ec1: {
-                // color: ['#FFBF00'],
-                // paddingLeft: 0,
-                // title: {
-                //     text: 'Gradient Stacked Area Chart'
-                // },
-                // tooltip: {
-                //     trigger: 'axis',
-                //     axisPointer: {
-                //         type: 'cross',
-                //         label: {
-                //             backgroundColor: '#6a7985'
-                //         }
-                //     }
-                // },
+            legendData: ['卡尔曼预测'],
 
-                // options: {
-                //     backgroundColor: '#fff',
-                //     title:{
-                //         text:'测温数据',
-                //         left:'center'
-                //     }
-                // },
+            // 定义一个共用的 series 数据
+            // seriesData: [
+            //     {
+            //         name: '卡尔曼预测',
+            //         type: 'line',
+            //         data: []
+            //     }
+            // ],
+            // legendSelected: { '卡尔曼预测': true },
 
-                // legend: {
-                //     data: ['Line 1']
-                // },
-                // toolbox: {
-                //     feature: {
-                //         saveAsImage: {}
-                //     }
-                // },
-                // grid: {
-                //     left: '3%',
-                //     right: '4%',
-                //     bottom: '3%',
-                //     containLabel: true
-                // },
-                // xAxis: [
-                //     {
-                //         type: 'category',
-                //         boundaryGap: false,
-                //         data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-                //         // axisLabel: {
-                //         //     formatter: function (value, index) {
-                //         //         var date = new Date(value);
-                //         //         return date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
-                //         //     }
-                //         // }
-                //     }
-                // ],
-                // yAxis: [
-                //     {
-                //         type: 'value'
-                //     }
-                // ],
-                // series: [
-                //     {
-                //         name: 'Line 1',
-                //         type: 'line',
-                //         stack: 'Total',
-                //         smooth: true,
-                //         lineStyle: {
-                //             width: 0
-                //         },
-                //         showSymbol: false,
-                //         areaStyle: {
-                //             opacity: 0.8,
-                //             color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                //                 {
-                //                     offset: 0,
-                //                     color: 'rgb(128, 255, 165)'
-                //                 },
-                //                 {
-                //                     offset: 1,
-                //                     color: 'rgb(1, 191, 236)'
-                //                 }
-                //             ])
-                //         },
-                //         emphasis: {
-                //             focus: 'series'
-                //         },
-                //         data: [120, 132, 101, 134, 90, 230, 210]
-                //     },
-                //     ]
-            }
+            chartData1: {
+                title: {
+                    text: '温度：'
+                },
+                legend: {
+                    data: ['原始数据', '卡尔曼预测'],
+                    show: true,
+                },
+                //悬停数字
+                tooltip: {
+                    trigger: 'axis',//显示横坐标值
+                    axisPointer: {
+                        type: 'cross',
+                        label: {
+                            backgroundColor: '#6a7985'
+                        }
+                    }
+                },
+                xAxis: {
+                    type: 'category',
+                    boundaryGap: false,
+                    data: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
+
+                    inverse: true,// 设置反向属性
+                    axisLabel: {
+                        formatter: function (value, index) {
+                            const date = new Date(value);
+                            //显示几月几号： (date.getMonth() + 1),date.getDate(),
+
+                            // 显示时分秒
+                            const texts = [
+                                date.getHours().toString().padStart(2, '0'), // 将小时转换成字符串，并填充到 2 位，用字符 '0' 来填充
+                                date.getMinutes().toString().padStart(2, '0'), // 将分钟转换成字符串，并填充到 2 位，用字符 '0' 来填充
+                                date.getSeconds().toString().padStart(2, '0') // 将秒钟转换成字符串，并填充到 2 位，用字符 '0' 来填充
+                            ];
+                            //实现时间为xx.xx.xx格式
+                            return texts.join(':');
+
+                        }
+                    },
+                },
+
+
+                yAxis: {
+                    type: 'value'
+                },
+                series: [
+                    {
+                        name: '原始数据',
+                        icon: 'circle',
+
+                        data: [820, 932, 901, 934, 1290, 1330, 1320, 1340, 1360, 1380],
+                        type: 'line',
+                        itemStyle: {
+                            color: 'rgb(8,46,84)'
+                        },
+                        areaStyle: {
+                            opacity: 0.4,
+                            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                                {
+                                    offset: 0,
+                                    color: 'rgb(255, 235, 205)'
+                                },
+                                {
+                                    offset: 1,
+                                    color: 'rgb(128,128,105)'
+                                }
+
+                            ])
+                        },
+                        smooth: true
+                    },
+                    {
+                        name: '卡尔曼预测',
+                        icon: 'circle',
+                        data: [10, 10, 10, 10, 10, 10, 10],
+                        type: 'line',
+                        smooth: true,
+                    },
+                ],
+
+            },
+            chartData2: {
+                title: {
+                    text: '温度：'
+                },
+                legend: {
+                    data: this.legendData
+                },
+                //悬停数字
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: {
+                        type: 'cross',
+                        label: {
+                            backgroundColor: '#6a7985'
+                        }
+                    }
+                },
+                xAxis: {
+                    type: 'category',
+                    boundaryGap: false,
+                    data: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
+                    inverse: true, // 设置反向属性
+                    axisLabel: {
+                        formatter: function (value, index) {
+                            const date = new Date(value);
+                            //显示几月几号： (date.getMonth() + 1),date.getDate(),
+
+                            // 显示时分秒
+                            const texts = [
+                                date.getHours().toString().padStart(2, '0'), // 将小时转换成字符串，并填充到 2 位，用字符 '0' 来填充
+                                date.getMinutes().toString().padStart(2, '0'), // 将分钟转换成字符串，并填充到 2 位，用字符 '0' 来填充
+                                date.getSeconds().toString().padStart(2, '0') // 将秒钟转换成字符串，并填充到 2 位，用字符 '0' 来填充
+                            ];
+                            //实现时间为xx.xx.xx格式
+                            return texts.join(':');
+
+                        }
+                    },
+                },
+                yAxis: {
+                    type: 'value'
+                },
+                series: [
+                    {
+                        name: '原始数据',
+                        data: [820, 932, 901, 934, 1290, 1330, 1320, 1340, 1360, 1380],
+                        type: 'line',
+                        itemStyle: {
+                            color: 'rgb(39,64,139)'
+                        },
+                        areaStyle: {
+                            opacity: 0.4,
+                            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                                {
+                                    offset: 0,
+                                    color: 'rgb(255, 235, 205)'
+                                },
+                                {
+                                    offset: 1,
+                                    color: 'rgb(77, 119, 255)'
+                                }
+
+                            ])
+                        },
+                        smooth: true
+                    },
+                    {
+                        name: '卡尔曼预测',
+                        data: [10, 10, 10, 10, 10, 10, 10],
+                        type: 'line',
+                        smooth: true,
+                    }
+                ]
+            },
+            chartData3: {
+                title: {
+                    text: '温度：'
+                },
+                legend: {
+                    data: this.legendData
+                },
+                //悬停数字
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: {
+                        type: 'cross',
+                        label: {
+                            backgroundColor: '#6a7985'
+                        }
+                    }
+                },
+                xAxis: {
+                    type: 'category',
+                    boundaryGap: false,
+                    data: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
+                    inverse: true, // 设置反向属性
+                    axisLabel: {
+                        formatter: function (value, index) {
+                            const date = new Date(value);
+                            //显示几月几号： (date.getMonth() + 1),date.getDate(),
+
+                            // 显示时分秒
+                            const texts = [
+                                date.getHours().toString().padStart(2, '0'), // 将小时转换成字符串，并填充到 2 位，用字符 '0' 来填充
+                                date.getMinutes().toString().padStart(2, '0'), // 将分钟转换成字符串，并填充到 2 位，用字符 '0' 来填充
+                                date.getSeconds().toString().padStart(2, '0') // 将秒钟转换成字符串，并填充到 2 位，用字符 '0' 来填充
+                            ];
+                            //实现时间为xx.xx.xx格式
+                            return texts.join(':');
+
+                        }
+                    },
+                },
+                yAxis: {
+                    type: 'value'
+                },
+                series: [
+                    {
+                        name: '原始数据',
+                        data: [820, 932, 901, 934, 1290, 1330, 1320, 1340, 1360, 1380],
+                        type: 'line',
+                        itemStyle: {
+                            color: 'rgb(135,38,87)'
+                        },
+                        areaStyle: {
+                            opacity: 0.4,
+                            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                                {
+                                    offset: 0,
+                                    color: 'rgb(255, 250, 205)'
+                                },
+                                {
+                                    offset: 1,
+                                    color: 'rgb(255,20,147)'
+                                }
+
+                            ])
+                        },
+                        smooth: true
+                    },
+                    {
+                        name: '卡尔曼预测',
+                        data: [10, 10, 10, 10, 10, 10, 10],
+                        type: 'line',
+                        smooth: true,
+                    }
+                ]
+            },
+            chartData4: {
+                title: {
+                    text: '温度：'
+                },
+                legend: {
+                    data: this.legendData
+                },
+                //悬停数字
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: {
+                        type: 'cross',
+                        label: {
+                            backgroundColor: '#6a7985'
+                        }
+                    }
+                },
+                xAxis: {
+                    type: 'category',
+                    boundaryGap: false,
+                    data: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
+                    inverse: true, // 设置反向属性
+                    axisLabel: {
+                        formatter: function (value, index) {
+                            const date = new Date(value);
+                            //显示几月几号： (date.getMonth() + 1),date.getDate(),
+
+                            // 显示时分秒
+                            const texts = [
+                                date.getHours().toString().padStart(2, '0'), // 将小时转换成字符串，并填充到 2 位，用字符 '0' 来填充
+                                date.getMinutes().toString().padStart(2, '0'), // 将分钟转换成字符串，并填充到 2 位，用字符 '0' 来填充
+                                date.getSeconds().toString().padStart(2, '0') // 将秒钟转换成字符串，并填充到 2 位，用字符 '0' 来填充
+                            ];
+                            //实现时间为xx.xx.xx格式
+                            return texts.join(':');
+
+                        }
+                    },
+                },
+                yAxis: {
+                    type: 'value'
+                },
+                series: [
+                    {
+                        name: '原始数据',
+                        data: [820, 932, 901, 934, 1290, 1330, 1320, 1340, 1360, 1380],
+                        type: 'line',
+                        itemStyle: {
+                            color: 'rgb(255,97,3)'
+                        },
+                        areaStyle: {
+                            opacity: 0.4,
+                            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                                {
+                                    offset: 0,
+                                    color: 'rgb(255, 235, 205)'
+                                },
+                                {
+                                    offset: 1,
+                                    color: 'rgb(255,140,0)'
+                                }
+
+                            ])
+                        },
+                        smooth: true
+                    },
+                    {
+                        name: '卡尔曼预测',
+                        data: [10, 10, 10, 10, 10, 10, 10],
+                        type: 'line',
+                        smooth: true,
+                    }
+                ]
+            },
+            chartData5: {
+                title: {
+                    text: '温度：'
+                },
+                legend: {
+                    data: this.legendData
+                },
+                //悬停数字
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: {
+                        type: 'cross',
+                        label: {
+                            backgroundColor: '#6a7985'
+                        }
+                    }
+                },
+                xAxis: {
+                    type: 'category',
+                    boundaryGap: false,
+                    data: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
+                    inverse: true, // 设置反向属性
+                    axisLabel: {
+                        formatter: function (value, index) {
+                            const date = new Date(value);
+                            //显示几月几号： (date.getMonth() + 1),date.getDate(),
+
+                            // 显示时分秒
+                            const texts = [
+                                date.getHours().toString().padStart(2, '0'), // 将小时转换成字符串，并填充到 2 位，用字符 '0' 来填充
+                                date.getMinutes().toString().padStart(2, '0'), // 将分钟转换成字符串，并填充到 2 位，用字符 '0' 来填充
+                                date.getSeconds().toString().padStart(2, '0') // 将秒钟转换成字符串，并填充到 2 位，用字符 '0' 来填充
+                            ];
+                            //实现时间为xx.xx.xx格式
+                            return texts.join(':');
+
+                        }
+                    },
+                },
+                yAxis: {
+                    type: 'value'
+                },
+                series: [
+                    {
+                        name: '原始数据',
+                        data: [820, 932, 901, 934, 1290, 1330, 1320, 1340, 1360, 1380],
+                        type: 'line',
+                        itemStyle: {
+                            color: 'rgb(48, 128, 20 )'
+                        },
+                        areaStyle: {
+                            opacity: 0.4,
+                            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                                {
+                                    offset: 0,
+                                    color: 'rgb(255, 250, 205)'
+                                },
+                                {
+                                    offset: 1,
+                                    color: 'rgb(127, 255, 0)'
+                                }
+                            ])
+                        },
+                        smooth: true
+                    },
+                    {
+                        name: '卡尔曼预测',
+                        data: [10, 10, 10, 10, 10, 10, 10],
+                        type: 'line',
+                        smooth: true,
+                    }
+                ]
+            },
+            chartData6: {
+                title: {
+                    text: '温度：'
+                },
+                legend: {
+                    data: ['原始数据', '卡尔曼预测'],
+
+                },
+                //悬停数字
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: {
+                        type: 'cross',
+                        label: {
+                            backgroundColor: '#6a7985'
+                        }
+                    }
+                },
+                xAxis: {
+                    type: 'category',
+                    boundaryGap: false,
+                    data: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
+                    inverse: true, // 设置反向属性
+                    axisLabel: {
+                        formatter: function (value, index) {
+                            const date = new Date(value);
+                            //显示几月几号： (date.getMonth() + 1),date.getDate(),
+
+                            // 显示时分秒
+                            const texts = [
+                                date.getHours().toString().padStart(2, '0'), // 将小时转换成字符串，并填充到 2 位，用字符 '0' 来填充
+                                date.getMinutes().toString().padStart(2, '0'), // 将分钟转换成字符串，并填充到 2 位，用字符 '0' 来填充
+                                date.getSeconds().toString().padStart(2, '0') // 将秒钟转换成字符串，并填充到 2 位，用字符 '0' 来填充
+                            ];
+                            //实现时间为xx.xx.xx格式
+                            return texts.join(':');
+
+                        }
+                    },
+                },
+                yAxis: {
+                    type: 'value'
+                },
+                series: [
+                    {
+                        name: '原始数据',
+                        data: [820, 932, 901, 934, 1290, 1330, 1320, 1340, 1360, 1380],
+                        type: 'line',
+
+                        itemStyle: {
+                            color: 'rgb(106,90,205)'
+                        },
+                        areaStyle: {
+                            opacity: 0.4,
+                            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                                {
+                                    offset: 0,
+                                    color: 'rgb(255, 235, 205)'
+                                },
+                                {
+                                    offset: 1,
+                                    color: 'rgb(116, 21, 219)'
+                                }
+
+                            ])
+                        },
+                        smooth: true
+                    },
+                    {
+                        name: '卡尔曼预测',
+                        data: [10, 10, 10, 10, 10, 10, 10],
+                        type: 'line',
+                        smooth: true,
+                    }
+                ]
+            },
+            chartData7: {
+                title: {
+                    text: '温度：'
+                },
+                legend: {
+                    data: this.legendData
+                },
+                //悬停数字
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: {
+                        type: 'cross',
+                        label: {
+                            backgroundColor: '#6a7985'
+                        }
+                    }
+                },
+                xAxis: {
+                    type: 'category',
+                    boundaryGap: false,
+                    data: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
+                    inverse: true, // 设置反向属性
+                    axisLabel: {
+                        formatter: function (value, index) {
+                            const date = new Date(value);
+                            //显示几月几号： (date.getMonth() + 1),date.getDate(),
+
+                            // 显示时分秒
+                            const texts = [
+                                date.getHours().toString().padStart(2, '0'), // 将小时转换成字符串，并填充到 2 位，用字符 '0' 来填充
+                                date.getMinutes().toString().padStart(2, '0'), // 将分钟转换成字符串，并填充到 2 位，用字符 '0' 来填充
+                                date.getSeconds().toString().padStart(2, '0') // 将秒钟转换成字符串，并填充到 2 位，用字符 '0' 来填充
+                            ];
+                            //实现时间为xx.xx.xx格式
+                            return texts.join(':');
+
+                        }
+                    },
+                },
+                yAxis: {
+                    type: 'value'
+                },
+                series: [
+                    {
+                        name: '原始数据',
+                        data: [820, 932, 901, 934, 1290, 1330, 1320, 1340, 1360, 1380],
+                        type: 'line',
+                        itemStyle: {
+                            color: 'rgb(205,133,0)'
+                        },
+                        areaStyle: {
+                            opacity: 0.4,
+                            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                                {
+                                    offset: 0,
+                                    color: 'rgb(240, 230, 140)'
+                                },
+                                {
+                                    offset: 1,
+                                    color: 'rgb(255, 255, 0)'
+                                }
+
+                            ])
+                        },
+                        smooth: true
+                    },
+                    {
+                        name: '卡尔曼预测',
+                        data: [10, 10, 10, 10, 10, 10, 10],
+                        type: 'line',
+                        smooth: true,
+                    }
+                ]
+            },
+
+
+            chartData8: {
+                title: {
+                    text: '温度：'
+                },
+                legend: {
+                    data: this.legendData
+                },
+                //悬停数字
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: {
+                        type: 'cross',
+                        label: {
+                            backgroundColor: '#6a7985'
+                        }
+                    }
+                },
+                xAxis: {
+                    type: 'category',
+                    boundaryGap: false,
+                    data: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
+                    inverse: true, // 设置反向属性
+                    axisLabel: {
+                        formatter: function (value, index) {
+                            const date = new Date(value);
+                            //显示几月几号： (date.getMonth() + 1),date.getDate(),
+
+                            // 显示时分秒
+                            const texts = [
+                                date.getHours().toString().padStart(2, '0'), // 将小时转换成字符串，并填充到 2 位，用字符 '0' 来填充
+                                date.getMinutes().toString().padStart(2, '0'), // 将分钟转换成字符串，并填充到 2 位，用字符 '0' 来填充
+                                date.getSeconds().toString().padStart(2, '0') // 将秒钟转换成字符串，并填充到 2 位，用字符 '0' 来填充
+                            ];
+                            //实现时间为xx.xx.xx格式
+                            return texts.join(':');
+
+                        }
+                    },
+                },
+                yAxis: {
+                    type: 'value'
+                },
+                series: [
+                    {
+                        name: '原始数据',
+                        data: [820, 932, 901, 934, 1290, 1330, 1320, 1340, 1360, 1380],
+                        type: 'line',
+                        itemStyle: {
+                            color: 'rgb(178,34,34)'
+                        },
+                        areaStyle: {
+                            opacity: 0.4,
+                            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                                {
+                                    offset: 0,
+                                    color: 'rgb(255, 235, 205)'
+                                },
+                                {
+                                    offset: 1,
+                                    color: 'rgb(255,48, 48)'
+                                }
+
+                            ])
+                        },
+                        smooth: true
+                    },
+                    {
+                        name: '卡尔曼预测',
+                        data: [10, 10, 10, 10, 10, 10, 10],
+                        type: 'line',
+                        smooth: true,
+                    }
+                ]
+            },
+
+
+            chartData9: {
+                title: {
+                    text: '温度：'
+                },
+                legend: {
+                    data: this.legendData
+                },
+                //悬停数字
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: {
+                        type: 'cross',
+                        label: {
+                            backgroundColor: '#6a7985'
+                        }
+                    }
+                },
+                xAxis: {
+                    type: 'category',
+                    boundaryGap: false,
+                    data: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
+                    inverse: true, // 设置反向属性
+                    axisLabel: {
+                        formatter: function (value, index) {
+                            const date = new Date(value);
+                            //显示几月几号： (date.getMonth() + 1),date.getDate(),
+
+                            // 显示时分秒
+                            const texts = [
+                                date.getHours().toString().padStart(2, '0'), // 将小时转换成字符串，并填充到 2 位，用字符 '0' 来填充
+                                date.getMinutes().toString().padStart(2, '0'), // 将分钟转换成字符串，并填充到 2 位，用字符 '0' 来填充
+                                date.getSeconds().toString().padStart(2, '0') // 将秒钟转换成字符串，并填充到 2 位，用字符 '0' 来填充
+                            ];
+                            //实现时间为xx.xx.xx格式
+                            return texts.join(':');
+
+                        }
+                    },
+                },
+                yAxis: {
+                    type: 'value'
+                },
+                series: [
+                    {
+                        name: '原始数据',
+                        data: [820, 932, 901, 934, 1290, 1330, 1320, 1340, 1360, 1380],
+                        type: 'line',
+                        itemStyle: {
+                            color: 'rgb(95, 158, 160)'
+                        },
+                        areaStyle: {
+                            opacity: 0.4,
+                            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                                {
+                                    offset: 0,
+                                    color: 'rgb(255,246,143)'
+                                },
+                                {
+                                    offset: 1,
+                                    color: 'rgb(0, 128, 128)'
+                                }
+
+                            ])
+                        },
+                        smooth: true
+                    },
+                    {
+                        name: '卡尔曼预测',
+                        data: [10, 10, 10, 10, 10, 10, 10],
+                        type: 'line',
+                        smooth: true,
+                    }
+                ]
+            },
+
+
         }
     },
 
-
-    beforeDestroy() {
-        this.chart.dispose()
-    },
 
     mounted() {
-        // 初始化 Echarts 实例
-        const chart1 = echarts.init(document.getElementById('ec1'));
-        const chart2 = echarts.init(document.getElementById('ec2'));
-        const chart3 = echarts.init(document.getElementById('ec3'));
-        const chart4 = echarts.init(document.getElementById('ec4'));
-        const chart5 = echarts.init(document.getElementById('ec5'));
-        const chart6 = echarts.init(document.getElementById('ec6'));
-        const chart7 = echarts.init(document.getElementById('hi1'));
-        const chart8 = echarts.init(document.getElementById('hi2'));
-        const chart9 = echarts.init(document.getElementById('hi3'));
 
-        // 根据不同的图表类型创建不同的 option 对象
-        const option1 = {
-            title: {
-                text: '测温数据1'
-            },
-            tooltip: {},
-            legend: {
-                data: ['data1']
-            },
-            xAxis: {
-                data: ["周一", "周二", "周三", "周四", "周五", "周六", "周日"]
-            },
-            yAxis: {},
-            series: [{
-                smooth: true,
-                name: 'data1',
-                type: 'line',
-                data: [5, 20, 36, 10, 10, 20, 5],
-                areaStyle: {
-                    normal: {
-                        color: new echarts.graphic.LinearGradient(
-                            0, 0, 0, 1,
-                            [
-                                {offset: 0, color: '#FFDAB9'},
-                                {offset: 0.5, color: 'pink'},
-                                {offset: 1, color: '#ffffff'}
-                            ]
-                        )
-                    }
-                },
-            }],
-
-        };
-        const option2 = {
-            title: {
-                text: '测温数据2'
-            },
-            tooltip: {},
-            legend: {
-                data: ['data2']
-            },
-            xAxis: {
-                data: ["周一", "周二", "周三", "周四", "周五", "周六", "周日"]
-            },
-            yAxis: {},
-            series: [{
-                smooth: true,
-                name: 'data2',
-                type: 'line',
-                data: [5, 20, 36, 10, 10, 20, 5],
-                lineStyle: {
-                    normal: {
-                        color: '#9370DB',
-                        width: 2,
-                    }
-                },
-                areaStyle: {
-                    normal: {
-                        color: new echarts.graphic.LinearGradient(
-                            0, 0, 0, 1,
-                            [
-                                {offset: 0, color: '#E0EEEE'},
-                                {offset: 0.5, color: '#EED2EE'},
-                                {offset: 1, color: '#ffffff'}
-                            ]
-                        )
-                    }
-                },
-            }]
-        };
-        const option3 = {
-            title: {
-                text: '测温数据3'
-            },
-            tooltip: {},
-            legend: {
-                data: ['data3']
-            },
-            xAxis: {
-                data: ["周一", "周二", "周三", "周四", "周五", "周六", "周日"]
-            },
-            yAxis: {},
-            series: [{
-                smooth: true,
-                name: 'data3',
-                type: 'line',
-                data: [5, 20, 36, 10, 10, 20, 5],
-                lineStyle: {
-                    normal: {
-                        color: '#FFA500',
-                        width: 2,
-                    }
-                },
-                areaStyle: {
-                    normal: {
-                        color: new echarts.graphic.LinearGradient(
-                            0, 0, 0, 1,
-                            [
-                                {offset: 0, color: '#FFF8DC'},
-                                {offset: 0.5, color: '#FFA54F'},
-                                {offset: 1, color: '#ffffff'}
-                            ]
-                        )
-                    }
-                },
-            }]
-        };
-        const option4 = {
-            title: {
-                text: '测温数据4'
-            },
-            tooltip: {},
-            legend: {
-                data: ['data4']
-            },
-            xAxis: {
-                data: ["周一", "周二", "周三", "周四", "周五", "周六", "周日"]
-            },
-            yAxis: {},
-            series: [{
-                smooth: true,
-                name: 'data4',
-                type: 'line',
-                data: [5, 20, 36, 10, 10, 20, 5],
-                lineStyle: {
-                    normal: {
-                        color: '#FFB90F',
-                        width: 2,
-                    }
-                },
-                areaStyle: {
-                    normal: {
-                        color: new echarts.graphic.LinearGradient(
-                            0, 0, 0, 1,
-                            [
-                                {offset: 0, color: '#FFF68F'},
-                                {offset: 0.5, color: '#FFD700'},
-                                {offset: 1, color: '#ffffff'}
-                            ]
-                        )
-                    }
-                },
-            }]
-        };
-        const option5 = {
-            title: {
-                text: '测温数据5'
-            },
-            tooltip: {},
-            legend: {
-                data: ['data5']
-            },
-            xAxis: {
-                data: ["周一", "周二", "周三", "周四", "周五", "周六", "周日"]
-            },
-            yAxis: {},
-            series: [{
-                smooth: true,
-                name: 'data5',
-                type: 'line',
-                data: [5, 20, 36, 10, 10, 20, 5],
-                lineStyle: {
-                    normal: {
-                        color: '#9ACD32',
-                        width: 2,
-                    }
-                },
-                areaStyle: {
-                    normal: {
-                        color: new echarts.graphic.LinearGradient(
-                            0, 0, 0, 1,
-                            [
-                                {offset: 0, color: '#FFFFF0'},
-                                {offset: 0.5, color: '#BCEE68'},
-                                {offset: 1, color: '#ffffff'}
-                            ]
-                        )
-                    }
-                },
-            }]
-        };
-        const option6 = {
-            title: {
-                text: '测温数据6'
-            },
-            tooltip: {},
-            legend: {
-                data: ['data6']
-            },
-            xAxis: {
-                data: ["周一", "周二", "周三", "周四", "周五", "周六", "周日"]
-            },
-            yAxis: {},
-            series: [{
-                smooth: true,
-                name: 'data6',
-                type: 'line',
-                data: [5, 20, 36, 10, 10, 20, 5],
-                lineStyle: {
-                    normal: {
-                        color: '#696969',
-                        width: 2,
-                    }
-                },
-                areaStyle: {
-                    normal: {
-                        color: new echarts.graphic.LinearGradient(
-                            0, 0, 0, 1,
-                            [
-                                {offset: 0, color: '#FFE4E1'},
-                                {offset: 0.5, color: '#CFCFCF'},
-                                {offset: 1, color: '#ffffff'}
-                            ]
-                        )
-                    }
-                },
-            }]
-        };
-        const option7 = {
-            title: {
-                text: '测温数据7'
-            },
-            tooltip: {},
-            legend: {
-                data: ['data7']
-            },
-            xAxis: {
-                data: ["周一", "周二", "周三", "周四", "周五", "周六", "周日"]
-            },
-            yAxis: {},
-            series: [{
-                smooth: true,
-                name: 'data7',
-                type: 'line',
-                data: [5, 20, 36, 10, 10, 20, 5],
-                lineStyle: {
-                    normal: {
-                        color: '#8B4513',
-                        width: 2,
-                    }
-                },
-                areaStyle: {
-                    normal: {
-                        color: new echarts.graphic.LinearGradient(
-                            0, 0, 0, 1,
-                            [
-                                {offset: 0, color: '#DEB887'},
-                                {offset: 0.5, color: '#CD853F'},
-                                {offset: 1, color: '#ffffff'}
-                            ]
-                        )
-                    }
-                },
-            }]
-        };
-        const option8 = {
-            title: {
-                text: '测温数据8'
-            },
-            tooltip: {},
-            legend: {
-                data: ['data8']
-            },
-            xAxis: {
-                data: ["周一", "周二", "周三", "周四", "周五", "周六", "周日"]
-            },
-            yAxis: {},
-            series: [{
-                smooth: true,
-                name: 'data8',
-                type: 'line',
-                data: [5, 20, 36, 10, 10, 20, 5],
-                lineStyle: {
-                    normal: {
-                        color: '#006400',
-                        width: 2,
-                    }
-                },
-                areaStyle: {
-                    normal: {
-                        color: new echarts.graphic.LinearGradient(
-                            0, 0, 0, 1,
-                            [
-                                {offset: 0, color: '#EEE8AA'},
-                                {offset: 0.5, color: '#BDB76B'},
-                                {offset: 1, color: '#ffffff'}
-                            ]
-                        )
-                    }
-                },
-            }]
-        };
-        const option9 = {
-            title: {
-                text: '测温数据9'
-            },
-            tooltip: {},
-            legend: {
-                data: ['data9']
-            },
-            xAxis: {
-                data: ["周一", "周二", "周三", "周四", "周五", "周六", "周日"]
-            },
-            yAxis: {},
-            series: [{
-                smooth: true,
-                name: 'data9',
-                type: 'line',
-                data: [5, 20, 36, 10, 10, 20, 5],
-                lineStyle: {
-                    normal: {
-                        color: '#1E90FF',
-                        width: 2,
-                    }
-                },
-                areaStyle: {
-                    normal: {
-                        color: new echarts.graphic.LinearGradient(
-                            0, 0, 0, 1,
-                            [
-                                {offset: 0, color: '#B0C4DE'},
-                                {offset: 0.5, color: '#48D1CC'},
-                                {offset: 1, color: '#ffffff'}
-                            ]
-                        )
-                    }
-                },
-            }]
-        };
+        const chart1 = echarts.init(this.$refs.chart1);
+        const chart2 = echarts.init(this.$refs.chart2);
+        const chart3 = echarts.init(this.$refs.chart3);
+        const chart4 = echarts.init(this.$refs.chart4);
+        const chart5 = echarts.init(this.$refs.chart5);
+        const chart6 = echarts.init(this.$refs.chart6);
+        const chart7 = echarts.init(this.$refs.chart7);
+        const chart8 = echarts.init(this.$refs.chart8);
+        const chart9 = echarts.init(this.$refs.chart9);
 
 
-        // 使用配置项显示图表
-        chart1.setOption(option1);
-        chart2.setOption(option2);
-        chart3.setOption(option3);
-        chart4.setOption(option4);
-        chart5.setOption(option5);
-        chart6.setOption(option6);
-        chart7.setOption(option7);
-        chart8.setOption(option8);
-        chart9.setOption(option9);
-
-// 循环更新数据
-        for (let i = 1; i <= 9; i++) {
-            const chart = echarts.init(document.getElementById(`ec${i}`));
-            const option = {
-                title: {
-                    text: `测温数据${i}`
-                },
-                // ...
-            };
-            chart.setOption(option);
-        }
+        chart1.setOption(this.chartData1);
+        chart2.setOption(this.chartData2);
+        chart3.setOption(this.chartData3);
+        chart4.setOption(this.chartData4);
+        chart5.setOption(this.chartData5);
+        chart6.setOption(this.chartData6);
+        chart7.setOption(this.chartData7);
+        chart8.setOption(this.chartData8);
+        chart9.setOption(this.chartData9);
 
 
-
-// 获取按钮
-        const button = document.getElementById("btn");
-// 绑定click事件
-        button.addEventListener("click", function () {
-            // 点击按钮后执行的代码
+        this.chartStates.forEach(state => {
+            const chart = echarts.init(document.getElementById(state.name));
+            chart.setOption({
+                // 配置项
+            });
+            // 存储图表实例
+            state.chart = chart;
         });
 
-
-
-
-
-        const chart = echarts.init(this.$refs.chart);
-        chart.setOption(this.chartData);
         setInterval(() => {
-            // this.chartData.series[0].data = this.generateData();
-            // chart.setOption(this.chartData);
+            // this.newdata = this.generateData();
 
-          // 生成新的数据
-            const newData1 = this.generateData1();
-            const newData2 = this.generateData2();
-            const newData3 = this.generateData3();
-            const newData4 = this.generateData4();
-            const newData5 = this.generateData5();
-            const newData6 = this.generateData6();
-            const newData7 = this.generateData7();
-            const newData8 = this.generateData8();
-            const newData9 = this.generateData9();
-            const newcurrenttime = this.generatecurrenttime();
+            // 数组predictdata1左移
+            if (this.checkedstatus === true) {
+                //
+                this.predictdata1.shift();
+                this.predictdata1[6] = this.kalmanFilter();
+                this.chartData1.series[1].data = this.predictdata1;
+                this.chartData1.legend.data = ['原始数据', '卡尔曼预测']
+
+            } else {
+                this.chartData1.legend.data = []
+                this.chartData1.series[1].hidden = true;
+
+            }
+            // 获取最新的数据
+            // this.generateData();
+
+            const now = new Date();
+            // 获取3s前的时间
+            const before3s = new Date(now.getTime() - 3000);
+            const before6s = new Date(now.getTime() - 6000);
+            const before9s = new Date(now.getTime() - 9000);
+            const before12s = new Date(now.getTime() - 12000);
+            const before15s = new Date(now.getTime() - 15000);
+            const before18s = new Date(now.getTime() - 18000);
+            const before21s = new Date(now.getTime() - 21000);
+            const before24s = new Date(now.getTime() - 24000);
+            const before27s = new Date(now.getTime() - 27000);
+            // const before30s = new Date(now.getTime() - 30000);
+
+            this.timeserial = [now, before3s, before6s, before9s, before12s, before15s, before18s, before21s, before24s, before27s];
+            // const hour = now.getHours();
+
+            this.newdata = this.generateData();
+
+            // 调用接口获取测温数据并更新 temperatureData 变量
+
+            this.chartData1.xAxis.data = this.timeserial;
+            this.chartData2.xAxis.data = this.timeserial;
+            this.chartData3.xAxis.data = this.timeserial;
+            this.chartData4.xAxis.data = this.timeserial;
+            this.chartData5.xAxis.data = this.timeserial;
+            this.chartData6.xAxis.data = this.timeserial;
+            this.chartData7.xAxis.data = this.timeserial;
+            this.chartData8.xAxis.data = this.timeserial;
+            this.chartData9.xAxis.data = this.timeserial;
 
 
-            chart.setOption({
-                series: [{
-                    data: newData
-                }
-                ]
-            });
+            this.chartData1.series[0].data = this.temperature1;
+            // 将时间序列 timeserial 给chartData1的xAxis
+
+            this.chartData2.series[0].data = this.temperature2;
+
+            this.chartData3.series[0].data = this.temperature3;
+            this.chartData4.series[0].data = this.temperature4;
+            this.chartData5.series[0].data = this.temperature5;
+            this.chartData6.series[0].data = this.temperature6;
+            this.chartData7.series[0].data = this.temperature7;
+            this.chartData8.series[0].data = this.temperature8;
+            this.chartData9.series[0].data = this.temperature9;
+
+            chart1.setOption(this.chartData1);
+            chart2.setOption(this.chartData2);
+            chart3.setOption(this.chartData3);
+            chart4.setOption(this.chartData4);
+            chart5.setOption(this.chartData5);
+            chart6.setOption(this.chartData6);
+            chart7.setOption(this.chartData7);
+            chart8.setOption(this.chartData8);
+            chart9.setOption(this.chartData9);
+
+
             // 更新温度数据
-            this.temperature1[0] = newData[0].value;
+
         }, 3000);
+    },
 
-
-        this.showCharts([0, 1, 2, 3, 4, 5]);
+    watch: {
+        temperatureData(newVal) {
+            if (newVal) {
+                // 更新 Echarts 图表数据
+                this.chartData6.series[0].data = newVal
+            }
+        },
+        chartStates: {
+            deep: true,
+            handler(states) {
+                states.forEach(state => {
+                    if (state.chart) {
+                        if (state.visible) {
+                            state.chart.show();
+                        } else {
+                            state.chart.hide();
+                        }
+                    }
+                });
+            }
+        }
 
     },
     methods: {
-        // handleClick1() {
-        //
-        //     axios.get('http://localhost:10866/getdbtemperature').then((response) => {
-        //         this.text = response.data
-        //     })
-        // },
-        generateData() {
-            // const data = [];
-            // for (let i = 0; i < 7; i++) {
-            //     data.push(Math.floor(Math.random() * 1000));
-            // }
+        kalmanFilter() {
 
-            axios.get('http://localhost:10866/getdbtemperature').then((response) => {
+            let m;
+            this.nowtemp[0] = this.temperature1[0];
+            // this.nowtemp[0] = 100;
+            this.nowtemp[1] = this.temperature2[0];
+            this.nowtemp[2] = this.temperature3[0];
+            this.nowtemp[3] = this.temperature4[0];
+            this.nowtemp[4] = this.temperature5[0];
+            this.nowtemp[5] = this.temperature6[0];
+            this.nowtemp[6] = this.temperature7[0];
+            this.nowtemp[7] = this.temperature8[0];
+            this.nowtemp[8] = this.temperature9[0];
 
-                this.temperature1 = response.data.map(item => item.ec1);
-                this.temperature2 = response.data.map(item => item.ec2);
-                this.temperature3 = response.data.map(item => item.ec3);
-                this.temperature4 = response.data.map(item => item.ec4);
-                this.temperature5 = response.data.map(item => item.ec5);
-                this.temperature6 = response.data.map(item => item.ec6);
-                this.temperature7 = response.data.map(item => item.ec7);
-                this.temperature8 = response.data.map(item => item.ec8);
-                this.temperature9 = response.data.map(item => item.ec9);
-                this.currenttime = response.data.map(item => item.currenttime);
-            });
-            return this.temperature1;
-            return this.temperature2;
-            return this.temperature3;
-            return this.temperature4;
-            return this.temperature5;
-            return this.temperature6;
-        },
 
-        showCharts(indexes) {
-            this.charts.forEach((chart, index) => {
-                if (indexes.includes(index)) {
-                    chart.setOption({hide: 'none'});
+            for (m = 0; m <= 8; m++) {
+                this.x_pred[m] = this.x[m]
+
+                this.p_pred[m] = this.p[m] + this.q[m]
+
+
+                // 更新状态
+                if (this.nowtemp[m] != null) {
+                    this.z[m] = this.nowtemp[m]
+                    this.k[m] = this.p_pred[m] / (this.p_pred[m] + this.r[m])
+
+                    if (this.x[m] != null) {
+                        this.x_update[m] = this.x_pred[m] + this.k[m] * (this.z[m] - this.x_pred[m])
+
+                        this.p_update[m] = (1 - this.k[m]) * this.p_pred[m]
+                        this.x[m] = this.x_update[m]
+                        this.p[m] = this.p_update[m]
+                        return this.x_update[m]
+                    } else {
+                        console.log("x[m] is NaN", m)
+                    }
                 } else {
-                    chart.setOption({show: 'none'});
+                    console.log("nowtemp is NaN", m)
                 }
-            });
+            }
+// 判断所有温度是否达到 100°
+            if (this.nowtemp.every(temp => temp >= 100)) {
+                alert('所有温度已达到 100°，请立即停止操作！');
+            }
         },
-        showAllCharts() {
-            this.showCharts([0, 1, 2, 3, 4, 5]);
+
+        generateData() {
+            axios.get('http://localhost:10866/getdbtemperature').then((response) => {
+                this.temperature1 = response.data.map(item => item.data1);
+                this.temperature2 = response.data.map(item => item.data2);
+                this.temperature3 = response.data.map(item => item.data3);
+                this.temperature4 = response.data.map(item => item.data4);
+                this.temperature5 = response.data.map(item => item.data5);
+                this.temperature6 = response.data.map(item => item.data6);
+                this.temperature7 = response.data.map(item => item.data7);
+                this.temperature8 = response.data.map(item => item.data8);
+                this.temperature9 = response.data.map(item => item.data9);
+
+            }).catch((error) => {
+                console.log(error);
+            });
+            if (this.temperature1.length === 0) {
+                return;
+            }
+            return this.temperature1, this.temperature2, this.temperature3, this.temperature4, this.temperature5, this.temperature6, this.temperature7, this.temperature8, this.temperature9;
         }
 
     },
-
 
 }
 
 </script>
-<style>
-#ec1, #ec2, #ec3,#ec4, #ec5, #ec6 {
-    width: 100%;
-
-    height: 400px;
-
-}
-#hi1, #hi2, #hi3{
-    width: 100%;
-
-    height: 400px;
-
-}
-.bv-example-row {
-    position: relative;
-}
-
-
-hideCharts{
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    transform: translateX(-100%);
-    transition: transform 0.5s ease;
-}
-
-button {
-    display: block;
-    margin-top: 20px;
-}
-</style>
-
-
