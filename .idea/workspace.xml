@@ -5,14 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="91036d36-d2ab-466a-a5ad-eee88f80c62d" name="变更" comment="change workspace">
-      <change afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/vuexy-full-version/src/views/apps/breaker/MyChart.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/32b4b35d-6ce4-4627-aaa6-3376b4f0462f.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/b6ce9f15-1907-4112-8bdd-e275cb38ed01.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/b6ce9f15-1907-4112-8bdd-e275cb38ed01.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/f45768a1-7605-436c-b9bc-ac1f1e639078.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Task/mydatabase.db" beforeDir="false" afterPath="$PROJECT_DIR$/Task/mydatabase.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Task/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Task/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Task/test.js" beforeDir="false" afterPath="$PROJECT_DIR$/Task/test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/vuexy-full-version/src/views/apps/breaker/breaker.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/vuexy-full-version/src/views/apps/breaker/breaker.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/vuexy-full-version/src/views/apps/breaker/mydatabase.db" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/vuexy-full-version/src/views/apps/breaker/test.js" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,32 +55,32 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "C:/Users/Han/Desktop/data-visualization-with-covid-19-main",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "项目",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "preferences.editor",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Han/Desktop/data-visualization-with-covid-19-main&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;项目&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.editor&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "vue.recent.templates": [
-      "Vue Class API Component"
+  &quot;keyToStringList&quot;: {
+    &quot;vue.recent.templates&quot;: [
+      &quot;Vue Class API Component&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="npm.serve (1)">
     <configuration name="xy3.js" type="NodeJSConfigurationType" nameIsGenerated="true" path-to-js-file="xy3.js" working-dir="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/vuexy-starter-kit/src/@core/layouts/sql_session">
       <method v="2" />
@@ -160,7 +161,9 @@
       <workItem from="1684464928652" duration="3030000" />
       <workItem from="1684473045583" duration="11055000" />
       <workItem from="1684975023069" duration="7835000" />
-      <workItem from="1684982996213" duration="16807000" />
+      <workItem from="1684982996213" duration="16982000" />
+      <workItem from="1685061497976" duration="24736000" />
+      <workItem from="1685164271132" duration="378000" />
     </task>
     <task id="LOCAL-00001" summary="change workspace">
       <created>1684112004864</created>

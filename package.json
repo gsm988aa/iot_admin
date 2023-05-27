@@ -8,6 +8,7 @@
     "express": "^4.18.2",
     "fs": "^0.0.1-security",
     "jquery": "^3.7.0",
+    "nodemailer": "^6.9.2",
     "serialport": "^10.5.0",
     "sqlite3": "^5.1.6",
     "yarn": "^1.22.19"

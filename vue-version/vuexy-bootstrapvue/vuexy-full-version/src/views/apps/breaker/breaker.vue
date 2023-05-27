@@ -1,10 +1,14 @@
 <template>
     <b-container fluid>
-
         <b-row>
-            <b-col cols="12">
-                <b-card className="center">
-                    <b-form-checkbox v-model="checkedstatus">增加卡尔曼滤波器温度预测</b-form-checkbox>
+<!--            <b-col cols="2">-->
+<!--                <b-card className="center">-->
+<!--                    <b-form-checkbox v-model="checkedstatus">增加卡尔曼滤波器温度预测</b-form-checkbox>-->
+<!--                </b-card>-->
+<!--            </b-col>-->
+            <b-col cols="4">
+                <b-card>
+                    <b-form-checkbox v-model="checkedstatus" @change="showKalmanChange">显示卡尔曼温度预测曲线,超温告警,邮件提醒</b-form-checkbox>
                 </b-card>
             </b-col>
         </b-row>
@@ -12,102 +16,97 @@
         <b-row>
             <b-col cols="4">
                 <b-card>
-                    <div ref="chart1" style="width: 100%; height: 400px;">
-                    </div>
-
+                    <div ref="chart1" style="width: 100%; height: 400px;"></div>
+                    <div  ref="chart1-kalman" ></div>
                 </b-card>
             </b-col>
             <b-col cols="4">
                 <b-card>
-                    <div ref="chart2" style="width: 100%; height: 400px;">
-                    </div>
-
+                    <div ref="chart2" style="width: 100%; height: 400px;"></div>
+                    <div ref="chart2-kalman"></div>
                 </b-card>
             </b-col>
             <b-col cols="4">
                 <b-card>
-                    <div ref="chart3" style="width: 100%; height: 400px;">
-                    </div>
-
-                </b-card>
-            </b-col>
-
-        </b-row>
-
-
-        <b-row>
-            <b-col cols="4">
-                <b-card>
-                    <div ref="chart4" style="width: 100%; height: 400px;">
-                    </div>
-                </b-card>
-            </b-col>
-            <b-col cols="4">
-                <b-card>
-                    <div ref="chart5" style="width: 100%; height: 400px;">
-                    </div>
-                </b-card>
-            </b-col>
-            <b-col cols="4">
-                <b-card>
-                    <div ref="chart6" style="width: 100%; height: 400px;">
-                    </div>
+                    <div ref="chart3" style="width: 100%; height: 400px;"></div>
+                    <div  ref="chart3-kalman"></div>
                 </b-card>
             </b-col>
         </b-row>
 
+        <b-row>
+            <b-col cols="4">
+                <b-card>
+                    <div ref="chart4" style="width: 100%; height: 400px;"></div>
+                    <div  ref="chart4-kalman"></div>
+                </b-card>
+            </b-col>
+            <b-col cols="4">
+                <b-card>
+                    <div ref="chart5" style="width: 100%; height: 400px;"></div>
+                    <div  ref="chart5-kalman"></div>
+                </b-card>
+            </b-col>
+            <b-col cols="4">
+                <b-card>
+                    <div ref="chart6" style="width: 100%; height: 400px;"></div>
+                    <div  ref="chart6-kalman"></div>
+                </b-card>
+            </b-col>
+        </b-row>
 
         <b-row>
             <b-col cols="4">
                 <b-card>
-                    <div ref="chart7" style="width: 100%; height: 400px;">
-                    </div>
+                    <div ref="chart7" style="width: 100%; height: 400px;"></div>
+                    <div  ref="chart7-kalman"></div>
                 </b-card>
             </b-col>
             <b-col cols="4">
                 <b-card>
-                    <div ref="chart8" style="width: 100%; height: 400px;">
-                    </div>
+                    <div ref="chart8" style="width: 100%; height: 400px;"></div>
+                    <div  ref="chart8-kalman"></div>
                 </b-card>
             </b-col>
-
             <b-col cols="4">
                 <b-card>
-                    <div ref="chart9" style="width: 100%; height: 400px;">
-                    </div>
+                    <div ref="chart9" style="width: 100%; height: 400px;"></div>
+                    <div  ref="chart9-kalman" ></div>
                 </b-card>
             </b-col>
         </b-row>
 
 
         <div>
-            <ul>
-                <li v-for="(state, index) in chartStates" :key="index">
-                    <label>
-                        <input type="checkbox" v-model="state.visible">
-                        {{ state.name }}
-                    </label>
-                </li>
-            </ul>
-            <div v-for="(state, index) in chartStates" :key="index">
-                <div :id="state.name"></div>
-            </div>
+            <b-modal v-model="showModal" hide-footer>
+                <template #modal-title>
+                    温度预测超过100°，注意安全！
+                </template>
+                <div class="d-block text-center">
+                    <h3>{{ alertMessage }}</h3>
+                </div>
+                <b-button class="mt-3" block @click="hideModal">知道了</b-button>
+            </b-modal>
         </div>
 
-    </b-container>
 
+
+
+    </b-container>
 </template>
+
 
 <script>
 import {
-    BRow, BCol, BCardGroup, BCard, BCardText, BButton, BFormTextarea, BContainer, BFormSelect, BFormCheckbox
+    BRow, BCol, BCardGroup, BCard, BCardText, BButton, BFormTextarea, BContainer,  BFormCheckbox,BModal
 } from 'bootstrap-vue'
 import echarts from 'echarts';
 import axios from 'axios';
-
+import { ref } from 'vue';
 
 export default {
-    components: {
+
+        components: {
         BContainer,
         BRow,
         BCol,
@@ -118,25 +117,15 @@ export default {
         BFormCheckbox,
         BCardGroup,
         BCardText,
-
+        BModal,
 
     },
-
+    
 
     data() {
         return {
-            chartStates: [
-                { name: 'chart1', visible: true },
-                { name: 'chart2', visible: true },
-                { name: 'chart3', visible: true },
-                { name: 'chart4', visible: true },
-                { name: 'chart5', visible: true },
-                { name: 'chart6', visible: true },
-                { name: 'chart7', visible: true },
-                { name: 'chart8', visible: true },
-                { name: 'chart9', visible: true },
-            ],
             checkedstatus: false,
+            showKalman: false,
             nowtemp: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
             x: [10, 10, 10, 10, 10, 10, 10, 10, 10, 10],
             x_pred: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -144,6 +133,8 @@ export default {
             z: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
             p: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
             q: [0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01],
+            // r是输入噪声，可以假设为0
+            // r:  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
             r: [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1],
             k: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
             x_update: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -153,15 +144,15 @@ export default {
             switch9: true,
             newdata: [],
             // 预测温度
-            predictdata1: [0, 0, 0, 0, 0, 0, 0],
-            predictdata2: [0, 0, 0, 0, 0, 0, 0],
-            predictdata3: [0, 0, 0, 0, 0, 0, 0],
-            predictdata4: [0, 0, 0, 0, 0, 0, 0],
-            predictdata5: [0, 0, 0, 0, 0, 0, 0],
-            predictdata6: [0, 0, 0, 0, 0, 0, 0],
-            predictdata7: [0, 0, 0, 0, 0, 0, 0],
-            predictdata8: [0, 0, 0, 0, 0, 0, 0],
-            predictdata9: [0, 0, 0, 0, 0, 0, 0],
+            predictdata1: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            predictdata2: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            predictdata3: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            predictdata4: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            predictdata5: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            predictdata6: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            predictdata7: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            predictdata8: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            predictdata9: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 
             temperature1: [],
             temperature2: [],
@@ -174,7 +165,7 @@ export default {
             temperature9: [],
             currenttime: [],
 
-            legendData: ['卡尔曼预测'],
+            legendData: ['原始数据', '卡尔曼预测'],
 
             // 定义一个共用的 series 数据
             // seriesData: [
@@ -188,10 +179,11 @@ export default {
 
             chartData1: {
                 title: {
-                    text: '温度：'
+                    // 将当前temperature1[0]的值显示在标题上
+                    text: '温度：' ,
                 },
                 legend: {
-                    data: ['原始数据', '卡尔曼预测'],
+                    data: ['原始数据', 'chart1-kalman'],
                     show: true,
                 },
                 //悬停数字
@@ -259,11 +251,12 @@ export default {
                         smooth: true
                     },
                     {
-                        name: '卡尔曼预测',
+                        name: 'chart1-kalman',
                         icon: 'circle',
-                        data: [10, 10, 10, 10, 10, 10, 10],
+                        data: [],
                         type: 'line',
                         smooth: true,
+
                     },
                 ],
 
@@ -273,7 +266,8 @@ export default {
                     text: '温度：'
                 },
                 legend: {
-                    data: this.legendData
+                    data: ['原始数据', 'chart2-kalman'],
+                    show: true,
                 },
                 //悬停数字
                 tooltip: {
@@ -335,8 +329,8 @@ export default {
                         smooth: true
                     },
                     {
-                        name: '卡尔曼预测',
-                        data: [10, 10, 10, 10, 10, 10, 10],
+                        name: 'chart2-kalman',
+                        data: [],
                         type: 'line',
                         smooth: true,
                     }
@@ -347,7 +341,8 @@ export default {
                     text: '温度：'
                 },
                 legend: {
-                    data: this.legendData
+                    data: ['原始数据', 'chart3-kalman'],
+                    show: true,
                 },
                 //悬停数字
                 tooltip: {
@@ -409,8 +404,8 @@ export default {
                         smooth: true
                     },
                     {
-                        name: '卡尔曼预测',
-                        data: [10, 10, 10, 10, 10, 10, 10],
+                        name: 'chart3-kalman',
+                        data: [],
                         type: 'line',
                         smooth: true,
                     }
@@ -421,7 +416,8 @@ export default {
                     text: '温度：'
                 },
                 legend: {
-                    data: this.legendData
+                    data: ['原始数据', 'chart4-kalman'],
+                    show: true,
                 },
                 //悬停数字
                 tooltip: {
@@ -483,8 +479,8 @@ export default {
                         smooth: true
                     },
                     {
-                        name: '卡尔曼预测',
-                        data: [10, 10, 10, 10, 10, 10, 10],
+                        name: 'chart4-kalman',
+                        data: [],
                         type: 'line',
                         smooth: true,
                     }
@@ -495,7 +491,8 @@ export default {
                     text: '温度：'
                 },
                 legend: {
-                    data: this.legendData
+                    data: ['原始数据', 'chart5-kalman'],
+                    show: true,
                 },
                 //悬停数字
                 tooltip: {
@@ -556,8 +553,8 @@ export default {
                         smooth: true
                     },
                     {
-                        name: '卡尔曼预测',
-                        data: [10, 10, 10, 10, 10, 10, 10],
+                        name: 'chart5-kalman',
+                        data: [],
                         type: 'line',
                         smooth: true,
                     }
@@ -568,8 +565,8 @@ export default {
                     text: '温度：'
                 },
                 legend: {
-                    data: ['原始数据', '卡尔曼预测'],
-
+                    data: ['原始数据', 'chart6-kalman'],
+                    show: true,
                 },
                 //悬停数字
                 tooltip: {
@@ -632,8 +629,8 @@ export default {
                         smooth: true
                     },
                     {
-                        name: '卡尔曼预测',
-                        data: [10, 10, 10, 10, 10, 10, 10],
+                        name: 'chart6-kalman',
+                        data: [],
                         type: 'line',
                         smooth: true,
                     }
@@ -644,7 +641,8 @@ export default {
                     text: '温度：'
                 },
                 legend: {
-                    data: this.legendData
+                    data: ['原始数据', 'chart7-kalman'],
+                    show: true,
                 },
                 //悬停数字
                 tooltip: {
@@ -706,8 +704,8 @@ export default {
                         smooth: true
                     },
                     {
-                        name: '卡尔曼预测',
-                        data: [10, 10, 10, 10, 10, 10, 10],
+                        name: 'chart7-kalman',
+                        data: [],
                         type: 'line',
                         smooth: true,
                     }
@@ -720,7 +718,8 @@ export default {
                     text: '温度：'
                 },
                 legend: {
-                    data: this.legendData
+                    data: ['原始数据', 'chart8-kalman'],
+                    show: true,
                 },
                 //悬停数字
                 tooltip: {
@@ -782,8 +781,8 @@ export default {
                         smooth: true
                     },
                     {
-                        name: '卡尔曼预测',
-                        data: [10, 10, 10, 10, 10, 10, 10],
+                        name: 'chart8-kalman',
+                        data: [],
                         type: 'line',
                         smooth: true,
                     }
@@ -796,7 +795,8 @@ export default {
                     text: '温度：'
                 },
                 legend: {
-                    data: this.legendData
+                    data: ['原始数据', 'chart9-kalman'],
+                    show: true,
                 },
                 //悬停数字
                 tooltip: {
@@ -858,8 +858,8 @@ export default {
                         smooth: true
                     },
                     {
-                        name: '卡尔曼预测',
-                        data: [10, 10, 10, 10, 10, 10, 10],
+                        name: 'chart9-kalman',
+                        data: [],
                         type: 'line',
                         smooth: true,
                     }
@@ -869,6 +869,7 @@ export default {
 
         }
     },
+
 
 
     mounted() {
@@ -883,7 +884,6 @@ export default {
         const chart8 = echarts.init(this.$refs.chart8);
         const chart9 = echarts.init(this.$refs.chart9);
 
-
         chart1.setOption(this.chartData1);
         chart2.setOption(this.chartData2);
         chart3.setOption(this.chartData3);
@@ -893,31 +893,63 @@ export default {
         chart7.setOption(this.chartData7);
         chart8.setOption(this.chartData8);
         chart9.setOption(this.chartData9);
-
-
-        this.chartStates.forEach(state => {
-            const chart = echarts.init(document.getElementById(state.name));
-            chart.setOption({
-                // 配置项
-            });
-            // 存储图表实例
-            state.chart = chart;
-        });
-
         setInterval(() => {
-            // this.newdata = this.generateData();
 
-            // 数组predictdata1左移
             if (this.checkedstatus === true) {
-                //
-                this.predictdata1.shift();
-                this.predictdata1[6] = this.kalmanFilter();
+                // 数组predictdata1右移
+                for (let i = 9; i >= 0; i--) {
+                    this.predictdata1[i + 1] = this.predictdata1[i];
+                    this.predictdata2[i + 1] = this.predictdata2[i];
+                    this.predictdata3[i + 1] = this.predictdata3[i];
+                    this.predictdata4[i + 1] = this.predictdata4[i];
+                    this.predictdata5[i + 1] = this.predictdata5[i];
+                    this.predictdata6[i + 1] = this.predictdata6[i];
+                    this.predictdata7[i + 1] = this.predictdata7[i];
+                    this.predictdata8[i + 1] = this.predictdata8[i];
+                    this.predictdata9[i + 1] = this.predictdata9[i];
+                }
+                // 获取kalmanFilter()的值
+                this.predictdata1[0] = this.kalmanFilter(0);
+                this.predictdata2[0] = this.kalmanFilter(1);
+                this.predictdata3[0] = this.kalmanFilter(2);
+                this.predictdata4[0] = this.kalmanFilter(3);
+                this.predictdata5[0] = this.kalmanFilter(4);
+                this.predictdata6[0] = this.kalmanFilter(5);
+                this.predictdata7[0] = this.kalmanFilter(6);
+                this.predictdata8[0] = this.kalmanFilter(7);
+                this.predictdata9[0] = this.kalmanFilter(8);
+
                 this.chartData1.series[1].data = this.predictdata1;
-                this.chartData1.legend.data = ['原始数据', '卡尔曼预测']
+                this.chartData2.series[1].data = this.predictdata2;
+                this.chartData3.series[1].data = this.predictdata3;
+                this.chartData4.series[1].data = this.predictdata4;
+                this.chartData5.series[1].data = this.predictdata5;
+                this.chartData6.series[1].data = this.predictdata6;
+                this.chartData7.series[1].data = this.predictdata7;
+                this.chartData8.series[1].data = this.predictdata8;
+                this.chartData9.series[1].data = this.predictdata9;
+
+
+                this.chartData1.legend.data = ['原始数据', 'chart1-kalman']
+                this.chartData2.legend.data = ['原始数据', 'chart2-kalman']
+                this.chartData3.legend.data = ['原始数据', 'chart3-kalman']
+                this.chartData4.legend.data = ['原始数据', 'chart4-kalman']
+                this.chartData5.legend.data = ['原始数据', 'chart5-kalman']
+                this.chartData6.legend.data = ['原始数据', 'chart6-kalman']
+                this.chartData7.legend.data = ['原始数据', 'chart7-kalman']
+                this.chartData8.legend.data = ['原始数据', 'chart8-kalman']
+                this.chartData9.legend.data = ['原始数据', 'chart9-kalman']
 
             } else {
                 this.chartData1.legend.data = []
-                this.chartData1.series[1].hidden = true;
+                this.chartData2.legend.data = []
+                this.chartData3.legend.data = []
+                this.chartData4.legend.data = []
+                this.chartData5.legend.data = []
+                this.chartData6.legend.data = []
+                this.chartData7.legend.data = []
+                this.chartData8.legend.data = []
+                this.chartData9.legend.data = []
 
             }
             // 获取最新的数据
@@ -954,11 +986,10 @@ export default {
             this.chartData9.xAxis.data = this.timeserial;
 
 
-            this.chartData1.series[0].data = this.temperature1;
             // 将时间序列 timeserial 给chartData1的xAxis
 
+            this.chartData1.series[0].data = this.temperature1;
             this.chartData2.series[0].data = this.temperature2;
-
             this.chartData3.series[0].data = this.temperature3;
             this.chartData4.series[0].data = this.temperature4;
             this.chartData5.series[0].data = this.temperature5;
@@ -977,80 +1008,138 @@ export default {
             chart8.setOption(this.chartData8);
             chart9.setOption(this.chartData9);
 
+            // m不是全局变量所以无法在vue的mounted调用method中内容
 
-            // 更新温度数据
+            if (this.x_update[0] > 100 || this.x_update[1] > 100 || this.x_update[2] > 100 || this.x_update[3] > 100 || this.x_update[4] > 100 || this.x_update[5] > 100 || this.x_update[6] > 100 || this.x_update[7] > 100 || this.x_update[8] > 100) {
+                alert("预测温度超过100°C，请注意安全！");
+                // 调用函数应该不用加this指针  好吧，我说错了  要加this指针
+                this.sendEmail();
+            }
 
         }, 3000);
     },
 
     watch: {
-        temperatureData(newVal) {
-            if (newVal) {
-                // 更新 Echarts 图表数据
-                this.chartData6.series[0].data = newVal
-            }
-        },
-        chartStates: {
-            deep: true,
-            handler(states) {
-                states.forEach(state => {
-                    if (state.chart) {
-                        if (state.visible) {
-                            state.chart.show();
-                        } else {
-                            state.chart.hide();
-                        }
-                    }
-                });
-            }
-        }
+        // 这段是什么意思？
+        // 之前弄的，可能删了也没关系
 
+        // temperatureData(newVal) {
+        //     if (newVal) {
+        //         // 更新 Echarts 图表数据
+        //         this.chartData6.series[0].data = newVal
+        //     }
+        // },
+        // checkedstatus(newVal) {
+        //     if (!newVal) {
+        //         this.chartData1.legend.data = [];
+        //         this.chartData2.legend.data = [];
+        //         this.chartData3.legend.data = [];
+        //         this.chartData4.legend.data = [];
+        //         this.chartData5.legend.data = [];
+        //         this.chartData6.legend.data = [];
+        //         this.chartData7.legend.data = [];
+        //         this.chartData8.legend.data = [];
+        //         this.chartData9.legend.data = [];
+        //     }
+        // }
     },
     methods: {
-        kalmanFilter() {
 
+        sendEmail() {
+            axios.get('http://localhost:3000/sendemail')
+                .then(response => {
+                    console.log(response.data);
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+        },
+
+        showKalmanChange(value) {
+            let list = ''
+            if (value) {
+                list = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            } else {
+                list = []
+            }
+            this.chartData1.series[1].data = list
+            this.chartData2.series[1].data = list
+            this.chartData3.series[1].data = list
+            this.chartData4.series[1].data = list
+            this.chartData5.series[1].data = list
+            this.chartData6.series[1].data = list
+            this.chartData7.series[1].data = list
+            this.chartData8.series[1].data = list
+            this.chartData9.series[1].data = list
+
+            const chart1 = echarts.init(this.$refs.chart1);
+            const chart2 = echarts.init(this.$refs.chart2);
+            const chart3 = echarts.init(this.$refs.chart3);
+            const chart4 = echarts.init(this.$refs.chart4);
+            const chart5 = echarts.init(this.$refs.chart5);
+            const chart6 = echarts.init(this.$refs.chart6);
+            const chart7 = echarts.init(this.$refs.chart7);
+            const chart8 = echarts.init(this.$refs.chart8);
+            const chart9 = echarts.init(this.$refs.chart9);
+
+            chart1.setOption(this.chartData1);
+            chart2.setOption(this.chartData2);
+            chart3.setOption(this.chartData3);
+            chart4.setOption(this.chartData4);
+            chart5.setOption(this.chartData5);
+            chart6.setOption(this.chartData6);
+            chart7.setOption(this.chartData7);
+            chart8.setOption(this.chartData8);
+            chart9.setOption(this.chartData9);
+
+        },
+
+
+        kalmanFilter(index) {
             let m;
-            this.nowtemp[0] = this.temperature1[0];
-            // this.nowtemp[0] = 100;
-            this.nowtemp[1] = this.temperature2[0];
-            this.nowtemp[2] = this.temperature3[0];
-            this.nowtemp[3] = this.temperature4[0];
-            this.nowtemp[4] = this.temperature5[0];
-            this.nowtemp[5] = this.temperature6[0];
-            this.nowtemp[6] = this.temperature7[0];
-            this.nowtemp[7] = this.temperature8[0];
-            this.nowtemp[8] = this.temperature9[0];
+            this.nowtemp[0] = this.temperature1[0]
+            this.nowtemp[1] = this.temperature2[0]
+            this.nowtemp[2] = this.temperature3[0]
+            this.nowtemp[3] = this.temperature4[0]
+            this.nowtemp[4] = this.temperature5[0]
+            this.nowtemp[5] = this.temperature6[0]
+            this.nowtemp[6] = this.temperature7[0]
+            this.nowtemp[7] = this.temperature8[0]
+            this.nowtemp[8] = this.temperature9[0]
+            m = index
 
+            // for (m = 0; m <= 8; m++) {
+            this.x_pred[m] = this.x[m]
+            this.p_pred[m] = this.p[m] + this.q[m]
+            // 更新状态
+            if (this.nowtemp[m] != null) {
+                this.z[m] = this.nowtemp[m]
+                this.k[m] = this.p_pred[m] / (this.p_pred[m] + this.r[m])
+                if (this.x[m] != null) {
+                    this.x_update[m] = this.x_pred[m] + this.k[m] * (this.z[m] - this.x_pred[m])
+                    this.p_update[m] = (1 - this.k[m]) * this.p_pred[m]
+                    this.x[m] = this.x_update[m]
+                    this.p[m] = this.p_update[m]
 
-            for (m = 0; m <= 8; m++) {
-                this.x_pred[m] = this.x[m]
-
-                this.p_pred[m] = this.p[m] + this.q[m]
-
-
-                // 更新状态
-                if (this.nowtemp[m] != null) {
-                    this.z[m] = this.nowtemp[m]
-                    this.k[m] = this.p_pred[m] / (this.p_pred[m] + this.r[m])
-
-                    if (this.x[m] != null) {
-                        this.x_update[m] = this.x_pred[m] + this.k[m] * (this.z[m] - this.x_pred[m])
-
-                        this.p_update[m] = (1 - this.k[m]) * this.p_pred[m]
-                        this.x[m] = this.x_update[m]
-                        this.p[m] = this.p_update[m]
-                        return this.x_update[m]
-                    } else {
-                        console.log("x[m] is NaN", m)
+                    if (this.x_update[m] > 100) {
+                        alert("温度超过100°C，请注意安全！")
+                        axios.get('http://localhost:3000/sendemail', {
+                            to: '2634363039@qq.com',
+                            subject: '温度超过100°C警告',
+                            text: '温度超过100°C，请注意安全！'
+                        }).then((response) => {
+                            console.log(response.data)
+                        })
                     }
+
+                    return this.x_update[m]
                 } else {
-                    console.log("nowtemp is NaN", m)
+                    console.log("x[m] is NaN", m)
                 }
+            } else {
+                console.log("nowtemp is NaN", m)
             }
-// 判断所有温度是否达到 100°
-            if (this.nowtemp.every(temp => temp >= 100)) {
-                alert('所有温度已达到 100°，请立即停止操作！');
-            }
+            // }
         },
 
         generateData() {
@@ -1072,10 +1161,8 @@ export default {
                 return;
             }
             return this.temperature1, this.temperature2, this.temperature3, this.temperature4, this.temperature5, this.temperature6, this.temperature7, this.temperature8, this.temperature9;
-        }
-
-    },
-
+        },
+    }
 }
 
 </script>

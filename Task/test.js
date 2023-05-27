@@ -3,7 +3,10 @@ const {SerialPort} = require('serialport')
 const express = require('express');
 const app = express();
 const cors = require('cors');
-const {ReadlineParser} = require('@serialport/parser-readline')
+const {ReadlineParser} = require('@serialport/parser-readline');
+
+const nodemailer = require('nodemailer');
+
 
 
 const serialport3 = new SerialPort({path: 'COM3', baudRate: 115200}, function (err) {
@@ -20,12 +23,48 @@ const parser = serialport3.pipe(new ReadlineParser({delimiter: '\r\n'}))
 var port = 10866;
 app.use(
     cors({
-        origin: ["http://localhost:10866", "http://localhost:8080", "http://127.0.0.1:8080", "http://192.168.3.231:8080", "http://192.168.3.103:8080"]
+        origin: ["http://localhost:10866", "http://localhost:8080","http://localhost:3000", "http://127.0.0.1:8080", "http://192.168.3.231:8080", "http://192.168.3.103:8080"]
     })
 );
-
+// 可以了
 
 require('events').EventEmitter.defaultMaxListeners = 0;
+
+
+
+// 创建一个邮件传输器
+const transporter = nodemailer.createTransport({
+    service:'qq',
+    auth: {
+        user: '2634363039@qq.com',
+        pass: 'jprazlwdmaqqdjbg'//需要在QQ邮箱的设置中开启SMTP服务，并获取授权码
+    }
+});
+// 发送邮件
+app.get('/sendemail', (req, res) => {
+    const mailOptions = {
+        from: '2634363039@qq.com',
+        to: '807683237@qq.com',
+        subject: '卡尔曼预测温度警报消息',
+        text: '您收到了一条警报消息，请及时处理！'
+    };
+    transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+            console.log(error);
+            res.send('error from backend');
+        } else {
+            console.log('邮件发送成功：' + info.response);
+            res.send('success');
+        }
+    });
+});
+// 启动服务器
+app.listen(3000, () => {
+    console.log('Server started on port 3000');
+});
+
+
+
 
 // 打开一个数据库连接
 db = new sqlite3.Database('./mydatabase.db', (err) => {
