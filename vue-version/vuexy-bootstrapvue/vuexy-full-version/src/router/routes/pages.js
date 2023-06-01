@@ -1,4 +1,44 @@
 export default [
+
+  // {
+  //   path: 'apps/emergencyopening',
+  //   name: 'emergencyopening',
+  //   component: () => import('@/views/apps/emergency opening/emergencyopening.vue'),
+  //   meta: {
+  //     requiresAuth: true,
+  //     allowedRoles: ['admin'] // 只允许管理者访问
+  //   },
+  // },
+  // {
+  //   path: 'apps/mcpiot',
+  //   name: 'mcp',
+  //   component: () => import('@/views/apps/mcpiot/mcp.vue'),
+  //   meta: {
+  //     requiresAuth: true,
+  //     allowedRoles: ['admin'] // 只允许管理者访问
+  //   },
+  // },
+  // {
+  //   path: 'apps/settings',
+  //   name: 'settings-usersettings',
+  //   component: () => import('@/views/apps/settings/usersettings.vue'),
+  //   meta: {
+  //     requiresAuth: true,
+  //     allowedRoles: ['admin'] // 只允许管理者访问
+  //   },
+  // },
+
+  {
+    path: '/break',
+    name: 'break',
+    component: () => import('@/views/apps/breaker/breaker.vue'),
+    meta: {
+      requiresAuth: true,
+      allowedRoles: ['admin', 'observer'] // 允许管理者和观察者访问
+    },
+  },
+
+
   {
     path: '/error-404',
     name: 'error-404',
