@@ -83,6 +83,7 @@
               <b-form-group
                   label="用户名/邮箱"
                   label-for="login-email"
+                  class="form-label"
               >
                 <validation-provider
                     #default="{ errors }"
