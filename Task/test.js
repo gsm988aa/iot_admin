@@ -6,7 +6,7 @@ const cors = require('cors');
 const {ReadlineParser} = require('@serialport/parser-readline');
 const bodyParser = require('body-parser')
 
-
+const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const nodemailer = require('nodemailer');
 
@@ -21,7 +21,7 @@ const serialport3 = new SerialPort({path: 'COM3', baudRate: 115200}, function (e
 const parser = serialport3.pipe(new ReadlineParser({delimiter: '\r\n'}))
 
 // 10866是端口号
-var port = 10866;
+const port = 10866;
 app.use(
     cors({
         origin: ["http://localhost:10866", "http://localhost:8080", "http://localhost:3030", "http://127.0.0.1:8080", "http://192.168.6.111:3030","http://localhost:3000", "http://127.0.0.1:8080", "http://192.168.3.231:8080", "http://192.168.3.103:8080"]
@@ -43,27 +43,71 @@ let db = new sqlite3.Database('mydatabase.db', (err) => {
 db.serialize(function () {
     db.run('DROP TABLE IF EXISTS users');
 
-// 创建一个名为user的数据表，该表包含username、password和rolegroup字段
+
+    // 加密密码 加盐运算为4
+    const saltRounds = 4; // 设置盐的计算成本，值越大，计算时间越长，安全性越高
+
+    const plainPassword = 'admin'; // 要加密的原始密码
+
+    bcrypt.hash(plainPassword, saltRounds, (err, hashedPassword) => {
+        if (err) {
+            console.error(err);
+        } else {
+            // hashedPassword 包含了加密后的密码，您可以将其存储到数据库中
+            console.log('Hashed Password:', hashedPassword);
+        }
+    });
+
+// 创建一个名为users的数据表，该表包含username、password和rolegroup字段
     db.run('CREATE TABLE users(id INTEGER  PRIMARY KEY AUTOINCREMENT NOT NULL  ,username TEXT, password TEXT, rolegroup INTEGER)', (err) => {
         if (err) {
             console.error(err.message);
         }
         console.log('user table created successfully.');
     });
-
-    db.run('INSERT INTO users(username, password, rolegroup) VALUES(?, ?, ?)', ['admin@demo.com', 'admin', 0], (err) => {
+// 向users表中插入两条数据
+    db.run('INSERT INTO users(username, password, rolegroup) VALUES(?, ?, ?)', ['demo', 'admin', 0], (err) => {
         if (err) {
             console.error(err.message);
         }
         console.log('A row has been inserted into user table with rowid' );
     });
-    db.run('INSERT INTO users(username, password, rolegroup) VALUES(?, ?, ?)', ['guest@demo.com', 'guest', 1], (err) => {
+    db.run('INSERT INTO users(username, password, rolegroup) VALUES(?, ?, ?)', ['demo2', 'guest', 1], (err) => {
         if (err) {
             console.error(err.message);
         }
         console.log('A row has been inserted into user table with rowid' );
     });
 } );
+
+const userId = 1; // 要获取用户ID为1的加密密码
+db.get('SELECT password FROM users WHERE id = ?', userId, (err, row) => {
+    if (err) {
+        console.error(err.message);
+    } else if (row) {
+        const hashedPassword = row.password;
+        // 在这里使用获取到的加密密码进行后续操作
+        console.log('Hashed Password:', hashedPassword);
+    } else {
+        console.log('User not found');
+    }
+});
+// 比较密码
+const plainPassword = 'admin'; // 用户输入的密码
+const hashedPassword = '...'; // 从数据库中获取的加密密码
+
+bcrypt.compare(plainPassword, hashedPassword, (err, result) => {
+    if (err) {
+        console.error(err);
+    } else if (result) {
+        // 密码匹配，继续登录逻辑
+        console.log('Password matched!');
+    } else {
+        // 密码不匹配
+        console.log('Password did not match!');
+    }
+});
+
 
 // 验证用户名和密码，并返回JWT令牌和角色值
 app.post('/login', (req, res) => {
@@ -133,6 +177,37 @@ app.get('/users/:id', authenticateJWT, (req, res) => {
     )
 });
 
+// 处理注册请求
+app.post('/register', (req, res) => {
+    const { username, password } = req.body;
+
+    // 使用bcrypt对密码进行加密
+    const saltRounds = 4;
+
+    bcrypt.hash(password, saltRounds, (err, hashedPassword) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send('Internal Server Error');
+        } else {
+            // 将用户名和加密后的密码存储到数据库中
+            const sql = 'INSERT INTO users (username, password) VALUES (?, ?)';
+            db.run(sql, [username, hashedPassword], (err) => {
+                if (err) {
+                    console.error(err.message);
+                    res.status(500).send('Internal Server Error');
+                } else {
+                    res.status(200).send('User registered successfully');
+                }
+            });
+        }
+    });
+});
+
+// 启动服务器监听端口
+app.listen(port, () => {
+    console.log(`Server listening on port 8081`);
+});
+
 
 // 创建一个邮件传输器
 const transporter = nodemailer.createTransport({
@@ -192,7 +267,7 @@ db.serialize(function () {
             }
         });
     }
-    ;
+
 });
 
 // 创建一个9个数的数组
@@ -250,7 +325,7 @@ app.get('/getdbtemperature', (req, res) => {
 
 app.get('/:action', function (req, res) {
 
-    var action = req.params.action || req.param('action');
+    const action = req.params.action || req.param('action');
 
     if (action == 'gettemp') {
         return res.send(temperature[0], temperature[1], temperature[2], temperature[3], temperature[4], temperature[5], temperature[6], temperature[7], temperature[8]);

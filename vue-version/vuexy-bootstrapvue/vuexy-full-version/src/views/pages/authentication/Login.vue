@@ -184,7 +184,7 @@ import VuexyLogo from '@core/layouts/components/Logo.vue'
 import {
   BRow, BCol, BLink, BFormGroup, BFormInput, BInputGroupAppend, BInputGroup, BFormCheckbox, BCardText, BCardTitle, BImg, BForm, BButton, BAlert, VBTooltip, BFormCheckboxGroup,BFormRadioGroup,BFormRadio,
 } from 'bootstrap-vue'
-import useJwt from '@/auth/jwt/useJwt'
+// import useJwt from '@/auth/jwt/useJwt'
 import { required, email } from '@validations'
 import { togglePasswordVisibility } from '@core/mixins/ui/forms'
 import store from '@/store/index'
@@ -194,7 +194,7 @@ import ToastificationContent from '@core/components/toastification/Toastificatio
 
 
 import axios from "axios";
-import images from "swiper/src/components/core/images";
+// import images from "swiper/src/components/core/images";
 
 
 export default {
@@ -291,6 +291,8 @@ export default {
         this.$router.replace(getHomeRouteForLoggedInUser(this.rolegroup))
             .then(() => {
 
+              let rolegroup = this.rolegroup === 0 ? {role: '管理员'} : {role: '观察员'}
+
               this.$toast({
                 component: ToastificationContent,
                 position: 'top-right',
@@ -298,7 +300,7 @@ export default {
                   // title: `Welcome ${userData.fullName || userData.username}`,
                   icon: 'CoffeeIcon',
                   variant: 'success',
-                  text: `You have successfully logged in as ${userData.role}. Now you can start to explore!`,
+                  text: `You have successfully logged in as ${rolegroup.role}. Now you can start to explore!`,
                 },
               })
             })
