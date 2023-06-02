@@ -24,7 +24,7 @@ const parser = serialport3.pipe(new ReadlineParser({delimiter: '\r\n'}))
 const port = 10866;
 app.use(
     cors({
-        origin: ["http://localhost:10866", "http://localhost:8080", "http://localhost:3030", "http://127.0.0.1:8080", "http://192.168.6.111:3030","http://localhost:3000", "http://127.0.0.1:8080", "http://192.168.3.231:8080", "http://192.168.3.103:8080"]
+        origin: ["http://localhost:10866", "http://localhost:8080", "http://localhost:3030",  "http://127.0.0.1:8080", "http://192.168.6.111:3030","http://localhost:3000", "http://127.0.0.1:8080", "http://192.168.3.231:8080", "http://192.168.3.103:8080"]
     })
 );
 // 可以了
@@ -177,6 +177,7 @@ app.get('/users/:id', authenticateJWT, (req, res) => {
     )
 });
 
+
 // 处理注册请求
 app.post('/register', (req, res) => {
     const { username, password } = req.body;
@@ -203,10 +204,10 @@ app.post('/register', (req, res) => {
     });
 });
 
-// 启动服务器监听端口
-app.listen(port, () => {
-    console.log(`Server listening on port 8081`);
-});
+// 启动服务器监听端口 这段重复了
+// app.listen(port, () => {
+//     console.log(`Server listening on port 8081`);
+// });
 
 
 // 创建一个邮件传输器
