@@ -3,75 +3,75 @@
 
     <b-card-text>
 
-    <h6>GPT 人工智能回复：</h6>
+      <h6>GPT 人工智能回复：</h6>
       <b-card
-        text-variant="dark"
-        border-variant="info"
-        class="mb-2"
+          text-variant="dark"
+          border-variant="info"
+          class="mb-2"
       >
-            <b-card-text>
+        <b-card-text>
 
-              <br>
-                <b-spinner variant="primary" label="Spinning"  v-if="status !== 1"></b-spinner>
+          <br>
+          <b-spinner variant="primary" label="Spinning"  v-if="status !== 1"></b-spinner>
 
-              {{ posts }}
+          {{ posts }}
 
-            </b-card-text>
+        </b-card-text>
       </b-card>
 
     </b-card-text>
-          <br>
+    <br>
 
-<!--    -->
+    <!--    -->
     <h6>请输入问题</h6>
     <b-form-input
-      v-model="message"
-      placeholder="金川集团优秀"
+        v-model="message"
+        placeholder="金川集团优秀"
     />
-          <br>
+    <br>
 
     <b-button
-      variant="primary" pill
-      @click="send"
+        variant="primary" pill
+        @click="send"
     >
 
       发送
     </b-button>
-<!-- 加入空格 -->
+    <!-- 加入空格 -->
 
-  &nbsp
-  &nbsp
-  &nbsp
-  <br>
-  举例：
-  <br>
+    &nbsp
+    &nbsp
+    &nbsp
+    <br>
+    举例：
+    <br>
 
     <b-button
-      variant="secondary" pill
-      @click="send2"
+        variant="secondary" pill
+        @click="send2"
     >
 
       10kV高压开关柜常用的速断整定值是多少
     </b-button>
     &nbsp
-  &nbsp
-  &nbsp
-  
+    &nbsp
+    &nbsp
+
     <b-button
-      variant="info" pill
-      @click="send3"
+        variant="info" pill
+        @click="send3"
     >
 
       10kV高压开关柜常用的定时限整定值是多少
     </b-button>
 
     &nbsp
-  &nbsp
-  &nbsp
-  
+    &nbsp
+    &nbsp
+
     <b-button
-      variant="dark" pill
-      @click="send4"
+        variant="dark" pill
+        @click="send4"
     >
       无锡的美景有哪些
     </b-button>
@@ -79,18 +79,18 @@
 
   </b-card>
 
-<!--&lt;!&ndash;      写一个可以输入的文本框&ndash;&gt;-->
-<!--      <input type="text" v-model="message" />-->
-<!--&lt;!&ndash;      点击按钮发送&ndash;&gt;-->
-<!--      <button @click="send">发送</button>-->
+  <!--&lt;!&ndash;      写一个可以输入的文本框&ndash;&gt;-->
+  <!--      <input type="text" v-model="message" />-->
+  <!--&lt;!&ndash;      点击按钮发送&ndash;&gt;-->
+  <!--      <button @click="send">发送</button>-->
 
 </template>
 
 <script>
 
 import {
- BRow, BCol, BCard, BContainer, BButton, BButtonGroup, BFormInput, BModal,BSpinner,BCardText
-, BCollapse } from 'bootstrap-vue'
+  BRow, BCol, BCard, BContainer, BButton, BButtonGroup, BFormInput, BModal,BSpinner,BCardText
+  , BCollapse } from 'bootstrap-vue'
 // import axios
 import axios from 'axios'
 import Spinner from "@/views/components/spinner/Spinner.vue";
@@ -215,7 +215,7 @@ export default {
             console.log(error);
           });
     },
-}
+  }
 
 };
 

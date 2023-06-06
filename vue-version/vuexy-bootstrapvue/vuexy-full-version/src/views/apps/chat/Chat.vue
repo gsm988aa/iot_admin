@@ -71,6 +71,7 @@
                 size="17"
                 class="cursor-pointer d-sm-block d-none mr-1"
               />
+             <!--图标-摄像头-->
               <feather-icon
                 icon="VideoIcon"
                 size="17"

@@ -5,11 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="91036d36-d2ab-466a-a5ad-eee88f80c62d" name="变更" comment="change workspace">
+      <change afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/vuexy-full-version/src/assets/images/avatars/kaola.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/vuexy-full-version/src/assets/images/avatars/pig.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/vuexy-full-version/src/views/apps/mcpiot/iot/ChatActiveChatContentDetailsSidedbar.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/vuexy-full-version/src/views/apps/mcpiot/iot/ChatContact.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/vuexy-full-version/src/views/apps/mcpiot/iot/ChatLeftSidebar.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/vuexy-full-version/src/views/apps/mcpiot/iot/ChatLog.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/vuexy-full-version/src/views/apps/mcpiot/iot/UserProfileSidebar.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Task/mydatabase.db" beforeDir="false" afterPath="$PROJECT_DIR$/Task/mydatabase.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Task/test.js" beforeDir="false" afterPath="$PROJECT_DIR$/Task/test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/vuexy-full-version/src/views/apps/chat/Chat.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/vuexy-full-version/src/views/apps/chat/Chat.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/vuexy-full-version/src/views/apps/mcpiot/iot/iot.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/vuexy-full-version/src/views/apps/mcpiot/iot/iot.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/vuexy-full-version/src/views/pages/authentication/Register.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/vuexy-full-version/src/views/pages/authentication/Register.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/vuexy-full-version/src/views/pages/authentication/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/vuexy-full-version/src/views/pages/authentication/Login.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,35 +61,37 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;正在变基 main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Han/Desktop/iot_admin/Task&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;项目&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.editor&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\Program Files\\JetBrains\\IntelliJ IDEA 2023.1.1\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "正在变基 main",
+    "last_opened_file_path": "C:/Users/Han/Desktop/iot_admin/vue-version/vuexy-bootstrapvue/vuexy-full-version/src/views/apps/mcpiot/iot",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "项目",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "preferences.editor",
+    "ts.external.directory.path": "C:\\Program Files\\JetBrains\\IntelliJ IDEA 2023.1.1\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;vue.recent.templates&quot;: [
-      &quot;Vue Class API Component&quot;
+  "keyToStringList": {
+    "vue.recent.templates": [
+      "Vue Class API Component"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Han\Desktop\iot_admin\vue-version\vuexy-bootstrapvue\vuexy-full-version\src\views\apps\mcpiot\iot" />
+      <recent name="C:\Users\Han\Desktop\iot_admin\vue-version\vuexy-bootstrapvue\vuexy-full-version\src\assets\images\avatars" />
       <recent name="C:\Users\Han\Desktop\iot_admin\Task" />
       <recent name="C:\Users\Han\Desktop\iot_admin\vue-version\vuexy-bootstrapvue\vuexy-full-version\src\views\pages\authentication" />
     </key>
@@ -181,7 +190,8 @@
       <workItem from="1685585536988" duration="17910000" />
       <workItem from="1685925716927" duration="4521000" />
       <workItem from="1686011636591" duration="2140000" />
-      <workItem from="1686013791978" duration="13260000" />
+      <workItem from="1686013791978" duration="21898000" />
+      <workItem from="1686041470602" duration="311000" />
     </task>
     <task id="LOCAL-00001" summary="change workspace">
       <created>1684112004864</created>
