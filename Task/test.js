@@ -29,6 +29,7 @@ app.use(
 );
 // 可以了
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 
 require('events').EventEmitter.defaultMaxListeners = 0;
@@ -177,10 +178,12 @@ app.get('/users/:id', authenticateJWT, (req, res) => {
     )
 });
 
-// app.use(express.json());
+
+
+
 // 处理注册请求
 app.post('/api/register', (req, res) => {
-    const { username,  password } = req.body;
+    const { username,  password , rolegroup } = req.body;
 
     // 使用bcrypt对密码进行加密
     const saltRounds = 4;

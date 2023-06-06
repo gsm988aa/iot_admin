@@ -126,7 +126,7 @@ export default {
       }, {
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer fk192265-ZSVj6ZJGVn2Na3lm0Ouz5S0PZ7NrMRxA'
+          'Authorization': 'Bearer fk192265-RBY97zyLQHJYyhGpPNtoTw2ILhMNtkvW'
         }
       }).then(response => {
         // 等待5s
@@ -150,7 +150,7 @@ export default {
       }, {
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer fk192265-ZSVj6ZJGVn2Na3lm0Ouz5S0PZ7NrMRxA'
+          'Authorization': 'Bearer fk192265-RBY97zyLQHJYyhGpPNtoTw2ILhMNtkvW'
         }
       }).then(response => {
         // 等待5s
@@ -174,7 +174,7 @@ export default {
       }, {
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer fk192265-ZSVj6ZJGVn2Na3lm0Ouz5S0PZ7NrMRxA'
+          'Authorization': 'Bearer fk192265-RBY97zyLQHJYyhGpPNtoTw2ILhMNtkvW'
         }
       }).then(response => {
         // 等待5s
@@ -198,7 +198,7 @@ export default {
       }, {
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer fk192265-ZSVj6ZJGVn2Na3lm0Ouz5S0PZ7NrMRxA'
+          'Authorization': 'Bearer fk192265-RBY97zyLQHJYyhGpPNtoTw2ILhMNtkvW'
         }
       }).then(response => {
         // 等待5s

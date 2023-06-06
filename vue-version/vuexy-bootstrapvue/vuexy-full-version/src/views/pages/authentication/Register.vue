@@ -7,7 +7,7 @@
         <vuexy-logo />
 
         <h2 class="brand-text text-primary ml-1">
-          Vuexy
+          智能柜
         </h2>
       </b-link>
       <!-- /Brand logo-->
@@ -38,11 +38,11 @@
             lg="12"
             class="px-xl-2 mx-auto"
         >
-          <b-card-title class="mb-1">
-            Adventure starts here 🚀
+          <b-card-title class="mb-1" style="font-family: 宋体;font-size: 30px">
+            智能从这里开始 🚀
           </b-card-title>
           <b-card-text class="mb-2">
-            Make your app management easy and fun!
+            智能开关柜控制系统，注册您的专属账号！
           </b-card-text>
 
           <!-- form -->
@@ -56,7 +56,7 @@
             >
               <!-- username -->
               <b-form-group
-                  label="Username"
+                  label="用户名"
                   label-for="register-username"
               >
                 <validation-provider
@@ -101,7 +101,7 @@
               <!-- password -->
               <b-form-group
                   label-for="register-password"
-                  label="Password"
+                  label="密码"
               >
                 <validation-provider
                     #default="{ errors }"
@@ -134,14 +134,62 @@
                 </validation-provider>
               </b-form-group>
 
+              <b-form-group
+                  label-for="register-confirm-password"
+                  label="确认密码"
+              >
+                <validation-provider
+                    #default="{ errors }"
+                    name="Confirm Password"
+                    vid="confirmPassword"
+                    rules="required|confirmed:password"
+                >
+                  <b-input-group
+                      class="input-group-merge"
+                      :class="errors.length > 0 ? 'is-invalid' : null"
+                  >
+                    <b-form-input
+                        id="register-confirm-password"
+                        v-model="confirmPassword"
+                        class="form-control-merge"
+                        :type="passwordFieldType"
+                        :state="errors.length > 0 ? false : null"
+                        name="register-confirm-password"
+                        placeholder="············"
+                    />
+                    <b-input-group-append is-text>
+                      <feather-icon
+                          :icon="passwordToggleIcon"
+                          class="cursor-pointer"
+                          @click="togglePasswordVisibility"
+                      />
+                    </b-input-group-append>
+                  </b-input-group>
+                  <small class="text-danger">{{ errors[0] }}</small>
+                </validation-provider>
+              </b-form-group>
+
+
+              <b-form-group
+                  label-for="register-rolegroup"
+                  label="选择角色"
+              >
+                <!--添加select下拉选项，管理员或者观察员-->
+                <b-form-select v-model="selected" :options="options"></b-form-select>
+                <!--                <div class="mt-3">Selected: <strong>{{ selected }}</strong></div>-->
+              </b-form-group>
+
+
+
+
               <b-form-group>
                 <b-form-checkbox
                     id="register-privacy-policy"
                     v-model="status"
                     name="checkbox-1"
                 >
-                  I agree to
-                  <b-link>privacy policy & terms</b-link>
+                  我同意
+                  <b-link>隐私政策和条款</b-link>
                 </b-form-checkbox>
               </b-form-group>
 
@@ -151,22 +199,22 @@
                   type="submit"
                   :disabled="invalid"
               >
-                Sign up
+                注册
               </b-button>
             </b-form>
           </validation-observer>
 
           <p class="text-center mt-2">
-            <span>Already have an account?</span>
+            <span>已经有账户了吗？</span>
             <b-link :to="{name:'auth-login'}">
-              <span>&nbsp;Sign in instead</span>
+              <span>&nbsp;直接登录</span>
             </b-link>
           </p>
 
           <!-- divider -->
           <div class="divider my-2">
             <div class="divider-text">
-              or
+              其他方式
             </div>
           </div>
 
@@ -208,7 +256,21 @@
 import { ValidationProvider, ValidationObserver } from 'vee-validate'
 import VuexyLogo from '@core/layouts/components/Logo.vue'
 import {
-  BRow, BCol, BLink, BButton, BForm, BFormCheckbox, BFormGroup, BFormInput, BInputGroup, BInputGroupAppend, BImg, BCardTitle, BCardText,
+  BRow,
+  BCol,
+  BLink,
+  BButton,
+  BForm,
+  BFormCheckbox,
+  BFormGroup,
+  BFormInput,
+  BInputGroup,
+  BInputGroupAppend,
+  BImg,
+  BCardTitle,
+  BCardText,
+  BFormRadio, BFormRadioGroup,
+  BFormSelect,
 } from 'bootstrap-vue'
 import { required, email } from '@validations'
 import { togglePasswordVisibility } from '@core/mixins/ui/forms'
@@ -218,6 +280,7 @@ import axios from "axios";
 
 export default {
   components: {
+    BFormRadioGroup, BFormRadio,
     VuexyLogo,
     BRow,
     BImg,
@@ -235,6 +298,7 @@ export default {
     // validations
     ValidationProvider,
     ValidationObserver,
+    BFormSelect,
   },
   mixins: [togglePasswordVisibility],
   data() {
@@ -247,6 +311,10 @@ export default {
       // validation
       required,
       email,
+      options: [
+        { text: '管理员' },
+        { text: '观察员' },
+      ]
     }
   },
   computed: {
@@ -264,7 +332,14 @@ export default {
   },
   methods: {
     register() {
+
+
       this.$refs.registerForm.validate().then(success => {
+
+        if (this.password !== this.confirmPassword) {
+          // 密码和确认密码不匹配，进行相应的处理
+          return;
+        }
         if (success) {
           useJwt.register({
             username: this.username,
@@ -274,7 +349,7 @@ export default {
           })
 
               .then(() => {
-                axios.post('/api/register', {
+                axios.post('http://localhost:10866/api/register', {
                   username: this.username,
                   // email: this.userEmail,
                   password: this.password,
