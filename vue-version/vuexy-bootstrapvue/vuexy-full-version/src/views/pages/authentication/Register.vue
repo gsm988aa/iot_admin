@@ -14,14 +14,14 @@
 
       <!-- Left Text-->
       <b-col
-        lg="8"
-        class="d-none d-lg-flex align-items-center p-5"
+          lg="8"
+          class="d-none d-lg-flex align-items-center p-5"
       >
         <div class="w-100 d-lg-flex align-items-center justify-content-center px-5">
           <b-img
-            fluid
-            :src="imgUrl"
-            alt="Register V2"
+              fluid
+              :src="imgUrl"
+              alt="Register V2"
           />
         </div>
       </b-col>
@@ -29,14 +29,14 @@
 
       <!-- Register-->
       <b-col
-        lg="4"
-        class="d-flex align-items-center auth-bg px-2 p-lg-5"
+          lg="4"
+          class="d-flex align-items-center auth-bg px-2 p-lg-5"
       >
         <b-col
-          sm="8"
-          md="6"
-          lg="12"
-          class="px-xl-2 mx-auto"
+            sm="8"
+            md="6"
+            lg="12"
+            class="px-xl-2 mx-auto"
         >
           <b-card-title class="mb-1">
             Adventure starts here 🚀
@@ -47,86 +47,86 @@
 
           <!-- form -->
           <validation-observer
-            ref="registerForm"
-            #default="{invalid}"
+              ref="registerForm"
+              #default="{invalid}"
           >
             <b-form
-              class="auth-register-form mt-2"
-              @submit.prevent="register"
+                class="auth-register-form mt-2"
+                @submit.prevent="register"
             >
               <!-- username -->
               <b-form-group
-                label="Username"
-                label-for="register-username"
+                  label="Username"
+                  label-for="register-username"
               >
                 <validation-provider
-                  #default="{ errors }"
-                  name="Username"
-                  vid="username"
-                  rules="required"
+                    #default="{ errors }"
+                    name="Username"
+                    vid="username"
+                    rules="required"
                 >
                   <b-form-input
-                    id="register-username"
-                    v-model="username"
-                    name="register-username"
-                    :state="errors.length > 0 ? false:null"
-                    placeholder="johndoe"
+                      id="register-username"
+                      v-model="username"
+                      name="register-username"
+                      :state="errors.length > 0 ? false:null"
+                      placeholder="johndoe"
                   />
                   <small class="text-danger">{{ errors[0] }}</small>
                 </validation-provider>
               </b-form-group>
 
-              <!-- email -->
-              <b-form-group
-                label="Email"
-                label-for="register-email"
-              >
-                <validation-provider
-                  #default="{ errors }"
-                  name="Email"
-                  vid="email"
-                  rules="required|email"
-                >
-                  <b-form-input
-                    id="register-email"
-                    v-model="userEmail"
-                    name="register-email"
-                    :state="errors.length > 0 ? false:null"
-                    placeholder="john@example.com"
-                  />
-                  <small class="text-danger">{{ errors[0] }}</small>
-                </validation-provider>
-              </b-form-group>
+<!--              &lt;!&ndash; email &ndash;&gt;-->
+<!--              <b-form-group-->
+<!--                  label="Email"-->
+<!--                  label-for="register-email"-->
+<!--              >-->
+<!--                <validation-provider-->
+<!--                    #default="{ errors }"-->
+<!--                    name="Email"-->
+<!--                    vid="email"-->
+<!--                    rules="required|email"-->
+<!--                >-->
+<!--                  <b-form-input-->
+<!--                      id="register-email"-->
+<!--                      v-model="userEmail"-->
+<!--                      name="register-email"-->
+<!--                      :state="errors.length > 0 ? false:null"-->
+<!--                      placeholder="john@example.com"-->
+<!--                  />-->
+<!--                  <small class="text-danger">{{ errors[0] }}</small>-->
+<!--                </validation-provider>-->
+<!--              </b-form-group>-->
 
               <!-- password -->
               <b-form-group
-                label-for="register-password"
-                label="Password"
+                  label-for="register-password"
+                  label="Password"
               >
                 <validation-provider
-                  #default="{ errors }"
-                  name="Password"
-                  vid="password"
-                  rules="required"
+                    #default="{ errors }"
+                    name="Password"
+                    vid="password"
+                    rules="required"
                 >
                   <b-input-group
-                    class="input-group-merge"
-                    :class="errors.length > 0 ? 'is-invalid':null"
+                      class="input-group-merge"
+                      :class="errors.length > 0 ? 'is-invalid':null"
                   >
                     <b-form-input
-                      id="register-password"
-                      v-model="password"
-                      class="form-control-merge"
-                      :type="passwordFieldType"
-                      :state="errors.length > 0 ? false:null"
-                      name="register-password"
-                      placeholder="············"
+                        id="register-password"
+                        v-model="password"
+                        class="form-control-merge"
+                        :type="passwordFieldType"
+                        :state="errors.length > 0 ? false:null"
+                        name="register-password"
+                        placeholder="············"
                     />
                     <b-input-group-append is-text>
                       <feather-icon
-                        :icon="passwordToggleIcon"
-                        class="cursor-pointer"
-                        @click="togglePasswordVisibility"
+                          :icon="passwordToggleIcon"
+                          class="cursor-pointer"
+                          @click="togglePasswordVisibility"
                       />
                     </b-input-group-append>
                   </b-input-group>
@@ -136,9 +136,9 @@
 
               <b-form-group>
                 <b-form-checkbox
-                  id="register-privacy-policy"
-                  v-model="status"
-                  name="checkbox-1"
+                    id="register-privacy-policy"
+                    v-model="status"
+                    name="checkbox-1"
                 >
                   I agree to
                   <b-link>privacy policy & terms</b-link>
@@ -146,10 +146,10 @@
               </b-form-group>
 
               <b-button
-                variant="primary"
-                block
-                type="submit"
-                :disabled="invalid"
+                  variant="primary"
+                  block
+                  type="submit"
+                  :disabled="invalid"
               >
                 Sign up
               </b-button>
@@ -172,33 +172,33 @@
 
           <div class="auth-footer-btn d-flex justify-content-center">
             <b-button
-              variant="facebook"
-              href="javascript:void(0)"
+                variant="facebook"
+                href="javascript:void(0)"
             >
               <feather-icon icon="FacebookIcon" />
             </b-button>
             <b-button
-              variant="twitter"
-              href="javascript:void(0)"
+                variant="twitter"
+                href="javascript:void(0)"
             >
               <feather-icon icon="TwitterIcon" />
             </b-button>
             <b-button
-              variant="google"
-              href="javascript:void(0)"
+                variant="google"
+                href="javascript:void(0)"
             >
               <feather-icon icon="MailIcon" />
             </b-button>
             <b-button
-              variant="github"
-              href="javascript:void(0)"
+                variant="github"
+                href="javascript:void(0)"
             >
               <feather-icon icon="GithubIcon" />
             </b-button>
           </div>
         </b-col>
       </b-col>
-    <!-- /Register-->
+      <!-- /Register-->
     </b-row>
   </div>
 </template>
@@ -214,6 +214,7 @@ import { required, email } from '@validations'
 import { togglePasswordVisibility } from '@core/mixins/ui/forms'
 import store from '@/store/index'
 import useJwt from '@/auth/jwt/useJwt'
+import axios from "axios";
 
 export default {
   components: {
@@ -267,19 +268,30 @@ export default {
         if (success) {
           useJwt.register({
             username: this.username,
-            email: this.userEmail,
+            // email: this.userEmail,
             password: this.password,
+            rolegroup: this.rolegroup
           })
-            .then(response => {
-              useJwt.setToken(response.data.accessToken)
-              useJwt.setRefreshToken(response.data.refreshToken)
-              localStorage.setItem('userData', JSON.stringify(response.data.userData))
-              this.$ability.update(response.data.userData.ability)
-              this.$router.push('/')
-            })
-            .catch(error => {
-              this.$refs.registerForm.setErrors(error.response.data.error)
-            })
+
+              .then(() => {
+                axios.post('/api/register', {
+                  username: this.username,
+                  // email: this.userEmail,
+                  password: this.password,
+                  rolegroup: this.rolegroup
+                })
+
+                    .then(response => {
+                      useJwt.setToken(response.data.accessToken)
+                      useJwt.setRefreshToken(response.data.refreshToken)
+                      localStorage.setItem('userData', JSON.stringify(response.data.userData))
+                      this.$ability.update(response.data.userData.ability)
+                      this.$router.push('/')
+                    })
+                    .catch(error => {
+                      this.$refs.registerForm.setErrors(error.response.data.error)
+                    })
+              })
         }
       })
     },

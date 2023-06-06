@@ -177,10 +177,10 @@ app.get('/users/:id', authenticateJWT, (req, res) => {
     )
 });
 
-
+// app.use(express.json());
 // 处理注册请求
-app.post('/register', (req, res) => {
-    const { username, password } = req.body;
+app.post('/api/register', (req, res) => {
+    const { username,  password } = req.body;
 
     // 使用bcrypt对密码进行加密
     const saltRounds = 4;
@@ -191,8 +191,8 @@ app.post('/register', (req, res) => {
             res.status(500).send('Internal Server Error');
         } else {
             // 将用户名和加密后的密码存储到数据库中
-            const sql = 'INSERT INTO users (username, password) VALUES (?, ?)';
-            db.run(sql, [username, hashedPassword], (err) => {
+            const sql = 'INSERT INTO users (username, password,rolegroup) VALUES (?, ? , ?)';
+            db.run(sql, [username, hashedPassword,rolegroup], (err) => {
                 if (err) {
                     console.error(err.message);
                     res.status(500).send('Internal Server Error');
@@ -203,7 +203,6 @@ app.post('/register', (req, res) => {
         }
     });
 });
-
 // 启动服务器监听端口 这段重复了
 // app.listen(port, () => {
 //     console.log(`Server listening on port 8081`);
