@@ -224,7 +224,7 @@ const transporter = nodemailer.createTransport({
 app.get('/sendemail', (req, res) => {
     const mailOptions = {
         from: '2634363039@qq.com',
-        to: '807683237@qq.com',
+        to: '2634363039@qq.com',
         subject: '卡尔曼预测温度警报消息',
         text: '您收到了一条警报消息，请及时处理！'
     };

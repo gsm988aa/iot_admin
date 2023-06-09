@@ -26,7 +26,7 @@
     <h6>请输入问题</h6>
     <b-form-input
         v-model="message"
-        placeholder="金川集团优秀"
+        placeholder="试试输入：物联网是什么"
     />
     <br>
 
@@ -38,6 +38,14 @@
       发送
     </b-button>
     <!-- 加入空格 -->
+
+    <div>
+      <ChatLeftSideBar />
+      <ChatLog />
+      <ChatActiveChatContentDetailsSidebar />
+      <!-- 其他模板内容 -->
+    </div>
+
 
     &nbsp
     &nbsp
@@ -94,6 +102,12 @@ import {
 // import axios
 import axios from 'axios'
 import Spinner from "@/views/components/spinner/Spinner.vue";
+
+import ChatLeftSidebar from './ChatLeftSidebar.vue'
+import ChatActiveChatContentDetailsSidedbar from './ChatActiveChatContentDetailsSidedbar.vue'
+import ChatLog from './ChatLog.vue'
+// import useChat from './useChat'
+// import chatStoreModule from './chatStoreModule'
 export default {
   components: {
     BSpinner,
@@ -109,10 +123,14 @@ export default {
     BFormInput,
     BModal,
     BCollapse,
+
+    ChatLeftSidebar,
+    ChatActiveChatContentDetailsSidedbar,
+    ChatLog,
   },
   data() {
     return {
-      message: '金川集团钼矿镍矿优秀',
+      message: '',
       status: 1,
       posts: ''
     };

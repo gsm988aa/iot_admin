@@ -5,18 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="91036d36-d2ab-466a-a5ad-eee88f80c62d" name="变更" comment="change workspace">
-      <change afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/vuexy-full-version/src/assets/images/avatars/kaola.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/vuexy-full-version/src/assets/images/avatars/pig.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/vuexy-full-version/src/views/apps/mcpiot/iot/ChatActiveChatContentDetailsSidedbar.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/vuexy-full-version/src/views/apps/mcpiot/iot/ChatContact.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/vuexy-full-version/src/views/apps/mcpiot/iot/ChatLeftSidebar.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/vuexy-full-version/src/views/apps/mcpiot/iot/ChatLog.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/vuexy-full-version/src/views/apps/mcpiot/iot/UserProfileSidebar.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/vuexy-full-version/src/views/apps/mcpiot/iot/chatStoreModule.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/vuexy-full-version/src/views/apps/mcpiot/iot/useChat.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Task/mydatabase.db" beforeDir="false" afterPath="$PROJECT_DIR$/Task/mydatabase.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/vuexy-full-version/src/views/apps/chat/Chat.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/vuexy-full-version/src/views/apps/chat/Chat.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Task/test.js" beforeDir="false" afterPath="$PROJECT_DIR$/Task/test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/qtweb/qtweb.py" beforeDir="false" afterPath="$PROJECT_DIR$/qtweb/qtweb.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/vuexy-full-version/src/views/apps/mcpiot/iot/iot.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/vuexy-full-version/src/views/apps/mcpiot/iot/iot.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/vuexy-full-version/src/views/pages/authentication/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/vuexy-full-version/src/views/pages/authentication/Login.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/vuexy-full-version/src/views/apps/shortcuts/shortcuts.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/vuexy-full-version/src/views/apps/shortcuts/shortcuts.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,7 +72,7 @@
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "project.structure.last.edited": "项目",
-    "project.structure.proportion": "0.0",
+    "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.0",
     "settings.editor.selected.configurable": "preferences.editor",
     "ts.external.directory.path": "C:\\Program Files\\JetBrains\\IntelliJ IDEA 2023.1.1\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external",
@@ -107,7 +103,6 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="C:\Python311\python.exe" />
-      <option name="SDK_NAME" value="Python 3.11" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/vuexy-starter-kit/src/@core/layouts/sql_session" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
@@ -147,6 +142,7 @@
       <item itemvalue="Node.js.xy3.js" />
       <item itemvalue="npm.serve (1)" />
       <item itemvalue="npm.serve" />
+      <item itemvalue="Python.pytest" />
     </list>
     <recent_temporary>
       <list>
@@ -191,7 +187,10 @@
       <workItem from="1685925716927" duration="4521000" />
       <workItem from="1686011636591" duration="2140000" />
       <workItem from="1686013791978" duration="21898000" />
-      <workItem from="1686041470602" duration="311000" />
+      <workItem from="1686041470602" duration="543000" />
+      <workItem from="1686098288866" duration="3387000" />
+      <workItem from="1686185128691" duration="6074000" />
+      <workItem from="1686271280189" duration="5848000" />
     </task>
     <task id="LOCAL-00001" summary="change workspace">
       <created>1684112004864</created>
@@ -208,6 +207,7 @@
   </component>
   <component name="UnknownFeatures">
     <option featureType="com.intellij.configurationType" implementationName="PythonConfigurationType" />
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.py" />
     <option featureType="dependencySupport" implementationName="javascript:npm:vue" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
