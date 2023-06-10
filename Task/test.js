@@ -321,7 +321,7 @@ app.get('/getdbtemperature', (req, res) => {
             res.status(500).send('Internal Server Error');
         } else {
             res.json(rows);
-        }
+        }99999
     });
 });
 
@@ -337,4 +337,3 @@ app.get('/:action', function (req, res) {
 app.listen(port, function () {
     console.log('Example applistening on port http://127.0.0.1:' + port + '!');
 });
-
