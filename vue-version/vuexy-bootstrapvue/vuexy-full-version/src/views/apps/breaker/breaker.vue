@@ -1080,7 +1080,7 @@ export default {
       axios
           .get('http://localhost:3000/sendemail', {
             params:{
-              to:'2634363039@qq.com',
+              to:['2634363039@qq.com','1927137693@qq.com'],//邮箱群发多用户
               subject: '温度超过100°C警告',
               text: '温度超过100°C，请注意安全！'
             }

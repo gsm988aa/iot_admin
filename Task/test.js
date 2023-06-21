@@ -222,11 +222,15 @@ const transporter = nodemailer.createTransport({
 });
 // 发送邮件
 app.get('/sendemail', (req, res) => {
+    const to = req.query.to; // 获取收件人邮箱地址数组
+    const subject = req.query.subject || '卡尔曼预测温度警报消息';
+    const text = req.query.text || '您收到了一条警报消息，请及时处理！';
+
     const mailOptions = {
         from: '2634363039@qq.com',
-        to: '2634363039@qq.com',
-        subject: '卡尔曼预测温度警报消息',
-        text: '您收到了一条警报消息，请及时处理！'
+        to: to.join(','),//群发逗号分隔
+        subject:subject,
+        text: text
     };
     transporter.sendMail(mailOptions, (error, info) => {
         if (error) {

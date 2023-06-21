@@ -3,148 +3,163 @@
   <b-container className= "bv-example-row" style="display: flex; justify-content: center; align-items: center;">
     <!-- Error_info按钮平时隐藏，show2为true时 显示 -->
     <b-button hidden @click= "showModal">Err_info</b-button>
-<!--    修改cancel按键名字为namex-->
+    <!--    修改cancel按键名字为namex-->
 
     <b-modal v-model= "showmodal" title="故障信息"  @ok="handleOk" @cancel = "handleCancel">
       {{ errorinfo }}
     </b-modal>
-<!---->
-    <b-row>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-    </b-row>
-    <canvas ref="canvas" width="200px" height="200px" style="position: absolute"></canvas>
+
     <b-row>
 
-      <b-col cols = "6">
+      <b-col cols="12" sm="6" lg="4" xl="3">
+        <b-card style="max-width: 200px;">
+          <b-button id="button1" variant = "primary" @click = "handleClick1" :disabled="isDisabled" class="btn btn-petal1" style="font-size: 25px" >
+            合闸
+          </b-button>
+          <br>
+          <br>
+          <b-button id="button2" variant = "secondary" @click = "handleClick2" :disabled="isDisabled" class="btn btn-petal102" style="font-size: 25px">
+            分闸
+          </b-button>
+          <br>
+          <br>
+        </b-card>
+      </b-col>
 
-        <div style                                                        = "transform: scale(1);" >
-          <b-card style="width: 100vh;background-color: #9f94d9" >
+      <b-col cols="12" sm="6" lg="4" xl="3">
+        <b-card style="max-width: 200px;">
+          <b-button id="button4" variant = "danger" @click = "handleClick4" :disabled="isDisabled" class="btn btn-petal3" style="font-size: 25px">
+            手车驶入
+          </b-button>
+          <br>
+          <br>
+          <b-button id="button5" variant = "warning" @click = "handleClick5" :disabled="isDisabled" class="btn btn-petal302" style="font-size: 25px">
+            手车驶出
+          </b-button>
+          <br>
+          <br>
+        </b-card>
+      </b-col>
 
-<!--            <canvas id="vine-canvas"></canvas>-->
 
-            <b-button id="button1" variant = "primary" @click = "handleClick1" :disabled="isDisabled" class="btn btn-petal1" style="font-size: 50px" >
-              合闸
-            </b-button>
-            <br>
-            <br>
-            <b-button id="button2" variant = "secondary" @click = "handleClick2" :disabled="isDisabled" class="btn btn-petal102" style="font-size: 50px">
-              分闸
-            </b-button>
-            <br>
-            <br>
+      <b-col cols="12" sm="6" lg="4" xl="3" >
+        <b-card style="max-width: 200px">
+          <b-button id="button6" variant = "info" @click = "handleClick5_1" :disabled="isDisabled" class="btn btn-petal4" style="font-size: 25px">
+            一键顺控  送电
+          </b-button>
+          <br>
+          <br>
+          <b-button id="button7" variant = "info" @click = "handleClick5_2" :disabled="isDisabled" class="btn btn-petal402" style="font-size: 25px">
+            一键顺控  断电
+          </b-button>
+          <br>
+          <br>
+        </b-card>
+      </b-col>
 
-            <b-button id="button3" variant = "success" @click = "handleClick3" :disabled="isDisabled" class="btn btn-petal2" style="font-size: 40px">
-              电机储能
-            </b-button>
-            <br>
-            <br>
+      <b-col cols="12" sm="6" lg="4" xl="3">
+        <b-card style="max-width: 200px;">
+          <b-button id="button3" variant = "success" @click = "handleClick3" :disabled="isDisabled" class="btn btn-petal2" style="font-size: 25px">
+            电机储能
+          </b-button>
+          <br>
+          <br>
+          <b-button id="button8" variant = "primary" @click = "handleClick6" :disabled="isDisabled" class="btn btn-petal5" style="font-size: 24px">
+            控制器复位
+          </b-button>
+          <br>
+          <br>
+        </b-card>
+      </b-col>
 
-            <b-button id="button4" variant = "danger" @click = "handleClick4" :disabled="isDisabled" class="btn btn-petal3" style="font-size: 40px">
-              手车驶入
-            </b-button>
-            <br>
-            <br>
-            <b-button id="button5" variant = "warning" @click = "handleClick5" :disabled="isDisabled" class="btn btn-petal302" style="font-size: 40px">
-              手车驶出
-            </b-button>
-            <br>
-            <br>
-            <b-button id="button6" variant = "info" @click = "handleClick5_1" :disabled="isDisabled" class="btn btn-petal4" style="font-size: 35px">
-              一件顺控  送电
-            </b-button>
-            <br>
-            <br>
-            <b-button id="button7" variant = "info" @click = "handleClick5_2" :disabled="isDisabled" class="btn btn-petal402" style="font-size: 35px">
-              一件顺控  断电
-            </b-button>
-            <br>
-            <br>
-            <b-button id="button8" variant = "primary" @click = "handleClick6" :disabled="isDisabled" class="btn btn-petal5" style="font-size: 40px">
-              控制器复位
-            </b-button>
 
-            <br>
-            <br>
-            <!--            button打开localhost                             : 8084/5-->
-            <!--            <b-button variant                             = "secondary"  :disabled="isDisabled" href="http://192.168.3.19:8084">打开摄像头</b-button>-->
+      <b-col cols="12" sm="12" lg="8">
 
-            <!--            VUE嵌入localhost                                : 8085网页 缩放为30% 分辨率是640*480-->
-            <!--            <iframe src                                   = "http://192.168.3.19:8085" width="640" height="480" style="transform: scale(0.5);"></iframe>-->
+        <b-card style="background-color: #9f94d9;font-size: 22px;text-align: center;margin-top: 20px;" class="show" >指令接收框
+          <br>
+          <br>
+          <b-form-input v-model="text"  style="height: 35px;font-size: 18px;font-family: 宋体" />
+        </b-card>
+      </b-col>
+      <!--      </div>-->
 
-            <br>
-            <br>
-            <b-form-input v-model    = "text" />
-          </b-card>
-
-          <b-button v-if = "!showenable" variant="primary" @click="changeshowenable"  >
+      <b-col cols="12">
+        <div class="d-flex justify-content-end align-items-center">
+          <b-button v-if="!showenable" variant="primary" @click="changeshowenable">
             显示故障信息
           </b-button>
         </div>
       </b-col>
 
-                <b-col cols= "3">
-                  <!--摄像头card-->
-                  <b-card>
-                    <div>
-                      <!--              <b-button v-b-toggle.collapse-1 variant   = "success">摄像头开关</b-button>-->
-                      <b-button
-                          class="visible ? null : 'collapsed'"
-                          aria-expanded="visible ? 'true' : 'false'"
-                          aria-controls = "collapse-4"
-                          @click = "visible = !visible"
-                      >
-                        摄像头1开关
-                      </b-button>.
+      <b-col cols="12" sm="6" lg="4" xl="3">
+        <!--摄像头card-->
+        <b-card class="camera" :class="{ active: isActive === 'camera' }" @click="isActive = 'camera'" style="max-width: 200px;">
 
-                      <b-collapse id = "collapse-4" v-model="visible" class="mt-2" >
-                        <iframe src = "http://localhost:8085" width="640" height="480" style="transform: scale(1);" />
-                      </b-collapse>
-                    </div>
-                    <br>
-                    <br>
-                    <div>
+          <h3 style="font-family: '微软雅黑 Light';font-weight: bold;">视频监控</h3>
 
-                      <b-button
-                          class="visible2 ? null : 'collapsed'"
-                          aria-expanded="visible2 ? 'true' : 'false'"
-                          aria-controls   = "collapse-5"
-                          @click = "visible2 = !visible2"
-                      >
-                        摄像头2开关
-                      </b-button>.
+          <div>
+            <!--              <b-button v-b-toggle.collapse-1 variant   = "success">摄像头开关</b-button>-->
+            <b-button
+                class="visible ? null : 'collapsed'"
+                aria-expanded="visible ? 'true' : 'false'"
+                aria-controls = "collapse-4"
+                @click = "visible = !visible"
+            >
+              摄像头1开关
+            </b-button>.
 
-                      <b-collapse id = "collapse-5" v-model="visible2" class="mt-2" >
-                        <iframe src = "http://localhost:8087" width="640" height="480" style="transform: scale(1);" />
-                      </b-collapse>
-                    </div>
-                  </b-card>
-                </b-col>
+            <b-collapse id = "collapse-4" v-model="visible" class="mt-2" >
+              <iframe src = "http://localhost:8085" width="640" height="480" style="transform: scale(1);" />
+            </b-collapse>
+          </div>
+          <br>
+          <br>
+          <div>
+            <b-button
+                class="visible2 ? null : 'collapsed'"
+                aria-expanded="visible2 ? 'true' : 'false'"
+                aria-controls   = "collapse-5"
+                @click = "visible2 = !visible2"
+            >
+              摄像头2开关
+            </b-button>.
 
-<!--      <b-col cols = "3" />-->
+            <b-collapse id = "collapse-5" v-model="visible2" class="mt-2" >
+              <iframe src = "http://localhost:8087" width="640" height="480" style="transform: scale(1);" />
+            </b-collapse>
+          </div>
+        </b-card>
+      </b-col>
 
     </b-row>
+
+
+
+<!--    <b-row>-->
+<!--&lt;!&ndash;      <div class="col-12 ">&ndash;&gt;-->
+
+<!--    </b-row>-->
+
+
+
   </b-container>
 
 </template>
 
 <script>
 import {
- BRow, BCol, BCard, BContainer, BButton, BButtonGroup, BFormInput, BModal
-, BCollapse } from 'bootstrap-vue'
+  BRow, BCol, BCard, BContainer, BButton, BButtonGroup, BFormInput, BModal
+  , BCollapse } from 'bootstrap-vue'
 // import axios
 import axios from 'axios'
+import CardTitle from "@/views/card/card-basic/CardTitle.vue";
 
 
 
 
 export default {
   components: {
+    CardTitle,
     BRow,
     BCol,
     BCard,
@@ -169,14 +184,15 @@ export default {
       showmodal: false,
       visible: false,
       visible2: false,
+      isAcitve:null
     }
   },
-watch: {
+  watch: {
     errorinfo(newVal) {
       if (newVal)
       { this.show= true; }
     }
- },
+  },
   // created() {
   //   axios.post('http://localhost:10866/autoflagenable')
   //     .then(response => {
@@ -212,6 +228,19 @@ watch: {
   //     }, 1000)
   //   }
   // },
+
+
+  computed: {
+    activeCardZIndex() {
+      // Set a high z-index value for the active card
+      if (this.isActive) {
+        return 10;
+      } else {
+        return null;
+      }
+    }
+  },
+
   mounted() {
     this.drawTriangle();
   },
@@ -226,13 +255,13 @@ watch: {
     handleCancel(bvModalEvt) {
       this.showenable= false
       axios.post('http://localhost:10866/remotereset')
-        .then(response => {
-          this.text= response.data
-          console.log(response)
-        })
-        .catch(error => {
-          console.log(error)
-        })
+          .then(response => {
+            this.text= response.data
+            console.log(response)
+          })
+          .catch(error => {
+            console.log(error)
+          })
     },
 
     handleClick1() {
@@ -348,7 +377,7 @@ watch: {
       }
     },
     showModal() { this.show= true }
-},
+  },
 
   drawTriangle() {
     const canvas = this.$refs.canvas;
@@ -373,90 +402,181 @@ watch: {
 <style lang= "scss">
 @import '@core/scss/vue/libs/vue-sweetalert.scss';
 
-canvas {
-  border:1px solid;
+// canvas {
+//   border:1px solid;
+// }
+
+.camera {
+  margin-top: 20px;
 }
 
+.active {
+  z-index: 10;
+  transform: scale(1.2);
+}
+
+
 .btn-petal1{
-  border-radius: 50%;
-  //background-color: #f1c40f;
-  //transform: rotate(10deg);
-  width:200px;
-  height: 100px;
-  margin-top: 100px;
-  margin-left: 100px;
-  margin-bottom: -100px;
+
+  // 立体效果
+  display: inline-block;
+  border-radius: 5px;
+  background-color: #ce9a2b;
+  text-align: center;
+  font-weight: bold;
+  padding: 10px 40px;
+  color: #fff;
+  text-decoration: none;
+  text-shadow: 1px 1px rgba(0, 0, 0, 0.4);
+  box-shadow: 0px 3px #7a5b19, 0px 4px #6d5117, 0px 5px #604814, 0px 6px #543f11, 0px 7px #47350f, 0px 8px #36280b, 0px 12px 6px -1px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.7), inset 0 0 3px rgba(252, 252, 252, 0.6);
+  border: solid 1px #7a5b19;
+  background-image: -moz-linear-gradient(bottom, rgba(0, 0, 0, 0.14), rgba(255, 255, 255, 0.14));
+  background-image: -webkit-linear-gradient(bottom, rgba(0, 0, 0, 0.14), rgba(255, 255, 255, 0.14));
+  background-image: linear-gradient(to top, rgba(0, 0, 0, 0.14), rgba(255, 255, 255, 0.14));
+  transition: transform 100ms, box-shadow 100ms, background-color 200ms, color 200ms;
+
 }
 
 .btn-petal102{
-  border-radius: 50%;
-  background-color: #f1c40f;
-  //transform: rotate(-35deg);
-  width:200px;
-  height: 100px;
-  margin-left: 150px;
-  margin-bottom: -350px;
+  // 立体效果
+  display: inline-block;
+  border-radius: 5px;
+  background-color: #ce9a2b;
+  text-align: center;
+  font-weight: bold;
+  padding: 10px 40px;
+  color: #fff;
+  text-decoration: none;
+  text-shadow: 1px 1px rgba(0, 0, 0, 0.4);
+  box-shadow: 0px 3px #7a5b19, 0px 4px #6d5117, 0px 5px #604814, 0px 6px #543f11, 0px 7px #47350f, 0px 8px #36280b, 0px 12px 6px -1px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.7), inset 0 0 3px rgba(252, 252, 252, 0.6);
+  border: solid 1px #7a5b19;
+  background-image: -moz-linear-gradient(bottom, rgba(0, 0, 0, 0.14), rgba(255, 255, 255, 0.14));
+  background-image: -webkit-linear-gradient(bottom, rgba(0, 0, 0, 0.14), rgba(255, 255, 255, 0.14));
+  background-image: linear-gradient(to top, rgba(0, 0, 0, 0.14), rgba(255, 255, 255, 0.14));
+  transition: transform 100ms, box-shadow 100ms, background-color 200ms, color 200ms;
 }
 
 .btn-petal2{
-  border-radius: 50%;
-  background-color: #f1c40f;
-  //transform: rotate(-60deg);
-  width:200px;
-  height: 100px;
-  margin-left: 300px;
-  margin-bottom: -350px;
+  // 立体效果
+  display: inline-block;
+  border-radius: 5px;
+  background-color: #ce9a2b;
+  text-align: center;
+  font-weight: bold;
+  padding: 10px 40px;
+  color: #fff;
+  text-decoration: none;
+  text-shadow: 1px 1px rgba(0, 0, 0, 0.4);
+  box-shadow: 0px 3px #7a5b19, 0px 4px #6d5117, 0px 5px #604814, 0px 6px #543f11, 0px 7px #47350f, 0px 8px #36280b, 0px 12px 6px -1px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.7), inset 0 0 3px rgba(252, 252, 252, 0.6);
+  border: solid 1px #7a5b19;
+  background-image: -moz-linear-gradient(bottom, rgba(0, 0, 0, 0.14), rgba(255, 255, 255, 0.14));
+  background-image: -webkit-linear-gradient(bottom, rgba(0, 0, 0, 0.14), rgba(255, 255, 255, 0.14));
+  background-image: linear-gradient(to top, rgba(0, 0, 0, 0.14), rgba(255, 255, 255, 0.14));
+  transition: transform 100ms, box-shadow 100ms, background-color 200ms, color 200ms;
 
 }
 
 .btn-petal3{
-  border-radius: 50%;
-  background-color: #f1c40f;
-  //transform: rotate(65deg);
-  width:200px;
-  height: 100px;
-  margin-left: 250px;
-  margin-top: -350px;
+  // 立体效果
+  display: inline-block;
+  border-radius: 5px;
+  background-color: #ce9a2b;
+  text-align: center;
+  font-weight: bold;
+  padding: 10px 40px;
+  color: #fff;
+  text-decoration: none;
+  text-shadow: 1px 1px rgba(0, 0, 0, 0.4);
+  box-shadow: 0px 3px #7a5b19, 0px 4px #6d5117, 0px 5px #604814, 0px 6px #543f11, 0px 7px #47350f, 0px 8px #36280b, 0px 12px 6px -1px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.7), inset 0 0 3px rgba(252, 252, 252, 0.6);
+  border: solid 1px #7a5b19;
+  background-image: -moz-linear-gradient(bottom, rgba(0, 0, 0, 0.14), rgba(255, 255, 255, 0.14));
+  background-image: -webkit-linear-gradient(bottom, rgba(0, 0, 0, 0.14), rgba(255, 255, 255, 0.14));
+  background-image: linear-gradient(to top, rgba(0, 0, 0, 0.14), rgba(255, 255, 255, 0.14));
+  transition: transform 100ms, box-shadow 100ms, background-color 200ms, color 200ms;
 }
 
 .btn-petal302{
-  border-radius: 50%;
-  background-color: #f1c40f;
-  //transform: rotate(-80deg);
-  width:200px;
-  height: 100px;
-  margin-top: -400px;
-  margin-left: 400px;
+  // 立体效果
+  display: inline-block;
+  border-radius: 5px;
+  background-color: #ce9a2b;
+  text-align: center;
+  font-weight: bold;
+  padding: 10px 40px;
+  color: #fff;
+  text-decoration: none;
+  text-shadow: 1px 1px rgba(0, 0, 0, 0.4);
+  box-shadow: 0px 3px #7a5b19, 0px 4px #6d5117, 0px 5px #604814, 0px 6px #543f11, 0px 7px #47350f, 0px 8px #36280b, 0px 12px 6px -1px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.7), inset 0 0 3px rgba(252, 252, 252, 0.6);
+  border: solid 1px #7a5b19;
+  background-image: -moz-linear-gradient(bottom, rgba(0, 0, 0, 0.14), rgba(255, 255, 255, 0.14));
+  background-image: -webkit-linear-gradient(bottom, rgba(0, 0, 0, 0.14), rgba(255, 255, 255, 0.14));
+  background-image: linear-gradient(to top, rgba(0, 0, 0, 0.14), rgba(255, 255, 255, 0.14));
+  transition: transform 100ms, box-shadow 100ms, background-color 200ms, color 200ms;
 }
 
 .btn-petal4{
-  border-radius: 50%;
-  background-color: #f1c40f;
-  //transform: rotate(-50deg);
-  width:200px;
-  height: 100px;
-  margin-top: -400px;
-  margin-left: 550px;
+  // 立体效果
+  display: inline-block;
+  border-radius: 5px;
+  background-color: #ce9a2b;
+  text-align: center;
+  font-weight: bold;
+  padding: 10px 40px;
+  color: #fff;
+  text-decoration: none;
+  text-shadow: 1px 1px rgba(0, 0, 0, 0.4);
+  box-shadow: 0px 3px #7a5b19, 0px 4px #6d5117, 0px 5px #604814, 0px 6px #543f11, 0px 7px #47350f, 0px 8px #36280b, 0px 12px 6px -1px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.7), inset 0 0 3px rgba(252, 252, 252, 0.6);
+  border: solid 1px #7a5b19;
+  background-image: -moz-linear-gradient(bottom, rgba(0, 0, 0, 0.14), rgba(255, 255, 255, 0.14));
+  background-image: -webkit-linear-gradient(bottom, rgba(0, 0, 0, 0.14), rgba(255, 255, 255, 0.14));
+  background-image: linear-gradient(to top, rgba(0, 0, 0, 0.14), rgba(255, 255, 255, 0.14));
+  transition: transform 100ms, box-shadow 100ms, background-color 200ms, color 200ms;
 }
 
 .btn-petal402{
-  border-radius: 50%;
-  background-color: #f1c40f;
-  //transform: rotate(-5deg);
-  width:200px;
-  height: 100px;
-  margin-top: -200px;
-  margin-left: 600px;
+  // 立体效果
+  display: inline-block;
+  border-radius: 5px;
+  background-color: #ce9a2b;
+  text-align: center;
+  font-weight: bold;
+  padding: 10px 40px;
+  color: #fff;
+  text-decoration: none;
+  text-shadow: 1px 1px rgba(0, 0, 0, 0.4);
+  box-shadow: 0px 3px #7a5b19, 0px 4px #6d5117, 0px 5px #604814, 0px 6px #543f11, 0px 7px #47350f, 0px 8px #36280b, 0px 12px 6px -1px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.7), inset 0 0 3px rgba(252, 252, 252, 0.6);
+  border: solid 1px #7a5b19;
+  background-image: -moz-linear-gradient(bottom, rgba(0, 0, 0, 0.14), rgba(255, 255, 255, 0.14));
+  background-image: -webkit-linear-gradient(bottom, rgba(0, 0, 0, 0.14), rgba(255, 255, 255, 0.14));
+  background-image: linear-gradient(to top, rgba(0, 0, 0, 0.14), rgba(255, 255, 255, 0.14));
+  transition: transform 100ms, box-shadow 100ms, background-color 200ms, color 200ms;
 }
 
 .btn-petal5{
-  border-radius: 50%;
-  background-color: #f1c40f;
-  //transform: rotate(60deg);
-  width:200px;
-  height: 100px;
-  margin-top: -50px;
-  margin-left: 480px;
+  // 立体效果
+  display: inline-block;
+  border-radius: 5px;
+  background-color: #ce9a2b;
+  text-align: center;
+  font-weight: bold;
+  padding: 10px 40px;
+  color: #fff;
+  text-decoration: none;
+  text-shadow: 1px 1px rgba(0, 0, 0, 0.4);
+  box-shadow: 0px 3px #7a5b19, 0px 4px #6d5117, 0px 5px #604814, 0px 6px #543f11, 0px 7px #47350f, 0px 8px #36280b, 0px 12px 6px -1px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.7), inset 0 0 3px rgba(252, 252, 252, 0.6);
+  border: solid 1px #7a5b19;
+  background-image: -moz-linear-gradient(bottom, rgba(0, 0, 0, 0.14), rgba(255, 255, 255, 0.14));
+  background-image: -webkit-linear-gradient(bottom, rgba(0, 0, 0, 0.14), rgba(255, 255, 255, 0.14));
+  background-image: linear-gradient(to top, rgba(0, 0, 0, 0.14), rgba(255, 255, 255, 0.14));
+  transition: transform 100ms, box-shadow 100ms, background-color 200ms, color 200ms;
+}
+
+.show{
+  margin-top:50px;
+  margin-left: 350px;
+
+  color: white;
+  font-size: 20px;
 }
 
 </style>

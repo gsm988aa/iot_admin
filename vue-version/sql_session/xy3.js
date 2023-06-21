@@ -5,6 +5,64 @@ const { SerialPort } = require('serialport')
 const spawn = require('child_process').spawn;
 const ls = spawn('python3', ['test.py']);
 
+// 定义 IEC68150 帧的起始符和结束符
+const FRAME_START = Buffer.from([0x68]);
+const FRAME_END = Buffer.from([0x16]);
+
+// 对要发送的数据进行编码
+const encodeIEC68150 = (data) => {
+    // 计算数据长度
+    const dataLength = data.length;
+
+    // 计算校验和
+    let checksum = 0;
+    for (let i = 0; i < dataLength; i++) {
+        checksum += data[i];
+    }
+
+    // 创建 IEC68150 帧的缓冲区
+    const frame = Buffer.alloc(dataLength + 6);
+
+    // 添加起始符和数据长度
+    FRAME_START.copy(frame, 0);
+    frame.writeUInt8(dataLength, 1);
+
+// 添加数据和校验和
+data.copy(frame, 2);
+frame.writeUInt8(checksum, dataLength + 2);
+
+// 添加结束符
+FRAME_END.copy(frame, dataLength + 3);
+
+return frame;
+};
+
+// 对接收到的数据进行解码
+const parseIEC68150 = (data) => {
+    // 检查起始符和结束符是否正确
+    if (data.slice(0, 1).equals(FRAME_START) && data.slice(-1).equals(FRAME_END)) {
+        // 获取数据长度
+        const dataLength = data.readUInt8(1);
+
+        // 获取数据和校验和
+        const frameData = data.slice(2, dataLength + 2);
+        const frameChecksum = data.readUInt8(dataLength + 2);
+
+        // 计算校验和
+        let checksum = 0;
+        for (let i = 0; i < frameData.length; i++) {
+            checksum += frameData[i];
+        }
+
+        // 检查校验和是否正确
+        if (checksum === frameChecksum) {
+            return frameData;
+        }
+    }
+    return null;
+};
+
+
 const serialport2 = new SerialPort({ path: '/dev/ttyUSB0', baudRate: 115200}, function (err) {
 //const serialport2 = new SerialPort({ path: 'COM3', baudRate: 115200}, function (err) {
 
