@@ -5,18 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="91036d36-d2ab-466a-a5ad-eee88f80c62d" name="变更" comment="change workspace">
-      <change afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/vuexy-full-version/src/views/apps/mcpiot/pc/happy.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/vuexy-full-version/src/views/apps/mcpiot/pc/hema.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/vuexy-full-version/src/views/apps/mcpiot/pc/me.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/vuexy-full-version/src/views/apps/mcpiot/pc/snow.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Task/mydatabase.db" beforeDir="false" afterPath="$PROJECT_DIR$/Task/mydatabase.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Task/test.js" beforeDir="false" afterPath="$PROJECT_DIR$/Task/test.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/qtweb/qtweb.py" beforeDir="false" afterPath="$PROJECT_DIR$/qtweb/qtweb.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue-version/sql_session/xy3.js" beforeDir="false" afterPath="$PROJECT_DIR$/vue-version/sql_session/xy3.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/vuexy-full-version/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/vuexy-full-version/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/vuexy-full-version/src/views/apps/breaker/breaker.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/vuexy-full-version/src/views/apps/breaker/breaker.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/vuexy-full-version/src/views/apps/mcpiot/iot/chatStoreModule.js" beforeDir="false" afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/vuexy-full-version/src/views/apps/mcpiot/iot/chatStoreModule.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/vuexy-full-version/src/views/apps/mcpiot/iot/iot.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/vuexy-full-version/src/views/apps/mcpiot/iot/iot.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/vuexy-full-version/src/views/apps/shortcuts/shortcuts.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/vuexy-full-version/src/views/apps/shortcuts/shortcuts.vue" afterDir="false" />
     </list>
@@ -104,7 +93,7 @@
       <recent name="C:\Users\Han\Desktop\iot_admin\vue-version\vuexy-bootstrapvue\vuexy-full-version\src\views\apps\mcpiot\pc" />
     </key>
   </component>
-  <component name="RunManager" selected="Node.js.xy3.js">
+  <component name="RunManager">
     <configuration name="xy3.js" type="NodeJSConfigurationType" nameIsGenerated="true" path-to-js-file="xy3.js" working-dir="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/vuexy-starter-kit/src/@core/layouts/sql_session">
       <method v="2" />
     </configuration>
@@ -208,7 +197,10 @@
       <workItem from="1686972306692" duration="12188000" />
       <workItem from="1687050031746" duration="13461000" />
       <workItem from="1687221410413" duration="21333000" />
-      <workItem from="1687308225676" duration="21363000" />
+      <workItem from="1687308225676" duration="22218000" />
+      <workItem from="1687480823802" duration="2373000" />
+      <workItem from="1687654229846" duration="1491000" />
+      <workItem from="1687661038439" duration="9736000" />
     </task>
     <task id="LOCAL-00001" summary="change workspace">
       <created>1684112004864</created>
@@ -265,6 +257,6 @@
     <select />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/iot_admin$qtweb.coverage" NAME="qtweb 覆盖结果" MODIFIED="1687237805356" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../qtweb2" />
+    <SUITE FILE_PATH="coverage/iot_admin$qtweb.coverage" NAME="qtweb 覆盖结果" MODIFIED="1687671195605" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../qtweb2" />
   </component>
 </project>

@@ -8,7 +8,7 @@
         <div class="message-content">
           <b-row>
             <div class="message-avatar" >
-              <img src="../pc/hema.png" alt="头像" style="width: 40px; height: 40px;">
+              <img src="../pc/hema.png" alt="头像" style="width: 40px; height: 40px;margin-bottom: 20px">
               你好我是小智，有什么问题尽管问我哦~
             </div>
           </b-row>
@@ -44,7 +44,7 @@
 
            <!--GPT的头像-->
                    <div class="message-avatar" >
-                    <img src="../pc/happy.png" alt="头像" style="width: 40px; height: 40px; margin-right: 10px;">
+                    <img src="../pc/happy.png" alt="头像" style="width: 40px; height: 40px;">
                   </div>
 <!--                  <h6 style="font-family:微软雅黑;font-weight: bold">{{ post.role }}：</h6>-->
                   <div class="message-compare ">
@@ -302,33 +302,17 @@ export default {
           console.log(error);
         });
   },
-  getUserMessageStyle(content) {
-    const messageLength = content.length;
-    const width = Math.min(messageLength * 10, this.maxMessageWidth);
-    return {
-      width: `${width}px`
-    };
-  },
-  getGptMessageStyle(content) {
-    const messageLength = content.length;
-    const width = Math.min(messageLength * 10, this.maxMessageWidth);
-    return {
-      width: `${width}px`
-    };
-  },
+
 };
 
 </script>
 
 <style scoped>
-.message-card {
-  border: none;
-}
 
 .message-wrapper {
   display: flex;
   align-items: flex-start;
-  height: 400px; /* 设置容器的固定高度 */
+  height: 250px; /* 设置容器的固定高度 */
   overflow-y: scroll; /* 启用垂直滚动条 */
 }
 
@@ -352,7 +336,7 @@ export default {
 
 .message-zhi {
   display: flex;
-  align-items: flex-start;
+  justify-content: flex-start;
 }
 
 .message-compare {

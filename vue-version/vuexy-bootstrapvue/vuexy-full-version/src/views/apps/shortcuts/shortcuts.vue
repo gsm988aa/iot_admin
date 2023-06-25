@@ -11,14 +11,14 @@
 
     <b-row>
 
-      <b-col cols="12" sm="6" lg="4" xl="3">
+      <b-col cols="12" sm="6" lg="4" xl="3" class="col-md">
         <b-card style="max-width: 200px;">
-          <b-button id="button1" variant = "primary" @click = "handleClick1" :disabled="isDisabled" class="btn btn-petal1" style="font-size: 25px" >
+          <b-button id="button1" variant = "primary" @click = "handleClick1" :disabled="isDisabled" class="btn btn-petal1" style="font-size: 18px" >
             合闸
           </b-button>
           <br>
           <br>
-          <b-button id="button2" variant = "secondary" @click = "handleClick2" :disabled="isDisabled" class="btn btn-petal102" style="font-size: 25px">
+          <b-button id="button2" variant = "secondary" @click = "handleClick2" :disabled="isDisabled" class="btn btn-petal102" style="font-size: 18px">
             分闸
           </b-button>
           <br>
@@ -26,14 +26,14 @@
         </b-card>
       </b-col>
 
-      <b-col cols="12" sm="6" lg="4" xl="3">
+      <b-col cols="12" sm="6" lg="4" xl="3" class="col-md" >
         <b-card style="max-width: 200px;">
-          <b-button id="button4" variant = "danger" @click = "handleClick4" :disabled="isDisabled" class="btn btn-petal3" style="font-size: 25px">
+          <b-button id="button4" variant = "danger" @click = "handleClick4" :disabled="isDisabled" class="btn btn-petal3" style="font-size: 16px">
             手车驶入
           </b-button>
           <br>
           <br>
-          <b-button id="button5" variant = "warning" @click = "handleClick5" :disabled="isDisabled" class="btn btn-petal302" style="font-size: 25px">
+          <b-button id="button5" variant = "warning" @click = "handleClick5" :disabled="isDisabled" class="btn btn-petal302" style="font-size: 16px">
             手车驶出
           </b-button>
           <br>
@@ -42,14 +42,14 @@
       </b-col>
 
 
-      <b-col cols="12" sm="6" lg="4" xl="3" >
+      <b-col cols="12" sm="6" lg="4" xl="3" class="col-md">
         <b-card style="max-width: 200px">
-          <b-button id="button6" variant = "info" @click = "handleClick5_1" :disabled="isDisabled" class="btn btn-petal4" style="font-size: 25px">
+          <b-button id="button6" variant = "info" @click = "handleClick5_1" :disabled="isDisabled" class="btn btn-petal4" style="font-size: 16px">
             一键顺控  送电
           </b-button>
           <br>
           <br>
-          <b-button id="button7" variant = "info" @click = "handleClick5_2" :disabled="isDisabled" class="btn btn-petal402" style="font-size: 25px">
+          <b-button id="button7" variant = "info" @click = "handleClick5_2" :disabled="isDisabled" class="btn btn-petal402" style="font-size: 16px">
             一键顺控  断电
           </b-button>
           <br>
@@ -57,14 +57,14 @@
         </b-card>
       </b-col>
 
-      <b-col cols="12" sm="6" lg="4" xl="3">
+      <b-col cols="12" sm="6" lg="4" xl="3" class="col-md">
         <b-card style="max-width: 200px;">
-          <b-button id="button3" variant = "success" @click = "handleClick3" :disabled="isDisabled" class="btn btn-petal2" style="font-size: 25px">
+          <b-button id="button3" variant = "success" @click = "handleClick3" :disabled="isDisabled" class="btn btn-petal2" style="font-size: 16px">
             电机储能
           </b-button>
           <br>
           <br>
-          <b-button id="button8" variant = "primary" @click = "handleClick6" :disabled="isDisabled" class="btn btn-petal5" style="font-size: 24px">
+          <b-button id="button8" variant = "primary" @click = "handleClick6" :disabled="isDisabled" class="btn btn-petal5" style="font-size: 16px">
             控制器复位
           </b-button>
           <br>
@@ -73,12 +73,12 @@
       </b-col>
 
 
-      <b-col cols="12" sm="12" lg="8">
+      <b-col cols="12" sm="12" lg="8" class="d-flex justify-content-center align-items-center">
 
-        <b-card style="background-color: #9f94d9;font-size: 22px;text-align: center;margin-top: 20px;" class="show" >指令接收框
+        <b-card style="background-color: #9f94d9;font-size: 16px;text-align: center;margin-top: 20px;" class="show" >指令接收框
           <br>
           <br>
-          <b-form-input v-model="text"  style="height: 35px;font-size: 18px;font-family: 宋体" />
+          <b-form-input v-model="text"  style="height: 25px;font-size: 12px;font-family: 宋体" />
         </b-card>
       </b-col>
       <!--      </div>-->
@@ -125,7 +125,7 @@
             </b-button>.
 
             <b-collapse id = "collapse-5" v-model="visible2" class="mt-2" >
-              <iframe src = "http://localhost:8087" width="640" height="480" style="transform: scale(1);" />
+              <iframe src = "http://localhost:8087" width="640" height="480" style="transform: scale(1);max-width: 100%; max-height: 100%; overflow: auto; " />
             </b-collapse>
           </div>
         </b-card>
@@ -577,6 +577,9 @@ export default {
 
   color: white;
   font-size: 20px;
+}
+.camera{
+
 }
 
 </style>
