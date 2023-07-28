@@ -4,7 +4,7 @@
       <!-- message-warpper是GPT回复框的div-->
       <div class="message-wrapper" >
 
-      <!-- message-avatar是头像的div-->
+        <!-- message-avatar是头像的div-->
         <div class="message-content">
           <b-row>
             <div class="message-avatar" >
@@ -14,14 +14,14 @@
           </b-row>
 
 
-      <!--对话框 -->
+          <!--对话框 -->
           <b-card
               text-variant="dark"
               border-variant="info"
               class="mb-2"
           >
 
-        <!--用户的对话消息条-->
+            <!--用户的对话消息条-->
             <div v-for="post in posts" :key="post.id" class="message-item" style="text-align: right">
               <template v-if="post.role === 'user'">
 
@@ -30,31 +30,31 @@
                   <img src="../pc/me.png" alt="头像" style="width: 45px; height: 40px; margin-right: 10px;">
                 </div>
                 <div class="message-content ">
-<!--                <h6 style="font-family:微软雅黑;font-weight: bold">{{ post.role }}：</h6>-->
-                <div class="user-message" >
-                  <p>{{ post.content }}</p>
-                </div>
-
-               </div>
-              </template>
-
-        <!--GPT小智的对话消息条-->
-              <template v-else>
-                <div class="message-zhi" >
-
-           <!--GPT的头像-->
-                   <div class="message-avatar" >
-                    <img src="../pc/happy.png" alt="头像" style="width: 40px; height: 40px;">
-                  </div>
-<!--                  <h6 style="font-family:微软雅黑;font-weight: bold">{{ post.role }}：</h6>-->
-                  <div class="message-compare ">
-                  <div class="gpt-message" >
+                  <!--                <h6 style="font-family:微软雅黑;font-weight: bold">{{ post.role }}：</h6>-->
+                  <div class="user-message" >
                     <p>{{ post.content }}</p>
                   </div>
+
+                </div>
+              </template>
+
+              <!--GPT小智的对话消息条-->
+              <template v-else>
+                <div class="message-zhi" style="padding-right: 100px">
+
+                  <!--GPT的头像-->
+                  <div class="message-avatar" >
+                    <img src="../pc/happy.png" alt="头像" style="width: 40px; height: 40px;">
+                  </div>
+                  <!--                  <h6 style="font-family:微软雅黑;font-weight: bold">{{ post.role }}：</h6>-->
+                  <div class="message-compare ">
+                    <div class="gpt-message" >
+                      <p>{{ post.content }}</p>
+                    </div>
                   </div>
                 </div>
-               </template>
-              </div>
+              </template>
+            </div>
           </b-card>
 
 
@@ -62,26 +62,28 @@
       </div>
 
       <div class="message-input">
-      <b-row class="align-items-center  justify-content-end">
-        <b-col  class="ml-auto">
-<!--      <h6 >请输入问题</h6>-->
-      <b-form-input
-          v-model="message"
-          @keydown.enter="sendMessage"
-          placeholder="试试输入：物联网是什么"
-      />
-        </b-col>
+        <b-row class="align-items-center  justify-content-end">
+          <b-col  class="ml-auto">
+            <!--      <h6 >请输入问题</h6>-->
+            <b-form-input
+                v-model="message"
+                @keydown.enter="sendMessage"
+                placeholder="试试输入：物联网是什么"
 
-        <b-col cols="auto" class="text-right">
-      <b-button
-          variant="primary" pill
-          @click="send"
-      >
-        发送
-      </b-button>
-        </b-col>
+            />
 
-      </b-row>
+          </b-col>
+
+          <b-col cols="auto" class="text-right">
+            <b-button
+                variant="primary" pill
+                @click="send"
+            >
+              发送
+            </b-button>
+          </b-col>
+
+        </b-row>
       </div>
 
 
@@ -107,10 +109,10 @@
     <br>
 
     <b-button
-        variant="secondary" pill
+        variant="secondary"
+        pill
         @click="send2"
     >
-
       10kV高压开关柜常用的速断整定值是多少
     </b-button>
     &nbsp
@@ -144,6 +146,7 @@
   <!--&lt;!&ndash;      点击按钮发送&ndash;&gt;-->
   <!--      <button @click="send">发送</button>-->
 
+
 </template>
 
 <script>
@@ -154,6 +157,8 @@ import {
 // import axios
 import axios from 'axios'
 import Spinner from "@/views/components/spinner/Spinner.vue";
+
+
 
 import ChatLeftSidebar from './ChatLeftSidebar.vue'
 import ChatActiveChatContentDetailsSidedbar from './ChatActiveChatContentDetailsSidedbar.vue'
@@ -176,6 +181,7 @@ export default {
     BModal,
     BCollapse,
 
+    // KeyBoard,
     ChatLeftSidebar,
     ChatActiveChatContentDetailsSidedbar,
     ChatLog,
@@ -183,6 +189,9 @@ export default {
   data() {
     return {
       message: '',
+      // message1:'',
+      // message2:'',
+      // message3:'',
       status: 1,
       posts: [],
     };
@@ -191,6 +200,9 @@ export default {
   methods: {
     sendMessage() {
       this.send();
+      this.send2();
+      this.send3();
+      this.send4();
     },
     send() {
       // 构造消息对象
@@ -223,14 +235,17 @@ export default {
             this.message = '';
           })
 
-      .catch(error => {
-          console.log(error);
-        });
-        this.message = '';
+          .catch(error => {
+            console.log(error);
+          });
+      this.message = '';
 
     }
   },
   send2() {
+    this.message = '10kV高压开关柜常用的速断整定值是多少';
+    this.posts.push({ role: 'user', content: this.message });
+
     axios.post('https://openai.api2d.net/v1/chat/completions', {
       model: 'gpt-3.5-turbo',
       messages: [{role: 'user', content: '10kV高压柜常用微机综保的速断整定值是多少，一般是多少，请举例'}]
@@ -243,7 +258,9 @@ export default {
       // 等待5s
       setTimeout(() => {
         this.status = 1
-        this.posts = response.data.choices[0].message.content
+        // this.posts = response.data.choices[0].message.content
+        this.posts.push({ role: 'GPT小智', content: response.data.choices[0].message.content });
+
         console.log(response.data.choices[0].message.content)
         // console.log(response.data)
       }, 3000);
@@ -308,7 +325,11 @@ export default {
 </script>
 
 <style scoped>
-
+#app {
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 .message-wrapper {
   display: flex;
   align-items: flex-start;

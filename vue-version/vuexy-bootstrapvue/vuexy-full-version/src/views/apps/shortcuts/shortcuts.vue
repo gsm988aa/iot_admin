@@ -1,6 +1,6 @@
 <template>
 
-  <b-container className= "bv-example-row" style="display: flex; justify-content: center; align-items: center;">
+  <b-container className= "bv-example-row" style="display: flex; justify-content: center; align-items: center">
     <!-- Error_info按钮平时隐藏，show2为true时 显示 -->
     <b-button hidden @click= "showModal">Err_info</b-button>
     <!--    修改cancel按键名字为namex-->
@@ -91,55 +91,59 @@
         </div>
       </b-col>
 
+
       <b-col cols="12" sm="6" lg="4" xl="3">
         <!--摄像头card-->
-        <b-card class="camera" :class="{ active: isActive === 'camera' }" @click="isActive = 'camera'" style="max-width: 200px;">
+        <b-card class="camera" :class="{ active: isActive === 'camera' }" @click="isActive = 'camera'" style="max-width: 400px;margin-left: 30px">
 
-          <h3 style="font-family: '微软雅黑 Light';font-weight: bold;">视频监控</h3>
+          <h3 style="font-family: '微软雅黑 Light';font-weight: bold; ">视频监控</h3>
 
-          <div>
-            <!--              <b-button v-b-toggle.collapse-1 variant   = "success">摄像头开关</b-button>-->
-            <b-button
-                class="visible ? null : 'collapsed'"
-                aria-expanded="visible ? 'true' : 'false'"
-                aria-controls = "collapse-4"
-                @click = "visible = !visible"
-            >
-              摄像头1开关
-            </b-button>.
+          <!--摄像头1-->
+          <b-button
+              class="visible ? null : 'collapsed'"
+              aria-expanded="visible ? 'true' : 'false'"
+              aria-controls="collapse-4"
+              @click="visible = !visible"
+          >
+            摄像头1开关
+          </b-button>.
 
-            <b-collapse id = "collapse-4" v-model="visible" class="mt-2" >
-              <iframe src = "http://localhost:8085" width="640" height="480" style="transform: scale(1);" />
+          <div style="display: flex; justify-content:center; align-items: center;">
+            <b-collapse id="collapse-4" v-model="visible" class="mt-2">
+              <iframe src="http://localhost:8085" width="640" height="480" style="transform: scale(0.6);"></iframe>
             </b-collapse>
           </div>
           <br>
           <br>
-          <div>
-            <b-button
-                class="visible2 ? null : 'collapsed'"
-                aria-expanded="visible2 ? 'true' : 'false'"
-                aria-controls   = "collapse-5"
-                @click = "visible2 = !visible2"
-            >
-              摄像头2开关
-            </b-button>.
 
+
+          <!--摄像头2-->
+          <b-button
+              class="visible2 ? null : 'collapsed'"
+              aria-expanded="visible2 ? 'true' : 'false'"
+              aria-controls   = "collapse-5"
+              @click = "visible2 = !visible2"
+          >
+            摄像头2开关
+          </b-button>.
+
+          <div  style="display: flex; justify-content:center; align-items: center; ">
             <b-collapse id = "collapse-5" v-model="visible2" class="mt-2" >
-              <iframe src = "http://localhost:8087" width="640" height="480" style="transform: scale(1);max-width: 100%; max-height: 100%; overflow: auto; " />
+              <iframe src = "http://localhost:8087" width="640" height="480" style="transform: scale(0.6);" />
             </b-collapse>
           </div>
+
         </b-card>
       </b-col>
+      <!---->
 
     </b-row>
 
 
+    <!--    <b-row>-->
+    <!--&lt;!&ndash;      <div class="col-12 ">&ndash;&gt;-->
 
-<!--    <b-row>-->
-<!--&lt;!&ndash;      <div class="col-12 ">&ndash;&gt;-->
-
-<!--    </b-row>-->
-
+    <!--    </b-row>-->
 
 
   </b-container>
@@ -577,9 +581,6 @@ export default {
 
   color: white;
   font-size: 20px;
-}
-.camera{
-
 }
 
 </style>

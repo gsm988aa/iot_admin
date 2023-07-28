@@ -24,19 +24,19 @@
     <b-row>
       <b-col cols="4">
         <b-card>
-          <div ref="chart1" style="width: 100%; height: 400px;"></div>
+          <div ref="chart1" style="width:100%; height: 300px;"></div>
           <div  ref="chart1-kalman" ></div>
         </b-card>
       </b-col>
       <b-col cols="4">
         <b-card>
-          <div ref="chart2" style="width: 100%; height: 400px;"></div>
+          <div ref="chart2" style="width: 100%; height: 300px;"></div>
           <div ref="chart2-kalman"></div>
         </b-card>
       </b-col>
       <b-col cols="4">
         <b-card>
-          <div ref="chart3" style="width: 100%; height: 400px;"></div>
+          <div ref="chart3" style="width: 100%; height: 300px;"></div>
           <div  ref="chart3-kalman"></div>
         </b-card>
       </b-col>
@@ -45,19 +45,19 @@
     <b-row>
       <b-col cols="4">
         <b-card>
-          <div ref="chart4" style="width: 100%; height: 400px;"></div>
+          <div ref="chart4" style="width: 100%; height: 300px;"></div>
           <div  ref="chart4-kalman"></div>
         </b-card>
       </b-col>
       <b-col cols="4">
         <b-card>
-          <div ref="chart5" style="width: 100%; height: 400px;"></div>
+          <div ref="chart5" style="width: 100%; height: 300px;"></div>
           <div  ref="chart5-kalman"></div>
         </b-card>
       </b-col>
       <b-col cols="4">
         <b-card>
-          <div ref="chart6" style="width: 100%; height: 400px;"></div>
+          <div ref="chart6" style="width: 100%; height: 300px;"></div>
           <div  ref="chart6-kalman"></div>
         </b-card>
       </b-col>
@@ -66,19 +66,19 @@
     <b-row>
       <b-col cols="4">
         <b-card>
-          <div ref="chart7" style="width: 100%; height: 400px;"></div>
+          <div ref="chart7" style="width: 100%; height: 300px;"></div>
           <div  ref="chart7-kalman"></div>
         </b-card>
       </b-col>
       <b-col cols="4">
         <b-card>
-          <div ref="chart8" style="width: 100%; height: 400px;"></div>
+          <div ref="chart8" style="width: 100%; height: 300px;"></div>
           <div  ref="chart8-kalman"></div>
         </b-card>
       </b-col>
       <b-col cols="4">
         <b-card>
-          <div ref="chart9" style="width: 100%; height: 400px;"></div>
+          <div ref="chart9" style="width: 100%; height: 300px;"></div>
           <div  ref="chart9-kalman" ></div>
         </b-card>
       </b-col>
@@ -202,9 +202,14 @@ export default {
           // 将当前temperature1[0]的值显示在标题上
           text: '温度：' ,
         },
+        textStyle: {
+          fontSize: 7,
+        },
         legend: {
           data: ['原始数据', 'chart1-kalman'],
           show: true,
+          right:'5%',
+          top:'8%',
         },
         //悬停数字
         tooltip: {
@@ -285,9 +290,14 @@ export default {
         title: {
           text: '温度：'
         },
+        textStyle: {
+          fontSize: 7,  //图标字体大小
+        },
         legend: {
           data: ['原始数据', 'chart2-kalman'],
           show: true,
+          right:'5%',
+          top:'8%',
         },
         //悬停数字
         tooltip: {
@@ -360,9 +370,14 @@ export default {
         title: {
           text: '温度：'
         },
+        textStyle: {
+          fontSize: 7,
+        },
         legend: {
           data: ['原始数据', 'chart3-kalman'],
           show: true,
+          right:'5%',
+          top:'8%',
         },
         //悬停数字
         tooltip: {
@@ -435,9 +450,14 @@ export default {
         title: {
           text: '温度：'
         },
+        textStyle: {
+          fontSize: 7,
+        },
         legend: {
           data: ['原始数据', 'chart4-kalman'],
           show: true,
+          right:'5%',
+          top:'8%',
         },
         //悬停数字
         tooltip: {
@@ -510,9 +530,14 @@ export default {
         title: {
           text: '温度：'
         },
+        textStyle: {
+          fontSize: 7,
+        },
         legend: {
           data: ['原始数据', 'chart5-kalman'],
           show: true,
+          right:'5%',
+          top:'8%',
         },
         //悬停数字
         tooltip: {
@@ -584,9 +609,14 @@ export default {
         title: {
           text: '温度：'
         },
+        textStyle: {
+          fontSize: 7,
+        },
         legend: {
           data: ['原始数据', 'chart6-kalman'],
           show: true,
+          right:'5%',
+          top:'8%',
         },
         //悬停数字
         tooltip: {
@@ -660,9 +690,14 @@ export default {
         title: {
           text: '温度：'
         },
+        textStyle: {
+          fontSize: 7,
+        },
         legend: {
           data: ['原始数据', 'chart7-kalman'],
           show: true,
+          right:'5%',
+          top:'8%',
         },
         //悬停数字
         tooltip: {
@@ -737,9 +772,14 @@ export default {
         title: {
           text: '温度：'
         },
+        textStyle: {
+          fontSize: 7,
+        },
         legend: {
           data: ['原始数据', 'chart8-kalman'],
           show: true,
+          right:'5%',
+          top:'8%',
         },
         //悬停数字
         tooltip: {
@@ -814,9 +854,14 @@ export default {
         title: {
           text: '温度：'
         },
+        textStyle: {
+          fontSize: 7,
+        },
         legend: {
           data: ['原始数据', 'chart9-kalman'],
           show: true,
+          right:'5%',
+          top:'8%',
         },
         //悬停数字
         tooltip: {
@@ -1220,5 +1265,8 @@ export default {
   font-family: 微软雅黑;
 }
 
+.legend{
+  font-size: 20px;
+}
 
 </style>
