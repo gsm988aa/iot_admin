@@ -1,11 +1,15 @@
 <template>
   <div class="full-screen" >
-    <div class="index-background">
+    <div class="index-background" >
 
-      <div style="display: flex; flex-direction: column; align-items: center;"> 新一代智能柜
+      <div class="content-background" >
+
+      </div>
+
+      <div style="display: flex; flex-direction: column; align-items: center;color: #1e232f":class="{'blue-background': isBlueBackground}"> 新一代智能柜
       </div>
 <!--版本号-->
-      <b-card-text style="text-align: end;padding-top: 325px;font-size: 5px">XYD_V.1.0</b-card-text>
+      <b-card-text style="text-align: end;padding-top: 325px;font-size: 5px;">XYD_V.1.0</b-card-text>
     </div>
     <dv-border-box-9 class="box-9">
 
@@ -262,7 +266,24 @@
             </b-tab>
 
             <b-tab title="设置">
-              <b-card-text>Tab contents 3</b-card-text></b-tab>
+              <b-card-text style="font-size: 16px;font-family: 黑体">
+                <img src="@/assets/set.png" style="width: 20px;height: 20px;margin-bottom: 5px"/>
+                个性化设置：</b-card-text>
+              <b-row>
+                <b-col cols="12">
+
+                  <button @click="toggleBackground" style="margin-left: 90px;border-color: #55acee">切换背景</button>
+
+                  <img src="@/assets/3.png" style="width: 30px;height: 30px;margin-left: 10px"/>
+                  <img src="@/assets/picture1.png" style="width: 30px;height: 30px;margin-left: 2px"/>
+                </b-col>
+              </b-row>
+
+
+            </b-tab>
+
+
+
           </b-tabs>
 <!--        </dv-border-box-8>-->
         </div>
@@ -399,6 +420,8 @@ export default {
     return {
          data:{},
          showModal:false,
+
+         isBlueBackground: false,
 
          selectedTemperature:30,//默认值为80°C
 
@@ -1519,6 +1542,9 @@ export default {
       }
       return this.temperature1, this.temperature2, this.temperature3, this.temperature4, this.temperature5, this.temperature6, this.temperature7, this.temperature8, this.temperature9 ;
     },
+    toggleBackground() {
+      this.isBlueBackground = !this.isBlueBackground;
+    },
   },
 }
 </script>
@@ -1541,7 +1567,6 @@ export default {
 .content {
   display: flex;
   flex-direction: column;
-  padding: 20px;
   flex: 1;
 }
 
@@ -1632,6 +1657,18 @@ export default {
 
   border-radius: 20px;
   border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+
+.blue-background {
+  background-image: url("~@/assets/picture1.png");
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-size: cover;
+
 }
 
 </style>
