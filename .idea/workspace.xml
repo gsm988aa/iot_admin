@@ -5,13 +5,39 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="91036d36-d2ab-466a-a5ad-eee88f80c62d" name="变更" comment="change workspace">
+      <change afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/duobaoshan/src/assets/1-150H4143Q9/浅灰色低多边形PPT背景图片/图片1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/duobaoshan/src/assets/1-150H4143Q9/浅灰色低多边形PPT背景图片/图片1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/duobaoshan/src/assets/1-150H4143Q9/浅灰色低多边形PPT背景图片/图片10.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/duobaoshan/src/assets/1-150H4143Q9/浅灰色低多边形PPT背景图片/图片12.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/duobaoshan/src/assets/1-150H4143Q9/浅灰色低多边形PPT背景图片/图片13.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/duobaoshan/src/assets/1-150H4143Q9/浅灰色低多边形PPT背景图片/图片2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/duobaoshan/src/assets/1-150H4143Q9/浅灰色低多边形PPT背景图片/图片3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/duobaoshan/src/assets/1-150H4143Q9/浅灰色低多边形PPT背景图片/图片8.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/duobaoshan/src/assets/images/kaiguan/kaiguanquankai.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/duobaoshan/src/assets/images/kaiguan/weichuneng.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/duobaoshan/src/assets/images/slider/04.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/duobaoshan/src/assets/picture1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/duobaoshan/src/views/ModalBasic.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/duobaoshan/src/views/ModalTheme.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/duobaoshan/src/views/MyChart.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/duobaoshan/src/views/SweetAlert.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/duobaoshan/src/views/SweetAlertAnimation.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/duobaoshan/src/views/SweetAlertBasic.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/duobaoshan/src/views/SweetAlertConfirmOption.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/duobaoshan/src/views/SweetAlertOption.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/duobaoshan/src/views/SweetAlertPosition.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/duobaoshan/src/views/SweetAlertTypes.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/duobaoshan/src/views/code.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/duobaoshan/src/views/echarts.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/duobaoshan/src/views/echarts.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/91610613-646f-486c-97c4-8155aa6e6420.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/91610613-646f-486c-97c4-8155aa6e6420.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/vuexy-full-version/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/vuexy-full-version/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/vuexy-full-version/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/vuexy-full-version/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Task/test.js" beforeDir="false" afterPath="$PROJECT_DIR$/Task/test.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/vuexy-full-version/src/views/apps/breaker/breaker.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/vuexy-full-version/src/views/apps/breaker/breaker.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/vuexy-full-version/src/views/apps/mcpiot/iot/iot.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/vuexy-full-version/src/views/apps/mcpiot/iot/iot.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/vuexy-full-version/src/views/apps/mcpiot/mcp/mcp.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/vuexy-full-version/src/views/apps/mcpiot/mcp/mcp.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/vuexy-full-version/src/views/apps/shortcuts/shortcuts.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/vuexy-full-version/src/views/apps/shortcuts/shortcuts.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/vuexy-full-version/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/vuexy-full-version/yarn.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/vuexy-full-version/src/views/dashboard/deviceinfos/Deviceinfos.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/vuexy-full-version/src/views/dashboard/deviceinfos/Deviceinfos.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,7 +93,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;正在变基 main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Han/Desktop/长按触摸相关文件/qtweb2&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Han/Desktop/iot_admin&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -205,6 +231,18 @@
       <workItem from="1687480823802" duration="2373000" />
       <workItem from="1687654229846" duration="1491000" />
       <workItem from="1687661038439" duration="9736000" />
+      <workItem from="1690610985958" duration="1935000" />
+      <workItem from="1690953414278" duration="2079000" />
+      <workItem from="1691282599700" duration="3187000" />
+      <workItem from="1691377107391" duration="789000" />
+      <workItem from="1691378885937" duration="34000" />
+      <workItem from="1691460683646" duration="9000" />
+      <workItem from="1691461871701" duration="1173000" />
+      <workItem from="1691545287872" duration="2699000" />
+      <workItem from="1691548189398" duration="17619000" />
+      <workItem from="1691628203189" duration="23102000" />
+      <workItem from="1691714399834" duration="5475000" />
+      <workItem from="1691720652410" duration="679000" />
     </task>
     <task id="LOCAL-00001" summary="change workspace">
       <created>1684112004864</created>

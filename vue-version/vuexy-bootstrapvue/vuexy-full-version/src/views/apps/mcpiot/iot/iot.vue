@@ -197,6 +197,15 @@ export default {
     };
   },
 
+
+  mounted() {
+
+    // 每5分钟自动保存数据
+    // setInterval(this.saveData, 5 * 60 * 1000);
+  },
+
+
+
   methods: {
     sendMessage() {
       this.send();
@@ -319,6 +328,23 @@ export default {
           console.log(error);
         });
   },
+
+  // 保存该页面所有数据
+  // async saveData() {
+  //   try {
+  //     // 直接使用 this 获取整个页面的数据对象 用dataToSend集合
+  //     const dataToSend = {
+  //       message:this.message,
+  //       posts:this.posts,
+  //     };
+  //
+  //     // 发送 POST 请求，将数据保存到服务器
+  //     await axios.post('http://localhost:8080/saveData', dataToSend);
+  //     console.log("Data saved successfully.");
+  //   } catch (error) {
+  //     console.error("Error occurred while saving data:", error);
+  //   }
+  // },
 
 };
 

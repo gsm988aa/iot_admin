@@ -1734,37 +1734,13 @@ export default {
   mounted() {
     // Truncate the label on component mount to fit the button width
     this.truncateLabel();
+
+    // 每5分钟自动保存数据
+    // setInterval(this.saveData, 5 * 60 * 1000);
   },
 
 
   methods: {
-
-    // truncateLabel() {  //阻止“命令”button框超出屏幕 2023.7.26
-    //   const maxButtonWidth = 100;
-    //
-    //   const buttonElement = document.querySelector('.fcn-button');
-    //
-    //   const tempSpan = document.createElement('span');
-    //   tempSpan.textContent = this.fcnname;
-    //   tempSpan.style.visibility = 'hidden';
-    //   tempSpan.style.position = 'absolute';
-    //   document.body.appendChild(tempSpan);
-    //
-    //   // 计算文本宽度
-    //   const textWidth = tempSpan.offsetWidth;
-    //   document.body.removeChild(tempSpan);
-    //
-    //   if (textWidth > maxButtonWidth) {
-    //     const charsToShow = Math.floor((maxButtonWidth / textWidth) * this.fcnname.length);
-    //
-    //     this.fcnnameShort = this.fcnname.substring(0, charsToShow - 3) + '...';
-    //   } else {
-    //     this.fcnnameShort = this.fcnname;
-    //   }
-    // },
-
-
-
     // 单个写入
     setvalue(Prefix) {
       var valuesum = 0
@@ -1840,8 +1816,31 @@ export default {
       this.Notepad_context = Notepad_context[Notepad_index]
     },
 
-  },
 
+    // 保存该页面所有数据
+    // async saveData() {
+    //   try {
+    //     // 直接使用 this 获取整个页面的数据对象 用dataToSend集合
+    //     const dataToSend = {
+    //       resp: this.resp,
+    //       valueset1: this.valueset1,
+    //       valueset2: this.valueset2,
+    //       valueset3: this.valueset3,
+    //       valueset4: this.valueset4,
+    //       text: this.text,
+    //       fcnname: this.fcnname,
+    //       fcnnameShort: this.fcnnameShort,
+    //     };
+    //
+    //     // 发送 POST 请求，将数据保存到服务器
+    //     await axios.post('http://localhost:8080/saveData', dataToSend);
+    //     console.log("Data saved successfully.");
+    //   } catch (error) {
+    //     console.error("Error occurred while saving data:", error);
+    //   }
+    // },
+
+  },
 }
 </script>
 
@@ -1859,7 +1858,7 @@ export default {
 .custom-tab {
   max-width: 600px;
   margin: 0 auto;
-  margin-top: 50px;
+  margin-top: 40px;     /* 通道系数 */
 }
 
 .custom-tab2 {
@@ -1872,11 +1871,17 @@ export default {
 .total1 {
   max-width: 600px; /* Adjust this value as needed */
   margin: 0 auto;
-  margin-top: 55px;
+  margin-top: 30px;
 
-  height: 460px;
+  height: 410px;
 }
+.total2{
+  max-width: 600px; /* Adjust this value as needed */
+  margin: 0 auto;
+  margin-top: 30px;
 
+  height: 630px;
+}
 .total3{
   max-width: 600px;
   margin: 0 auto;
@@ -1886,17 +1891,17 @@ export default {
 }
 
 .total4{
-  max-width: 600px; /* Adjust this value as needed */
+  max-width: 600px; /* 系统事件记录 */
   margin: 0 auto;
-  margin-top: 60px;
+  margin-top: 35px;
 
   height: 500px;
 }
 
 .total5{
-  max-width: 600px; /* Adjust this value as needed */
+  max-width: 600px; /* 故障事件记录 */
   margin: 0 auto;
-  margin-top: 60px;
+  margin-top: 35px;
 
   height: 500px;
 }
@@ -1925,11 +1930,5 @@ export default {
   height: 270px;
 }
 
-.total2{
-  max-width: 600px; /* Adjust this value as needed */
-  margin: 0 auto;
-  margin-top: 80px;
 
-  height: 700px;
-}
 </style>

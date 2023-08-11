@@ -110,7 +110,7 @@
 
           <div style="display: flex; justify-content:center; align-items: center;">
             <b-collapse id="collapse-4" v-model="visible" class="mt-2">
-              <iframe src="http://localhost:8085" width="640" height="480" style="transform: scale(0.6);"></iframe>
+              <iframe src="http://localhost:8085" width="640" height="480" style="transform: scale(0.64);"></iframe>
             </b-collapse>
           </div>
           <br>
@@ -129,7 +129,7 @@
 
           <div  style="display: flex; justify-content:center; align-items: center; ">
             <b-collapse id = "collapse-5" v-model="visible2" class="mt-2" >
-              <iframe src = "http://localhost:8087" width="640" height="480" style="transform: scale(0.6);" />
+              <iframe src = "http://localhost:8087" width="640" height="480" style="transform: scale(0.64);" />
             </b-collapse>
           </div>
 
@@ -157,6 +157,7 @@ import {
 // import axios
 import axios from 'axios'
 import CardTitle from "@/views/card/card-basic/CardTitle.vue";
+import { isActive } from 'nock'
 
 
 
@@ -230,6 +231,10 @@ export default {
   //         this.showenable = true
   //       }
   //     }, 1000)
+
+  // 每5分钟自动保存数据
+  // setInterval(this.saveData, 5 * 60 * 1000);
+
   //   }
   // },
 
@@ -247,8 +252,13 @@ export default {
 
   mounted() {
     this.drawTriangle();
+
+    // 每5分钟自动保存数据
+    // setInterval(this.saveData, 5 * 60 * 1000);
+
   },
   methods: {
+    isActive,
     changeshowenable() {
       this.showenable= true
     },
@@ -397,8 +407,34 @@ export default {
     ctx.fill();
   },
 
-}
+  // 保存该页面所有数据
+  // async saveData() {
+  //   try {
+  //     // 直接使用 this 获取整个页面的数据对象 用dataToSend集合
+  //     const dataToSend = {
+  //       text: this.text,
+  //       text2: this.text2,
+  //       auto485flag: this.auto485flag,
+  //       enablecount: this.enablecount,
+  //       errorinfo: this.errorinfo,
+  //       showenable: this.showenable,
+  //       isDisabled: this.isDisabled,
+  //       showmodal: this.showmodal,
+  //       visible: this.visible,
+  //       visible2: this.visible2,
+  //       isAcitve: this.isAcitve
+  //     };
+  //
+  //     // 发送 POST 请求，将数据保存到服务器
+  //     await axios.post('http://localhost:8080/saveData', dataToSend);
+  //     console.log("Data saved successfully.");
+  //   } catch (error) {
+  //     console.error("Error occurred while saving data:", error);
+  //   }
+  // },
 
+
+}
 
 
 </script>

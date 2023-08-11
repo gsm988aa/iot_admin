@@ -18,9 +18,9 @@
           header="开关状态示意图"
           img-src="@/assets/images/kaiguan/kaiguanquankai.png" img-alt="Card image" img-bottom
       >
-        <b-card-text>
+<!--        <b-card-text>-->
 
-        </b-card-text>
+<!--        </b-card-text>-->
       </b-card>
     </b-col>
     <b-col cols="3">

@@ -114,6 +114,7 @@ export default {
     BRow,
     BCol,
     BCard,
+    // eslint-disable-next-line vue/no-unused-components
     BFormTextarea,
     BButton,
 
@@ -1105,13 +1106,12 @@ export default {
 
 
     }, 3000);
+
+    // 每5分钟自动保存数据
+    // setInterval(this.saveData, 5 * 60 * 1000);
+
   },
 
-
-
-
-  watch: {
-  },
 
 
   methods: {
@@ -1248,6 +1248,42 @@ export default {
       }
       return this.temperature1, this.temperature2, this.temperature3, this.temperature4, this.temperature5, this.temperature6, this.temperature7, this.temperature8, this.temperature9 ;
     },
+
+    // 保存该页面所有数据
+    // async saveData() {
+    //   try {
+    //     // 直接使用 this 获取整个页面的数据对象 用dataToSend集合
+    //     const dataToSend = {
+    //      nowtemp:this.nowtemp,
+    //      predictdata1:this.predictdata1,
+    //      predictdata2:this.predictdata2,
+    //      predictdata3:this.predictdata3,
+    //      predictdata4:this.predictdata4,
+    //      predictdata5:this.predictdata5,
+    //      predictdata6:this.predictdata6,
+    //      predictdata7:this.predictdata7,
+    //      predictdata8:this.predictdata8,
+    //      predictdata9:this.predictdata9,
+
+    //      temperature1:this.temperature1,
+    //      temperature2:this.temperature2,
+    //      temperature3:this.temperature3,
+    //      temperature4:this.temperature4,
+    //      temperature5:this.temperature5,
+    //      temperature6:this.temperature6,
+    //      temperature7:this.temperature7,
+    //      temperature8:this.temperature8,
+    //      temperature9:this.temperature9,
+    //     };
+    //
+    //     // 发送 POST 请求，将数据保存到服务器
+    //     await axios.post('http://localhost:8080/saveData', dataToSend);
+    //     console.log("Data saved successfully.");
+    //   } catch (error) {
+    //     console.error("Error occurred while saving data:", error);
+    //   }
+    // },
+
   }
 }
 

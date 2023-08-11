@@ -6,6 +6,8 @@ const cors = require('cors');
 const {ReadlineParser} = require('@serialport/parser-readline');
 const bodyParser = require('body-parser')
 
+// const { exec } = require('child_process');
+
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const nodemailer = require('nodemailer');
@@ -179,6 +181,51 @@ app.get('/users/:id', authenticateJWT, (req, res) => {
 });
 
 
+
+
+
+// let lastDataReceivedTime = Date.now();
+
+// function checkDataReception() {
+//   const currentTime = Date.now();
+//   const timeThreshold = 600000; 
+
+//   if (currentTime - lastDataReceivedTime > timeThreshold) {
+//     console.log('No data received within the threshold. Restarting Vue program...');
+
+//     // 重启Vue
+//     exec('mobaXterm-command-to-restart-Vue-program', (error, stdout, stderr) => {
+//       if (error) {
+//         console.error('Error restarting Vue program:', error);
+//       } else {
+//         console.log('Vue program restarted successfully.');
+//       }
+//     });
+//   }
+// }
+
+// app.post('/saveData', async (req, res) => {
+//   try {
+//     lastDataReceivedTime = Date.now();
+
+//     console.log("Data saved successfully.");
+
+//     // Send response to the client
+//     res.status(200).send('Data saved successfully');
+//   } catch (error) {
+//     console.error("Error occurred while saving data:", error);
+//     res.status(500).send('Internal Server Error');
+//   }
+// });
+
+// // 每10分钟检查一次是否有数据
+// setInterval(checkDataReception, 600000);
+
+// parser.on('data', chunk => {
+
+//   lastDataReceivedTime = Date.now();
+
+// });
 
 
 // 处理注册请求
