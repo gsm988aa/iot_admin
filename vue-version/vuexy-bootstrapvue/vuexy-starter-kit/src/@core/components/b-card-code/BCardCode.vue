@@ -120,7 +120,7 @@ export default {
     ::-webkit-scrollbar {
       width: 8px;
       height: 8px;
-      background: #000000;
+      background: #2d2d2d;
       border-radius: 100%;
 
       .dark-layout & {

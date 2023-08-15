@@ -1,4 +1,4 @@
-const path = require('path');
+const path = require('path')
 
 module.exports = {
   publicPath: '/',
@@ -22,8 +22,6 @@ module.exports = {
       },
     },
   },
-
-
   chainWebpack: config => {
     config.module
       .rule('vue')

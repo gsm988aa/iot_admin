@@ -7,7 +7,6 @@
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
-  "main": "background.js",
   "dependencies": {
     "@casl/ability": "4.1.6",
     "@casl/vue": "1.1.1",

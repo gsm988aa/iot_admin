@@ -304,22 +304,26 @@ import BCardCode from '@core/components/b-card-code';
 import dataV from '@jiaminghi/data-view';
 import { borderBox9 } from '@jiaminghi/data-view';
 
-import ModalBasic from "@/views/ModalBasic.vue";
-import ModalTheme from "@/views/ModalTheme.vue";
+import ModalBasic from "@/views/apps/closingopening/ModalBasic.vue";
+import ModalTheme from "@/views/apps/closingopening/ModalTheme.vue";
 
-import SweetAlertBasic from './SweetAlertBasic.vue'
-import SweetAlertPosition from './SweetAlertPosition.vue'
-import SweetAlertAnimation from './SweetAlertAnimation.vue'
-import SweetAlertTypes from './SweetAlertTypes.vue'
-import SweetAlertOption from './SweetAlertOption.vue'
-import SweetAlertConfirmOption from './SweetAlertConfirmOption.vue'
+import SweetAlertBasic from '@/views/extensions/sweet-alerts/SweetAlertBasic.vue'
+import SweetAlertTypes from '@/views/extensions/sweet-alerts/SweetAlertTypes.vue'
+import SweetAlertOption from '@/views/extensions/sweet-alerts/SweetAlertOption.vue'
+import SweetAlertConfirmOption from '@/views/extensions/sweet-alerts/SweetAlertConfirmOption.vue'
+
 
 // eslint-disable-next-line import/extensions
 import AnalyticsCongratulation from '@/views/dashboard/analytics/AnalyticsCongratulation'
 // eslint-disable-next-line import/extensions
 import AnalyticsAvgSessions from '@/views/dashboard/analytics/AnalyticsAvgSessions'
+import StatisticCardWithAreaChart from '@core/components/statistics-cards/StatisticCardWithAreaChart.vue';
+import AnalyticsSupportTracker from '@/views/dashboard/analytics/AnalyticsSupportTracker.vue'
 // eslint-disable-next-line import/extensions
 import AnalyticsTimeline from '@/views/dashboard/analytics/AnalyticsTimeline'
+// eslint-disable-next-line import/extensions
+import AnalyticsSalesRadarChart from '@/views/dashboard/analytics/AnalyticsSalesRadarChart.vue'
+import AnalyticsAppDesign from '@/views/dashboard/analytics/AnalyticsAppDesign.vue'
 // eslint-disable-next-line import/extensions
 import InvoiceList from '@/views/invoice/invoice-list/InvoiceList'
 // eslint-disable-next-line no-unused-vars
@@ -329,6 +333,7 @@ Vue.use(dataV)
 Vue.use(borderBox9)
 
 import Vue from "vue";
+// eslint-disable-next-line import/first
 import {kFormatter} from '@core/utils/filter';
 
 import {
@@ -356,10 +361,9 @@ import {
   BFormCheckbox,
   BCardTitle,
 } from 'bootstrap-vue'
-import StatisticCardWithAreaChart from "@core/components/statistics-cards/StatisticCardWithAreaChart.vue";
-import AnalyticsSupportTracker from '@/views/dashboard/analytics/AnalyticsSupportTracker.vue'
-import AnalyticsSalesRadarChart from '@/views/dashboard/analytics/AnalyticsSalesRadarChart.vue'
-import AnalyticsAppDesign from '@/views/dashboard/analytics/AnalyticsAppDesign.vue'
+import SweetAlertAnimation from './SweetAlertAnimation.vue'
+import SweetAlertPosition from './SweetAlertPosition.vue'
+
 
 
 export default {
@@ -399,13 +403,15 @@ export default {
     SweetAlertOption,
     SweetAlertConfirmOption,
 
-
-
     AnalyticsCongratulation,
+    // eslint-disable-next-line vue/no-unused-components
     AnalyticsAvgSessions,
+    // eslint-disable-next-line vue/no-unused-components
     AnalyticsSupportTracker,
+    // eslint-disable-next-line vue/no-unused-components
     AnalyticsTimeline,
     AnalyticsSalesRadarChart,
+    // eslint-disable-next-line vue/no-unused-components
     AnalyticsAppDesign,
     // eslint-disable-next-line vue/no-unused-components
     InvoiceList,
@@ -418,7 +424,7 @@ export default {
 
   data() {
     return {
-         data:{},
+      data: {},
          showModal:false,
 
          isBlueBackground: false,

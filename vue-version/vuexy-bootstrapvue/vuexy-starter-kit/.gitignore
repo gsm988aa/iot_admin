@@ -27,6 +27,3 @@ yarn-error.log*
 
 # Docs
 /docs/.temp
-
-#Electron-builder output
-/dist_electron

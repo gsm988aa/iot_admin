@@ -1,147 +1,44 @@
 <template>
+  <div id = "app2" >
+    <b-card title="Kick start your project 🚀">
+      <b-card-text>All the best for your new project.</b-card-text>
+      <b-card-text>Please make sure to read our <b-link
+        href="https://pixinvent.com/demo/vuexy-vuejs-admin-dashboard-template/documentation/"
+        target="_blank"
+      >
+        Template Documentation
+      </b-link> to understand where to go from here and how to use our template.</b-card-text>
+    </b-card>
 
-  <b-container class="bv-example-row">
-    <b-row>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-    </b-row>
-    <b-row>
-      <b-col cols="3">
-      </b-col>
-
-      <b-col cols="6">
-
-        <div style="transform: scale(2);">
-          <b-card >
-
-            <b-button variant="primary" @click="handleClick1" :disabled="isDisabled">合闸</b-button>
-            <br>
-            <br>
-            <b-button variant="secondary" @click="handleClick2" :disabled="isDisabled">分闸</b-button>
-            <br>
-            <br>
-            <b-button variant="success" @click="handleClick3" :disabled="isDisabled">电机储能</b-button>
-            <br>
-            <br>
-            <b-button variant="danger" @click="handleClick4" :disabled="isDisabled">手车驶入</b-button>
-            <br>
-            <br>
-            <b-button variant="warning" @click="handleClick5" :disabled="isDisabled">手车驶出</b-button>
-            <br>
-            <br>
-            <b-button variant="info" @click="handleClick6" :disabled="isDisabled">控制器复位</b-button>
-            <br>
-            <br>
-            <b-form-input v-model="text"></b-form-input>
-          </b-card>
-
-        </div>
-
-      </b-col>
-      <b-col cols="3">
-      </b-col>
-
-    </b-row>
-  </b-container>
-
+    <b-card title="Want to integrate JWT? 🔒">
+      <b-card-text>We carefully crafted JWT flow so you can implement JWT with ease and with minimum efforts.</b-card-text>
+      <b-card-text>Please read our  JWT Documentation to get more out of JWT authentication.</b-card-text>
+    </b-card>
+  </div>
 </template>
- 
-<script>
-import { BRow, BCol,BCard ,BContainer,BButton,BButtonGroup,BFormInput} from 'bootstrap-vue'
 
+<script>
+import { BCard, BCardText, BLink } from 'bootstrap-vue'
 
 export default {
   components: {
-    BRow,
-    BCol,
     BCard,
-    BButton,
-    BButtonGroup,
-    BFormInput
-
+    BCardText,
+    BLink,
   },
-  data(){
-    return{
-      text:'',
-      isDisabled: false
-    }
-  },
-  methods: {
-    handleClick1() {
-      if(!this.isDisabled){
-        this.isDisabled = true;
-        setTimeout(() => {
-          console.log('Button clicked!')
-          console.log('Button 1 clicked!')
-          this.text = 'Button 1 clicked!'
-          this.isDisabled = false;
-        }, 3000);
-      }
-    },
-    handleClick2() {
-      if(!this.isDisabled){
-        this.isDisabled = true;
-        setTimeout(() => {
-          console.log('Button 2 clicked!')
-          this.text = 'Button 2 clicked!'
-          this.isDisabled = false;
-        }, 3000);
-      }
-    },
-    handleClick3() {
-      if(!this.isDisabled){
-        this.isDisabled = true;
-        setTimeout(() => {
-          console.log('Button 3 clicked!')
-          this.text = 'Button 3 clicked!'
-          this.isDisabled = false;
-        }, 3000);
-      }
-    },
-    handleClick4() {
-      if(!this.isDisabled){
-        this.isDisabled = true;
-        setTimeout(() => {
-          console.log('Button 4 clicked!')
-          this.text = 'Button 4 clicked!'
-          this.isDisabled = false;
-        }, 3000);
-      }
-    },
-    handleClick5() {
-      if(!this.isDisabled){
-        this.isDisabled = true;
-        setTimeout(() => {
-          console.log('Button 5 clicked!')
-          this.text = 'Button 5 clicked!'
-          this.isDisabled = false;
-        }, 3000);
-      }
-    },
-    handleClick6() {
-      if(!this.isDisabled){
-        this.isDisabled = true;
-        setTimeout(() => {
-          console.log('Button 6 clicked!')
-          this.text = 'Button 6 clicked!'
-          this.isDisabled = false;
-        }, 3000);
-      }
-    }
-  }
 }
 </script>
 
-<style lang="scss">
-@import '@core/scss/vue/libs/vue-sweetalert.scss';
+<style>
+#app2{
+    background : url('../assets/images/apple-logo-white2.jpg') no-repeat center ;
+  height: 100%;
 
+  width: 100%;
 
+  background-size: cover;
+
+  position: fixed;
+ 
+}
 </style>
