@@ -18,12 +18,12 @@
             <YiJianShunKong/>
           </b-card-text>
         </b-tab>
-        <b-tab title="状态预览">
+        <b-tab title="状态">
           <b-card-text>
             <ZhuangTai/>
           </b-card-text>
         </b-tab>
-        <b-tab title="开关柜设置">
+        <b-tab title="设置">
           <b-card-text>
             <SheZhi/>
           </b-card-text>
