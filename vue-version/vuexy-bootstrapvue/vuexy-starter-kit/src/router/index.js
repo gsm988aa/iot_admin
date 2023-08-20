@@ -15,29 +15,29 @@ const router = new VueRouter({
       name: 'home',
       component: () => import('@/views/Home.vue'),
       meta: {
-        pageTitle: 'Home',
+        pageTitle: '智能柜',
         breadcrumb: [
           {
-            text: 'Home',
+            text: '智能控制系统',
             active: true,
           },
         ],
       },
     },
-    {
-      path: '/second-page',
-      name: 'second-page',
-      component: () => import('@/views/SecondPage.vue'),
-      meta: {
-        pageTitle: 'Second Page',
-        breadcrumb: [
-          {
-            text: 'Second Page',
-            active: true,
-          },
-        ],
-      },
-    },
+    // {
+    //   path: '/second-page',
+    //   name: 'second-page',
+    //   component: () => import('@/views/SecondPage.vue'),
+    //   meta: {
+    //     pageTitle: 'Second Page',
+    //     breadcrumb: [
+    //       {
+    //         text: 'Second Page',
+    //         active: true,
+    //       },
+    //     ],
+    //   },
+    // },
     {
       path: '/login',
       name: 'login',

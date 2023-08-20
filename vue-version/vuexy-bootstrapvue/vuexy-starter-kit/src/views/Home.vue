@@ -1,44 +1,64 @@
 <template>
-  <div id = "app2" >
-    <b-card title="Kick start your project 🚀">
-      <b-card-text>All the best for your new project.</b-card-text>
-      <b-card-text>Please make sure to read our <b-link
-        href="https://pixinvent.com/demo/vuexy-vuejs-admin-dashboard-template/documentation/"
-        target="_blank"
-      >
-        Template Documentation
-      </b-link> to understand where to go from here and how to use our template.</b-card-text>
-    </b-card>
+  <b-row>
+    <b-col cols="12">
 
-    <b-card title="Want to integrate JWT? 🔒">
-      <b-card-text>We carefully crafted JWT flow so you can implement JWT with ease and with minimum efforts.</b-card-text>
-      <b-card-text>Please read our  JWT Documentation to get more out of JWT authentication.</b-card-text>
-    </b-card>
-  </div>
+      <b-tabs pills card vertical>
+        <b-tab title="紧急分闸" active>
+          <b-card-text>
+            <JinJiFenZha/>
+          </b-card-text>
+        </b-tab>
+        <b-tab title="多点测温">
+          <b-card-text>
+            <DuoDianCeWen/>
+          </b-card-text>
+        </b-tab>
+        <b-tab title="一键控制">
+          <b-card-text>
+            <YiJianShunKong/>
+          </b-card-text>
+        </b-tab>
+        <b-tab title="状态预览">
+          <b-card-text>
+            <ZhuangTai/>
+          </b-card-text>
+        </b-tab>
+        <b-tab title="开关柜设置">
+          <b-card-text>
+            <SheZhi/>
+          </b-card-text>
+        </b-tab>
+
+
+      </b-tabs>
+
+    </b-col>
+  </b-row>
+
 </template>
 
 <script>
-import { BCard, BCardText, BLink } from 'bootstrap-vue'
+import { BRow, BCol, BTab, BTabs, BCard, BCardText } from 'bootstrap-vue'
+import DuoDianCeWen from './DuoDianCeWen.vue'
+import JinJiFenZha from './JinJiFenZha.vue'
+import ZhuangTai from './ZhuangTai.vue'
+import SheZhi from './SheZhi.vue'
+import YiJianShunKong from './YiJianShunKong.vue'
 
 export default {
   components: {
+    BRow,
+    BCol,
+    BTab,
+    BTabs,
     BCard,
     BCardText,
-    BLink,
+    DuoDianCeWen,
+    JinJiFenZha,
+    ZhuangTai,
+    SheZhi,
+    YiJianShunKong,
   },
+
 }
 </script>
-
-<style>
-#app2{
-    background : url('../assets/images/apple-logo-white2.jpg') no-repeat center ;
-  height: 100%;
-
-  width: 100%;
-
-  background-size: cover;
-
-  position: fixed;
- 
-}
-</style>
