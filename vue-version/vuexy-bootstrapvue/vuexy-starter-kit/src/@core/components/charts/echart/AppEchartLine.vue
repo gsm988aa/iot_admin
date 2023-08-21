@@ -14,6 +14,7 @@ import 'echarts/lib/component/tooltip'
 import 'echarts/lib/component/legend'
 import 'echarts/lib/chart/line'
 import theme from './theme.json'
+import echarts from 'echarts/lib/export'
 
 ECharts.registerTheme('theme-color', theme)
 
@@ -37,6 +38,7 @@ export default {
           min: 0,
           max: 400,
         }],
+
         grid: {
           width: '96%',
           left: '30px',
@@ -56,7 +58,20 @@ export default {
         },
         series: {
           type: 'line',
+          smooth: true,
           showSymbol: false,
+          areaStyle: {
+            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+              {
+                offset: 0,
+                color: 'rgb(255,255,255)'
+              },
+              {
+                offset: 1,
+                color: 'rgb(172,99,248)'
+              }
+            ])
+          },
           data: this.optionData.series,
         },
       },
