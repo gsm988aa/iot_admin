@@ -2,33 +2,39 @@
   <b-row>
     <b-col cols="12">
 
-      <b-tabs pills card vertical>
-        <b-tab title="紧急分闸" active>
+      <b-tabs
+        pills
+        card
+        vertical
+      >
+        <b-tab
+          title="紧急分闸"
+          active
+        >
           <b-card-text>
-            <JinJiFenZha/>
+            <JinJiFenZha />
           </b-card-text>
         </b-tab>
         <b-tab title="多点测温">
           <b-card-text>
-            <DuoDianCeWen/>
+            <DuoDianCeWen />
           </b-card-text>
         </b-tab>
         <b-tab title="一键控制">
           <b-card-text>
-            <YiJianShunKong/>
+            <YiJianShunKong />
           </b-card-text>
         </b-tab>
         <b-tab title="状态">
           <b-card-text>
-            <ZhuangTai/>
+            <ZhuangTai />
           </b-card-text>
         </b-tab>
         <b-tab title="设置">
           <b-card-text>
-            <SheZhi/>
+            <SheZhi />
           </b-card-text>
         </b-tab>
-
 
       </b-tabs>
 
@@ -38,7 +44,9 @@
 </template>
 
 <script>
-import { BRow, BCol, BTab, BTabs, BCard, BCardText } from 'bootstrap-vue'
+import {
+  BRow, BCol, BTab, BTabs, BCard, BCardText,
+} from 'bootstrap-vue'
 import DuoDianCeWen from './DuoDianCeWen.vue'
 import JinJiFenZha from './JinJiFenZha.vue'
 import ZhuangTai from './ZhuangTai.vue'

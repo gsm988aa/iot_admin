@@ -15,17 +15,17 @@ export default new Vuex.Store({
   mutations: {
     updateChuanCan(state, value) {
       state.ChuanCan = value;
-    }
+    },
   },
   actions: {
     setChuanCan({ commit }, value) {
       commit('updateChuanCan', value);
-    }
+    },
   },
   getters: {
     getChuanCan(state) {
       return state.ChuanCan;
-    }
+    },
   },
 
   modules: {

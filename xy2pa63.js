@@ -4,13 +4,10 @@ const { crc16 } = require('easy-crc');
 const fs = require('fs');
 const cors = require("cors")
 const { SerialPort } = require('serialport')
-
-const serialport2 = new SerialPort({ path: '/dev/ttyUSB0', baudRate: 9600}, function (err) {
-  if (err) {
-    return console.log('Error: ', err.message)
-  }
-})
-
+const jsonParse = require('json-parse');
+// 这是Linux的串口
+// 你要改成Windows的串口
+const serialport2 =  new SerialPort('COM1', { baudRate: 9600 });
 var port = 10866;
 app.use(
   cors({
@@ -268,6 +265,47 @@ app.post('/:action', function (req, res) {
 
 });
 
+
+// 创建串口连接  
+const serialport3 = new SerialPort('COM2', {
+  baudRate: 9600, // 设置波特率
+});
+
+// 监听串口打开事件
+serialport3.on('open', () => {
+  console.log('Serial port COM2 opened');
+});
+
+// 监听串口错误事件
+serialport3.on('error', (err) => {
+  console.error('Error on COM2:', err.message);
+});
+
+app.get('/getdbtemperature', (req, res) => {
+  // 读取 JSON 文件并解析数据
+  fs.readFile('./tempdata.json', 'utf8', (err, data) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).send('Internal Server Error');
+    }
+
+    try {
+      const parsedData = JSON.parse(data); // 使用 JSON.parse 直接解析 JSON 数据
+      res.json(parsedData);
+
+      // 将解析后的数据发送到 COM2
+      const dataToSend = JSON.stringify(parsedData);
+      serialport3.write(dataToSend, (err) => {
+        if (err) {
+          console.error('Error writing to COM2:', err.message);
+        }
+      });
+    } catch (parseError) {
+      console.error(parseError);
+      res.status(500).send('Error parsing JSON');
+    }
+  });
+});
 app.listen(port, function () {
   console.log('Example applistening on port http://127.0.0.1:' + port + '!');
 });
