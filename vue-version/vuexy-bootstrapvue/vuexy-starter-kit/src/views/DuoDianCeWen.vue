@@ -22,21 +22,32 @@
     </div>
 
     <!-- echart -->
-    <app-echart-line :option-data="option1" />
-    <app-echart-line :option-data="option2" />
+    <b-row>
+      <b-col cols = 3 >
+        <app-echart-line :option-data="option1" />
+      </b-col>
+      <b-col cols = 3 >
+        <app-echart-line2 :option-data="option2" />
+      </b-col>
+    </b-row>
+
+<!--    <app-echart-line2 :option-data="option2" />-->
     <app-echart-line :option-data="option3" />
 
   </b-card>
 </template>
 
 <script>
-import { BCard, BBadge } from 'bootstrap-vue'
+import { BCard, BBadge,BRow,BCol } from 'bootstrap-vue'
 import AppEchartLine from '@core/components/charts/echart/AppEchartLine.vue'
-
+import AppEchartLine2 from '@core/components/charts/echart/AppEchartLine2.vue'
 export default {
   components: {
     BCard,
+    BRow,BCol,
+
     AppEchartLine,
+    AppEchartLine2,
     BBadge,
   },
   data() {

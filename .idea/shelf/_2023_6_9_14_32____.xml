@@ -1,0 +1,29 @@
+<changelist name="在进行更新之前于_2023_6_9_14_32_取消提交了更改_[变更]" date="1686292333886" recycled="false" toDelete="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/在进行更新之前于_2023_6_9_14_32_取消提交了更改_[变更]/shelved.patch" />
+  <option name="DESCRIPTION" value="在进行更新之前于 2023/6/9 14:32 取消提交了更改 [变更]" />
+  <binary>
+    <option name="BEFORE_PATH" value=".idea/shelf/在进行更新之前于_2023_5_18_23_18_取消提交了变更_[变更]1/mydatabase.db" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="vue-version/vuexy-bootstrapvue/vuexy-full-version/dist.zip" />
+    <option name="AFTER_PATH" value="vue-version/vuexy-bootstrapvue/vuexy-full-version/dist.zip" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/在进行更新之前于_2023_6_9_14_32_取消提交了更改_[变更]/dist.zip" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value=".idea/shelf/在进行更新之前于_2023_5_18_6_56_取消提交了变更_[变更]1/mydatabase.db" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value=".idea/shelf/在进行更新之前于_2023_5_18_8_14_取消提交了变更_[变更]/mydatabase.db" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value=".idea/shelf/在进行更新之前于_2023_5_19_8_20_取消提交了变更_[变更]1/mydatabase.db" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+</changelist>
