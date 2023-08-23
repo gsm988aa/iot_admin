@@ -1,11 +1,11 @@
 <template>
   <b-card>
     <e-charts
-        ref="chart2"
-        autoresize
-        :options="chartData2"
-        theme="theme-color"
-        auto-resize
+      ref="chart2"
+      autoresize
+      :options="chartData2"
+      theme="theme-color"
+      auto-resize
     />
   </b-card>
 
@@ -19,9 +19,9 @@ import 'echarts/lib/chart/line'
 import {
   BCard,
 } from 'bootstrap-vue'
-import theme from './theme.json'
 import echarts from 'echarts/lib/export'
 import axios from 'axios'
+import theme from './theme.json'
 
 ECharts.registerTheme('theme-color', theme)
 
@@ -40,8 +40,36 @@ export default {
     return {
       newdata: [],
       temperature2: [],
-      predictdata2: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      legendData: ['温度数据2'],
+      count: 0,
+
+      intervalId: null,
+
+      nowtemp: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      x: [10, 10, 10, 10, 10, 10, 10, 10, 10, 10],
+      x_pred: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      p_pred: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      z: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      p: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+      q: [0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01],
+      // r是输入噪声，可以假设为0
+      // r:  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      r: [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1],
+      k: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+      x_update: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      p_update: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+
+      // 预测温度
+      predictdata1: [0, 5, 0, 0, 0, 8, 0, 0, 0, 0],
+      predictdata2: [0, 0, 1, 0, 0, 0, 2, 0, 0, 0],
+      predictdata3: [0, 0, 3, 0, 3, 0, 0, 3, 0, 0],
+      predictdata4: [0, 0, 0, 1, 0, 0, 0, 0, 0, 4],
+      predictdata5: [0, 0, 2, 0, 2, 0, 4, 0, 6, 0],
+      predictdata6: [0, 0, 0, 0, 0, 0, 0, 0, 0, 8],
+      predictdata7: [0, 0, 4, 0, 6, 0, 0, 7, 0, 0],
+      predictdata8: [0, 4, 0, 0, 0, 1, 0, 0, 3, 0],
+      predictdata9: [0, 0, 6, 0, 5, 0, 0, 8, 0, 2],
+
+      legendData: ['原始数据', '卡尔曼预测'],
 
       chartData2: {
         // Make gradient line here
@@ -59,10 +87,9 @@ export default {
           show: false,
         },
         legend: {
-          data: ['温度数据2'],
+          data: ['原始数据', 'chart2-kalman'],
           show: true,
           right: '5%',
-          top: '8%',
         },
         // 悬停数字
         tooltip: {
@@ -77,6 +104,7 @@ export default {
         xAxis: [{
           boundaryGap: false,
           data: this.optionData.xAxisData,
+          inverse: true, // 设置反向属性
           axisLabel: {
             formatter(value) {
               const date = new Date(value)
@@ -99,34 +127,97 @@ export default {
         },
         series: [
           {
-            name: '温度数据2',
+            name: '原始数据',
             type: 'line',
             itemStyle: {
-              color: 'rgb(39,64,139)'
+              color: 'rgb(39,64,139)',
             },
             smooth: true,
-            showSymbol: false,
+            showSymbol: true, // 显示空心圆
+            symbol: 'emptyCircle',
+            symbolSize: 6,
             areaStyle: {
               color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
                 {
                   offset: 0,
-                  color: 'rgb(255,235,205)'
+                  color: 'rgb(255,235,205)',
                 },
                 {
                   offset: 1,
-                  color: 'rgb(31,140,255)'
+                  color: 'rgb(31,140,255)',
                 },
-              ])
+              ]),
             },
             data: this.optionData.series,
+          },
+          {
+            name: 'chart2-kalman',
+            type: 'line',
+            color: 'rgb(211,11,29)',
+            smooth: true,
+            showSymbol: true,
+            symbol: 'emptyCircle',
+            symbolSize: 6,
+            areaStyle: {
+              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+              ]),
+            },
+            data: this.optionData.series[1],
           },
         ],
       },
     }
   },
   mounted() {
-    this.chartData2.legend.data = ['温度数据2']
     setInterval(() => {
+      if (this.checkedstatus === true) {
+        // 数组predictdata2 右移
+        for (let i = 9; i >= 0; i--) {
+          this.predictdata1[i + 1] = this.predictdata1[i]
+          this.predictdata2[i + 1] = this.predictdata2[i]
+          this.predictdata3[i + 1] = this.predictdata3[i]
+          this.predictdata4[i + 1] = this.predictdata4[i]
+          this.predictdata5[i + 1] = this.predictdata5[i]
+          this.predictdata6[i + 1] = this.predictdata6[i]
+          this.predictdata7[i + 1] = this.predictdata7[i]
+          this.predictdata8[i + 1] = this.predictdata8[i]
+          this.predictdata9[i + 1] = this.predictdata9[i]
+        }
+        // 获取kalmanFilter()的值
+        this.predictdata1[0] = this.kalmanFilter(0)
+        this.predictdata2[0] = this.kalmanFilter(1)
+        this.predictdata3[0] = this.kalmanFilter(2)
+        this.predictdata4[0] = this.kalmanFilter(3)
+        this.predictdata5[0] = this.kalmanFilter(4)
+        this.predictdata6[0] = this.kalmanFilter(5)
+        this.predictdata7[0] = this.kalmanFilter(6)
+        this.predictdata8[0] = this.kalmanFilter(7)
+        this.predictdata9[0] = this.kalmanFilter(8)
+
+        this.chartData2.series[1].data = this.predictdata2
+
+        this.chartData2.legend.data = ['原始数据', 'chart1-kalman']
+
+        if (this.x_update[0] > this.selectedTemperature || this.x_update[1] > this.selectedTemperature || this.x_update[2] > this.selectedTemperature || this.x_update[3] > this.selectedTemperature || this.x_update[4] > this.selectedTemperature || this.x_update[5] > this.selectedTemperature || this.x_update[6] > this.selectedTemperature || this.x_update[7] > this.selectedTemperature || this.x_update[8] > this.selectedTemperature) {
+          if (this.isEmailSent === false && this.counter < 5) {
+            this.showModal = true
+            this.sendEmail()
+            this.counter += 1
+            console.log('counter =  ', this.counter)
+            this.isEmailSent = true
+          } else if (this.isEmailSent === true && this.counter < 5) {
+            this.counter += 1
+            console.log('counter =  ', this.counter)
+            this.isEmailSent = true
+          } else {
+            this.counter = 0
+            this.isEmailSent = false
+          }
+        }
+      } else {
+        this.chartData2.legend.data = []
+      }
+
       const now = new Date()
       // 获取3s前的时间
       const before3s = new Date(now.getTime() - 3000)
@@ -148,9 +239,64 @@ export default {
       this.chartData2.xAxis[0].data = this.timeserial
 
       this.chartData2.series[0].data = this.temperature2
+
+      this.intervalId = setInterval(this.updateChartData, 3000)
+
+      // 可以在这里处理报警温度判断
+      console.log('selectedTemperature =  ', this.selectedTemperature)
     }, 3000)
   },
+  beforeDestroy() {
+    // 清除组件销毁时的间隔
+    clearInterval(this.intervalId)
+  },
   methods: {
+    updateChartData() {
+      // 使用卡尔曼滤波更新 predictdata 数组
+      for (let i = 9; i >= 0; i--) {
+        this.predictdata1[i + 1] = this.predictdata1[i]
+        this.predictdata2[i + 1] = this.predictdata2[i]
+        this.predictdata3[i + 1] = this.predictdata3[i]
+        this.predictdata4[i + 1] = this.predictdata4[i]
+        this.predictdata5[i + 1] = this.predictdata5[i]
+        this.predictdata6[i + 1] = this.predictdata6[i]
+        this.predictdata7[i + 1] = this.predictdata7[i]
+        this.predictdata8[i + 1] = this.predictdata8[i]
+        this.predictdata9[i + 1] = this.predictdata9[i]
+      }
+      // 调用kalmanFilter函数
+      this.predictdata2[0] = this.kalmanFilter(0)
+
+      // 更新卡尔曼滤波序列的序列数据
+      this.chartData2.series[1].data = this.predictdata2
+    },
+
+    kalmanFilter(index) {
+      let m
+      this.nowtemp[0] = this.temperature2[0]
+      m = index
+
+      // for (m = 0; m <= 8; m++) {
+      this.x_pred[m] = this.x[m]
+      this.p_pred[m] = this.p[m] + this.q[m]
+      // 更新状态
+      if (this.nowtemp[m] != null) {
+        this.z[m] = this.nowtemp[m]
+        this.k[m] = this.p_pred[m] / (this.p_pred[m] + this.r[m])
+        if (this.x[m] != null) {
+          this.x_update[m] = this.x_pred[m] + this.k[m] * (this.z[m] - this.x_pred[m])
+          this.p_update[m] = (1 - this.k[m]) * this.p_pred[m]
+          this.x[m] = this.x_update[m]
+          this.p[m] = this.p_update[m]
+
+          return this.x_update[m]
+        }
+        console.log('x[m] is NaN', m)
+      } else {
+        console.log('nowtemp is NaN', m)
+      }
+    },
+
     generateData() {
       axios.get('/getdbtemperature').then(response => {
         this.temperature2 = response.data.map(item => item.data2)
@@ -162,7 +308,7 @@ export default {
       }
       return this.temperature2
     },
-  }
+  },
 }
 </script>
 
