@@ -1,5 +1,8 @@
 <template>
-  <b-card title="Balance" class="gsm-card">
+  <b-card
+    title="Balance"
+    class="gsm-card"
+  >
     <div class="d-flex justify-content-between flex-wrap">
       <div class="mb-1 mb-sm-0">
         <span class="text-muted">Commercial networks and enterprises</span>
@@ -11,9 +14,9 @@
         <div class="pt-25 ml-75">
           <b-badge variant="light-secondary">
             <feather-icon
-                icon="ArrowDownIcon"
-                size="12"
-                class="text-danger align-middle"
+              icon="ArrowDownIcon"
+              size="12"
+              class="text-danger align-middle"
             />
             <span class="font-weight-bolder align-middle"> 24%</span>
           </b-badge>
@@ -23,28 +26,32 @@
 
     <!-- echart -->
     <b-row>
-      <b-col cols = 3 >
+      <b-col cols="3">
         <app-echart-line :option-data="option1" />
       </b-col>
-      <b-col cols = 3 >
+      <b-col cols="3">
         <app-echart-line2 :option-data="option2" />
       </b-col>
     </b-row>
 
-<!--    <app-echart-line2 :option-data="option2" />-->
+    <!--    <app-echart-line2 :option-data="option2" />-->
     <app-echart-line :option-data="option3" />
 
   </b-card>
 </template>
 
 <script>
-import { BCard, BBadge,BRow,BCol } from 'bootstrap-vue'
+import {
+  BCard, BBadge, BRow, BCol,
+} from 'bootstrap-vue'
 import AppEchartLine from '@core/components/charts/echart/AppEchartLine.vue'
 import AppEchartLine2 from '@core/components/charts/echart/AppEchartLine2.vue'
+
 export default {
   components: {
     BCard,
-    BRow,BCol,
+    BRow,
+    BCol,
 
     AppEchartLine,
     AppEchartLine2,
@@ -53,8 +60,12 @@ export default {
   data() {
     return {
       option1: {
-        xAxisData: ['7/12', '8/12', '9/12', '10/12', '11/12', '12/12', '13/12', '14/12', '15/12', '16/12', '17/12', '18/12', '19/12', '20/12'],
-        series: ['290', '200', '210', '190', '250', '220', '80', '90', '200', '150', '160', '100', '140', '100', '30'],
+        xAxisData: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
+        // 两条曲线
+        series: [
+          ['21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31', '32'],
+          ['31', '32', '33', '34', '35', '36', '37', '38', '39', '40', '41', '42'],
+        ],
 
       },
       option2: {
