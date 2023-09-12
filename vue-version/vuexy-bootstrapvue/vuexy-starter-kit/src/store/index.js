@@ -10,7 +10,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    ChuanCan: 123,
+    ChuanCan: 'admin',
   },
   mutations: {
     updateChuanCan(state, value) {
