@@ -26,7 +26,7 @@
     <h6>请输入问题</h6>
     <b-form-input
         v-model="message"
-        placeholder="写一段欢迎鞍钢设计院领导的标语！"
+        placeholder="再写一段欢迎太钢集团及中冶北方设计院领导的标语！"
     />
     <br>
 
@@ -112,7 +112,7 @@ export default {
   },
   data() {
     return {
-      message: '写一段欢迎鞍钢设计院领导的标语！',
+      message: '写一段欢迎太钢集团及中冶北方设计院领导的标语！',
       status: 1,
       posts: ''
     };

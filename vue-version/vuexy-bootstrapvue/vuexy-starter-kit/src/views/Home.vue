@@ -1,12 +1,12 @@
 <template>
   <div>
-    <b-tabs v-model="activeTab">
-      <b-tab title="Tab 1">
+    <b-tabs v-model="activeTab" vertical>
+      <b-tab title="用户">
         <div v-if="isAdmin || activeTab === 0">
           <!-- Tab 1 内容 -->
-          <h3>默认管理员账户是admin默认管理员密码是admin 管理员拥有控制权限 普通用户有观察权限</h3>
-          <p class="introduction">这是一段介绍文字。{{ChuanCan}}</p>
-          <h3>请在设置中修改密码</h3>
+          <h6>默认管理员账户是admin默认管理员密码是admin 管理员拥有控制权限 普通用户有观察权限</h6>
+          <h6 class="introduction">这是一段介绍文字。{{ChuanCan}}</h6>
+          <h6>请在设置中修改密码</h6>
           <b-form-input
               v-model="username"
               placeholder="用户名"
@@ -22,34 +22,44 @@
 
         </div>
       </b-tab>
-      <b-tab title="Tab 2">
+      <b-tab title="系统状态">
         <div v-if="isAdmin || activeTab === 1">
           <!-- Tab 2 内容 -->
+<!--          <ZhuangTai/>-->
         </div>
       </b-tab>
-      <b-tab title="Tab 3">
+      <b-tab title="紧急分闸">
         <div v-if="isAdmin || activeTab === 2">
+          <SweetAlertTypes/>
           <!-- Tab 3 内容 -->
         </div>
       </b-tab>
+<!--      <b-tab title="电力状态">-->
+<!--        <div v-if="isAdmin || activeTab === 3">-->
+<!--          <YiJianShunKong/>-->
+<!--          &lt;!&ndash; Tab 3 内容 &ndash;&gt;-->
+<!--        </div>-->
+<!--      </b-tab>-->
       <!-- 其他Tabs -->
-      <b-tab title="Tab 6">
-        <div v-if="isAdmin || activeTab === 5">
+      <b-tab title="多点测温">
+        <div v-if="isAdmin || activeTab === 4">
           <!-- Tab 6 内容 -->
+          <DuoDianCeWen/>
         </div>
       </b-tab>
       <b-tab
-        v-if="isAdmin"
-        title="Tab 7"
+        v-if="isAdmin || activeTab === 5"
+        title="设置"
       >
-        <SheZhi/>
+        <SheZhi />
 
         <!-- Tab 7 内容 -->
       </b-tab>
       <b-tab
-        v-if="isAdmin"
-        title="Tab 8"
+         v-if="isAdmin || activeTab === 6"
+        title="一键顺控"
       >
+        <YiJianShunKong />
         <!-- Tab 8 内容 -->
       </b-tab>
       <!-- 其他管理员权限Tabs -->
@@ -60,21 +70,29 @@
 import {
   BRow, BCol, BTab, BTabs, BCard, BCardText, BButton, BFormInput,
 } from 'bootstrap-vue'
-import DuoDianCeWen from './DuoDianCeWen.vue'
+
+import SweetAlertTypes  from '@/views/SweetAlertTypes.vue'
 import JinJiFenZha from './JinJiFenZha.vue'
 import ZhuangTai from './ZhuangTai.vue'
 import SheZhi from './SheZhi.vue'
 import ChatAI from './ChatAI.vue'
 import YiJianShunKong from './YiJianShunKong.vue'
 
+import DuoDianCeWen from '@/views/DuoDianCeWen.vue'
+
+
 
 export default {
   components: {
+    DuoDianCeWen,
+    YiJianShunKong,
+    ZhuangTai,
     SheZhi,
     BTabs,
     BTab,
     BFormInput,
     BButton,
+    SweetAlertTypes,
   },
   data() {
     return {
@@ -84,13 +102,13 @@ export default {
       isAdmin: false,
       activeTab: 0,
       tabs: [
-        { title: 'Tab 1', content: 'Tab 1 内容' },
-        { title: 'Tab 2', content: 'Tab 2 内容' },
-        { title: 'Tab 3', content: 'Tab 3 内容' },
-        { title: 'Tab 4', content: 'Tab 4 内容' },
-        { title: 'Tab 5', content: 'Tab 5 内容' },
-        { title: 'Tab 6', content: 'Tab 6 内容' },
-        { title: 'Tab 7', content: 'Tab 7 内容 (管理员权限)' },
+        { title: '用户登录', content: '用户登录' },
+        { title: 'Tab 2', content: '系统状态' },
+        { title: 'Tab 3', content: '紧急分闸' },
+        { title: 'Tab 4', content: '电力状态' },
+        { title: 'Tab 5', content: '多点测温' },
+        { title: 'Tab 6', content: '设置' },
+        { title: 'Tab 7', content: '一键顺控' },
         { title: 'Tab 8', content: 'Tab 8 内容 (管理员权限)' },
       ],
     }
