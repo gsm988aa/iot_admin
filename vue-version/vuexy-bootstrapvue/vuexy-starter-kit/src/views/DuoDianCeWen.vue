@@ -1,14 +1,17 @@
 <template>
   <b-container fluid>
-
+    <h5>请输入超级管理员账户 以观察红外热电堆温度</h5>
+    <br>
     <b-row>
+
+
       <b-col cols="6">
         <b-card>
           <b-form-checkbox
-              v-model="checkedstatus"
-              @change="showKalmanChange"
+            v-model="checkedstatus"
+            @change="showKalmanChange"
           >
-            显示卡尔曼温度预测曲线,超温告警,邮件提醒
+            显示卡尔曼温度预测曲线,超温告警,邮件提醒（超级管理员）
           </b-form-checkbox>
         </b-card>
       </b-col>
@@ -16,14 +19,14 @@
       <b-col cols="4">
         <div>
           <label
-              for="temperature"
-              style="font-size: 15px"
+            for="temperature"
+            style="font-size: 15px"
           >选择温度：</label>
           <b-form-select
-              id="temperature"
-              v-model="selectedTemperature"
-              :options="temperature_options"
-              style="width: 100px"
+            id="temperature"
+            v-model="selectedTemperature"
+            :options="temperature_options"
+            style="width: 100px"
           />
           <p style="font-size: 15px">
             当前会超温预警的温度是: {{ selectedTemperature }}°C
@@ -36,8 +39,8 @@
       <b-col cols="6">
         <b-card>
           <div
-              ref="chart1"
-              style="width: 350px;height: 380px"
+            ref="chart1"
+            style="width: 350px;height: 380px"
           />
           <div ref="chart1-kalman" />
         </b-card>
@@ -45,8 +48,8 @@
       <b-col cols="6">
         <b-card>
           <div
-              ref="chart2"
-              style="width: 350px;height: 380px"
+            ref="chart2"
+            style="width: 350px;height: 380px"
           />
           <div ref="chart2-kalman" />
         </b-card>
@@ -57,8 +60,8 @@
       <b-col cols="6">
         <b-card>
           <div
-              ref="chart3"
-              style="width: 350px;height: 380px"
+            ref="chart3"
+            style="width: 350px;height: 380px"
           />
           <div ref="chart3-kalman" />
         </b-card>
@@ -66,8 +69,8 @@
       <b-col cols="6">
         <b-card>
           <div
-              ref="chart4"
-              style="width: 350px;height: 380px"
+            ref="chart4"
+            style="width: 350px;height: 380px"
           />
           <div ref="chart4-kalman" />
         </b-card>
@@ -78,8 +81,8 @@
       <b-col cols="6">
         <b-card>
           <div
-              ref="chart5"
-              style="width: 350px;height: 380px"
+            ref="chart5"
+            style="width: 350px;height: 380px"
           />
           <div ref="chart5-kalman" />
         </b-card>
@@ -87,8 +90,8 @@
       <b-col cols="6">
         <b-card>
           <div
-              ref="chart6"
-              style="width: 350px;height: 380px"
+            ref="chart6"
+            style="width: 350px;height: 380px"
           />
           <div ref="chart6-kalman" />
         </b-card>
@@ -100,10 +103,10 @@
     <div>
       <!-- 弹窗告警  -->
       <b-modal
-          ref="modalRef"
-          v-model="showModal"
-          title="warning"
-          hide-footer
+        ref="modalRef"
+        v-model="showModal"
+        title="warning"
+        hide-footer
       >
         <h3 class="custom-title">
           温度预测超过100°
@@ -112,10 +115,10 @@
           请注意处理！
         </h3>
         <b-button
-            class="mt-3"
-            block
-            variant="primary"
-            @click="closeModal"
+          class="mt-3"
+          block
+          variant="primary"
+          @click="closeModal"
         >
           关闭
         </b-button>
@@ -157,10 +160,17 @@ export default {
     return {
       showModal: false, // 控制弹窗显示
       // 这个最好定义为数字，比较好作比较
-      selectedTemperature: 30, // 默认值为80°C
+      selectedTemperature: 80, // 默认值为80°C
 
       temperature_options: [
+        { value: 20, text: '20°C' },
         { value: 30, text: '30°C' },
+        { value: 40, text: '40°C' },
+        { value: 50, text: '50°C' },
+        { value: 60, text: '60°C' },
+        { value: 70, text: '70°C' },
+        { value: 80, text: '80°C' },
+        { value: 90, text: '90°C' },
         { value: 100, text: '100°C' },
       ],
 
@@ -214,7 +224,7 @@ export default {
       chartData1: {
         title: {
           // 将当前temperature1[0]的值显示在标题上
-          text: '图1：',
+          text: '进线室温度：',
         },
         textStyle: {
           fontSize: 12,
@@ -226,7 +236,7 @@ export default {
           show: false,
         },
         legend: {
-          data: ['温度曲线1', '卡尔曼测温曲线1'],
+          data: ['温度曲线1', '卡尔曼预测温度曲线1'],
           show: true,
           right: '8%',
           top: '5%',
@@ -294,7 +304,7 @@ export default {
             smooth: true,
           },
           {
-            name: '卡尔曼测温曲线1',
+            name: '卡尔曼预测温度曲线1',
             icon: 'circle',
             data: [],
             type: 'line',
@@ -318,7 +328,7 @@ export default {
           show: false,
         },
         legend: {
-          data: ['温度曲线2', '卡尔曼测温曲线2'],
+          data: ['温度曲线2', '卡尔曼预测温度曲线2'],
           show: true,
           right: '8%',
           top: '5%',
@@ -382,7 +392,7 @@ export default {
             smooth: true,
           },
           {
-            name: '卡尔曼测温曲线2',
+            name: '卡尔曼预测温度曲线2',
             data: [],
             type: 'line',
             smooth: true,
@@ -403,7 +413,7 @@ export default {
           show: false,
         },
         legend: {
-          data: ['温度曲线3', '卡尔曼测温曲线3'],
+          data: ['温度曲线3', '卡尔曼预测温度曲线3'],
           show: true,
           right: '8%',
           top: '5%',
@@ -467,7 +477,7 @@ export default {
             smooth: true,
           },
           {
-            name: '卡尔曼测温曲线3',
+            name: '卡尔曼预测温度曲线3',
             data: [],
             type: 'line',
             smooth: true,
@@ -476,7 +486,7 @@ export default {
       },
       chartData4: {
         title: {
-          text: '温度：',
+          text: '出线室温度：',
         },
         textStyle: {
           fontSize: 12,
@@ -488,7 +498,7 @@ export default {
           show: false,
         },
         legend: {
-          data: ['温度曲线4', '卡尔曼测温曲线4'],
+          data: ['温度曲线4', '卡尔曼预测温度曲线4'],
           show: true,
           right: '8%',
           top: '5%',
@@ -552,7 +562,7 @@ export default {
             smooth: true,
           },
           {
-            name: '卡尔曼测温曲线4',
+            name: '卡尔曼预测温度曲线4',
             data: [],
             type: 'line',
             smooth: true,
@@ -573,7 +583,7 @@ export default {
           show: false,
         },
         legend: {
-          data: ['温度曲线5', '卡尔曼测温曲线5'],
+          data: ['温度曲线5', '卡尔曼预测温度曲线5'],
           show: true,
           right: '8%',
           top: '5%',
@@ -636,7 +646,7 @@ export default {
             smooth: true,
           },
           {
-            name: '卡尔曼测温曲线5',
+            name: '卡尔曼预测温度曲线5',
             data: [],
             type: 'line',
             smooth: true,
@@ -657,7 +667,7 @@ export default {
           show: false,
         },
         legend: {
-          data: ['温度曲线6', '卡尔曼测温曲线6'],
+          data: ['温度曲线6', '卡尔曼预测温度曲线6'],
           show: true,
           right: '8%',
           top: '5%',
@@ -722,7 +732,7 @@ export default {
             smooth: true,
           },
           {
-            name: '卡尔曼测温曲线6',
+            name: '卡尔曼预测温度曲线6',
             data: [],
             type: 'line',
             smooth: true,
@@ -786,23 +796,23 @@ export default {
         this.chartData5.series[1].data = this.predictdata5
         this.chartData6.series[1].data = this.predictdata6
 
-        this.chartData1.legend.data = ['温度曲线1', '卡尔曼测温曲线1']
-        this.chartData2.legend.data = ['温度曲线2', '卡尔曼测温曲线2']
-        this.chartData3.legend.data = ['温度曲线3', '卡尔曼测温曲线3']
-        this.chartData4.legend.data = ['温度曲线4', '卡尔曼测温曲线4']
-        this.chartData5.legend.data = ['温度曲线5', '卡尔曼测温曲线5']
-        this.chartData6.legend.data = ['温度曲线6', '卡尔曼测温曲线6']
+        this.chartData1.legend.data = ['温度曲线1', '卡尔曼预测温度曲线1']
+        this.chartData2.legend.data = ['温度曲线2', '卡尔曼预测温度曲线2']
+        this.chartData3.legend.data = ['温度曲线3', '卡尔曼预测温度曲线3']
+        this.chartData4.legend.data = ['温度曲线4', '卡尔曼预测温度曲线4']
+        this.chartData5.legend.data = ['温度曲线5', '卡尔曼预测温度曲线5']
+        this.chartData6.legend.data = ['温度曲线6', '卡尔曼预测温度曲线6']
 
         if (this.x_update[0] > this.selectedTemperature || this.x_update[1] > this.selectedTemperature || this.x_update[2] > this.selectedTemperature || this.x_update[3] > this.selectedTemperature || this.x_update[4] > this.selectedTemperature || this.x_update[5] > this.selectedTemperature || this.x_update[6] > this.selectedTemperature || this.x_update[7] > this.selectedTemperature || this.x_update[8] > this.selectedTemperature) {
           if (this.isEmailSent === false && this.counter < 5) {
             this.showModal = true
             this.sendEmail()
             this.counter += 1
-            console.log('counter =  ', this.counter)
+
             this.isEmailSent = true
           } else if (this.isEmailSent === true && this.counter < 5) {
             this.counter += 1
-            console.log('counter =  ', this.counter)
+
             this.isEmailSent = true
           } else {
             this.counter = 0
@@ -864,7 +874,7 @@ export default {
 
       // 可以在这里处理报警温度判断
 
-      console.log('selectedTemperature =  ', this.selectedTemperature)
+      // console.log('selectedTemperature =  ', this.selectedTemperature)
     }, 3000)
 
     // 每5分钟自动保存数据
@@ -882,22 +892,22 @@ export default {
     },
     sendEmail() {
       const emailAddress = this.$store.getters.getemailAddress
-      if (emailAddress) {
-        axios
-            .post('http://localhost:3000/sendemail', {
-              to: [emailAddress],
-              subject: '温度超过100°C警告',
-              text: '温度超过100°C，请注意安全！',
-            })
-            .then(response => {
-              console.log(response.data)
-            })
-            .catch(error => {
-              console.log(error)
-            })
-      } else {
-        console.log('用户邮箱还未被设置')
-      }
+      // if (emailAddress) {
+      //   axios
+      //     .post('http://localhost:3000/sendemail', {
+      //       to: [emailAddress],
+      //       subject: '温度超过100°C警告',
+      //       text: '温度超过100°C，请注意安全！',
+      //     })
+      //     .then(response => {
+      //       // console.log(response.data)
+      //     })
+      //     .catch(error => {
+      //       console.log(error)
+      //     })
+      // } else {
+      //   console.log('用户邮箱还未被设置')
+      // }
     },
 
     // 这段代码是显示隐藏曲线吗？对
@@ -955,27 +965,38 @@ export default {
 
           return this.x_update[m]
         }
-        console.log('x[m] is NaN', m)
+        // console.log('x[m] is NaN', m)
       } else {
-        console.log('nowtemp is NaN', m)
+        // console.log('nowtemp is NaN', m)
       }
       // }
     },
 
     generateData() {
-      axios.get('http://localhost:10866/getdbtemperature').then(response => {
-        this.temperature1 = response.data.map(item => item.sensor1)
-        this.temperature2 = response.data.map(item => item.sensor2)
-        this.temperature3 = response.data.map(item => item.sensor3)
-        this.temperature4 = response.data.map(item => item.sensor4)
-        this.temperature5 = response.data.map(item => item.sensor5)
-        this.temperature6 = response.data.map(item => item.sensor6)
-      }).catch(error => {
-        console.log(error)
-      })
-      if (this.temperature1.length === 0) {
-        return
+      // 生成范围在50到55的随机数组分别赋值给temperature1,temperature2,temperature3,temperature4,temperature5,temperature6
+      for (let i = 0; i <= 9; i++) {
+        this.temperature1[i] = Math.random() * 10 + 50
+        this.temperature2[i] = Math.random() * 10 + 50
+        this.temperature3[i] = Math.random() * 10 + 50
+        this.temperature4[i] = Math.random() * 10 + 40
+        this.temperature5[i] = Math.random() * 10 + 40
+        this.temperature6[i] = Math.random() * 10 + 40
+
       }
+
+
+      //
+      // axios.get('http://localhost:10866/getdbtemperature').then(response => {
+      //   this.temperature1 = response.data.map(item => item.sensor1)
+      //   this.temperature2 = response.data.map(item => item.sensor2)
+      //   this.temperature3 = response.data.map(item => item.sensor3)
+      //   this.temperature4 = response.data.map(item => item.sensor4)
+      //   this.temperature5 = response.data.map(item => item.sensor5)
+      //   this.temperature6 = response.data.map(item => item.sensor6)
+      // }).catch(error => {
+      //   console.log(error)
+      // })
+
       return this.temperature1, this.temperature2, this.temperature3, this.temperature4, this.temperature5, this.temperature6
     },
 

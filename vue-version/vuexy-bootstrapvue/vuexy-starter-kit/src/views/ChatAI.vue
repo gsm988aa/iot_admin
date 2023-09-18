@@ -3,38 +3,35 @@
 
     <b-card-text>
 
-      <h6>GPT 人工智能回复：</h6>
+      <h6>GPT 人工智能回复(本功能需要互联网链接)：</h6>
       <b-card
-          text-variant="dark"
+          text-variant="danger"
           border-variant="info"
           className="mb-2"
       >
         <b-card-text>
-
           <br>
           <b-spinner variant="primary" label="Spinning" v-if="status !== 1"></b-spinner>
-
           {{ posts }}
-
         </b-card-text>
       </b-card>
 
     </b-card-text>
     <br>
 
-    <!--    -->
     <h6>请输入问题</h6>
     <b-form-input
         v-model="message"
-        placeholder="写一段关于黑龙江多宝山铜矿的简介！写一段智能化矿山建设的介绍！"
+        placeholder=" 写一段黑龙江多宝山铜矿智能化矿山建设的介绍！"
+        rows="2"
+        max-rows="4"
     />
     <br>
 
     <b-button
-        variant="primary" pill
+        variant="outline-primary"
         @click="send"
     >
-
       发送
     </b-button>
     <!-- 加入空格 -->
@@ -114,7 +111,7 @@ export default {
   },
   data() {
     return {
-      message: '写一段欢迎鞍钢设计院领导的标语！',
+      message: ' 写一段多宝山铜矿智能化矿山建设的介绍！',
       status: 1,
       posts: ''
     };

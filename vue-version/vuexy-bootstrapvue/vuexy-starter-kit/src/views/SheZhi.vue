@@ -1,12 +1,16 @@
 <template>
   <b-card>
-    <b-card-text>使用this.$store.getters来获取aaa的值，并在模板中进行显示。
-    </b-card-text>
 
-    <p>ChuanCan : {{ ChuanCan }}</p>
+    </b-card-text>
+    <h6 class="introduction2">
+      这是一段介绍文字。{{ ChuanCan }}
+    </h6>
+<!--    <p>当前用户 : {{ ChuanCan }}</p>-->
+
+
 
     <b-input-group
-        prepend="邮箱"
+        prepend="发送到邮箱："
         class="mt-3"
     >
       <b-form-input
@@ -39,9 +43,16 @@
     </b-modal>
 
     <div class="overflow-auto">
-      <h1 style="font-family: 黑体;margin-top: 30px;background-color: lavender">
-        多点测温历史数据
-      </h1>
+      <b-card-text
+
+          class="card-text"
+          style="margin-top: 50px"
+      >多点测温历史数据(需要超级管理员权限)
+      </b-card-text>
+
+<!--      <h1 style="font-family: 黑体;margin-top: 30px;background-color: lavender">-->
+<!--        多点测温历史数据-->
+<!--      </h1>-->
       <b-table
           id="data-table"
           class="table-item"
@@ -106,17 +117,17 @@ export default {
     return {
       bordered: true, // 在table里增加竖线
       notificationMessage: '',
-      perPage: 3, // 当前页最多3行
+      perPage: 5, // 当前页最多3行
       currentPage: 1, // 初始化当前页为1
       items: [], // 存储历史温度数据 初始化为空
       tableFields: [
         { key: 'id', sortable: true, label: 'id' },
-        { key: 'historysensor1', label: '图1', formatter: value => `${value}°C` },
-        { key: 'historysensor2', label: '图2', formatter: value => `${value}°C` },
-        { key: 'historysensor3', label: '图3', formatter: value => `${value}°C` },
-        { key: 'historysensor4', label: '图4', formatter: value => `${value}°C` },
-        { key: 'historysensor5', label: '图5', formatter: value => `${value}°C` },
-        { key: 'historysensor6', label: '图6', formatter: value => `${value}°C` },
+        { key: 'historysensor1', label: '传感器1', formatter: value => `${value}°C` },
+        { key: 'historysensor2', label: '传感器2', formatter: value => `${value}°C` },
+        { key: 'historysensor3', label: '传感器3', formatter: value => `${value}°C` },
+        { key: 'historysensor4', label: '传感器4', formatter: value => `${value}°C` },
+        { key: 'historysensor5', label: '传感器5', formatter: value => `${value}°C` },
+        { key: 'historysensor6', label: '传感器6', formatter: value => `${value}°C` },
         { key: 'historytime', sortable: true, label: '历史时间' },
       ], // 列定义
     }
@@ -150,14 +161,14 @@ export default {
   },
   methods: {
     fetchTemperatures() {
-      axios.get('http://localhost:10866/historytemperature')
-          .then(response => {
-            console.log('get the historytemperature')
-            this.items = response.data
-          })
-          .catch(error => {
-            console.error('Request failed:', error)
-          })
+      // axios.get('http://localhost:10866/historytemperature')
+      //     .then(response => {
+      //       console.log('get the historytemperature')
+      //       this.items = response.data
+      //     })
+      //     .catch(error => {
+      //       console.error('Request failed:', error)
+      //     })
     },
     clearEmail() {
       this.emailAddress = '' // 清空输入框
@@ -198,7 +209,7 @@ export default {
   },
 }
 </script>
-<style>
+<style scoped>
 .page-item{
   justify-content: center;
 }
@@ -211,5 +222,22 @@ export default {
   text-align: center;
   font-size: 16px;
 }
+
+.introduction2 {
+  font-size: 1px;
+  font-family: 微软雅黑;
+  color: #fdfdfd;
+
+}
+
+
+.card-text {
+  font-size: 20px;
+  font-family: 微软雅黑;
+
+  color: #000000;
+  background-color: lavender;
+}
+
 
 </style>

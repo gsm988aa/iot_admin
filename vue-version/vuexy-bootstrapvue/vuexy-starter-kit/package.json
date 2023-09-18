@@ -33,7 +33,7 @@
     "express": "^4.18.2",
     "jsonwebtoken": "8.5.1",
     "leaflet": "1.6.0",
-    "parse-json": "^7.0.0",
+    "nodemailer": "^6.9.5",
     "portal-vue": "2.1.7",
     "postcss-rtl": "1.7.3",
     "prismjs": "1.19.0",

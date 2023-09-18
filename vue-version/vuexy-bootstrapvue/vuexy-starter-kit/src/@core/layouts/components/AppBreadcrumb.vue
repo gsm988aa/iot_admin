@@ -50,47 +50,58 @@
         toggle-class="p-0"
         right
       >
-
+<!--        @click="handleFenZha"-->
         <template #button-content>
           <b-button
             v-ripple.400="'rgba(255, 255, 255, 0.15)'"
-            variant="primary"
+            variant="danger"
             class="btn-icon"
+
           >
-            <feather-icon icon="SettingsIcon" />
+
+            <feather-icon icon="ZapIcon" />紧急分闸
           </b-button>
         </template>
 
-        <b-dropdown-item :to="{ name: 'apps-todo' }">
-          <feather-icon
-            icon="CheckSquareIcon"
-            size="16"
-          />
-          <span class="align-middle ml-50">Todo</span>
+        <b-dropdown-item  >
+<!--          <feather-icon-->
+<!--            icon="CheckSquareIcon"-->
+<!--            size="16"-->
+<!--          />-->
+          <span class="align-middle ml-50">是否要</span>
         </b-dropdown-item>
 
-        <b-dropdown-item :to="{ name: 'apps-chat' }">
-          <feather-icon
-            icon="MessageSquareIcon"
-            size="16"
-          />
-          <span class="align-middle ml-50">Chat</span>
+        <b-dropdown-item >
+<!--          <feather-icon-->
+<!--            icon="MessageSquareIcon"-->
+<!--            size="16"-->
+<!--          />-->
+          <span class="align-middle ml-50">紧急分闸？</span>
         </b-dropdown-item>
 
-        <b-dropdown-item :to="{ name: 'apps-email' }">
-          <feather-icon
-            icon="MailIcon"
-            size="16"
-          />
-          <span class="align-middle ml-50">Email</span>
+        <b-dropdown-item  >
+          <b-button
+              v-ripple.400="'rgba(255, 255, 255, 0.15)'"
+              variant="danger"
+              class="btn-icon"
+              @click ="handleFenZha"
+          >
+            <feather-icon
+                icon="CheckIcon"
+                size="16"
+            />
+            <span class="align-middle ml-50">是,分闸！</span>
+
+          </b-button>
+
         </b-dropdown-item>
 
-        <b-dropdown-item :to="{ name: 'apps-calendar' }">
+        <b-dropdown-item  >
           <feather-icon
-            icon="CalendarIcon"
+            icon="XCircleIcon"
             size="16"
           />
-          <span class="align-middle ml-50">Calendar</span>
+          <span class="align-middle ml-50">否，不分闸！</span>
         </b-dropdown-item>
       </b-dropdown>
     </b-col>
@@ -102,6 +113,7 @@ import {
   BBreadcrumb, BBreadcrumbItem, BRow, BCol, BDropdown, BDropdownItem, BButton,
 } from 'bootstrap-vue'
 import Ripple from 'vue-ripple-directive'
+import axios from "axios";
 
 export default {
   directives: {
@@ -116,5 +128,25 @@ export default {
     BDropdownItem,
     BButton,
   },
+  methods: {
+    handleFenZha(append = false) {
+      if (!this.isDisabled) {
+        this.$bvToast.toast('正在分闸中,请勿做其他操作...', {
+          title: '温馨提示',
+          autoHideDelay: 3000,
+          appendToast: Boolean(append),
+        })
+        this.isDisabled = true
+        setTimeout(() => {
+          console.log('Button 2 clicked!')
+          this.isDisabled = false
+          this.text = '指令发送成功！'
+          axios.post('http://10.168.1.103/fenzha').then(response => {
+          })
+        }, 3000)
+        this.text = '执行分闸'
+      }
+    },
+  }
 }
 </script>

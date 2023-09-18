@@ -1,54 +1,79 @@
 <template>
   <div>
-    <b-tabs v-model="activeTab" vertical>
-      <b-tab title="用户">
+    <b-tabs
+      v-model="activeTab"
+      vertical pills card
+    >
+      <b-tab  title="用户">
         <div v-if="isAdmin || activeTab === 0">
           <!-- Tab 1 内容 -->
-          <h6>默认管理员账户是admin默认管理员密码是admin 管理员拥有控制权限 普通用户有观察权限</h6>
-          <h6 class="introduction">这是一段介绍文字。{{ChuanCan}}</h6>
-          <h6>请在设置中修改密码</h6>
+          <b-card>
+
+
+          <h6>默认管理员账户是admin 管理员拥有控制权限 普通用户有观察权限 超级管理员有邮件预警 示意图权限</h6>
+          <h6 class="introduction">
+            这是一段介绍文字。{{ ChuanCan }}
+          </h6>
+
+            <br>
+            <h6>如需要控制智能柜请输入管理员/超级管理员账户与密码：</h6>
           <b-form-input
-              v-model="username"
-              placeholder="用户名"
-          />
+            v-model="username"
+            placeholder="用户名"
+          >{{ username}}
+          </b-form-input>
+
           <b-form-input
-              v-model="password"
-              type="password"
-              placeholder="密码"
-          />
-          <b-button @click="login">
+            v-model="password"
+            type="password"
+            placeholder="密码"
+          >
+          {{ password}}
+          </b-form-input>
+          <b-button variant="danger" @click="login">
             登录
           </b-button>
+          &nbsp;
+            &nbsp;
+            &nbsp;
+            <b-button variant="primary" @click="logout">
+              注销
+            </b-button>
+          </b-card>
 
+          <b-modal ref="loginModal" title="提示" ok-only :ok-title="'确定'"  hide-backdrop content-class="shadow"  >
+            恭喜！您已成功登录！
+
+          </b-modal>
         </div>
       </b-tab>
-      <b-tab title="系统状态">
-        <div v-if="isAdmin || activeTab === 1">
+      <b-tab title="示意图">
+        <div v-if="isAdmin || activeTab === 1 ">
           <!-- Tab 2 内容 -->
-<!--          <ZhuangTai/>-->
+          <ZhuangTai />
         </div>
       </b-tab>
       <b-tab title="紧急分闸">
-        <div v-if="isAdmin || activeTab === 2">
-          <SweetAlertTypes/>
+        <div v-if="isAdmin || activeTab === 2  ">
+          <JinJiFenZha />
           <!-- Tab 3 内容 -->
         </div>
       </b-tab>
-<!--      <b-tab title="电力状态">-->
-<!--        <div v-if="isAdmin || activeTab === 3">-->
-<!--          <YiJianShunKong/>-->
-<!--          &lt;!&ndash; Tab 3 内容 &ndash;&gt;-->
-<!--        </div>-->
-<!--      </b-tab>-->
+      <!--      <b-tab title="电力状态">-->
+      <!--        <div v-if="isAdmin || activeTab === 3">-->
+      <!--          <YiJianShunKong/>-->
+      <!--          &lt;!&ndash; Tab 3 内容 &ndash;&gt;-->
+      <!--        </div>-->
+      <!--      </b-tab>-->
       <!-- 其他Tabs -->
       <b-tab title="多点测温">
-        <div v-if="isAdmin || activeTab === 4">
+        <div v-if="isAdmin || activeTab === 3 ">
           <!-- Tab 6 内容 -->
-          <DuoDianCeWen/>
+          <DuoDianCeWen />
         </div>
       </b-tab>
       <b-tab
-        v-if="isAdmin || activeTab === 5"
+        v-if="isAdmin || activeTab === 6"
         title="设置"
       >
         <SheZhi />
@@ -56,10 +81,17 @@
         <!-- Tab 7 内容 -->
       </b-tab>
       <b-tab
-         v-if="isAdmin || activeTab === 6"
-        title="一键顺控"
+        v-if="isAdmin || activeTab === 7"
+        title="一键控制"
       >
         <YiJianShunKong />
+        <!-- Tab 8 内容 -->
+      </b-tab>
+      <b-tab
+        v-if="isAdmin || activeTab === 8"
+        title="ChartGPT"
+      >
+        <ChatAI />
         <!-- Tab 8 内容 -->
       </b-tab>
       <!-- 其他管理员权限Tabs -->
@@ -71,19 +103,19 @@ import {
   BRow, BCol, BTab, BTabs, BCard, BCardText, BButton, BFormInput,
 } from 'bootstrap-vue'
 
-import SweetAlertTypes  from '@/views/SweetAlertTypes.vue'
+import DuoDianCeWen from '@/views/DuoDianCeWen.vue'
+import ChatAI from '@/views/ChatAI.vue'
 import JinJiFenZha from './JinJiFenZha.vue'
 import ZhuangTai from './ZhuangTai.vue'
 import SheZhi from './SheZhi.vue'
-import ChatAI from './ChatAI.vue'
 import YiJianShunKong from './YiJianShunKong.vue'
-
-import DuoDianCeWen from '@/views/DuoDianCeWen.vue'
-
-
 
 export default {
   components: {
+    ChatAI,
+    BRow,
+    BCol,
+    BCard,
     DuoDianCeWen,
     YiJianShunKong,
     ZhuangTai,
@@ -92,13 +124,13 @@ export default {
     BTab,
     BFormInput,
     BButton,
-    SweetAlertTypes,
+    JinJiFenZha,
   },
   data() {
     return {
-      username: '',
+      username: 'admin',
       adminpass: '',
-      password: '',
+      password: 'admin',
       isAdmin: false,
       activeTab: 0,
       tabs: [
@@ -126,23 +158,28 @@ export default {
       if (this.username === 'admin' && this.password === this.adminpass) {
         console.log('here', this.adminpass)
         this.isAdmin = true
+        this.$refs.loginModal.show()
       } else if (this.username === 'observer' && this.password === 'observer') {
         this.isAdmin = false
+        // 显示登录成功的模态框
+        this.$refs.loginModal.show()
       } else {
         console.log(this.password)
-        alert("管理员密码不正确")
+        alert('管理员密码不正确')
         // 用户名或密码不正确
         // 可以显示错误信息给用户
       }
     },
+    logout() {
+          this.isAdmin = false
+    }
   },
 }
 </script>
 
 <style scoped>
 .introduction  {
-  color: #f8f8f8;
+  color: #fdfdfd;
 }
 
 </style>
-
