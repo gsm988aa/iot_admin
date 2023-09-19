@@ -1,33 +1,188 @@
 <template>
-  <b-card>
-    <b-card-text>是否要紧急分闸
-    </b-card-text>
-    <h5>使用this.$store.dispatch来调用setChuanCan action，以更新aaa的值</h5>
-    <p>传参====>  : {{ ChuanCan }}</p>
-    <button @click="updateChuanCan">更新传参</button>
-  </b-card>
+  <div class="demo-inline-spacing">
+
+    <b-card
+      title="是否要进行分闸操作？"
+      style="width: 100%;height: 200px"
+    >
+      <b-row style="margin-top: 50px">
+        <b-col cols="6">
+          <b-button
+
+            pill
+            variant="outline-danger"
+            class="xxxl"
+            style="scale: 1.1"
+            @click="confirmShutdown"
+          >
+            是,立即分闸
+          </b-button>
+        </b-col>
+        <b-col cols="6">
+          <b-button
+            v-ripple.400="'rgba(0, 207, 232, 0.15)'"
+
+            pill
+            variant="outline-info"
+            class="xxxl"
+            style="scale: 1.1"
+            @click="info"
+          >
+            不,不分闸
+
+          </b-button>
+        </b-col>
+      </b-row>
+
+      <b-modal
+        ref="confirmationModal"
+        hide-footer
+        title="请确认是否要立即进行分闸？"
+      >
+        <b-button
+          variant="danger"
+          @click="performShutdown"
+        >
+          确认分闸
+        </b-button>
+        <b-button
+          variant="secondary"
+          style="margin-left: 20px"
+          @click="closeModal"
+        >
+          取消
+        </b-button>
+      </b-modal>
+
+    </b-card>
+
+  </div>
 </template>
+
 <script>
-import { BButton, BCard, BCardText } from 'bootstrap-vue'
+// import BCardCode from '@core/components/b-card-code/BCardCode.vue'
+import {
+  BCard, BButton, BCol, BRow,
+} from 'bootstrap-vue'
+import Ripple from 'vue-ripple-directive'
+// import { codeTypes } from './code'
+import Swal from 'sweetalert2'
+import axios from 'axios'
 
 export default {
   components: {
-    BButton,
+    // BCardCode,
     BCard,
-    BCardText,
-
+    // BCardText,
+    BButton,
+    BCol,
+    BRow,
   },
-
-  computed: {
-    ChuanCan() {
-      return this.$store.getters.getChuanCan
+  directives: {
+    Ripple,
+  },
+  data() {
+    return {
+      // codeTypes,
+      userChoice: false, // 默认不分闸
     }
   },
   methods: {
-    // 更新传参 ChuanCan 这个按钮  dispatch中文含义是派发  或者理解为强行赋值设置
-    updateChuanCan() {
-      this.$store.dispatch('setChuanCan', 456)
-    }
-  }
+    closeModal() {
+      this.$refs.confirmationModal.hide()
+    },
+    confirmShutdown() {
+      this.$refs.confirmationModal.show()
+      // 用户选择分闸
+      this.userChoice = true
+      this.closeModal()
+    },
+
+    performShutdown() {
+      this.closeModal() // 确认分闸则关闭弹窗
+      this.showProcessingAlert()
+      setTimeout(() => {
+        this.showSuccessAlert()
+      }, 2000) // 等待3秒后显示分闸成功
+    },
+    showProcessingAlert() {
+      // eslint-disable-next-line no-unused-vars
+      axios.post('http://10.168.1.103/fenzha').then(response => {
+      })
+
+      Swal.fire({
+        title: '正在分闸中...',
+        icon: 'warning',
+        customClass: {
+          confirmButton: 'btn btn-primary',
+        },
+        buttonsStyling: false,
+        timer: 2000, // 8秒的定时器，自动关闭
+        timerProgressBar: true,
+      })
+    },
+    showSuccessAlert() {
+      Swal.fire({
+        title: '分闸成功!',
+        text: '已经完成分闸操作',
+        icon: 'success',
+        customClass: {
+          confirmButton: 'btn btn-primary',
+        },
+        buttonsStyling: false,
+      })
+    },
+
+    error() {
+      Swal.fire({
+        title: 'Error!',
+        text: ' You clicked the button!',
+        icon: 'error',
+        customClass: {
+          confirmButton: 'btn btn-primary',
+        },
+        buttonsStyling: false,
+      })
+    },
+
+    // warning
+    warning() {
+      Swal.fire({
+        title: 'Warning!',
+        text: ' You clicked the button!',
+        icon: 'warning',
+        customClass: {
+          confirmButton: 'btn btn-primary',
+        },
+        buttonsStyling: false,
+      })
+    },
+
+    // info
+    info() {
+      Swal.fire({
+        title: '中断分闸!',
+        text: '请按主页返回，检查柜状态',
+        icon: 'info',
+        customClass: {
+          confirmButton: 'btn btn-primary',
+        },
+        buttonsStyling: false,
+      })
+    },
+  },
 }
 </script>
+<style lang="scss">
+@import '@core/scss/vue/libs/vue-sweetalert.scss';
+.xxxl
+{
+  font-size: 42px;
+  margin-left: 50px;
+}
+
+.mb-0{
+  font-family: 宋体;
+
+}
+</style>

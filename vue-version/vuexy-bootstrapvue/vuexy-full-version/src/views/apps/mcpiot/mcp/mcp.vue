@@ -1,7 +1,8 @@
 <template>
-  <b-card-code title="无锡市新一代微机控制">
-    <b-tabs>
-      <b-tab v-on:click = "changeTabname('保护设置')" class="total1" style="text-align: center;">
+  <b-card  title="无锡市新一代微机控制">
+    <b-tabs >
+		<!-- class="total1" style="text-align: center;" -->
+      <b-tab v-on:click = "changeTabname('保护设置')"  class="total1" style="text-align: left;" 	>
         <template #title>
           <feather-icon icon="SettingsIcon"/>
           <!-- 附录1 -->
@@ -1643,7 +1644,7 @@
 
       </b-tab>
     </b-tabs>
-  </b-card-code>
+  </b-card >
 </template>
 
 <script>

@@ -1,4 +1,5 @@
 <template>
+<<<<<<< HEAD
   <b-card>
     <e-charts
         ref="chart3"
@@ -9,6 +10,15 @@
     />
     <div ref="chart3-kalman"></div>
   </b-card>
+=======
+  <e-charts
+      ref="line"
+      autoresize
+      :options="line"
+      theme="theme-color"
+      auto-resize
+  />
+>>>>>>> 19c490a0b1be14226f2ef7acde327c07ea1dfae9
 </template>
 
 <script>
@@ -17,18 +27,24 @@ import 'echarts/lib/component/tooltip'
 import 'echarts/lib/component/legend'
 import 'echarts/lib/chart/line'
 import theme from './theme.json'
+<<<<<<< HEAD
 import echarts from 'echarts/lib/export'
 import {
   BCard,
 } from 'bootstrap-vue'
 import axios from 'axios'
+=======
+>>>>>>> 19c490a0b1be14226f2ef7acde327c07ea1dfae9
 
 ECharts.registerTheme('theme-color', theme)
 
 export default {
   components: {
     ECharts,
+<<<<<<< HEAD
     BCard,
+=======
+>>>>>>> 19c490a0b1be14226f2ef7acde327c07ea1dfae9
   },
   props: {
     optionData: {
@@ -38,6 +54,7 @@ export default {
   },
   data() {
     return {
+<<<<<<< HEAD
       newdata: [],
       temperature3: [],
       count: 0,
@@ -72,6 +89,9 @@ export default {
       legendData: ['原始数据', '卡尔曼预测'],
 
       chartData3: {
+=======
+      line: {
+>>>>>>> 19c490a0b1be14226f2ef7acde327c07ea1dfae9
         // Make gradient line here
         visualMap: [{
           show: true,
@@ -79,13 +99,17 @@ export default {
           min: 0,
           max: 400,
         }],
+<<<<<<< HEAD
 
+=======
+>>>>>>> 19c490a0b1be14226f2ef7acde327c07ea1dfae9
         grid: {
           width: '96%',
           left: '30px',
           top: '10px',
           show: false,
         },
+<<<<<<< HEAD
         legend: {
           data: ['原始数据', 'chart3-kalman'],
           show: true,
@@ -100,10 +124,15 @@ export default {
               backgroundColor: '#6a7985',
             },
           },
+=======
+        tooltip: {
+          trigger: 'axis',
+>>>>>>> 19c490a0b1be14226f2ef7acde327c07ea1dfae9
         },
         xAxis: [{
           boundaryGap: false,
           data: this.optionData.xAxisData,
+<<<<<<< HEAD
           inverse: true, // 设置反向属性
           axisLabel: {
             formatter(value) {
@@ -120,11 +149,14 @@ export default {
               return texts.join(':')
             },
           },
+=======
+>>>>>>> 19c490a0b1be14226f2ef7acde327c07ea1dfae9
         }],
         yAxis: {
           type: 'value',
           splitLine: { show: false },
         },
+<<<<<<< HEAD
         series: [
           {
             name: '原始数据',
@@ -309,6 +341,16 @@ export default {
       return this.temperature3
     },
   },
+=======
+        series: {
+          type: 'line',
+          showSymbol: false,
+          data: this.optionData.series,
+        },
+      },
+    }
+  },
+>>>>>>> 19c490a0b1be14226f2ef7acde327c07ea1dfae9
 }
 </script>
 
