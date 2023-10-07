@@ -6,6 +6,8 @@ const cors = require("cors")
 const { SerialPort } = require('serialport')
 const {ReadlineParser} = require('@serialport/parser-readline');
 const axios = require('axios');
+const moment = require('moment');
+const PORT = process.env.PORT || 8181;
 
 
 const Serialport_CeWen =  new SerialPort({ path: 'COM4' ,   baudRate:9600  });   //测温数据
@@ -20,7 +22,7 @@ var backend_port = 10866;
 
 app.use(
   cors({
-    origin: ["http://localhost:10866", "http://localhost:11866",  "http://localhost:8080", "http://127.0.0.1:8080", "http://192.168.2.42:8080", "http://192.168.3.103:8080"]
+    origin: ["http://localhost:10866", "http://localhost:11866", "http://localhost:8086", "http://localhost:8080", "http://127.0.0.1:8080", "http://192.168.2.42:8080", "http://192.168.3.103:8080"]
   })
 );
 let kid = 1 ;
@@ -227,12 +229,142 @@ app.listen(3000, () => {
   console.log('Server started on port 3000');
 });
 
+
+//转换接收到的通讯数据到communication中
+function extractAndConvertValues(message) {
+  // 提取中间的0000并转换为十进制
+  const firstValue = parseInt(message.substr(6, 4), 16) / 10;
+  
+  // 提取中间的08 90并转换为十进制
+  const secondValue = parseInt(message.substr(10, 4), 16) / 10;
+  
+  // 提取中间的00 00并转换为十进制
+  const thirdValue = parseInt(message.substr(14, 4), 16) / 10;
+
+  // 提取中间的00 00并转换为十进制
+  const fourthValue = parseInt(message.substr(18, 4), 16) / 10;
+  
+  // 提取中间的00 00并转换为十进制
+  const fifthValue = parseInt(message.substr(22, 4), 16) / 10;
+  
+  // 提取中间的00 00并转换为十进制
+  const sixthValue = parseInt(message.substr(26, 4), 16) / 10;
+
+  // 提取中间的00 00并转换为十进制
+  const seventhValue = parseInt(message.substr(30, 4), 16) / 10;
+  
+  // 提取中间的0E CA并转换为十进制
+  const eighthValue = parseInt(message.substr(34, 4), 16) / 10;
+  
+  // 提取中间的00 00并转换为十进制
+  const ninthValue = parseInt(message.substr(38, 4), 16) / 10;
+
+  // 提取中间的00 00并转换为十进制
+  const tenthValue = parseInt(message.substr(42, 4), 16) / 10;
+  
+  // 提取中间的00 00并转换为十进制
+  const elevenValue = parseInt(message.substr(46, 4), 16) / 10;
+  
+  // 提取中间的00 00并转换为十进制
+  const twelfthValue = parseInt(message.substr(50, 4), 16) / 10;
+
+  // 提取中间的00 00并转换为十进制
+  const thirteenValue = parseInt(message.substr(54, 4), 16) / 10;
+  
+  // 提取中间的00 00并转换为十进制
+  const fourteenValue = parseInt(message.substr(58, 4), 16) / 10;
+  
+  // 提取中间的00 00并转换为十进制
+  const fifteenValue = parseInt(message.substr(62, 4), 16) / 10;
+  
+  // 提取中间的00 00并转换为十进制
+  const sixteenValue = parseInt(message.substr(66, 4), 16) / 10;
+  
+  // 提取中间的00 00并转换为十进制
+  const seventeenValue = parseInt(message.substr(70, 4), 16) / 10;
+  
+  // 提取中间的00 00并转换为十进制
+  const eighteenValue = parseInt(message.substr(74, 4), 16) / 10;
+
+  // 提取中间的00 00并转换为十进制
+  const nineteenValue = parseInt(message.substr(78, 4), 16) / 10;
+  
+  // 提取中间的00 00并转换为十进制
+  const twentiethValue = parseInt(message.substr(82, 4), 16) / 10;
+  
+  // 提取中间的00 00并转换为十进制
+  const TfirstValue = parseInt(message.substr(86, 4), 16) / 10;
+  
+  // 提取中间的00 00并转换为十进制
+  const TsecondValue = parseInt(message.substr(90, 4), 16) / 10;
+  
+  // 提取中间的00 00并转换为十进制
+  const TthirdValue = parseInt(message.substr(94, 4), 16) / 10;
+  
+  // 提取中间的00 00并转换为十进制
+  const TfourthValue = parseInt(message.substr(98, 4), 16) / 10;
+  
+  // 提取中间的00 00并转换为十进制
+  const TfifthValue = parseInt(message.substr(6, 4), 16) / 10;
+  
+  // 提取中间的00 00并转换为十进制
+  const TsixthValue = parseInt(message.substr(10, 4), 16) / 10;
+  
+  // 提取中间的00 00并转换为十进制
+  const TseventhValue = parseInt(message.substr(14, 4), 16) / 10;
+
+  // 提取中间的00 00并转换为十进制
+  const TeighthValue = parseInt(message.substr(6, 4), 16) / 10;
+  
+  // 提取中间的00 00并转换为十进制
+  const TninthValue = parseInt(message.substr(10, 4), 16) / 10;
+  
+  // 提取中间的00 00并转换为十进制
+  const thirtiethValue = parseInt(message.substr(14, 4), 16) / 10;
+
+  // 返回提取和转换后的值
+  return [firstValue, secondValue, thirdValue,fourthValue,fifthValue,sixthValue,seventhValue,eighthValue,ninthValue,tenthValue,elevenValue,twelfthValue,twelfthValue,thirteenValue,fourteenValue,fifteenValue,sixteenValue,seventeenValue,eighteenValue,nineteenValue,twentiethValue,TfirstValue,TsecondValue,TthirdValue,TfourthValue,TfifthValue,TsixthValue,TseventhValue,TeighthValue,TninthValue,thirtiethValue];
+}
+// 测试函数
+const message = "01033C00000890000000000000000000000ECA0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000BBFD";
+const mes = extractAndConvertValues(message);
+console.log(mes);
+
 // 创建数据库连接
 const db = new sqlite3.Database('db.sqlite3');
 
+// 添加指令列
+const instructions = ['A相电压', 'B相电压', 'C相电压','AB线电压', 'BC线电压', 'CA线电压','A相电流', 'B相电流', 'C相电流',' A相有功功率', 'B相有功功率', 'C相有功功率',' 总有功功率', 'A相无功功率', 'B相无功功率','C相无功功率', '总无功功率', 'A相位视在功率','B相位视在功率', 'C相位视在功率', '总视在功率','A相位功率因数', 'B相位功率因数', 'C相位功率因数','功率因数', '频率', '总千瓦时','总千瓦时', '总无功电能', '总无功电能', ];
 
+// 添加单位列
+const unit = ['Ua(V)', 'Ub(V)', 'Uc(V)', 'Uab(V)', 'Ubc(V)', 'Uca(V)', 'Ia(A)', 'Ib(A)', 'Ic(A)', 'Pa(W)', 'Pb(W)', 'Pc(W)', 'Ps(W)', 'Qa(W)', 'Qb(W)', 'Qc(W)', 'Qs(W)', 'Sa(W)', 'Sb(W)', 'Sc(W)', 'Ss(W)', 'PFa(W)', 'PFb(W)', 'PFc(W)', 'PFs(W)', 'FRE(HZ)', 'KWH', '-KWH', 'KvarH', 'KvarH',];
 db.serialize(() => {
-  // 删除表
+  // 删除通讯表
+  db.run('DROP TABLE IF EXISTS communication');
+  db.run('CREATE TABLE IF NOT EXISTS communication (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, value REAL, unit TEXT, instruction TEXT, currenttime TEXT)');
+
+
+  // 将每个值插入到具有相应id的单独行中
+function insertData(value, unit, instruction) {
+  // const currenttime = new Date().toISOString();
+  const currenttime = moment().format('YYYY-MM-DD HH:mm:ss');
+  db.run('INSERT INTO communication(value, unit, instruction, currenttime) VALUES(?,?,?,?)',  [value, unit, instruction, currenttime],(err) => {
+    if (err) {
+      console.error(err.message);
+    } else {
+      console.log(`Data inserted successfully for value: ${value}`);
+    }
+  });
+}
+
+// 遍历数据并将它们插入数据库
+mes.forEach((value, index) => {
+  const instruction = instructions[index] || ''; // 指令数据
+  const unitValue = unit[index] || '';  // 单位数据
+  insertData(value, unitValue, instruction);
+});
+
+  // 删除温度表
   db.run('DROP TABLE IF EXISTS temperatures');
   db.run('CREATE TABLE IF NOT EXISTS temperatures (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, sensor1 TEXT, sensor2 TEXT, sensor3 TEXT, sensor4 TEXT, sensor5 TEXT, sensor6 TEXT, currenttime TEXT)');
 
@@ -262,6 +394,30 @@ db.serialize(() => {
 
 
 });
+
+
+function writeToCommunication(data) {
+  console.log('Data:', value, unit, instruction, currenttime, currentId);
+  const updateData = db.prepare(`
+  UPDATE communication
+  SET value = ?,
+      unit = ?,
+      instruction = ?,
+      currenttime = ?
+      WHERE id = ?
+`);
+   const currenttime = new Date().toLocaleString('zh-CN', { timeZone: 'Asia/Shanghai' }); //转化为中国时间
+  updateData.run(
+    value,
+    unit,
+    instruction,
+    currenttime,
+    currentId
+  );
+  updateData.finalize();
+}
+
+
 
 let currentId = 1; // 初始化要更新的行的id
 //将数据更新至数据表 temperatures
@@ -352,6 +508,14 @@ console.log('正在监听串口数据...');
 //   res.send('Hello, SerialPort!');
 // });
 
+app.use((req, res, next) => {  // 前端 多功能表 报错 所以写了这段
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8081'); //替换为前端的URL
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.setHeader('Access-Control-Allow-Credentials', 'true'); // 允许凭据
+  next();
+});
+
 // 启动 Express 应用程序
 app.listen(10866, () => {
   console.log('Server started on port 10866');
@@ -368,6 +532,66 @@ app.get('/getdbtemperature', (req, res) => {
     }
   })
 });
+
+
+
+// 向前端发送 communication data
+app.get('/communication', (req, res) => {
+  // 查询数据库并检索通信数据
+  db.all('SELECT * FROM communication', (err, rows) => {
+    if (err) {
+      res.status(500).json({ error: 'Database error' });
+    } else {
+      res.json(rows); 
+    }
+  });
+});
+
+
+// 
+app.get('/sample-data', (req, res) => {
+  // Generate some sample data
+  const data = [
+    { id: 1, instruction: 'A' },
+    { id: 2, instruction: 'B' },
+    { id: 3, instruction: 'C' },
+    { id: 4, instruction: 'A' },
+    { id: 5, instruction: 'B' },
+    { id: 6, instruction: 'C' },
+    { id: 7, instruction: 'A' },
+    { id: 8, instruction: 'B' },
+    { id: 9, instruction: 'C' },
+    { id: 10, instruction: 'A' },
+    { id: 11, instruction: 'B' },
+    { id: 12, instruction: 'C' },
+    { id: 13, instruction: 'A' },
+    { id: 14, instruction: 'B' },
+    { id: 15, instruction: 'C' },
+    { id: 16, instruction: 'A' },
+    { id: 17, instruction: 'B' },
+    { id: 18, instruction: 'C' },
+    { id: 19, instruction: 'A' },
+    { id: 20, instruction: 'B' },
+    { id: 21, instruction: 'C' },
+    { id: 22, instruction: 'A' },
+    { id: 23, instruction: 'B' },
+    { id: 24, instruction: 'C' },
+    { id: 25, instruction: 'A' },
+    { id: 26, instruction: 'B' },
+    { id: 27, instruction: 'C' },
+    { id: 28, instruction: 'A' },
+    { id: 29, instruction: 'B' },
+    { id: 30, instruction: 'C' },
+    ];
+
+  // Send the data as JSON response
+  res.json(data);
+});
+
+app.listen(8181, () => {
+  console.log(`Server is running on port ${8181}`);
+});
+
 
 let historyDataCache = []; //存储历史数据
 
