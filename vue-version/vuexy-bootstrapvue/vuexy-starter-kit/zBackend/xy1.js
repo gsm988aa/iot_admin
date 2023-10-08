@@ -333,6 +333,9 @@ console.log(mes);
 // 创建数据库连接
 const db = new sqlite3.Database('db.sqlite3');
 
+//将三十个值赋值给value
+const value = mes;
+
 // 添加指令列
 const instructions = ['A相电压', 'B相电压', 'C相电压','AB线电压', 'BC线电压', 'CA线电压','A相电流', 'B相电流', 'C相电流',' A相有功功率', 'B相有功功率', 'C相有功功率',' 总有功功率', 'A相无功功率', 'B相无功功率','C相无功功率', '总无功功率', 'A相位视在功率','B相位视在功率', 'C相位视在功率', '总视在功率','A相位功率因数', 'B相位功率因数', 'C相位功率因数','功率因数', '频率', '总千瓦时','总千瓦时', '总无功电能', '总无功电能', ];
 
@@ -396,8 +399,7 @@ mes.forEach((value, index) => {
 });
 
 
-function writeToCommunication(data) {
-  console.log('Data:', value, unit, instruction, currenttime, currentId);
+function writeToCommunication(values, units, instructions, currenttime) {
   const updateData = db.prepare(`
   UPDATE communication
   SET value = ?,
@@ -406,16 +408,28 @@ function writeToCommunication(data) {
       currenttime = ?
       WHERE id = ?
 `);
-   const currenttime = new Date().toLocaleString('zh-CN', { timeZone: 'Asia/Shanghai' }); //转化为中国时间
-  updateData.run(
-    value,
-    unit,
-    instruction,
-    currenttime,
-    currentId
-  );
+  values.forEach((value, index) => {
+    console.log(`Updating data for id ${index + 1}:`);
+    console.log('Value:', value);
+    console.log('Unit:', units[index]);
+    console.log('Instruction:', instructions[index]);
+    console.log('Current Time:', currenttime);
+    updateData.run(
+      value,
+      units[index],
+      instructions[index],
+      currenttime,
+    );
+    console.log(`Updated data for id ${index + 1}`);
+  });
+
   updateData.finalize();
+  console.log('Data updated successfully');
 }
+
+const currenttime = new Date().toLocaleString('zh-CN', { timeZone: 'Asia/Shanghai' }); // 转化为中国时间
+  console.log('writeToCommunication function is being executed');
+writeToCommunication(value, unit, instructions, currenttime);
 
 
 
@@ -509,7 +523,7 @@ console.log('正在监听串口数据...');
 // });
 
 app.use((req, res, next) => {  // 前端 多功能表 报错 所以写了这段
-  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8081'); //替换为前端的URL
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8080'); //替换为前端的URL
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
   res.setHeader('Access-Control-Allow-Credentials', 'true'); // 允许凭据
@@ -548,49 +562,66 @@ app.get('/communication', (req, res) => {
 });
 
 
-// 
-app.get('/sample-data', (req, res) => {
-  // Generate some sample data
-  const data = [
-    { id: 1, instruction: 'A' },
-    { id: 2, instruction: 'B' },
-    { id: 3, instruction: 'C' },
-    { id: 4, instruction: 'A' },
-    { id: 5, instruction: 'B' },
-    { id: 6, instruction: 'C' },
-    { id: 7, instruction: 'A' },
-    { id: 8, instruction: 'B' },
-    { id: 9, instruction: 'C' },
-    { id: 10, instruction: 'A' },
-    { id: 11, instruction: 'B' },
-    { id: 12, instruction: 'C' },
-    { id: 13, instruction: 'A' },
-    { id: 14, instruction: 'B' },
-    { id: 15, instruction: 'C' },
-    { id: 16, instruction: 'A' },
-    { id: 17, instruction: 'B' },
-    { id: 18, instruction: 'C' },
-    { id: 19, instruction: 'A' },
-    { id: 20, instruction: 'B' },
-    { id: 21, instruction: 'C' },
-    { id: 22, instruction: 'A' },
-    { id: 23, instruction: 'B' },
-    { id: 24, instruction: 'C' },
-    { id: 25, instruction: 'A' },
-    { id: 26, instruction: 'B' },
-    { id: 27, instruction: 'C' },
-    { id: 28, instruction: 'A' },
-    { id: 29, instruction: 'B' },
-    { id: 30, instruction: 'C' },
-    ];
+// 创建虚拟port8181 5s更新一次数据和时间
+// let data = [
+//     { id: 1, instruction: 'A' },
+//     { id: 2, instruction: 'B' },
+//     { id: 3, instruction: 'C' },
+//     { id: 4, instruction: 'A' },
+//     { id: 5, instruction: 'B' },
+//     { id: 6, instruction: 'C' },
+//     { id: 7, instruction: 'A' },
+//     { id: 8, instruction: 'B' },
+//     { id: 9, instruction: 'C' },
+//     { id: 10, instruction: 'A' },
+//     { id: 11, instruction: 'B' },
+//     { id: 12, instruction: 'C' },
+//     { id: 13, instruction: 'A' },
+//     { id: 14, instruction: 'B' },
+//     { id: 15, instruction: 'C' },
+//     { id: 16, instruction: 'A' },
+//     { id: 17, instruction: 'B' },
+//     { id: 18, instruction: 'C' },
+//     { id: 19, instruction: 'A' },
+//     { id: 20, instruction: 'B' },
+//     { id: 21, instruction: 'C' },
+//     { id: 22, instruction: 'A' },
+//     { id: 23, instruction: 'B' },
+//     { id: 24, instruction: 'C' },
+//     { id: 25, instruction: 'A' },
+//     { id: 26, instruction: 'B' },
+//     { id: 27, instruction: 'C' },
+//     { id: 28, instruction: 'A' },
+//     { id: 29, instruction: 'B' },
+//     { id: 30, instruction: 'C' },
+// ];
 
-  // Send the data as JSON response
-  res.json(data);
-});
+// function getRandomInstruction() {
+//   const instructions = ['A', 'B', 'C'];
+//   return instructions[Math.floor(Math.random() * instructions.length)];
+// }
 
-app.listen(8181, () => {
-  console.log(`Server is running on port ${8181}`);
-});
+// function updateData() {
+//   const currenttime = new Date().toLocaleString('zh-CN', { timeZone: 'Asia/Shanghai' }); //转化为中国时间
+//   data = data.map(item => ({
+//     ...item,
+//     instruction: getRandomInstruction(),
+//     currenttime: currenttime, 
+//   }));
+// }
+
+// app.get('/sample-data', (req, res) => {
+//   res.json(data);
+// });
+
+// const intervalMilliseconds = 5000; // 5 seconds
+// setInterval(() => {
+//   updateData();
+// }, intervalMilliseconds);
+
+// app.listen(8181, () => {
+//   console.log(`Server is running on port ${8181}`);
+// });
 
 
 let historyDataCache = []; //存储历史数据
@@ -728,9 +759,9 @@ app.post('/:action', function (req, res) {
 });
 
 
-const app8080 = express();
-app8080.use(express.static('dist'));
+// const app8080 = express();
+// app8080.use(express.static('dist'));
 
-const port8080 = 8080;
-app8080.listen(port8080);
-console.log('server started ' + port8080);
+// const port8080 = 8080;
+// app8080.listen(port8080);
+// console.log('server started ' + port8080);

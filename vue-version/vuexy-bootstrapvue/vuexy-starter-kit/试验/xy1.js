@@ -29,55 +29,55 @@ let sensor1, sensor2, sensor3, sensor4, sensor5, sensor6; // 存储传感器值�
 let receivedDataBuffer = ''; // 用于累积数据的缓冲区 防止接收数据不完整
 let  history_index =0;
 // 在收到每一条数据后，将其写入数据库
-// Serialport_CeWen.on('data', (data) => {
-//   receivedDataBuffer += data.toString().trim(); // 累积接收到的数据
-//   // 检查是否包含完整的传感器数据
-//   while (receivedDataBuffer.includes('}')) {
-//     // 找到一个完整的传感器数据对象
-//     const startIndex = receivedDataBuffer.indexOf('{');
-//     const endIndex = receivedDataBuffer.indexOf('}') + 1;
+Serialport_CeWen.on('data', (data) => {
+  receivedDataBuffer += data.toString().trim(); // 累积接收到的数据
+  // 检查是否包含完整的传感器数据
+  while (receivedDataBuffer.includes('}')) {
+    // 找到一个完整的传感器数据对象
+    const startIndex = receivedDataBuffer.indexOf('{');
+    const endIndex = receivedDataBuffer.indexOf('}') + 1;
 
-//     if (startIndex !== -1 && endIndex !== -1 ) {
-//       const sensorData = receivedDataBuffer.slice(startIndex, endIndex);
-//       receivedDataBuffer = receivedDataBuffer.slice(endIndex); // 从缓冲区中删除已处理的数据
+    if (startIndex !== -1 && endIndex !== -1 ) {
+      const sensorData = receivedDataBuffer.slice(startIndex, endIndex);
+      receivedDataBuffer = receivedDataBuffer.slice(endIndex); // 从缓冲区中删除已处理的数据
 
-//       // 解析传感器数据
-//       try {
-//         const parsedData = JSON.parse(sensorData);
+      // 解析传感器数据
+      try {
+        const parsedData = JSON.parse(sensorData);
 
-//         const historyData = { ...parsedData };
-//         writeToDatabase(parsedData); // 将解析后的数据传递给 writeToDatabase 函数
-//         const { sensor1, sensor2, sensor3, sensor4, sensor5, sensor6 } = parsedData;
+        const historyData = { ...parsedData };
+        writeToDatabase(parsedData); // 将解析后的数据传递给 writeToDatabase 函数
+        const { sensor1, sensor2, sensor3, sensor4, sensor5, sensor6 } = parsedData;
 
-//         console.log('Sensor 1:', sensor1);
-//         console.log('Sensor 2:', sensor2);
-//         console.log('Sensor 3:', sensor3);
-//         console.log('Sensor 4:', sensor4);
-//         console.log('Sensor 5:', sensor5);
-//         console.log('Sensor 6:', sensor6);
+        console.log('Sensor 1:', sensor1);
+        console.log('Sensor 2:', sensor2);
+        console.log('Sensor 3:', sensor3);
+        console.log('Sensor 4:', sensor4);
+        console.log('Sensor 5:', sensor5);
+        console.log('Sensor 6:', sensor6);
 
 
 
-//       if (history_index >=3 ){  //设置3为试验
-//         history_index = 0
+      if (history_index >=3 ){  //设置3为试验
+        history_index = 0
 
-//         // console.log('Parsed Data:', historyData); // 添加这行输出
-//         updateHistoryData(historyData); // 将解析后的数据传递给 updateHistoryData 函数
-//         const { sensor1,sensor2, sensor3, sensor4, sensor5,sensor6 } = historyData;
+        // console.log('Parsed Data:', historyData); // 添加这行输出
+        updateHistoryData(historyData); // 将解析后的数据传递给 updateHistoryData 函数
+        const { sensor1,sensor2, sensor3, sensor4, sensor5,sensor6 } = historyData;
 
-//           }
+          }
 
-//             else{
-//               history_index ++
-//             }
+            else{
+              history_index ++
+            }
 
-//       } catch (error) {
-//         console.error('Error parsing sensor data:', error);
-//       }
-//     }
+      } catch (error) {
+        console.error('Error parsing sensor data:', error);
+      }
+    }
 
-//   }
-// });
+  }
+});
 
 // global.qqva = 'alsvbdgtprqjebbg'; // 定义全局变量 qqva，初始值为空字符串
  // 创建一个邮件传输器
