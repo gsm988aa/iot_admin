@@ -8,7 +8,7 @@
     <!--    <p>当前用户 : {{ ChuanCan }}</p>-->
 
     <b-card style="background-color: #F5F5F5">
-      <b-card-text style="font-family: 华文中宋,serif;color: #10163a;position: absolute">
+      <b-card-text style="font-size: 25px;font-family: 华文中宋,serif;color: #10163a;position: absolute">
         注册邮箱用户：
       </b-card-text>
       <b-input-group
@@ -47,12 +47,12 @@
 
     <b-card
       class="overflow-auto"
-      style="background-color: #eeeefc;margin-top: 50px"
+      style="background-color: #f2f2fa;margin-top: 50px"
     >
       <b-card-text
 
         class="card-text"
-        style="margin-top: 10px;padding: 0px 0px 10px"
+        style="margin-top: 10px;padding: 0px 0px 10px;font-size: 25px"
       >多点测温历史数据(需要超级管理员权限)
       </b-card-text>
 
@@ -86,7 +86,7 @@
 
     <b-card style="background-color: #f5f4f4;margin-top: 50px">
       <b-card-text
-        style="margin-top: 20px;color: #3a3a3a"
+        style="margin-top: 20px;color: #3a3a3a;font-size: 25px"
       >电力状态
       </b-card-text>
 
