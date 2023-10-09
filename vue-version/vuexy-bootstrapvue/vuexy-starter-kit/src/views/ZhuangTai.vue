@@ -1,8 +1,12 @@
 <template>
-  <b-card style="height: 100%;width: 760px;font-size: 26px;" header="开关状态示意图(需要超级管理员权限)">
+  <b-card
+    style="height: 100%;width: 760px;font-size: 26px;"
+    header="开关状态示意图(需要超级管理员权限)"
+  >
     <!--    <b-card-text></b-card-text>-->
     <b-card
-      style="background-color: #f8f8fc">
+      style="background-color: #f8f8fc"
+    >
       <b-row style="justify-content: center">
         <img
           src="@/assets/images/kaiguan/1.svg"
@@ -24,27 +28,27 @@
         <img
           v-if="showgongzuohezha"
           src="@/assets/images/kaiguan/gongzuohezha/2.svg"
-            style="width: 700px; height: 100px;margin-right: 5px;margin-top: -45px;"
+          style="width: 700px; height: 100px;margin-right: 5px;margin-top: -45px;"
         >
         <img
-            v-if="showshiyan"
-            src="@/assets/images/kaiguan/shiyan/2.svg"
-            style="width: 700px; height: 100px;margin-right: 5px;margin-top: -45px;"
+          v-if="showshiyan"
+          src="@/assets/images/kaiguan/shiyan/2.svg"
+          style="width: 700px; height: 100px;margin-right: 5px;margin-top: -45px;"
         >
         <img
-            v-if="showshiyanfen"
-            src="@/assets/images/kaiguan/shiyanfen/2.svg"
-            style="width: 700px; height: 100px;margin-right: 5px;margin-top: -45px;"
+          v-if="showshiyanfen"
+          src="@/assets/images/kaiguan/shiyanfen/2.svg"
+          style="width: 700px; height: 100px;margin-right: 5px;margin-top: -45px;"
         >
         <img
-            v-if="showshiyanhe"
-            src="@/assets/images/kaiguan/shiyanhe/2.svg"
-            style="width: 700px; height: 100px;margin-right: 5px;margin-top: -45px;"
+          v-if="showshiyanhe"
+          src="@/assets/images/kaiguan/shiyanhe/2.svg"
+          style="width: 700px; height: 100px;margin-right: 5px;margin-top: -45px;"
         >
         <img
-            v-if="showzhongjianweizhi"
-            src="@/assets/images/kaiguan/zhongjianweizhi/2.svg"
-            style="width: 700px; height: 100px;margin-right: 5px;margin-top: -46px;"
+          v-if="showzhongjianweizhi"
+          src="@/assets/images/kaiguan/zhongjianweizhi/2.svg"
+          style="width: 700px; height: 100px;margin-right: 5px;margin-top: -46px;"
         >
       </b-row>
 
@@ -60,29 +64,29 @@
           style="width: 700px; height: 100px;margin-top: -28px;margin-right: 24px;"
         >
         <img
-            v-if="showgongzuohezha"
-            src="@/assets/images/kaiguan/gongzuohezha/3.svg"
-            style="width: 700px; height: 100px;margin-top: -28px;margin-right: 24px;"
+          v-if="showgongzuohezha"
+          src="@/assets/images/kaiguan/gongzuohezha/3.svg"
+          style="width: 700px; height: 100px;margin-top: -28px;margin-right: 24px;"
         >
         <img
-            v-if="showshiyan"
-            src="@/assets/images/kaiguan/shiyan/3.svg"
-            style="width: 700px; height: 100px;margin-top: -28px;margin-right: 24px;"
+          v-if="showshiyan"
+          src="@/assets/images/kaiguan/shiyan/3.svg"
+          style="width: 700px; height: 100px;margin-top: -28px;margin-right: 24px;"
         >
         <img
-            v-if="showshiyanfen"
-            src="@/assets/images/kaiguan/shiyanfen/3.svg"
-            style="width: 700px; height: 100px;margin-top: -28px;margin-right: 24px;"
+          v-if="showshiyanfen"
+          src="@/assets/images/kaiguan/shiyanfen/3.svg"
+          style="width: 700px; height: 100px;margin-top: -28px;margin-right: 24px;"
         >
         <img
-            v-if="showshiyanhe"
-            src="@/assets/images/kaiguan/shiyanhe/3.svg"
-            style="width: 700px; height: 100px;margin-top: -28px;margin-right: 24px;"
+          v-if="showshiyanhe"
+          src="@/assets/images/kaiguan/shiyanhe/3.svg"
+          style="width: 700px; height: 100px;margin-top: -28px;margin-right: 24px;"
         >
         <img
-            v-if="showzhongjianweizhi"
-            src="@/assets/images/kaiguan/zhongjianweizhi/3.svg"
-            style="width: 700px; height: 100px;margin-top: -26px;margin-right: 24px;"
+          v-if="showzhongjianweizhi"
+          src="@/assets/images/kaiguan/zhongjianweizhi/3.svg"
+          style="width: 700px; height: 100px;margin-top: -26px;margin-right: 24px;"
         >
       </b-row>
 
@@ -98,29 +102,29 @@
           style="width: 700px; height: 100px;margin-top: -15px;margin-right: 9px;"
         >
         <img
-            v-if="showgongzuohezha"
-            src="@/assets/images/kaiguan/gongzuohezha/4.svg"
-            style="width: 700px; height: 100px;margin-top: -15px;margin-right: 9px;"
+          v-if="showgongzuohezha"
+          src="@/assets/images/kaiguan/gongzuohezha/4.svg"
+          style="width: 700px; height: 100px;margin-top: -15px;margin-right: 9px;"
         >
         <img
-            v-if="showshiyan"
-            src="@/assets/images/kaiguan/shiyan/4.svg"
-            style="width: 700px; height: 100px;margin-top: -15px;margin-right: 9px;"
+          v-if="showshiyan"
+          src="@/assets/images/kaiguan/shiyan/4.svg"
+          style="width: 700px; height: 100px;margin-top: -15px;margin-right: 9px;"
         >
         <img
-            v-if="showshiyanfen"
-            src="@/assets/images/kaiguan/shiyanfen/4.svg"
-            style="width: 700px; height: 100px;margin-top: -15px;margin-right: 9px;"
+          v-if="showshiyanfen"
+          src="@/assets/images/kaiguan/shiyanfen/4.svg"
+          style="width: 700px; height: 100px;margin-top: -15px;margin-right: 9px;"
         >
         <img
-            v-if="showshiyanhe"
-            src="@/assets/images/kaiguan/shiyanhe/4.svg"
-            style="width: 700px; height: 100px;margin-top: -15px;margin-right: 9px;"
+          v-if="showshiyanhe"
+          src="@/assets/images/kaiguan/shiyanhe/4.svg"
+          style="width: 700px; height: 100px;margin-top: -15px;margin-right: 9px;"
         >
         <img
-            v-if="showzhongjianweizhi"
-            src="@/assets/images/kaiguan/zhongjianweizhi/4.svg"
-            style="width: 700px; height: 100px;margin-top: -15px;margin-right: 9px;"
+          v-if="showzhongjianweizhi"
+          src="@/assets/images/kaiguan/zhongjianweizhi/4.svg"
+          style="width: 700px; height: 100px;margin-top: -15px;margin-right: 9px;"
         >
       </b-row>
 
@@ -143,29 +147,29 @@
           style="width: 700px; height: 100px;margin-top: -16px;margin-right: 15px"
         >
         <img
-            v-if="showgongzuohezha"
-            src="@/assets/images/kaiguan/gongzuohezha/6.svg"
-            style="width: 700px; height: 100px;margin-top: -16px;margin-right: 15px;"
+          v-if="showgongzuohezha"
+          src="@/assets/images/kaiguan/gongzuohezha/6.svg"
+          style="width: 700px; height: 100px;margin-top: -16px;margin-right: 15px;"
         >
         <img
-            v-if="showshiyan"
-            src="@/assets/images/kaiguan/shiyan/6.svg"
-            style="width: 700px; height: 100px;margin-top: -16px;margin-right: 15px"
+          v-if="showshiyan"
+          src="@/assets/images/kaiguan/shiyan/6.svg"
+          style="width: 700px; height: 100px;margin-top: -16px;margin-right: 15px"
         >
         <img
-            v-if="showshiyanfen"
-            src="@/assets/images/kaiguan/shiyanfen/6.svg"
-            style="width: 700px; height: 100px;margin-top: -16px;margin-right: 15px"
+          v-if="showshiyanfen"
+          src="@/assets/images/kaiguan/shiyanfen/6.svg"
+          style="width: 700px; height: 100px;margin-top: -16px;margin-right: 15px"
         >
         <img
-            v-if="showshiyanhe"
-            src="@/assets/images/kaiguan/shiyanhe/6.svg"
-            style="width: 700px; height: 100px;margin-top: -16px;margin-right: 15px"
+          v-if="showshiyanhe"
+          src="@/assets/images/kaiguan/shiyanhe/6.svg"
+          style="width: 700px; height: 100px;margin-top: -16px;margin-right: 15px"
         >
         <img
-            v-if="showzhongjianweizhi"
-            src="@/assets/images/kaiguan/zhongjianweizhi/6.svg"
-            style="width: 700px; height: 100px;margin-top: -16px;margin-right: 15px"
+          v-if="showzhongjianweizhi"
+          src="@/assets/images/kaiguan/zhongjianweizhi/6.svg"
+          style="width: 700px; height: 100px;margin-top: -16px;margin-right: 15px"
         >
       </b-row>
 

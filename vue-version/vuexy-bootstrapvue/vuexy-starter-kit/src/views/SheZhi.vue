@@ -1,183 +1,201 @@
 <template>
-  <b-card>
+  <b-card style="background-color: #f2f4f6">
 
-    <!--    </b-card-text>-->
-    <h6 class="introduction2">
-      这是一段介绍文字。{{ ChuanCan }}
-    </h6>
-    <!--    <p>当前用户 : {{ ChuanCan }}</p>-->
-
-    <b-card style="background-color: #F5F5F5">
-      <b-card-text style="font-size: 25px;font-family: 华文中宋,serif;color: #10163a;position: absolute">
-        注册邮箱用户：
-      </b-card-text>
-      <b-input-group
-        prepend="发送到邮箱："
-        class="mt-3"
+    <b-card>
+      <b-button
+        style="font-size: 25px;font-family: 宋体,serif;position: relative;width: 685px;text-align: left;color: #3a3a3f"
+        variant="outline-light"
+        @click="toggle"
       >
-        <b-form-input
-          v-model="emailAddress"
-          type="text"
-          placeholder="807683237@qq.com"
-        />
-        <b-input-group-append>
-          <b-button
-            variant="outline-success"
-            @click="storeEmailAddress"
-          >
-            保存
-          </b-button>
-          <b-button
-            variant="info"
-            @click="clearEmail"
-          >
-            清空
-          </b-button>
-        </b-input-group-append>
-      </b-input-group>
-
-      <b-modal
-        ref="notificationModal"
-        title="提示!"
-        hide-footer
+        注册邮箱用户
+        <span style="font-size: 26px;margin-left: 455px;color: #a5a5b2;font-weight: bold"> > </span>
+      </b-button>
+      <b-collapse
+        id="collapse-2"
+        v-model="isCollapsed"
       >
-        {{ notificationMessage }}
-      </b-modal>
-    </b-card>
+        <b-card style="background-color: #F5F5F5;">
 
-    <b-card
-      class="overflow-auto"
-      style="background-color: #f2f2fa;margin-top: 50px"
-    >
-      <b-card-text
+          <b-input-group
+            prepend="发送到邮箱："
+            class="one"
+          >
+            <b-form-input
+              v-model="emailAddress"
+              type="text"
+              placeholder="807683237@qq.com"
+            />
+            <b-input-group-append>
+              <b-button
+                variant="outline-success"
+                @click="storeEmailAddress"
+              >
+                保存
+              </b-button>
+              <b-button
+                variant="info"
+                @click="clearEmail"
+              >
+                清空
+              </b-button>
+            </b-input-group-append>
+          </b-input-group>
 
-        class="card-text"
-        style="margin-top: 10px;padding: 0px 0px 10px;font-size: 25px"
-      >多点测温历史数据(需要超级管理员权限)
-      </b-card-text>
-
-      <!--      <h1 style="font-family: 黑体;margin-top: 30px;background-color: lavender">-->
-      <!--        多点测温历史数据-->
-      <!--      </h1>-->
-      <b-table
-        id="data-table"
-        class="table-item"
-        :items="items"
-        :per-page="perPage"
-        :current-page="currentPage"
-        :fields="tableFields"
-        :bordered="bordered"
-      />
-
-      <b-pagination
-        v-model="currentPage"
-        :total-rows="rows"
-        :per-page="perPage"
-        aria-controls="my-table"
-        class="page-item"
-        first-number
-        last-number
-      />
-
-      <p class="mt-3">
-        当前页: {{ currentPage }}
-      </p>
-    </b-card>
-
-    <b-card style="background-color: #f5f4f4;margin-top: 50px">
-      <b-card-text
-        style="margin-top: 20px;color: #3a3a3a;font-size: 25px"
-      >电力状态
-      </b-card-text>
-
-      <div>
-        <b-card no-body>
-          <b-tabs card>
-            <b-tab
-              title="设备信息"
-              active
-            >
-              <b-card style="background-color: #57585b;">
-                <b-card-text style="margin-bottom: 25px;color: #fdfcfc;flex-direction: row;align-items: center;"><span>相电压</span>
-                  <span
-                    class="data-value"
-                    style="margin-left: 100px;"
-                  >{{ voltage }}</span> <span style="margin-left: 10px">V</span>
-                </b-card-text>
-
-                <b-card-text style="margin-bottom: 25px;color: #fdfcfc;flex-direction: row;align-items: center;">
-                  <span>相电流</span><span
-                    class="data-value"
-                    style="margin-left: 100px"
-                  >{{ current }}</span> <span style="margin-left: 35px">A</span>
-                </b-card-text>
-
-                <b-card-text style="margin-bottom: 25px;color: #fdfcfc;flex-direction: row;align-items: center;">
-                  <span>总功率</span><span
-                    class="data-value"
-                    style="margin-left: 100px"
-                  >{{ apparentPower }}</span> <span style="margin-left: 5px">W</span>
-                </b-card-text>
-
-                <!--                <b-card-text style="margin-bottom: 25px;color: #fdfcfc;flex-direction: row;align-items: center;">-->
-                <!--                  功率因数<span class="data-value">{{ powerFactor }}</span> <span style="margin-left: 5px" />-->
-                <!--                </b-card-text>-->
-
-                <b-card-text style="margin-bottom: 25px;color: #fdfcfc;flex-direction: row;align-items: center;">
-                  频率<span
-                    class="data-value"
-                    style="margin-left: 120px"
-                  >{{ frequency }}</span><span style="margin-left: 10px">Hz</span>
-                </b-card-text>
-
-                <b-card-text style="margin-bottom: 25px;color: #fdfcfc;flex-direction: row;align-items: center;">
-                  总千瓦时<span
-                    class="data-value"
-                    style="margin-left: 80px"
-                  >{{ totalKWh }}</span><span style="margin-left:10px">KWH</span>
-                </b-card-text>
-
-                <b-card-text style="color: #fdfcfc;flex-direction: row;align-items: center;">
-                  总无功电能<span
-                    class="data-value"
-                    style="margin-left: 60px"
-                  >{{ totalReactiveEnergy }}</span><span style="margin-left:10px">KvarH</span></b-card-text>
-                <div class="line-divider" />
-                <b-card-text style="margin-top: 18px;color: #faae76;">当前时间<span style="background-color: #858282;text-align: center;margin-left: 80px;padding: 8px 25px;">{{ currenttime }}</span>
-                </b-card-text>
-              </b-card>
-            </b-tab>
-
-            <b-tab title="详情信息">
-              <b-card>
-                <b-table
-                  class="communication-text"
-                  striped
-                  hover
-                  :items="communication"
-                  :per-page="perPage"
-                  :current-page="currentPage"
-                />
-                <b-pagination
-                  v-model="currentPage"
-                  :total-rows="corows"
-                  :per-page="perPage"
-                  aria-controls="my-table"
-                  class="custom-warning"
-                  first-number
-                  last-number
-                />
-
-                <p class="mt-3">
-                  当前页: {{ currentPage }}
-                </p>
-              </b-card>
-
-            </b-tab>
-          </b-tabs>
+          <b-modal
+            ref="notificationModal"
+            title="提示!"
+            hide-footer
+          >
+            {{ notificationMessage }}
+          </b-modal>
         </b-card>
-      </div>
+      </b-collapse>
+    </b-card>
 
+    <b-card>
+      <b-button
+        style="font-size: 25px;font-family: 宋体,serif;position: relative;width: 685px;text-align: left;color: #3a3a3f"
+        variant="outline-light"
+        @click="togglehistory"
+      >
+        多点测温历史数据(需要超级管理员权限)
+        <span style="font-size: 26px;margin-left: 152px;color: #a5a5b2;font-weight: bold"> > </span>
+      </b-button>
+      <b-collapse
+        id="collapse-2"
+        v-model="ishistory"
+      >
+        <b-card
+          class="overflow-auto"
+          style="background-color: #f2f2fa;margin-top: 50px"
+        >
+          <b-table
+            id="data-table"
+            class="table-item"
+            :items="items"
+            :per-page="perPage"
+            :current-page="currentPage"
+            :fields="tableFields"
+            :bordered="bordered"
+          />
+
+          <b-pagination
+            v-model="currentPage"
+            :total-rows="rows"
+            :per-page="perPage"
+            aria-controls="my-table"
+            class="page-item"
+            first-number
+            last-number
+          />
+
+          <p class="mt-3">
+            当前页: {{ currentPage }}
+          </p>
+        </b-card>
+      </b-collapse>
+    </b-card>
+
+    <b-card>
+      <b-button
+        style="font-size: 25px;font-family: 宋体,serif;position: relative;width: 685px;text-align: left;color: #3a3a3f"
+        variant="outline-light"
+        @click="toggledianli"
+      >
+        电力状态
+        <span style="font-size: 26px;margin-left: 500px;color: #a5a5b2;font-weight: bold"> > </span>
+      </b-button>
+      <b-collapse
+        id="collapse-2"
+        v-model="isdianli"
+      >
+        <b-card style="background-color: #f5f4f4;margin-top: 50px">
+          <div>
+
+            <b-tabs card>
+              <b-tab
+                title="设备信息"
+                active
+              >
+                <b-card style="background-color: #57585b;">
+                  <b-card-text style="margin-bottom: 25px;color: #fdfcfc;flex-direction: row;align-items: center;"><span>相电压</span>
+                    <span
+                      class="data-value"
+                      style="margin-left: 100px;"
+                    >{{ voltage }}</span> <span style="margin-left: 10px">V</span>
+                  </b-card-text>
+
+                  <b-card-text style="margin-bottom: 25px;color: #fdfcfc;flex-direction: row;align-items: center;">
+                    <span>相电流</span><span
+                      class="data-value"
+                      style="margin-left: 100px"
+                    >{{ current }}</span> <span style="margin-left: 35px">A</span>
+                  </b-card-text>
+
+                  <b-card-text style="margin-bottom: 25px;color: #fdfcfc;flex-direction: row;align-items: center;">
+                    <span>总功率</span><span
+                      class="data-value"
+                      style="margin-left: 100px"
+                    >{{ apparentPower }}</span> <span style="margin-left: 5px">W</span>
+                  </b-card-text>
+
+                  <b-card-text style="margin-bottom: 25px;color: #fdfcfc;flex-direction: row;align-items: center;">
+                    频率<span
+                      class="data-value"
+                      style="margin-left: 120px"
+                    >{{ frequency }}</span><span style="margin-left: 10px">Hz</span>
+                  </b-card-text>
+
+                  <b-card-text style="margin-bottom: 25px;color: #fdfcfc;flex-direction: row;align-items: center;">
+                    总千瓦时<span
+                      class="data-value"
+                      style="margin-left: 80px"
+                    >{{ totalKWh }}</span><span style="margin-left:10px">KWH</span>
+                  </b-card-text>
+
+                  <b-card-text style="color: #fdfcfc;flex-direction: row;align-items: center;">
+                    总无功电能<span
+                      class="data-value"
+                      style="margin-left: 60px"
+                    >{{ totalReactiveEnergy }}</span><span style="margin-left:10px">KvarH</span></b-card-text>
+                  <div class="line-divider" />
+                  <b-card-text style="margin-top: 18px;color: #faae76;">当前时间<span style="background-color: #858282;text-align: center;margin-left: 80px;padding: 8px 25px;">{{ currenttime }}</span>
+                  </b-card-text>
+                </b-card>
+              </b-tab>
+
+              <b-tab title="详情信息">
+                <b-card style="width: 600px">
+                  <b-table
+                    class="communication-text"
+                    striped
+                    hover
+                    :items="communication"
+                    :per-page="perPage"
+                    :current-page="currentPage"
+                  />
+                  <b-pagination
+                    v-model="currentPage"
+                    :total-rows="corows"
+                    :per-page="perPage"
+                    aria-controls="my-table"
+                    class="custom-warning"
+                    first-number
+                    last-number
+                  />
+
+                  <p class="mt-3">
+                    当前页: {{ currentPage }}
+                  </p>
+                </b-card>
+
+              </b-tab>
+            </b-tabs>
+
+          </div>
+
+        </b-card>
+      </b-collapse>
     </b-card>
 
   </b-card>
@@ -199,6 +217,7 @@ import {
   BTab,
   BTable,
   BTabs,
+  BCollapse,
 } from 'bootstrap-vue'
 import axios from 'axios'
 
@@ -217,6 +236,7 @@ export default {
     BTable,
     BTab,
     BTabs,
+    BCollapse,
   },
   data() {
     return {
@@ -230,6 +250,9 @@ export default {
       totalReactiveEnergy: 0,
       currenttime: '',
 
+      isdianli: false,
+      ishistory: false,
+      isCollapsed: false,
       bordered: true, // 在table里增加竖线
       notificationMessage: '',
       perPage: 5, // 当前页最多5行
@@ -272,18 +295,23 @@ export default {
   mounted() {
     this.startDataUpdates() // 初始化设备信息
 
-    setInterval(this.updateData, 5000)
-    this.updateData() // 初始化多功能表数据
+    // setInterval(this.updateData, 5000)
+    // this.updateData() // 初始化多功能表数据
+
+    this.timer = setInterval(() => {
+      this.updateData()
+    }, 5000) // 5秒请求一次多功能表数据
 
     console.log('Component mounted')
     this.fetchTemperatures()
 
     this.fetchInterval = setInterval(() => {
       this.fetchTemperatures()
-    }, 5000) // 10秒请求一次
+    }, 5000) // 5秒请求一次温度数据
+
     setInterval(() => {
       this.updateCurrentTime()
-    }, 1000) // 1000毫秒 = 1秒
+    }, 1000) // 更新电力状态里的当前时间
   },
   beforeDestroy() {
     clearInterval(this.fetchInterval)
@@ -317,7 +345,7 @@ export default {
         .then(response => {
           // 假设后端返回一个通信数据数组
           this.communication = response.data
-
+          console.log('get the communication data')
           // this.renderChart()
         })
         .catch(error => {
@@ -325,14 +353,14 @@ export default {
         })
     },
     fetchTemperatures() {
-      // axios.get('http://localhost:10866/historytemperature')
-      //     .then(response => {
-      //       console.log('get the historytemperature')
-      //       this.items = response.data
-      //     })
-      //     .catch(error => {
-      //       console.error('Request failed:', error)
-      //     })
+      axios.get('http://localhost:10866/historytemperature')
+        .then(response => {
+          console.log('get the historytemperature')
+          this.items = response.data
+        })
+        .catch(error => {
+          console.error('Request failed:', error)
+        })
     },
     clearEmail() {
       this.emailAddress = '' // 清空输入框
@@ -369,6 +397,15 @@ export default {
       } else {
         console.log('Email address is not set.')
       }
+    },
+    toggle() {
+      this.isCollapsed = !this.isCollapsed
+    },
+    togglehistory() {
+      this.ishistory = !this.ishistory
+    },
+    toggledianli() {
+      this.isdianli = !this.isdianli
     },
   },
 }
@@ -425,4 +462,5 @@ export default {
   border-top: 2px solid #fdfcfc; /* 绘制一条横线 */
   width: 100%; /* 让线占满整个宽度 */
 }
+
 </style>
