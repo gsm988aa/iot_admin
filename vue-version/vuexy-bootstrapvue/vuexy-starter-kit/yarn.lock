@@ -8856,10 +8856,20 @@ svgo@^1.0.0:
     unquote "~1.1.1"
     util.promisify "~1.0.0"
 
+sweet@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/sweet/-/sweet-0.1.1.tgz#19e2abacc413a1457cc54b433d400d46d6c4869d"
+  integrity sha512-tS8ngNgHs2zhQBebysj0YLCbsh5NEeODpDP6liwG2AhpIE4/WXEaOCI6wmq6uuLPQCAYhdA63YBc0mpQarm5xQ==
+
 sweetalert2@10.x:
   version "10.16.11"
   resolved "https://registry.yarnpkg.com/sweetalert2/-/sweetalert2-10.16.11.tgz#c8604059df2f31e06df56b02bd12b2f07ef7f098"
   integrity sha512-Rdfabv2G89Tr8vmUTb1auWCYYesKBEWnkYPSi7XaiCIW0ZXXGK8Nw1wYKPEMLU6O8gMSMJe5m6MRKqMQsAQy9A==
+
+sweetalert2@^11.7.27:
+  version "11.7.28"
+  resolved "https://registry.yarnpkg.com/sweetalert2/-/sweetalert2-11.7.28.tgz#472b8617a794cb823645ebad89198c7ae39cfe3a"
+  integrity sha512-9895DVuYTDlV4Hx4IJablFKMdSqzwpy0PKycztbO4cXnOeVMmw55weOq4gcZAh3/tAyunCKjApFDrlSAcswwcA==
 
 swiper@5.4.5:
   version "5.4.5"
