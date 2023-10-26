@@ -1,6 +1,25 @@
 const path = require('path')
 
 module.exports = {
+  devServer: {
+    // 更换端口号
+    port: 8888,
+    proxy: {
+
+      '/gets': {
+        target: 'http://192.168.10.166/gets', // 单片机 HTTP 服务器地址
+        changeOrigin: true,
+        pathRewrite: {
+          '^/gets': '/gets',
+        },
+        headers: {
+          'Access-Control-Allow-Origin': 'http://192.168.10.227:8888', // 设置允许的源请求地址
+        },
+      },
+
+    },
+  },
+
   publicPath: '/',
   lintOnSave: false,
   css: {
