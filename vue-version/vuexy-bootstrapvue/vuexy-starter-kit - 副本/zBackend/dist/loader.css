@@ -1,0 +1,77 @@
+body {
+  margin: 0;
+}
+
+#loading-bg {
+  width: 100%;
+  height: 100%;
+  background-color: transparent; /* 半透明的背景 */
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 998;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.loading-logo {
+  position: absolute;
+  left: calc(50% - 45px);
+  top: 40%;
+  z-index: 999;
+}
+.loading-overlay {
+  background: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  z-index: 99;
+}
+.loading {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  justify-items: center;
+  align-items: center;
+  animation: rotate 2s ease infinite;
+  left: calc(50% - 35px);
+  top: 50%;
+  border-radius: 50%;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  border: 3px solid transparent;
+  z-index: 999;
+}
+
+.loading div {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background-color: #a191f1;
+}
+
+.loading div:nth-child(2) {
+  opacity: 0.8;
+}
+
+.loading div:nth-child(3) {
+  opacity: 0.6;
+}
+
+.loading div:nth-child(4) {
+  opacity: 0.4;
+}
+
+@keyframes rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}

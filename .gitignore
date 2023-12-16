@@ -1,0 +1,13 @@
+```sh *.zip ```
+# 忽略生成的文件
+*.class
+*.jar
+*.o
+*.pyc
+*.dll
+*.zip
+
+/bin
+/build
+/dist
+/target

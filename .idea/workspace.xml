@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="91036d36-d2ab-466a-a5ad-eee88f80c62d" name="变更" comment="change workspace">
+      <change afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/duobaoshan/src/assets/1-150H4143Q9/浅灰色低多边形PPT背景图片/图片1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/duobaoshan/src/assets/1-150H4143Q9/浅灰色低多边形PPT背景图片/图片1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/duobaoshan/src/assets/1-150H4143Q9/浅灰色低多边形PPT背景图片/图片10.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/duobaoshan/src/assets/1-150H4143Q9/浅灰色低多边形PPT背景图片/图片12.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/duobaoshan/src/assets/1-150H4143Q9/浅灰色低多边形PPT背景图片/图片13.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/duobaoshan/src/assets/1-150H4143Q9/浅灰色低多边形PPT背景图片/图片2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/duobaoshan/src/assets/1-150H4143Q9/浅灰色低多边形PPT背景图片/图片3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/duobaoshan/src/assets/1-150H4143Q9/浅灰色低多边形PPT背景图片/图片8.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/duobaoshan/src/assets/images/kaiguan/kaiguanquankai.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/duobaoshan/src/assets/images/kaiguan/weichuneng.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/duobaoshan/src/assets/images/slider/04.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/duobaoshan/src/assets/picture1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/duobaoshan/src/views/ModalBasic.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/duobaoshan/src/views/ModalTheme.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/duobaoshan/src/views/MyChart.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/duobaoshan/src/views/SweetAlert.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/duobaoshan/src/views/SweetAlertAnimation.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/duobaoshan/src/views/SweetAlertBasic.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/duobaoshan/src/views/SweetAlertConfirmOption.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/duobaoshan/src/views/SweetAlertOption.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/duobaoshan/src/views/SweetAlertPosition.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/duobaoshan/src/views/SweetAlertTypes.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/duobaoshan/src/views/code.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/duobaoshan/src/views/echarts.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/duobaoshan/src/views/echarts.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/91610613-646f-486c-97c4-8155aa6e6420.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/91610613-646f-486c-97c4-8155aa6e6420.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Task/test.js" beforeDir="false" afterPath="$PROJECT_DIR$/Task/test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/vuexy-full-version/src/views/apps/breaker/breaker.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/vuexy-full-version/src/views/apps/breaker/breaker.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/vuexy-full-version/src/views/apps/mcpiot/iot/iot.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/vuexy-full-version/src/views/apps/mcpiot/iot/iot.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/vuexy-full-version/src/views/apps/mcpiot/mcp/mcp.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/vuexy-full-version/src/views/apps/mcpiot/mcp/mcp.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/vuexy-full-version/src/views/apps/shortcuts/shortcuts.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/vuexy-full-version/src/views/apps/shortcuts/shortcuts.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/vuexy-full-version/src/views/dashboard/deviceinfos/Deviceinfos.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/vuexy-full-version/src/views/dashboard/deviceinfos/Deviceinfos.vue" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Vue Class API Component" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="HARD" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="92ab91e1-0ae3-4272-8ede-e37c15520f64" />
+        <option name="url" value="git@github.com:gsm988aa/iot_admin.git" />
+      </UrlAndAccount>
+    </option>
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/vuexy-full-version/src/views/apps/mcpiot/iot/iot.vue" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="PackageJsonUpdateNotifier">
+    <dismissed value="$PROJECT_DIR$/package.json" />
+  </component>
+  <component name="ProjectId" id="2K3q2cw6vUz9gXmUlXTswurL4CA" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;正在变基 main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Han/Desktop/iot_admin&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;项目&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.editor&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Program Files\\JetBrains\\IntelliJ IDEA 2023.1.1\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;vue.recent.templates&quot;: [
+      &quot;Vue Class API Component&quot;
+    ]
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Han\Desktop\iot_admin\vue-version\vuexy-bootstrapvue\vuexy-full-version\src\views\apps\mcpiot\iot" />
+      <recent name="C:\Users\Han\Desktop\iot_admin\vue-version\vuexy-bootstrapvue\vuexy-full-version\src\assets\images\avatars" />
+      <recent name="C:\Users\Han\Desktop\iot_admin\Task" />
+      <recent name="C:\Users\Han\Desktop\iot_admin\vue-version\vuexy-bootstrapvue\vuexy-full-version\src\views\pages\authentication" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Han\Desktop\iot_admin\vue-version\vuexy-bootstrapvue\vuexy-full-version\src\views\apps\mcpiot\pc" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Node.js.xy3.js">
+    <configuration name="xy3.js" type="NodeJSConfigurationType" nameIsGenerated="true" path-to-js-file="xy3.js" working-dir="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/vuexy-starter-kit/src/@core/layouts/sql_session">
+      <method v="2" />
+    </configuration>
+    <configuration name="pytest" type="PythonConfigurationType" factoryName="Python">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Python311\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/vuexy-starter-kit/src/@core/layouts/sql_session" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/vuexy-starter-kit/src/@core/layouts/sql_session/test.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="serve (1)" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/vuexy-full-version/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="serve" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="serve" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/vue-version/vuexy-bootstrapvue/vuexy-starter-kit/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="serve" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Node.js.xy3.js" />
+      <item itemvalue="npm.serve (1)" />
+      <item itemvalue="npm.serve" />
+      <item itemvalue="Python.pytest" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="npm.serve (1)" />
+        <item itemvalue="npm.serve" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="应用程序级" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="默认任务">
+      <changelist id="91036d36-d2ab-466a-a5ad-eee88f80c62d" name="变更" comment="" />
+      <created>1673213407562</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1673213407562</updated>
+      <workItem from="1673213408607" duration="1283000" />
+      <workItem from="1673296542295" duration="1038000" />
+      <workItem from="1684111798654" duration="122000" />
+      <workItem from="1684111928166" duration="777000" />
+      <workItem from="1684120012084" duration="2185000" />
+      <workItem from="1684200152569" duration="1922000" />
+      <workItem from="1684214186010" duration="7935000" />
+      <workItem from="1684225139466" duration="2332000" />
+      <workItem from="1684371773760" duration="24204000" />
+      <workItem from="1684456569429" duration="8210000" />
+      <workItem from="1684464928652" duration="3030000" />
+      <workItem from="1684473045583" duration="11055000" />
+      <workItem from="1684975023069" duration="7835000" />
+      <workItem from="1684982996213" duration="16982000" />
+      <workItem from="1685061497976" duration="24736000" />
+      <workItem from="1685164271132" duration="756000" />
+      <workItem from="1685165076741" duration="53000" />
+      <workItem from="1685165143048" duration="36000" />
+      <workItem from="1685321512369" duration="323000" />
+      <workItem from="1685322771659" duration="22158000" />
+      <workItem from="1685407281600" duration="25020000" />
+      <workItem from="1685493447974" duration="24213000" />
+      <workItem from="1685579770640" duration="5013000" />
+      <workItem from="1685584807639" duration="716000" />
+      <workItem from="1685585536988" duration="17910000" />
+      <workItem from="1685925716927" duration="4521000" />
+      <workItem from="1686011636591" duration="2140000" />
+      <workItem from="1686013791978" duration="21898000" />
+      <workItem from="1686041470602" duration="543000" />
+      <workItem from="1686098288866" duration="3387000" />
+      <workItem from="1686185128691" duration="6074000" />
+      <workItem from="1686271280189" duration="8187000" />
+      <workItem from="1686359911261" duration="11575000" />
+      <workItem from="1686962524936" duration="5625000" />
+      <workItem from="1686972306692" duration="12188000" />
+      <workItem from="1687050031746" duration="13461000" />
+      <workItem from="1687221410413" duration="21333000" />
+      <workItem from="1687308225676" duration="22218000" />
+      <workItem from="1687480823802" duration="2373000" />
+      <workItem from="1687654229846" duration="1491000" />
+      <workItem from="1687661038439" duration="9736000" />
+      <workItem from="1690610985958" duration="1935000" />
+      <workItem from="1690953414278" duration="2079000" />
+      <workItem from="1691282599700" duration="3187000" />
+      <workItem from="1691377107391" duration="789000" />
+      <workItem from="1691378885937" duration="34000" />
+      <workItem from="1691460683646" duration="9000" />
+      <workItem from="1691461871701" duration="1173000" />
+      <workItem from="1691545287872" duration="2699000" />
+      <workItem from="1691548189398" duration="17619000" />
+      <workItem from="1691628203189" duration="23102000" />
+      <workItem from="1691714399834" duration="5475000" />
+      <workItem from="1691720652410" duration="679000" />
+    </task>
+    <task id="LOCAL-00001" summary="change workspace">
+      <created>1684112004864</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1684112004864</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.configurationType" implementationName="PythonConfigurationType" />
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.py" />
+    <option featureType="dependencySupport" implementationName="javascript:npm:vue" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="OPEN_GENERIC_TABS">
+      <map>
+        <entry key="4b4bf828-5759-4b70-bd7c-52deb5ee6123" value="TOOL_WINDOW" />
+      </map>
+    </option>
+    <option name="TAB_STATES">
+      <map>
+        <entry key="4b4bf828-5759-4b70-bd7c-52deb5ee6123">
+          <value>
+            <State>
+              <option name="CUSTOM_BOOLEAN_PROPERTIES">
+                <map>
+                  <entry key="Show.Git.Branches" value="true" />
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="change workspace" />
+    <option name="LAST_COMMIT_MESSAGE" value="change workspace" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/iot_admin$qtweb.coverage" NAME="qtweb 覆盖结果" MODIFIED="1687848957930" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../qtweb2 - 副本" />
+  </component>
+</project>
