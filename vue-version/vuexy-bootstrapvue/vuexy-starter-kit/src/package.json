@@ -5,7 +5,7 @@
   "scripts": {
     "start": "electron-forge start",
     "serve": "vue-cli-service serve",
-    "build": "electron-builder",
+    "build": "vue-cli-service build && electron-builder",
     "lint": "vue-cli-service lint",
     "electron:serve": "electron index.js",
     "package": "electron-forge package",
