@@ -16,14 +16,13 @@
 
 
 uart_free_protocol = 1
--- local fanhui =  
-
+ 
 local sc_Screen0 = 0
 
 --初始化函数
 function on_init()
    --set_text(0, 7, '2023-12-07 14:05:00') -- 设置文本ID为7的初始时间值
-   uart_set_baudrate(921600)
+ 
    start_timer(2,2000,1,0)  -- id为2 每3秒接收一次 一直循环  
    start_timer(6,8000,1,0)  -- id为6 每8秒接收一次 一直循环 
 
@@ -854,8 +853,8 @@ local Func_lampLight = 0x02
 
 pic_number = 1
 
-local buff          = {}            --缓冲区
-local cmd_length   = 0        --帧长度
+local buff = {}            --缓冲区
+local cmd_length = 0        --帧长度
 local cmd_end_tag = 0
 
 local judge_lamp1_light = 0 
@@ -945,7 +944,7 @@ end
 -- 系统函数: 串口接收函数(虚拟串口→串口屏 )
 function on_uart_recv_data(packet)
     local recv_packet_size = #(packet) -- 获取数据包的大小并存储
-    uart_set_baudrate(921600)
+ 
     for i = 0, recv_packet_size do
         buff[cmd_length] = packet[i]
         cmd_length = cmd_length + 1 -- 循环 每次+1
@@ -966,9 +965,7 @@ function on_uart_recv_data(packet)
         cmd_length = 0
     end
 end
-function uart_setup(baudrate,parity,stopbit,databits)
-    uart_set_baudrate(921600)
-end
+ 
 
 function on_timer(timer_id)
     if timer_id == 2 then
