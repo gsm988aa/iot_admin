@@ -21,6 +21,7 @@
     "@fullcalendar/list": "5.x",
     "@fullcalendar/timegrid": "5.x",
     "@fullcalendar/vue": "5.x",
+    "@jiaminghi/data-view": "^2.10.0",
     "@vue/composition-api": "^1.3.0",
     "@vueuse/core": "4.0.0",
     "animate.css": "4.1.1",
@@ -103,16 +104,15 @@
     "vue-template-compiler": "2.x"
   },
   "build": {
-  "appId": "com.example.myapp",
-  "productName": "XYD",
-  "directories": {
-    "output": "exeFile"
+    "appId": "com.example.myapp",
+    "productName": "XYD",
+    "directories": {
+      "output": "exeFile"
+    },
+    "win": {
+      "icon": "build/icon.ico"
+    }
   },
-  "win": {
-    "icon": "build/icon.ico"
-  }
-},
   "description": "XYD",
   "author": "Liu"
-
 }

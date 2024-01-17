@@ -55,7 +55,7 @@
       </b-modal>
 
     </b-card>
-
+<!--                <img src="@/assets/images/222.png" style="scale: 0.2"/>-->
   </div>
 </template>
 

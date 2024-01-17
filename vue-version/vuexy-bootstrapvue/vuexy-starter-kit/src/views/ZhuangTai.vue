@@ -1,491 +1,717 @@
 <template>
-  <b-card
-    style="  height: 650px;width:700px;font-size: 26px;position: fixed;"
-    header="开关状态示意图(超级管理员可见)"
-  >
-    <b-row>
-      <!-- 多状态按钮 -->
-      <b-col
-        cols="12"
-        sm="6"
-        md="3"
-      >
-        <b-card>
+  <b-card class="Lbackground">
+    <h1 class="title">
+      龙首矿西二采区辅助系统监控平台
+    </h1>
 
-          <b-row style="position: fixed;margin-top: -35px;width: 350px">
-            <b-col cols="6">
-              <b-button
-                pill
-                variant="warning"
-                @click="onupdate"
-              >
-                开启更新状态
-              </b-button>
-            </b-col>
-            <b-col cols="6">
-              <b-button
-                pill
-                variant="info"
-                @click="offupdate"
-              >
-                关闭更新状态
-              </b-button>
-            </b-col>
+    <div style="display: flex;margin-top: 70px;">
 
-          </b-row>
+      <!--右侧栏-->
+      <div style="display: flex; flex-direction: column;margin-left: 10px">
+        <!-- 模型-->
+        <div style="width: 100%; height: 100%;">
+          <canvas id="canvas" />
+        </div>
 
-          <!--            如果shiyanwei=0 代表没到位 如果 shiyanwei=1 代表到位-->
-          <b-row style="margin-left: 10px;display: block;padding:20px 10px;height: 520px;width: 100vh;position: fixed">
-            <h6 class="title">
-              试验位置：</h6>
-            <b-row>
-              <b-form-radio
-                v-model="shiyanwei"
-                value="0"
-                :disabled="isLocked"
-                style="padding: 0px 20px"
-              >
-                还未到位
-              </b-form-radio>
-              <b-form-radio
-                v-model="shiyanwei"
-                value="1"
-                class="custom-radio"
-                :disabled="isLocked"
-              >
-                已到位
-              </b-form-radio>
-            </b-row>
+        <!--标题 监控-->
+        <div style="width: 100%;height: 100%;">
 
-            <h6 class="title">
-              工作位置：
-            </h6>
-            <b-row>
-              <b-form-radio
-                v-model="gongzuowei"
-                value="0"
-                :disabled="isLocked"
-                style="padding: 0px 20px"
-              >
-                还未到位
-              </b-form-radio>
-              <b-form-radio
-                v-model="gongzuowei"
-                value="1"
-                class="custom-radio"
-                :disabled="isLocked"
-              >
-                已到位
-              </b-form-radio>
-            </b-row>
+          <div style="display: flex; flex-direction: column;text-align:center;margin-top: 30px">
+            <b-card-text style="font-size: 50px; color: #ffffff;font-weight: bold">
+              矿用柜3D模型
+            </b-card-text>
+          </div>
 
-            <h6 class="title">
-              接地开关分断：
-            </h6>
-            <b-row>
-              <b-form-radio
-                v-model="jiedifen"
-                value="0"
-                :disabled="isLocked"
-                style="padding: 0px 20px"
-              >
-                还未分断
-              </b-form-radio>
-              <b-form-radio
-                v-model="jiedifen"
-                value="1"
-                class="custom-radio"
-                :disabled="isLocked"
-              >
-                已分断
-              </b-form-radio>
-            </b-row>
-
-            <h6 class="title">
-              接地开关闭合：
-            </h6>
-            <b-row>
-              <b-form-radio
-                v-model="jiedihe"
-                value="0"
-                :disabled="isLocked"
-                style="padding: 0px 20px"
-              >
-                还未闭合
-              </b-form-radio>
-              <b-form-radio
-                v-model="jiedihe"
-                value="1"
-                class="custom-radio"
-                :disabled="isLocked"
-              >
-                已闭合
-              </b-form-radio>
-            </b-row>
-
-            <h6 class="title">
-              断路合闸：
-            </h6>
-            <b-row>
-              <b-form-radio
-                v-model="duanluhe"
-                value="0"
-                :disabled="isLocked"
-                style="padding: 0px 20px"
-              >
-                还未合闸
-              </b-form-radio>
-              <b-form-radio
-                v-model="duanluhe"
-                value="1"
-                class="custom-radio"
-                :disabled="isLocked"
-              >
-                已合闸
-              </b-form-radio>
-            </b-row>
-
-            <h6 class="title">
-              断路分闸：
-            </h6>
-            <b-row>
-              <b-form-radio
-                v-model="duanlufen"
-                value="0"
-                :disabled="isLocked"
-                style="padding: 0px 20px"
-              >
-                还未分闸
-              </b-form-radio>
-              <b-form-radio
-                v-model="duanlufen"
-                value="1"
-                class="custom-radio"
-                :disabled="isLocked"
-              >
-                已分闸
-              </b-form-radio>
-            </b-row>
-
-            <h6 class="title">
-              前门闭锁条件：
-            </h6>
-            <b-row>
-              <b-form-radio
-                v-model="qianmen"
-                value="0"
-                :disabled="isLocked"
-                style="padding: 0px 20px"
-              >
-                未满足
-              </b-form-radio>
-              <b-form-radio
-                v-model="qianmen"
-                value="1"
-                class="custom-radio"
-                :disabled="isLocked"
-              >
-                已满足
-              </b-form-radio>
-            </b-row>
-
-            <h6 class="title">
-              后门闭锁条件：
-            </h6>
-            <b-row>
-              <b-form-radio
-                v-model="houmen"
-                value="0"
-                :disabled="isLocked"
-                style="padding: 0px 20px"
-              >
-                未满足
-              </b-form-radio>
-              <b-form-radio
-                v-model="houmen"
-                value="1"
-                class="custom-radio"
-                :disabled="isLocked"
-              >
-                已满足
-              </b-form-radio>
-            </b-row>
-          </b-row>
-        </b-card>
-
-      </b-col>
-
-      <!-- 多状态svg图 -->
-      <b-col
-          cols="12" sm="6" md="3"
-          style="width: 100vh;"
-      >
-<!--        <b-card style="scale: 0.65;margin-top:-180px;margin-left:50px;background-color: transparent;">-->
-<!--          <img src="@/assets/images/duandian2.png"/>-->
-<!--        </b-card>-->
-
-
-        <b-card class="fixed-card">
-
-          <b-row style="justify-content: center;position: fixed;">
-            <img
-              src="@/assets/images/kaiguan/1.svg"
-              class="responsive-svg"
-              alt="SVG Image"
+          <div
+            id="realtime-video-btn"
+            style="width:400px;height:100px;scale: 0.8;display: flex"
+            @click="goToRealTimeVideo"
+          >
+            <dv-border-box-10
+              :border-style="'none'"
             >
-          </b-row>
+              <b-card-text style="font-size: 40px; color: #ffffff;font-weight: bold;margin-top: 30px;text-align: center">
+                点击查看实时监控
+              </b-card-text>
+            </dv-border-box-10>
+          </div>
 
-          <b-row style="justify-content: center;position: fixed;">
-            <img
-              v-if="shiyanwei === 1"
-              src="@/assets/images/kaiguan/2/2_shiyan.svg"
-              class="responsive-svg"
-              alt="SVG Image"
-            >
-            <img
-              v-else-if="gongzuowei === 1"
-              src="@/assets/images/kaiguan/2/2_gongzuo.svg"
-              class="responsive-svg"
-              alt="SVG Image"
-            >
-            <img
-              v-else-if="gongzuowei === 0 && shiyanwei === 0"
-              src="@/assets/images/kaiguan/2/2_zhongjian.svg"
-              class="responsive-svg"
-              alt="SVG Image"
-            >
-          </b-row>
+        </div>
+      </div>
 
-          <b-row style="justify-content: center;position: fixed;">
-            <img
-              v-if="duanluhe === 1"
-              src="@/assets/images/kaiguan/3/3_fen.svg"
-              class="responsive-svg"
-              alt="SVG Image"
-            >
-            <img
-              v-else-if="duanlufen === 1"
-              src="@/assets/images/kaiguan/3/3_he.svg"
-              class="responsive-svg"
-              alt="SVG Image"
-            >
-            <img
-              v-else-if="duanluhe === 0 && duanlufen === 0"
-              src="@/assets/images/kaiguan/3/3_no.svg"
-              class="responsive-svg"
-              alt="SVG Image"
-            >
-          </b-row>
+      <!-- 左侧栏-->
+      <div style="display: flex; flex-direction: column;margin-left: 10px">
+        <dv-border-box-10
+          :border-style="'none'"
+        >
+          <div style="display: flex; flex-direction: column;margin-top: 120px;margin-left:80px;gap: 100px;">
+            <b-card-text style="font-size: 50px; color: #ef7e7e;font-weight: bold">
+              温度
+            </b-card-text>
+            <b-card-text style="font-size: 50px; color: #63ccee;font-weight: bold">
+              湿度
+            </b-card-text>
+          </div>
+          <div style="display: flex; flex-direction: column;margin-top: -168px;margin-left:350px;gap: 120px;">
+            <dv-decoration-7 style="width:150px;height:30px;margin-left: -120px;scale: 2.2;color: #fff5ef;text-align: center">_0°C_</dv-decoration-7>
+            <dv-decoration-7 style="width:150px;height:30px;margin-left: -120px;scale: 2.2;color: #fff5ef">_0°C_</dv-decoration-7>
+          </div>
+        </dv-border-box-10>
 
-          <b-row style="justify-content: center;position: fixed;">
-            <img
-              v-if="shiyanwei===1"
-              src="@/assets/images/kaiguan/4/4_shiyan.svg"
-              class="responsive-svg"
-              alt="SVG Image"
-            >
-            <img
-              v-else-if="gongzuowei===1"
-              src="@/assets/images/kaiguan/4/4_gongzuo.svg"
-              class="responsive-svg"
-              alt="SVG Image"
-            >
-            <img
-              v-else-if="gongzuowei === 0 && shiyanwei === 0"
-              src="@/assets/images/kaiguan/4/4_zhongjian.svg"
-              class="responsive-svg"
-              alt="SVG Image"
-            >
-          </b-row>
 
-          <b-row style="justify-content: center;position: fixed;">
-            <img
 
-              src="@/assets/images/kaiguan/5.svg"
-              class="responsive-svg"
-              alt="SVG Image"
-            >
-          </b-row>
+        <dv-border-box-10
+          :border-style="'none'"
+        >
+          <div style="margin-bottom: 80px">
+            <div style="display: flex; flex-direction: column;margin-top: 70px;margin-left:40px;gap: 50px;">
+              <b-card-text style="font-size: 40px; color: #ffdc3e;font-weight: bold">
+                A相电压
+              </b-card-text>
+              <b-card-text style="font-size: 40px; color: #3ede0c;font-weight: bold">
+                B相电流
+              </b-card-text>
+              <b-card-text style="font-size: 40px; color: #12fcbc;font-weight: bold">
+                C相电压
+              </b-card-text>
+              <b-card-text style="font-size: 40px; color: #ff9c51;font-weight: bold">
+                有功功率
+              </b-card-text>
+              <b-card-text style="font-size: 40px; color: #ff6049;font-weight: bold;">
+                无功功率
+              </b-card-text>
+              <b-card-text style="font-size: 40px; color: #cb94e7;font-weight: bold">
+                功率因数
+              </b-card-text>
 
-          <b-row style="justify-content: center;position: fixed;">
-            <img
-              v-if="jiedifen === 1"
-              src="@/assets/images/kaiguan/6/6_fen.svg"
-              class="responsive-svg"
-              alt="SVG Image"
-            >
-            <img
-              v-else-if="jiedihe === 1"
-              src="@/assets/images/kaiguan/6/6_he.svg"
-              class="responsive-svg"
-              alt="SVG Image"
-            >
-            <img
-              v-else-if="jiedifen === 0 && jiedihe === 0"
-              src="@/assets/images/kaiguan/6/6_no.svg"
-              class="responsive-svg"
-              alt="SVG Image"
-            >
-          </b-row>
+              <div style="display: flex; flex-direction: column;margin-top: -510px;margin-left:270px;gap: 50px;">
+                <b-card-text style="font-size: 40px; color: #ffdc3e;font-weight: bold">
+                  ..
+                </b-card-text>
+                <b-card-text style="font-size: 40px; color: #3ede0c;font-weight: bold">
+                  ..
+                </b-card-text>
+                <b-card-text style="font-size: 40px; color: #12fcbc;font-weight: bold">
+                  ..
+                </b-card-text>
+                <b-card-text style="font-size: 40px; color: #ff9c51;font-weight: bold">
+                  ..
+                </b-card-text>
+                <b-card-text style="font-size: 40px; color: #ff6049;font-weight: bold;">
+                  ..
+                </b-card-text>
+                <b-card-text style="font-size: 40px; color: #cb94e7;font-weight: bold">
+                  ..
+                </b-card-text>
+              </div>
 
-          <b-row style="justify-content: center;position: fixed;">
-            <img
-              src="@/assets/images/kaiguan/7.svg"
-              class="responsive-svg"
-              alt="SVG Image"
-            >
-          </b-row>
+              <div style="display: flex; flex-direction: column;margin-top: -495px;margin-left:360px;gap: 50px;">
+                <b-card-text style="font-size: 40px; color: #ffdc3e;font-weight: bold">
+                  V
+                </b-card-text>
+                <b-card-text style="font-size: 40px; color: #3ede0c;font-weight: bold">
+                  A
+                </b-card-text>
+                <b-card-text style="font-size: 40px; color: #12fcbc;font-weight: bold">
+                  V
+                </b-card-text>
+                <b-card-text style="font-size: 40px; color: #ff9c51;font-weight: bold">
+                  W
+                </b-card-text>
+                <b-card-text style="font-size: 40px; color: #ff6049;font-weight: bold;">
+                  W
+                </b-card-text>
+                <b-card-text style="font-size: 40px; color: #cb94e7;font-weight: bold">
+                  COS
+                </b-card-text>
+              </div>
 
-        </b-card>
-      </b-col>
-    </b-row>
-    <!--    <b-form-input class="input" />-->
+            </div>
+          </div>
+
+        </dv-border-box-10>
+        <!--        <div style="width: 550px; height: 480px; background-color: #0954c4;"></div>-->
+      </div>
+
+    </div>
+
   </b-card>
 </template>
 
 <script>
 import {
-  BRow, BCol, BCard, BCardText, BButton, BFormRadio,
+  BCard, BCardText,
 } from 'bootstrap-vue'
-import axios from 'axios'
-import clouds from 'vanta/src/vanta.clouds'
 import * as THREE from 'three'
-// eslint-disable-next-line no-unused-vars
+import { FontLoader } from 'three/examples/jsm/loaders/FontLoader'
+import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry'
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
+import background from '@/assets/images/b.png' // 背景图片
+
+import Vue from 'vue'
+import DataView from '@jiaminghi/data-view'
+
+Vue.use(DataView)
 
 export default {
   components: {
-    BRow,
-
-    BCol,
-    BCard,
-    BCardText,
-    BButton,
-    BFormRadio,
+    BCard, BCardText,
   },
   data() {
     return {
-      status: '未储能', // 初始文本状态
-
-      isLocked: true, // 控制是否锁定复选框
-
-      shiyanwei: 0,
-      gongzuowei: 0,
-      jiedifen: 0,
-      jiedihe: 0,
-      duanluhe: 0,
-      duanlufen: 0,
-      qianmen: 0,
-      houmen: 0,
-
+      scene: null,
+      camera: null,
+      renderer: null,
+      mesh: null,
+      config: {
+        data: [31],
+        shape: 'round',
+        colors: ['#ffdcf1', '#e893ba', '#944a53'],
+      },
+      config2: {
+        data: [55],
+        shape: 'round',
+        colors: ['#fffcdc', '#40cbae', '#00cdfa'],
+      },
+      configTemp: {
+        value: 33,
+        lineDash: [10, 2],
+        colors: ['#ffdcf1', '#e893ba', '#944a53'],
+      },
+      configWet: {
+        value: 56,
+        lineDash: [10, 2],
+      },
     }
   },
-  created() {
-
-  },
-  beforeMount() {
-    axios.get('http://localhost:9999/switch_one')
-      .then(response => {
-
-      })
-      .catch(err => {
-        console.log(err)
-      })
-  },
   mounted() {
-    setInterval(() => {
-      axios.post('http://localhost:9999/getdata')
-        .then(response => {
-          this.qianmen = response.data.qianmen
-          this.houmen = response.data.houmen
-          this.duanlufen = response.data.duanlufen
-          this.duanluhe = response.data.duanluhe
-          this.jiedifen = response.data.jiedifen
-          this.jiedihe = response.data.jiedihe
-          this.gongzuowei = response.data.gongzuowei
-          this.shiyanwei = response.data.shiyanwei
+    // 创建场景
+    const scene = new THREE.Scene()
+    this.scene = scene
 
-          // this.data = res.data
-          console.log(this.data)
-        })
-        .catch(err => {
-          console.log(err)
-        })
-    }, 3000)
-  },
-  beforeDestroy() {
-    axios.get('http://localhost:9999/switch_zero')
-      .then(res => {
-        console.log(res)
-      })
-      .catch(err => {
-        console.log(err)
-      })
-  },
+    const loader = new THREE.TextureLoader()
+    const backgroundTexture = loader.load(background)
 
+    // 在加载完成后，设置背景
+    backgroundTexture.minFilter = THREE.LinearFilter
+    this.scene.background = backgroundTexture
+
+    // 创建相机
+    const camera = new THREE.PerspectiveCamera(55, window.innerWidth / window.innerHeight, 0.1, 1000)
+
+    // 创建渲染器
+    const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('canvas') })
+    renderer.setSize(window.innerWidth, window.innerHeight)
+
+    // 创建鼠标控制器
+    const controls = new OrbitControls(camera, renderer.domElement)
+
+    // 创建几何体
+    const geometry = new THREE.BoxGeometry(1, 2.5, 1)
+    const material = new THREE.MeshBasicMaterial({ color: 0xE8E8E8 }) // 柜身
+    const cube = new THREE.Mesh(geometry, material)
+    cube.position.y = 0.2
+
+    const geometry2 = new THREE.BoxGeometry(1, 0.1, 1) // 设置cube2尺寸为2x2x2个单位
+    const material2 = new THREE.MeshBasicMaterial({ color: 0xEE2C2C }) // 红色柜头
+    const cube2 = new THREE.Mesh(geometry2, material2)
+    cube2.position.y = 1.5 // 将cube2放在cube上方（向上偏移1个单位）
+    // cube2.rotation.y = -20
+
+    // 创建平面几何体
+    const planeGeometry = new THREE.PlaneGeometry(1, 1)
+    // 创建材质并加载贴图
+    const texture = new THREE.TextureLoader().load('sss.jpg')
+    const material9 = new THREE.MeshBasicMaterial({ map: texture })
+    // 设置贴图的重复次数和起始位置
+    material9.map.repeat.set(1, 1)
+    material9.map.offset.set(0, 0)
+    // 创建平面网格
+    const planeMesh = new THREE.Mesh(planeGeometry, material9)
+    planeMesh.position.x = -0.3 // 设置平面几何体的位置为左上角
+    planeMesh.position.y = 0.03
+    planeMesh.position.z = 0.53
+    planeMesh.scale.set(0.2, 0.25, 0.3)
+
+    // 操控
+    const planeGeometry2 = new THREE.PlaneGeometry(1, 1)
+    // 创建材质并加载贴图
+    const texture2 = new THREE.TextureLoader().load('control.png')
+    const material10 = new THREE.MeshBasicMaterial({ map: texture2, side: THREE.FrontSide })
+    // 设置贴图的重复次数和起始位置
+    material10.map.repeat.set(1, 1)
+    material10.map.offset.set(0, 0)
+    // 创建平面网格
+    const planeMesh2 = new THREE.Mesh(planeGeometry2, material10)
+    planeMesh2.position.x = 0.1 // 设置平面几何体的位置为左上角
+    planeMesh2.position.y = 0.03
+    planeMesh2.position.z = 0.53
+    planeMesh2.scale.set(0.4, 0.3, 0.3)
+
+    // 状态
+    const planeGeometry3 = new THREE.PlaneGeometry(1, 1)
+    // 创建材质并加载贴图
+    const texture3 = new THREE.TextureLoader().load('zt.png')
+    const material11 = new THREE.MeshBasicMaterial({ map: texture3, side: THREE.FrontSide })
+    // 设置贴图的重复次数和起始位置
+    material11.map.repeat.set(1, 1)
+    material11.map.offset.set(0, 0)
+    // 创建平面网格
+    const planeMesh3 = new THREE.Mesh(planeGeometry3, material11)
+    planeMesh3.position.x = -0.3 // 设置平面几何体的位置为左上角
+    planeMesh3.position.y = -0.7
+    planeMesh3.position.z = 0.53
+    planeMesh3.scale.set(0.18, 0.26, 0.3)
+
+    const geometry3 = new THREE.BoxGeometry(1, 0.7, 1) // 设置cube2尺寸为2x2x2个单位
+    const material3 = new THREE.MeshBasicMaterial({ color: 0xE8E8E8 }) // 门1
+    const cube3 = new THREE.Mesh(geometry3, material3)
+    cube3.add(planeMesh, planeMesh2, planeMesh3)
+    cube3.position.y = 1.1
+    // cube3.position.z = 2.5
+
+    const geometry4 = new THREE.BoxGeometry(1, 1, 1) // 设置cube2尺寸为2x2x2个单位
+    const material4 = new THREE.MeshBasicMaterial({ color: 0xE8E8E8 }) // 断路器
+    const cube4 = new THREE.Mesh(geometry4, material4)
+    cube4.position.y = 0.25
+
+    // 状态
+    const planeGeometry4 = new THREE.PlaneGeometry(1, 1)
+    // 创建材质并加载贴图
+    const texture4 = new THREE.TextureLoader().load('duanluqi.png')
+    const material12 = new THREE.MeshBasicMaterial({ map: texture4, side: THREE.FrontSide, transparent: true })
+    // 设置贴图的重复次数和起始位置
+    material12.map.repeat.set(1, 1)
+    material12.map.offset.set(0, 0)
+    // 创建平面网格
+    const planeMesh4 = new THREE.Mesh(planeGeometry4, material12)
+    planeMesh4.position.x = 0.01// 设置平面几何体的位置为左上角
+    planeMesh4.position.y = 1.31
+    planeMesh4.position.z = 0.53
+    planeMesh4.scale.set(1, 0.2, 0.3)
+
+    // 状态
+    const planeGeometry5 = new THREE.PlaneGeometry(1, 1)
+    // 创建材质并加载贴图
+    const texture5 = new THREE.TextureLoader().load('anniu.png')
+    const material13 = new THREE.MeshBasicMaterial({ map: texture5, side: THREE.FrontSide, transparent: true })
+    // 设置贴图的重复次数和起始位置
+    material13.map.repeat.set(1, 1)
+    material13.map.offset.set(0, 0)
+    // 创建平面网格
+    const planeMesh5 = new THREE.Mesh(planeGeometry5, material13)
+    planeMesh5.position.x = 0.01// 设置平面几何体的位置为左上角
+    planeMesh5.position.y = 0.76
+    planeMesh5.position.z = 0.53
+    planeMesh5.scale.set(0.33, 0.2, 0.3)
+
+    const geometry5 = new THREE.BoxGeometry(1, 0.8, 1) // 设置cube2尺寸为2x2x2个单位
+    const material5 = new THREE.MeshBasicMaterial({ color: 0xE8E8E8 }) // 手车
+    const cube5 = new THREE.Mesh(geometry5, material5)
+    cube5.add(planeMesh4, planeMesh5)
+    cube5.position.y = -0.65
+
+    const edges1 = new THREE.EdgesGeometry(cube3.geometry) // 加黑色边框
+    const lineMaterial = new THREE.MeshBasicMaterial({ color: 0x000000 })
+    const line = new THREE.LineSegments(edges1, lineMaterial)
+    scene.add(line)
+    line.position.copy(cube3.position) // 与几何保持一致
+
+    const edges2 = new THREE.EdgesGeometry(cube4.geometry) // 加黑色边框
+    const lineMaterial2 = new THREE.MeshBasicMaterial({ color: 0x000000 })
+    const line2 = new THREE.LineSegments(edges2, lineMaterial2)
+    scene.add(line2)
+    line2.position.copy(cube4.position) // 与几何保持一致
+
+    const edges3 = new THREE.EdgesGeometry(cube5.geometry) // 加黑色边框
+    const lineMaterial3 = new THREE.MeshBasicMaterial({ color: 0x000000 })
+    const line3 = new THREE.LineSegments(edges3, lineMaterial3)
+    scene.add(line3)
+    line3.position.copy(cube5.position) // 与几何保持一致
+
+    // 圆孔板
+    const shape = new THREE.Shape()
+    const radius = 0.1 // 圆形半径
+    const spacing = 0.2 // 圆形间距
+
+    // 添加圆形
+    for (let i = -0.5; i <= 0.5; i += spacing) {
+      for (let j = -0.5; j <= 0.5; j += spacing) {
+        shape.moveTo(i + radius, j)
+        shape.quadraticCurveTo(i + radius, j + radius, i, j + radius)
+        shape.quadraticCurveTo(i - radius, j + radius, i - radius, j)
+        shape.quadraticCurveTo(i - radius, j - radius, i, j - radius)
+        shape.quadraticCurveTo(i + radius, j - radius, i + radius, j)
+      }
+    }
+
+    // 创建立方体
+    const geometry6 = new THREE.BoxGeometry(0.01, 0.01, 0.01)
+    // 创建立方体材质
+    const material6 = new THREE.MeshBasicMaterial({ color: 0x1C1C1C })
+    // 创建立方体网格
+    const cube6 = new THREE.Mesh(geometry6, material6)
+    cube6.scale.set(0.28, 0.2, 0.2)
+    cube6.position.z = 0.5
+    cube6.position.y = -0.5
+    // 创建立方体的内部空洞
+    const hole6 = new THREE.Path()
+    hole6.absellipse(0.2, 0, 0.1, 0.05, 0, Math.PI * 2)
+    // 创建立方体的内部几何体
+    const geometryWithHole6 = new THREE.ShapeGeometry(shape)
+    // 创建立方体的内部网格
+    const meshWithHole6 = new THREE.Mesh(geometryWithHole6, material6)
+    // 将内部网格添加为立方体的子对象
+    cube6.add(meshWithHole6)
+
+    // 创建立方体2
+    const geometry7 = new THREE.BoxGeometry(0.01, 0.01, 0.01)
+    // 创建立方体材质
+    const material7 = new THREE.MeshBasicMaterial({ color: 0x1C1C1C })
+    // 创建立方体网格
+    const cube7 = new THREE.Mesh(geometry7, material7)
+    cube7.scale.set(0.28, 0.2, 0.2)
+    cube7.position.z = 0.5
+    cube7.position.y = 0.3
+    // 创建立方体的内部空洞
+    const hole7 = new THREE.Path()
+    hole7.absellipse(0.2, 0, 0.1, 0.05, 0, Math.PI * 2)
+    // 创建立方体的内部几何体
+    const geometryWithHole7 = new THREE.ShapeGeometry(shape)
+    // 创建立方体的内部网格
+    const meshWithHole7 = new THREE.Mesh(geometryWithHole7, material7)
+    // 将内部网格添加为立方体的子对象
+    cube7.add(meshWithHole7)
+
+    // 创建文字几何体
+    const fontLoader = new FontLoader()
+    // 创建一个组合对象
+    const group = new THREE.Object3D()
+
+    fontLoader.load('/three font/Felix Titling_Regular.json', font => {
+      // console.log('字体加载成功:', font)
+      // 创建文字几何体
+      const textGeometry = new TextGeometry('GKG-12', {
+        font,
+        size: 0.06, // 文字大小
+        height: 0.01, // 文字厚度
+        curveSegments: 20,
+        bevelEnabled: false,
+        bevelThickness: 1,
+        bevelSize: 0,
+        bevelOffset: 0,
+        bevelSegments: 15,
+      })
+
+      // 创建文字材质
+      const textMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff, side: THREE.DoubleSide })
+      // 创建文字Mesh对象
+      const textMesh = new THREE.Mesh(textGeometry, textMaterial)
+      // 设置文字位置
+      textMesh.position.x = -0.45
+      textMesh.position.y = 1.47
+      textMesh.position.z = 0.5
+      // 将文字Mesh添加到组合对象group中
+      group.add(textMesh)
+
+      // const clonedTextMesh = textMesh.clone() // 克隆文字Mesh对象
+      // clonedTextMesh.position.x = 0.63 // 设置相对位置
+      // clonedTextMesh.position.y = 1.47
+      // clonedTextMesh.position.z = 0.5
+      // group.add(clonedTextMesh) // 将克隆的文字Mesh添加到组合对象group中
+      //
+      // const clonedTextMesh2 = textMesh.clone() // 克隆文字Mesh对象
+      // clonedTextMesh2.position.x = 1.73 // 设置相对位置
+      // clonedTextMesh2.position.y = 1.47
+      // clonedTextMesh2.position.z = 0.5
+      // group.add(clonedTextMesh2) // 将克隆的文字Mesh添加到组合对象group中
+      //
+      // const clonedTextMesh3 = textMesh.clone() // 克隆文字Mesh对象
+      // clonedTextMesh3.position.x = 2.83 // 设置相对位置
+      // clonedTextMesh3.position.y = 1.47
+      // clonedTextMesh3.position.z = 0.5
+      // group.add(clonedTextMesh3) // 将克隆的文字Mesh添加到组合对象group中
+      //
+      // const clonedTextMesh4 = textMesh.clone() // 克隆文字Mesh对象
+      // clonedTextMesh4.position.x = 3.93 // 设置相对位置
+      // clonedTextMesh4.position.y = 1.47
+      // clonedTextMesh4.position.z = 0.5
+      // group.add(clonedTextMesh4) // 将克隆的文字Mesh添加到组合对象group中
+      //
+      // const clonedTextMesh5 = textMesh.clone() // 克隆文字Mesh对象
+      // clonedTextMesh5.position.x = 5.03 // 设置相对位置
+      // clonedTextMesh5.position.y = 1.47
+      // clonedTextMesh5.position.z = 0.5
+      // group.add(clonedTextMesh5) // 将克隆的文字Mesh添加到组合对象group中
+    })
+
+    // group.add(cube, cube2, cube3, cube4, cube5, cube6, cube7, line, line2, line3) // 将两个立方体添加到组合对象中
+    group.add(cube)
+    group.add(cube2)
+    group.add(cube3)
+    group.add(cube4)
+    group.add(cube5)
+    group.add(cube6)
+    group.add(cube7)
+    group.add(line)
+    group.add(line2)
+    group.add(line3)
+    group.position.x = -4
+    group.position.y = -0.5
+
+    const clonedGroup1 = group.clone() // 克隆模型
+    clonedGroup1.translateX(1.1) // 相对位置
+    clonedGroup1.translateY(0)
+    clonedGroup1.translateZ(0)
+
+    const clonedGroup2 = group.clone() // 克隆模型
+    clonedGroup2.translateX(2.2) // 相对位置
+    clonedGroup2.translateY(0)
+    clonedGroup2.translateZ(0)
+
+    const clonedGroup3 = group.clone() // 克隆模型
+    clonedGroup3.translateX(3.3) // 相对位置
+    clonedGroup3.translateY(0)
+    clonedGroup3.translateZ(0)
+
+    const clonedGroup4 = group.clone() // 克隆模型
+    clonedGroup4.translateX(4.4) // 相对位置
+    clonedGroup4.translateY(0)
+    clonedGroup4.translateZ(0)
+
+    const clonedGroup5 = group.clone() // 克隆模型
+    clonedGroup5.translateX(5.5) // 相对位置
+    clonedGroup5.translateY(0)
+    clonedGroup5.translateZ(0)
+
+    // 创建文字几何体  第二台
+    const fontLoader1 = new FontLoader()
+
+    fontLoader1.load('/three font/Felix Titling_Regular.json', font => {
+      const textGeometry20 = new TextGeometry('GKG-12', {
+        font,
+        size: 0.06, // 文字大小
+        height: 0.01, // 文字厚度
+        curveSegments: 20,
+        bevelEnabled: false,
+        bevelThickness: 1,
+        bevelSize: 0,
+        bevelOffset: 0,
+        bevelSegments: 15,
+      })
+
+      // 创建文字材质
+      const textMaterial20 = new THREE.MeshBasicMaterial({ color: 0xffffff, side: THREE.DoubleSide })
+      // 创建文字Mesh对象
+      const textMesh = new THREE.Mesh(textGeometry20, textMaterial20)
+      // 设置文字位置
+      textMesh.position.x = -0.45
+      textMesh.position.y = 1.47
+      textMesh.position.z = 0.5
+      // 将文字Mesh添加到组合对象group中
+      clonedGroup1.add(textMesh)
+    })
+
+    // 创建文字几何体 第三台
+    const fontLoader2 = new FontLoader()
+
+    fontLoader2.load('/three font/Felix Titling_Regular.json', font => {
+      const textGeometry21 = new TextGeometry('GKG-12', {
+        font,
+        size: 0.06, // 文字大小
+        height: 0.01, // 文字厚度
+        curveSegments: 20,
+        bevelEnabled: false,
+        bevelThickness: 1,
+        bevelSize: 0,
+        bevelOffset: 0,
+        bevelSegments: 15,
+      })
+
+      // 创建文字材质
+      const textMaterial21 = new THREE.MeshBasicMaterial({ color: 0xffffff, side: THREE.DoubleSide })
+      // 创建文字Mesh对象
+      const textMesh = new THREE.Mesh(textGeometry21, textMaterial21)
+      // 设置文字位置
+      textMesh.position.x = -0.45
+      textMesh.position.y = 1.47
+      textMesh.position.z = 0.5
+      // 将文字Mesh添加到组合对象group中
+      clonedGroup2.add(textMesh)
+    })
+
+
+    // 创建文字几何体 第四台
+    const fontLoader3 = new FontLoader()
+
+    fontLoader3.load('/three font/Felix Titling_Regular.json', font => {
+      const textGeometry22 = new TextGeometry('GKG-12', {
+        font,
+        size: 0.06, // 文字大小
+        height: 0.01, // 文字厚度
+        curveSegments: 20,
+        bevelEnabled: false,
+        bevelThickness: 1,
+        bevelSize: 0,
+        bevelOffset: 0,
+        bevelSegments: 15,
+      })
+
+      // 创建文字材质
+      const textMaterial22 = new THREE.MeshBasicMaterial({ color: 0xffffff, side: THREE.DoubleSide })
+      // 创建文字Mesh对象
+      const textMesh = new THREE.Mesh(textGeometry22, textMaterial22)
+      // 设置文字位置
+      textMesh.position.x = -0.45
+      textMesh.position.y = 1.47
+      textMesh.position.z = 0.5
+      // 将文字Mesh添加到组合对象group中
+      clonedGroup3.add(textMesh)
+    })
+
+
+    // 创建文字几何体 第五台
+    const fontLoader4 = new FontLoader()
+
+    fontLoader4.load('/three font/Felix Titling_Regular.json', font => {
+      const textGeometry23 = new TextGeometry('GKG-12', {
+        font,
+        size: 0.06, // 文字大小
+        height: 0.01, // 文字厚度
+        curveSegments: 20,
+        bevelEnabled: false,
+        bevelThickness: 1,
+        bevelSize: 0,
+        bevelOffset: 0,
+        bevelSegments: 15,
+      })
+
+      // 创建文字材质
+      const textMaterial23 = new THREE.MeshBasicMaterial({ color: 0xffffff, side: THREE.DoubleSide })
+      // 创建文字Mesh对象
+      const textMesh = new THREE.Mesh(textGeometry23, textMaterial23)
+      // 设置文字位置
+      textMesh.position.x = -0.45
+      textMesh.position.y = 1.47
+      textMesh.position.z = 0.5
+      // 将文字Mesh添加到组合对象group中
+      clonedGroup4.add(textMesh)
+    })
+
+
+    // 创建文字几何体 第六台
+    const fontLoader5 = new FontLoader()
+
+    fontLoader5.load('/three font/Felix Titling_Regular.json', font => {
+      const textGeometry24 = new TextGeometry('GKG-12', {
+        font,
+        size: 0.06, // 文字大小
+        height: 0.01, // 文字厚度
+        curveSegments: 20,
+        bevelEnabled: false,
+        bevelThickness: 1,
+        bevelSize: 0,
+        bevelOffset: 0,
+        bevelSegments: 15,
+      })
+
+      // 创建文字材质
+      const textMaterial24 = new THREE.MeshBasicMaterial({ color: 0xffffff, side: THREE.DoubleSide })
+      // 创建文字Mesh对象
+      const textMesh = new THREE.Mesh(textGeometry24, textMaterial24)
+      // 设置文字位置
+      textMesh.position.x = -0.45
+      textMesh.position.y = 1.47
+      textMesh.position.z = 0.5
+      // 将文字Mesh添加到组合对象group中
+      clonedGroup5.add(textMesh)
+    })
+
+    // 将组合几何体添加到场景中
+    scene.add(group)
+
+    scene.add(clonedGroup1) // 将克隆的模型添加到场景
+    scene.add(clonedGroup2)
+    scene.add(clonedGroup3)
+    scene.add(clonedGroup4)
+    scene.add(clonedGroup5)
+
+    //     parentGroup.add(group)
+    //     parentGroup.add(clonedGroup1)
+    //     parentGroup.add(clonedGroup2)
+    //     parentGroup.add(clonedGroup3)
+    //     parentGroup.add(clonedGroup4)
+    //     parentGroup.add(clonedGroup5)
+    //
+    // // 将父级组添加到场景中
+    //     scene.add(parentGroup)
+
+    // 设置相机位置
+    camera.position.z = 4.5
+    camera.position.x = 2.8
+
+    let isRotating = true
+
+    // 然后，在模型上添加一个点击事件监听器
+    renderer.domElement.addEventListener('click', () => {
+      // 切换旋转状态
+      isRotating = !isRotating
+    })
+
+    // 渲染循环
+    const animate = function () {
+      requestAnimationFrame(animate)
+
+      // 检查旋转状态
+      if (isRotating) {
+        // 如果正在旋转，则继续旋转模型
+        group.rotation.y += 0.01
+        clonedGroup1.rotation.y += 0.01
+        clonedGroup2.rotation.y += 0.01
+        clonedGroup3.rotation.y += 0.01
+        clonedGroup4.rotation.y += 0.01
+        clonedGroup5.rotation.y += 0.01
+      }
+
+      // parentGroup.rotation.y += 0.01
+
+      // 渲染场景
+      renderer.render(scene, camera)
+      controls.update() // 更新鼠标控制器
+    }
+
+    animate()
+  },
   methods: {
-    onupdate() {
-      console.log('click on')
-      axios.get('http://localhost:9999/switch_one')
-        .then(response => {
-          console.log('click on1')
-          // console.log(response.data)
-        })
-        .catch(err => {
-          console.log(err)
-        })
+    goToRealTimeVideo() {
+      this.$router.push('RealTimeVideo')
     },
-    offupdate() {
-      console.log('click off')
-      axios.get('http://localhost:9999/switch_zero')
-      // eslint-disable-next-line no-unused-vars
-        .then(response => {
-          console.log('click off1')
-          // console.log(response.data)
-        })
-        .catch(err => {
-          console.log(err)
-        })
-    },
-
   },
 }
 </script>
 
 <style>
-.input{
-  height: 60px;
+.Lbackground {
+  background-image: url("../assets/images/ba.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  scale: 0.5;
+  position: absolute;
+  transform: translate(-50%, -50%);
+}
+.title {
+  background-image: url("../assets/images/title.svg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  font-family: 新宋体;
   text-align: center;
-  font-size: 25px;
+  color: #6cd6fd;
+  font-weight: bold;
+  font-size: 50px;
 }
+.text-ABC{
 
-.title{
-  font-family: 新宋体,serif;
-  font-size: 16px;
-  font-weight: bolder;
-}
-.custom-control-input:checked ~ .custom-control-label::before,
-.custom-radio .custom-control-input:checked:disabled ~ .custom-control-label::before {
-  background-color: #33ff44;
-  border: #09280b;
-}
-.icon-radio{
-  margin-left: 10px;
-}
-.custom-radio .custom-control-label {
-  color: #000000 !important; /* Use !important to ensure it takes precedence */
-
-}
-.responsive-svg{
-  padding: 0;
-  border: 0;
-  height: 100vh;
-  width: 100%;
-}
-.fixed-card {
-  background-color: transparent;
-  scale: 1.6;
-  margin-right: -330px;
-  position: relative;
-  z-index: 9999;
 }
 </style>

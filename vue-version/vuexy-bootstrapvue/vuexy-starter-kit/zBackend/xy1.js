@@ -269,35 +269,6 @@ let duanlufen = 0
 let qianmen = 0
 let houmen = 0
 
-
-setInterval(() => {
-    if (swt == 1) {
-        axios.get('http://192.168.2.56/gets')
-            .then(response => {
-                jiedifen = response.data.jiedifen;
-                houmen = response.data.houmen;
-                qianmen = response.data.qianmen;
-                duanluhe = response.data.duanluhe;
-                jiedihe = response.data.jiedihe;
-                gongzuowei = response.data.gongzuowei;
-                shiyanwei = response.data.shiyanwei;
-                duanlufen = response.data.duanlufen;
-                console.log(response.data);
-
-                // Update the record table
-                const currentTime = new Date().toISOString();
-                db.run(`UPDATE record SET jiedifen=?, houmen=?, qianmen=?, duanluhe=?, jiedihe=?, gongzuowei=?, shiyanwei=?, duanlufen=?, currenttime=?`, [jiedifen, houmen, qianmen, duanluhe, jiedihe, gongzuowei, shiyanwei, duanlufen, currentTime], (updateErr) => {
-                    if (updateErr) {
-                        console.error(updateErr.message);
-                    }
-                });
-            })
-            .catch(error => {
-                console.error(error);
-            });
-    }
-}, 3000);
-
 let currentId = 1; // 初始化要更新的行的id
 //将数据更新至数据表 record
 function writeToDatabase(data) {
@@ -332,11 +303,40 @@ function writeToDatabase(data) {
   updateData.finalize();
 }
 
+
+setInterval(() => {
+    if (swt == 1) {
+        axios.get('http://192.168.6.185/gets')
+            .then(response => {
+                jiedifen = response.data.jiedifen;
+                houmen = response.data.houmen;
+                qianmen = response.data.qianmen;
+                duanluhe = response.data.duanluhe;
+                jiedihe = response.data.jiedihe;
+                gongzuowei = response.data.gongzuowei;
+                shiyanwei = response.data.shiyanwei;
+                duanlufen = response.data.duanlufen;
+                console.log(response.data);
+
+                // Update the record table
+                const currentTime = new Date().toISOString();
+                db.run(`UPDATE record SET jiedifen=?, houmen=?, qianmen=?, duanluhe=?, jiedihe=?, gongzuowei=?, shiyanwei=?, duanlufen=?, currenttime=?`, [jiedifen, houmen, qianmen, duanluhe, jiedihe, gongzuowei, shiyanwei, duanlufen, currentTime], (updateErr) => {
+                    if (updateErr) {
+                        console.error(updateErr.message);
+                    }
+                });
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    }
+}, 3000);
+
 // 从相应接口获得数值
 app9999.get('/switch_one', (req, res) => {
     swt = 1;
     // axios.get('http://10.168.1.103/gets')
-       axios.get('http://192.168.2.56/gets')
+       axios.get('http://192.168.6.185/gets')
         .then(response => {
             // console.log(response.data)
     })
@@ -347,7 +347,7 @@ app9999.get('/switch_zero', (req, res) => {
     swt = 0;
     console.log('capture is off ')
     // axios.get('http://10.168.1.103/sp')
-       axios.get('http://192.168.2.56/sp')
+       axios.get('http://192.168.6.185/sp')
         .then(response => {
             // console.log(response.data)
     })

@@ -1,6 +1,6 @@
 <template>
   <b-card
-    style="height: 120px;width:50px;font-size: 26px;position: relative;background-color: transparent;margin-left: -175px"
+    style="height: 120px;width:50px;font-size: 26px;position: relative;background-color: transparent;margin-left: -145px;"
   >
     <b-row>
       <!--       多状态svg图 -->
@@ -193,8 +193,8 @@ export default {
 }
 .fixed-card {
   background-color: transparent;
-  margin-top: -120px;
-  scale: 0.6;
+  margin-top: -80px;
+  scale: 0.55;
   position: relative;
   z-index: 9999;
 }

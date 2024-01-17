@@ -157,6 +157,14 @@
         <Mcp />
       </b-tab>
 
+      <b-tab
+          v-if="isAdmin || activeTab === 11"
+          title="实时监控"
+          style="overflow: hidden;width: 100vh"
+      >
+        <RealTimeVideo />
+      </b-tab>
+
       <!-- 其他管理员权限Tabs -->
     </b-tabs>
   </div>
@@ -178,10 +186,12 @@ import SheZhi from './SheZhi.vue'
 import YiJianShunKong from './YiJianShunKong.vue'
 import SheBeiCanShu from './SheBeiCanShu.vue'
 import Mcp from './Mcp.vue'
+import RealTimeVideo from '@/views/RealTimeVideo.vue'
 
 export default {
   name: 'Hello',
   components: {
+    RealTimeVideo,
     Mcp,
     SheBeiCanShu,
     ThreeD,
@@ -220,6 +230,7 @@ export default {
         { title: 'Tab 9', content: '3D模型图' },
         { title: 'Tab 10', content: '设备参数' },
         { title: 'Tab 11', content: '微机综保' },
+        { title: 'Tab 12', content: '实时监控' },
       ],
     }
   },

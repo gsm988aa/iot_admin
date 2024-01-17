@@ -67,6 +67,20 @@ const router = new VueRouter({
     //   },
     // },
     {
+      path: '/RealTimeVideo',
+      name: 'RealTimeVideo',
+      component: () => import('@/views/RealTimeVideo.vue'),
+      meta: {
+        pageTitle: 'RealTimeVideo',
+        breadcrumb: [
+          {
+            text: 'RealTimeVideo',
+            active: true,
+          },
+        ],
+      },
+    },
+    {
       path: '/login',
       name: 'login',
       component: () => import('@/views/Login.vue'),

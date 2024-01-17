@@ -1,176 +1,183 @@
 <template>
-  <b-card>
-    <div>
-      <b-table
-        striped
-        hover
-        :items="items"
-        thead-class="text-center"
-        bordered
-        style="table-layout: fixed; width: 100%;"
-      >
-        <template
-          #cell(图1)="row"
-          style="justify-content: center"
-        >
-          <ZhuangTaiImages :shiyanwei="shiyanwei" />
-        </template>
-        <template
-          #cell(图2)="row"
-          style="justify-content: center"
-        >
-          <ZhuangTaiImages :gongzuowei="gongzuowei" />
-        </template>
-        <template
-          #cell(图3)="row"
-          style="justify-content: center"
-        >
-          <ZhuangTaiImages :duanluhe="duanluhe" />
-        </template>
-        <template
-          #cell(图4)="row"
-          style="justify-content: center"
-        >
-          <ZhuangTaiImages :duanlufen="duanlufen" />
-        </template>
-        <template
-          #cell(图5)="row"
-          style="justify-content: center"
-        >
-          <ZhuangTaiImages :jiedifen="jiedifen" />
-        </template>
-        <template
-          #cell(图6)="row"
-          style="justify-content: center"
-        >
-          <ZhuangTaiImages :jiedihe="jiedihe" />
-        </template>
-      </b-table>
-      <b-collapse v-model="isCollapsed">
+  <div class="demo-inline-spacing" style="width: 670px">
+    <b-card style="position: relative;width: 100%;">
+      <div>
         <b-table
           striped
           hover
-          :items="dataitems"
-          thead-class="table"
-          class="text-sty"
-          no-header
-          :fields="['unit','图1', '图2', '图3', '图4', '图5', '图6']"
-          :thead-class="'d-none'"
+          :items="items"
+          thead-class="text-center"
           bordered
-        />
-      </b-collapse>
-      <b-button @click="toggleCollapse" variant="primary">{{ isCollapsed ? '收起' : '展开' }}</b-button>
-    </div>
+          style="table-layout: fixed; width: 100%;"
+        >
+          <template
+            #cell(图1)="row"
+            style="justify-content: center"
+          >
+<!--            <img src="@/assets/images/222.png" style="scale: 0.2"/>-->
+            <ZhuangTaiImages :shiyanwei="shiyanwei" />
+          </template>
+          <template
+            #cell(图2)="row"
+            style="justify-content: center"
+          >
+            <ZhuangTaiImages :gongzuowei="gongzuowei" />
+          </template>
+          <template
+            #cell(图3)="row"
+            style="justify-content: center"
+          >
+            <ZhuangTaiImages :duanluhe="duanluhe" />
+          </template>
+          <template
+            #cell(图4)="row"
+            style="justify-content: center"
+          >
+            <ZhuangTaiImages :duanlufen="duanlufen" />
+          </template>
+          <template
+            #cell(图5)="row"
+            style="justify-content: center"
+          >
+            <ZhuangTaiImages :jiedifen="jiedifen" />
+          </template>
+          <template
+            #cell(图6)="row"
+            style="justify-content: center"
+          >
+            <ZhuangTaiImages :jiedihe="jiedihe" />
+          </template>
+        </b-table>
+        <b-collapse v-model="isCollapsed">
+          <b-table
+            striped
+            hover
+            :items="dataitems"
+            thead-class="table"
+            class="text-sty"
+            no-header
+            :fields="['unit','图1', '图2', '图3', '图4', '图5', '图6']"
+            :thead-class="'d-none'"
+            bordered
+          />
+        </b-collapse>
+        <b-button
+          variant="primary"
+          @click="toggleCollapse"
+        >
+          {{ isCollapsed ? '收起' : '展开' }}
+        </b-button>
+      </div>
 
-    <b-card style="margin-left: 20px;width: 100%;background-color: transparent;z-index: 9999">
-      <b-card-text style="font-family: 黑体; font-size: 16px;">
-        仿真测试:
-      </b-card-text>
-      <br>
-      <b-row>
-        <b-col
-          cols="12"
-          sm="6"
-          md="3"
-        >
-          <b-button
-            variant="outline-primary"
-            style="margin-left: 50px;scale: 1.1"
-            @click="toggleshiyanwei"
+      <b-card style="margin-left: 20px;width: 100%;background-color: transparent;z-index: 9999">
+        <b-card-text style="font-family: 黑体; font-size: 16px;">
+          仿真测试:
+        </b-card-text>
+        <br>
+        <b-row>
+          <b-col
+            cols="12"
+            sm="6"
+            md="6"
           >
-            更改第一台试验位置
-          </b-button>
+            <b-button
+              variant="outline-primary"
+              style="margin-left: 50px;"
+              @click="toggleshiyanwei"
+            >
+              更改第一台试验位置
+            </b-button>
 
-        </b-col>
-        <b-col
-          cols="12"
-          sm="6"
-          md="3"
-        >
-          <b-button
-            variant="outline-secondary"
-            style="margin-left: 55px;scale: 1.1"
-            @click="togglegongzuowei"
+          </b-col>
+          <b-col
+            cols="12"
+            sm="6"
+            md="6"
           >
-            更改第二台工作位置
-          </b-button>
-        </b-col>
-      </b-row>
-      <br>
-      <b-row>
-        <b-col
-          cols="12"
-          sm="6"
-          md="3"
-        >
-          <b-button
-            variant="outline-success"
-            style="margin-left: 50px;margin-top: 10px;scale: 1.1"
-            @click="toggleduanluhe"
+            <b-button
+              variant="outline-secondary"
+              style="margin-left: 40px;"
+              @click="togglegongzuowei"
+            >
+              更改第二台工作位置
+            </b-button>
+          </b-col>
+        </b-row>
+        <br>
+        <b-row>
+          <b-col
+            cols="12"
+            sm="6"
+            md="6"
           >
-            更改第三台断路器合闸
-          </b-button>
-        </b-col>
-        <b-col
-          cols="12"
-          sm="6"
-          md="3"
-        >
-          <b-button
-            variant="outline-danger"
-            style="margin-left: 40px;margin-top: 10px;scale: 1.1"
-            @click="toggleduanlufen"
+            <b-button
+              variant="outline-success"
+              style="margin-left: 50px;"
+              @click="toggleduanluhe"
+            >
+              更改第三台断路器合闸
+            </b-button>
+          </b-col>
+          <b-col
+            cols="12"
+            sm="6"
+            md="6"
           >
-            更改第四台断路器分闸
-          </b-button>
-        </b-col>
-      </b-row>
-      <br>
-      <b-row>
-        <b-col
-          cols="12"
-          sm="6"
-          md="3"
-        >
-          <b-button
-            variant="outline-warning"
-            style="margin-left: 50px;margin-top: 10px;scale: 1.1"
-            @click="togglejiedifen"
+            <b-button
+              variant="outline-danger"
+              style="margin-left: 40px;"
+              @click="toggleduanlufen"
+            >
+              更改第四台断路器分闸
+            </b-button>
+          </b-col>
+        </b-row>
+        <br>
+        <b-row>
+          <b-col
+            cols="12"
+            sm="6"
+            md="6"
           >
-            更改第五台接地刀分闸
-          </b-button>
-        </b-col>
-        <b-col
-          cols="12"
-          sm="6"
-          md="3"
-        >
-          <b-button
-            variant="outline-info"
-            style="margin-left: 40px;margin-top: 10px;scale: 1.1"
-            @click="togglejiedihe"
+            <b-button
+              variant="outline-warning"
+              style="margin-left: 50px;"
+              @click="togglejiedifen"
+            >
+              更改第五台接地刀分闸
+            </b-button>
+          </b-col>
+          <b-col
+            cols="12"
+            sm="6"
+            md="6"
           >
-            更改第六台接地刀合闸
-          </b-button>
+            <b-button
+              variant="outline-info"
+              style="margin-left: 40px;"
+              @click="togglejiedihe"
+            >
+              更改第六台接地刀合闸
+            </b-button>
 
-        </b-col>
-      </b-row>
+          </b-col>
+        </b-row>
+
+      </b-card>
 
     </b-card>
-
-  </b-card>
-
+  </div>
 </template>
 
 <script>
 import {
-  BTable, BCard, BButton, BCollapse,
+  BTable, BCard, BButton, BCollapse, BCardText, BRow, BCol,
 } from 'bootstrap-vue'
 import ZhuangTaiImages from '@/views/ZhuangTaiImages.vue'
 
 export default {
   components: {
-    BTable, BCard, ZhuangTaiImages, BButton, BCollapse,
+    BTable, BCard, ZhuangTaiImages, BButton, BCollapse, BCardText, BRow, BCol,
   },
   data() {
     return {
@@ -296,7 +303,7 @@ export default {
         Object.keys(row).forEach(key => {
           if (key !== 'unit') {
             // 生成10到110之间的随机数
-            row[key] = `${Math.floor(Math.random() * (60 - 10 + 1) + 20).toFixed(1)}.°C`
+            row[key] = `${Math.floor(Math.random() * (60 - 10 + 1) + 20).toFixed(1)}°C`
           }
         })
       }
@@ -316,7 +323,7 @@ export default {
 }
 .text-sty{
   color: #109f0c;
-  font-size: 15px;
+  font-size: 12px;
   text-align: center;
   width: 100%;
   table-layout: fixed;

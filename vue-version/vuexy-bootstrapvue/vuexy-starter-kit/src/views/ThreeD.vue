@@ -1,15 +1,17 @@
 <template>
-  <div
-    ref="canvasContainer"
-    style="scale: 0.78;position: absolute;margin-top: -60px;margin-left: -50px;width: auto;height: 100vh;"
-  >
-    <b-button
-      variant="success"
-      @click="BigData"
+  <div>
+    <div
+      ref="canvasContainer"
+      style="scale: 0.78;position: absolute;margin-top: -60px;margin-left: -50px;max-width: 100%;height: 100vh;"
     >
-      返回主页
-    </b-button>
+      <b-button
+        variant="success"
+        @click="BigData"
+      >
+        返回主页
+      </b-button>
 
+    </div>
     <div
       id="container"
       class="div"
@@ -22,8 +24,8 @@
     >
       3D模型
     </div>
-
   </div>
+
 </template>
 
 <script>
@@ -126,8 +128,8 @@ export default {
         })
 
         const mesh2 = new THREE.Mesh(geometry2, material2)
-        mesh2.scale.set(0.2, 0.2, 0.2)
-        mesh2.position.set(160, 20, 0) // 设置第二个STL文件的位置
+        mesh2.scale.set(0.15, 0.15, 0.15)
+        mesh2.position.set(380, 20, 0) // 设置第二个STL文件的位置
 
         this.scene.add(mesh2)
 
@@ -152,7 +154,7 @@ export default {
       // const loader = new FBXLoader()
       const sloader = new STLLoader()
       // 加载STL文件
-      sloader.load('model/total.stl', geometry => {
+      sloader.load('model/2.stl', geometry => {
         // MeshLambertMaterial材质 光滑
         const material = new THREE.MeshPhongMaterial({ // Phong material 有纹理的材质
           color: 0xcecece, // 设置颜色
@@ -162,7 +164,8 @@ export default {
         })
 
         const mesh = new THREE.Mesh(geometry, material)
-        mesh.scale.set(0.06, 0.06, 0.06) // 缩放物体大小
+        mesh.scale.set(0.05, 0.05, 0.05) // 缩放物体大小
+        mesh.position.set(200, 20, 0) // 设置第二个STL文件的位置
         let rotationAngle = 0 // 在初始化中定义一个变量用于存储旋转角度
         const animate = () => {
           rotationAngle += 0.005 // 调整旋转速度
@@ -192,7 +195,7 @@ export default {
   methods: {
     BigData() {
       // 使用 Vue Router 导航到 Home 界面
-      this.$router.push('/')
+      window.location.href = 'BigData.vue'
     },
   },
 }
@@ -210,27 +213,27 @@ export default {
 }
 
 .div {
-  font-size: 10vw;
+  font-size: 6vw;
   line-height: 100vh;
   filter: drop-shadow(0 0 5px #ecc700);
   animation: spin 5s linear infinite;
   z-index: 80;
   position: fixed;
   display: flex;
-  margin-left: 720px;
-  margin-top: -330px;
+  margin-left: 580px;
+  margin-top: -280px;
   color: #ffffff;
   font-family: 微软雅黑,serif;
 }
 .model {
-  font-size: 10vw;
+  font-size: 6vw;
   line-height: 100vh;
   filter: drop-shadow(0 0 5px #ecc700);
   animation: spin 5s linear infinite;
   z-index: 80;
-  position: fixed;
-  margin-left: 700px;
-  margin-top: -220px;
+  position: absolute;
+  margin-left: 540px;
+  margin-top: -200px;
   color: #ffffff;
   font-family: 微软雅黑,serif;
 }

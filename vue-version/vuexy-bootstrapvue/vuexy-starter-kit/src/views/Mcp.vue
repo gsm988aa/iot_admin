@@ -16,6 +16,7 @@
     </b-button>
     <b-tabs>
       <!-- class="total1" style="text-align: center;" -->
+
       <b-tab
         class="total1"
         style="text-align: center;"
@@ -50,109 +51,113 @@
               >{{ fcnname }}
               </b-button>
             </b-card-header>
-            <b-collapse
-              id="accordion-1"
-              accordion="my-accordion"
-              role="tabpanel"
+            <!--            <b-collapse-->
+            <!--              id="accordion-1"-->
+            <!--              accordion="my-accordion"-->
+            <!--              role="tabpanel"-->
+            <!--            >-->
+            <b-card
+              v-show="showCard"
+              :class="{ 'day-mode': isDayMode, 'night-mode': !isDayMode }"
             >
-              <b-card
-                :class="{ 'day-mode': isDayMode, 'night-mode': !isDayMode }"
-              >
-                <b-row>
-                  <b-col cols="3">
-                    <b-button
-                      v-ripple.400="'rgba(113, 102, 240, 0.15)'"
-                      variant="primary"
-                      @click="getvalue(fcnvalueprefix)"
-                    >读取
-                    </b-button>
-                  </b-col>
-                  <b-col cols="9">
-                    <b-card-body>
-                      <b-row>
-                        <b-col cols="3">
-                          <b-card-text>读取值为:</b-card-text>
-                        </b-col>
-                        <b-col cols="3">
-                          <b-form
-                            style="border-bottom: 1px solid #ccc; padding-inline: 20px;"
-                          >
-                            {{ resp }}
-                          </b-form>
-                        </b-col>
-                      </b-row>
-                    </b-card-body>
-                  </b-col>
-                </b-row>
+              <b-row>
+                <b-col cols="3">
+                  <b-button
+                    v-ripple.400="'rgba(113, 102, 240, 0.15)'"
+                    variant="primary"
+                    @click="getvalue(fcnvalueprefix)"
+                  >读取
+                  </b-button>
+                </b-col>
+                <b-col
+                  cols="3"
+                  style="display: flex; align-items: center; justify-content: center;"
+                >
+                  <b-row>
+                    <b-col cols="9">
+                      <b-card-text>读取值为:</b-card-text>
+                    </b-col>
+                    <b-col cols="3">
+                      <b-form
+                        style="border-bottom: 1px solid #ccc; padding-inline: 20px;margin-top: 20px"
+                      >
+                        {{ resp }}
+                      </b-form>
+                    </b-col>
+                  </b-row>
+                </b-col>
+              </b-row>
+            </b-card>
 
-              </b-card>
-              <b-card
-                :class="{ 'day-mode': isDayMode, 'night-mode': !isDayMode }"
-              >
-                <b-row>
-                  <b-col cols="3">
-                    <b-button
-                      v-ripple.400="'rgba(113, 102, 240, 0.15)'"
-                      variant="primary"
-                      @click="setvalue(fcnvalueprefix)"
-                    >写入
-                    </b-button>
-                  </b-col>
-                  <b-col cols="9">
-                    <b-row>
-                      <b-col cols="3">
-                        <b-card-text style="margin-left: 20px">
-                          写入值为:
-                        </b-card-text>
-                      </b-col>
-                      <b-col cols="3">
-                        <b-form
-                          style="border-bottom: 1px solid #ccc; padding-inline: 20px;"
-                        >
-                          {{ valuesum }}
-                        </b-form>
-                      </b-col>
-                    </b-row>
-                  </b-col>
-                </b-row>
-                <b-card-body style="display: flex; align-items: center; justify-content: center;">
-                  <b-form-spinbutton
-                    id="sb-vertical"
-                    v-model="valueset1"
-                    min="0"
-                    max="9"
-                    vertical
-                  />
-                  <b-form-spinbutton
-                    id="sb-vertical"
-                    v-model="valueset2"
-                    min="0"
-                    max="9"
-                    vertical
-                  />
-                  <b-form-spinbutton
-                    id="sb-vertical"
-                    v-model="valueset3"
-                    min="0"
-                    max="9"
-                    vertical
-                  />
-                  <b-form-spinbutton
-                    id="sb-vertical"
-                    v-model="valueset4"
-                    min="0"
-                    max="9"
-                    vertical
-                  />
-                </b-card-body>
-              </b-card>
-            </b-collapse>
+            <b-card
+              v-show="showCard"
+              :class="{ 'day-mode': isDayMode, 'night-mode': !isDayMode }"
+            >
+              <b-row>
+                <b-col cols="3">
+                  <b-button
+                    v-ripple.400="'rgba(113, 102, 240, 0.15)'"
+                    variant="primary"
+                    @click="setvalue(fcnvalueprefix)"
+                  >写入
+                  </b-button>
+                </b-col>
+                <b-col
+                  cols="3"
+                  style="display: flex; align-items: center; justify-content: center;"
+                >
+                  <b-row>
+                    <b-col cols="9">
+                      <b-card-text>写入值为:</b-card-text>
+                    </b-col>
+                    <b-col cols="3">
+                      <b-form
+                        style="border-bottom: 1px solid #ccc; padding-inline: 20px;"
+                      >
+                        {{ valuesum }}
+                      </b-form>
+                    </b-col>
+                  </b-row>
+                </b-col>
+              </b-row>
+              <b-card-body style="display: flex; align-items: center; justify-content: center;">
+                <b-form-spinbutton
+                  id="sb-vertical"
+                  v-model="valueset1"
+                  min="0"
+                  max="9"
+                  vertical
+                />
+                <b-form-spinbutton
+                  id="sb-vertical"
+                  v-model="valueset2"
+                  min="0"
+                  max="9"
+                  vertical
+                />
+                <b-form-spinbutton
+                  id="sb-vertical"
+                  v-model="valueset3"
+                  min="0"
+                  max="9"
+                  vertical
+                />
+                <b-form-spinbutton
+                  id="sb-vertical"
+                  v-model="valueset4"
+                  min="0"
+                  max="9"
+                  vertical
+                />
+              </b-card-body>
+            </b-card>
+            <!--            </b-collapse>-->
           </b-card>
         </div>
         <!--电机电流互感器按钮时,将fcnname变量改为'aaa'-->
         <b-button
           v-ripple.400="'rgba(113, 102, 240, 0.15)'"
-          v-b-toggle.accordion-1
+
           variant="outline-primary"
           @click="changeProp('电流互感器变比','0x120300000001')"
         >
@@ -162,7 +167,7 @@
 
         <b-button
           v-ripple.400="'rgba(40, 199, 111, 0.15)'"
-          v-b-toggle.accordion-1
+
           variant="outline-success"
           @click="changeProp('电压互感器变比','0x120300020001')"
         >
@@ -443,95 +448,107 @@
               >{{ fcnname }}
               </b-button>
             </b-card-header>
-            <b-collapse
-              id="accordion-1"
-              accordion="my-accordion"
-              role="tabpanel"
+            <!--            <b-collapse-->
+            <!--              id="accordion-1"-->
+            <!--              accordion="my-accordion"-->
+            <!--              role="tabpanel"-->
+            <!--            >-->
+            <b-card
+              v-show="showCard"
+              :class="{ 'day-mode': isDayMode, 'night-mode': !isDayMode }"
             >
-              <b-card :class="{ 'day-mode': isDayMode, 'night-mode': !isDayMode }">
-                <b-row>
-                  <b-col cols="3">
-                    <b-button
-                      v-ripple.400="'rgba(113, 102, 240, 0.15)'"
-                      variant="primary"
-                      @click="getvalue(fcnvalueprefix)"
-                    >读取
-                    </b-button>
-                  </b-col>
-                  <b-col cols="3"  style="display: flex; align-items: center; justify-content: center;">
-                    <b-row>
-                      <b-col cols="9">
-                        <b-card-text>读取值为:</b-card-text>
-                      </b-col>
-                      <b-col cols="3">
-                        <b-form
-                            style="border-bottom: 1px solid #ccc; padding-inline: 20px;"
-                        >
-                          {{ resp }}
-                        </b-form>
-                      </b-col>
-                    </b-row>
-                  </b-col>
-                </b-row>
-              </b-card>
+              <b-row>
+                <b-col cols="3">
+                  <b-button
+                    v-ripple.400="'rgba(113, 102, 240, 0.15)'"
+                    variant="primary"
+                    @click="getvalue(fcnvalueprefix)"
+                  >读取
+                  </b-button>
+                </b-col>
+                <b-col
+                  cols="3"
+                  style="display: flex; align-items: center; justify-content: center;"
+                >
+                  <b-row>
+                    <b-col cols="9">
+                      <b-card-text>读取值为:</b-card-text>
+                    </b-col>
+                    <b-col cols="3">
+                      <b-form
+                        style="border-bottom: 1px solid #ccc; padding-inline: 20px;margin-top: 20px"
+                      >
+                        {{ resp }}
+                      </b-form>
+                    </b-col>
+                  </b-row>
+                </b-col>
+              </b-row>
+            </b-card>
 
-              <b-card :class="{ 'day-mode': isDayMode, 'night-mode': !isDayMode }">
-                <b-row>
-                  <b-col cols="3" >
-                    <b-button
-                        v-ripple.400="'rgba(113, 102, 240, 0.15)'"
-                        variant="primary"
-                        @click="setvalue(fcnvalueprefix)"
-                    >写入
-                    </b-button>
-                  </b-col>
-                  <b-col cols="3"  style="display: flex; align-items: center; justify-content: center;">
-                    <b-row>
-                        <b-col cols="9">
-                        <b-card-text>写入值为:</b-card-text>
-                         </b-col>
-                        <b-col cols="3">
-                        <b-form
-                            style="border-bottom: 1px solid #ccc; padding-inline: 20px;"
-                        >
-                          {{ valuesum }}
-                        </b-form>
-                        </b-col>
-                    </b-row>
-                  </b-col>
-                </b-row>
-                <b-card-body style="display: flex; align-items: center; justify-content: center;">
-                  <b-form-spinbutton
-                      id="sb-vertical"
-                      v-model="valueset1"
-                      min="0"
-                      max="9"
-                      vertical
-                  />
-                  <b-form-spinbutton
-                      id="sb-vertical"
-                      v-model="valueset2"
-                      min="0"
-                      max="9"
-                      vertical
-                  />
-                  <b-form-spinbutton
-                      id="sb-vertical"
-                      v-model="valueset3"
-                      min="0"
-                      max="9"
-                      vertical
-                  />
-                  <b-form-spinbutton
-                      id="sb-vertical"
-                      v-model="valueset4"
-                      min="0"
-                      max="9"
-                      vertical
-                  />
-                </b-card-body>
-              </b-card>
-            </b-collapse>
+            <b-card
+              v-show="showCard"
+              :class="{ 'day-mode': isDayMode, 'night-mode': !isDayMode }"
+            >
+              <b-row>
+                <b-col cols="3">
+                  <b-button
+                    v-ripple.400="'rgba(113, 102, 240, 0.15)'"
+                    variant="primary"
+                    @click="setvalue(fcnvalueprefix)"
+                  >写入
+                  </b-button>
+                </b-col>
+                <b-col
+                  cols="3"
+                  style="display: flex; align-items: center; justify-content: center;"
+                >
+                  <b-row>
+                    <b-col cols="9">
+                      <b-card-text>写入值为:</b-card-text>
+                    </b-col>
+                    <b-col cols="3">
+                      <b-form
+                        style="border-bottom: 1px solid #ccc; padding-inline: 20px;"
+                      >
+                        {{ valuesum }}
+                      </b-form>
+                    </b-col>
+                  </b-row>
+                </b-col>
+              </b-row>
+              <b-card-body style="display: flex; align-items: center; justify-content: center;">
+                <b-form-spinbutton
+                  id="sb-vertical"
+                  v-model="valueset1"
+                  min="0"
+                  max="9"
+                  vertical
+                />
+                <b-form-spinbutton
+                  id="sb-vertical"
+                  v-model="valueset2"
+                  min="0"
+                  max="9"
+                  vertical
+                />
+                <b-form-spinbutton
+                  id="sb-vertical"
+                  v-model="valueset3"
+                  min="0"
+                  max="9"
+                  vertical
+                />
+                <b-form-spinbutton
+                  id="sb-vertical"
+                  v-model="valueset4"
+                  min="0"
+                  max="9"
+                  vertical
+                />
+              </b-card-body>
+            </b-card>
+            <!--            </b-collapse>-->
           </b-card>
         </div>
 
@@ -923,103 +940,105 @@
               >{{ fcnname }}
               </b-button>
             </b-card-header>
-            <b-collapse
-                id="accordion-1"
-                accordion="my-accordion"
-                role="tabpanel"
+            <!--            <b-collapse-->
+            <!--              id="accordion-1"-->
+            <!--              accordion="my-accordion"-->
+            <!--              role="tabpanel"-->
+            <!--            >-->
+            <b-card
+              v-show="showCard"
+              :class="{ 'day-mode': isDayMode, 'night-mode': !isDayMode }"
             >
-              <b-card
-                  :class="{ 'day-mode': isDayMode, 'night-mode': !isDayMode }"
-              >
-                <b-row>
-                  <b-col cols="3">
-                    <b-button
-                        v-ripple.400="'rgba(113, 102, 240, 0.15)'"
-                        variant="primary"
-                        @click="getvalue(fcnvalueprefix)"
-                    >读取
-                    </b-button>
-                  </b-col>
-                  <b-col cols="9">
-                    <b-card-body>
-                      <b-row>
-                        <b-col cols="3">
-                          <b-card-text>读取值为:</b-card-text>
-                        </b-col>
-                        <b-col cols="3">
-                          <b-form
-                              style="border-bottom: 1px solid #ccc; padding-inline: 20px;"
-                          >
-                            {{ resp }}
-                          </b-form>
-                        </b-col>
-                      </b-row>
-                    </b-card-body>
-                  </b-col>
-                </b-row>
-
-              </b-card>
-              <b-card
-                  :class="{ 'day-mode': isDayMode, 'night-mode': !isDayMode }"
-              >
-                <b-row>
-                  <b-col cols="3">
-                    <b-button
-                        v-ripple.400="'rgba(113, 102, 240, 0.15)'"
-                        variant="primary"
-                        @click="setvalue(fcnvalueprefix)"
-                    >写入
-                    </b-button>
-                  </b-col>
-                  <b-col cols="9">
+              <b-row>
+                <b-col cols="3">
+                  <b-button
+                    v-ripple.400="'rgba(113, 102, 240, 0.15)'"
+                    variant="primary"
+                    @click="getvalue(fcnvalueprefix)"
+                  >读取
+                  </b-button>
+                </b-col>
+                <b-col cols="9">
+                  <b-card-body>
                     <b-row>
                       <b-col cols="3">
-                        <b-card-text style="margin-left: 20px">
-                          写入值为:
-                        </b-card-text>
+                        <b-card-text>读取值为:</b-card-text>
                       </b-col>
                       <b-col cols="3">
                         <b-form
-                            style="border-bottom: 1px solid #ccc; padding-inline: 20px;"
+                          style="border-bottom: 1px solid #ccc; padding-inline: 20px;margin-top: 20px"
                         >
-                          {{ valuesum }}
+                          {{ resp }}
                         </b-form>
                       </b-col>
                     </b-row>
-                  </b-col>
-                </b-row>
-                <b-card-body style="display: flex; align-items: center; justify-content: center;">
-                  <b-form-spinbutton
-                      id="sb-vertical"
-                      v-model="valueset1"
-                      min="0"
-                      max="9"
-                      vertical
-                  />
-                  <b-form-spinbutton
-                      id="sb-vertical"
-                      v-model="valueset2"
-                      min="0"
-                      max="9"
-                      vertical
-                  />
-                  <b-form-spinbutton
-                      id="sb-vertical"
-                      v-model="valueset3"
-                      min="0"
-                      max="9"
-                      vertical
-                  />
-                  <b-form-spinbutton
-                      id="sb-vertical"
-                      v-model="valueset4"
-                      min="0"
-                      max="9"
-                      vertical
-                  />
-                </b-card-body>
-              </b-card>
-            </b-collapse>
+                  </b-card-body>
+                </b-col>
+              </b-row>
+
+            </b-card>
+            <b-card
+              v-show="showCard"
+              :class="{ 'day-mode': isDayMode, 'night-mode': !isDayMode }"
+            >
+              <b-row>
+                <b-col cols="3">
+                  <b-button
+                    v-ripple.400="'rgba(113, 102, 240, 0.15)'"
+                    variant="primary"
+                    @click="setvalue(fcnvalueprefix)"
+                  >写入
+                  </b-button>
+                </b-col>
+                <b-col cols="9">
+                  <b-row>
+                    <b-col cols="3">
+                      <b-card-text style="margin-left: 20px">
+                        写入值为:
+                      </b-card-text>
+                    </b-col>
+                    <b-col cols="3">
+                      <b-form
+                        style="border-bottom: 1px solid #ccc; padding-inline: 20px;"
+                      >
+                        {{ valuesum }}
+                      </b-form>
+                    </b-col>
+                  </b-row>
+                </b-col>
+              </b-row>
+              <b-card-body style="display: flex; align-items: center; justify-content: center;">
+                <b-form-spinbutton
+                  id="sb-vertical"
+                  v-model="valueset1"
+                  min="0"
+                  max="9"
+                  vertical
+                />
+                <b-form-spinbutton
+                  id="sb-vertical"
+                  v-model="valueset2"
+                  min="0"
+                  max="9"
+                  vertical
+                />
+                <b-form-spinbutton
+                  id="sb-vertical"
+                  v-model="valueset3"
+                  min="0"
+                  max="9"
+                  vertical
+                />
+                <b-form-spinbutton
+                  id="sb-vertical"
+                  v-model="valueset4"
+                  min="0"
+                  max="9"
+                  vertical
+                />
+              </b-card-body>
+            </b-card>
+            <!--            </b-collapse>-->
           </b-card>
         </div>
 
@@ -1176,103 +1195,105 @@
               >{{ fcnname }}
               </b-button>
             </b-card-header>
-            <b-collapse
-                id="accordion-1"
-                accordion="my-accordion"
-                role="tabpanel"
+            <!--            <b-collapse-->
+            <!--              id="accordion-1"-->
+            <!--              accordion="my-accordion"-->
+            <!--              role="tabpanel"-->
+            <!--            >-->
+            <b-card
+              v-show="showCard"
+              :class="{ 'day-mode': isDayMode, 'night-mode': !isDayMode }"
             >
-              <b-card
-                  :class="{ 'day-mode': isDayMode, 'night-mode': !isDayMode }"
-              >
-                <b-row>
-                  <b-col cols="3">
-                    <b-button
-                        v-ripple.400="'rgba(113, 102, 240, 0.15)'"
-                        variant="primary"
-                        @click="getvalue(fcnvalueprefix)"
-                    >读取
-                    </b-button>
-                  </b-col>
-                  <b-col cols="9">
-                    <b-card-body>
-                      <b-row>
-                        <b-col cols="3">
-                          <b-card-text>读取值为:</b-card-text>
-                        </b-col>
-                        <b-col cols="3">
-                          <b-form
-                              style="border-bottom: 1px solid #ccc; padding-inline: 20px;"
-                          >
-                            {{ resp }}
-                          </b-form>
-                        </b-col>
-                      </b-row>
-                    </b-card-body>
-                  </b-col>
-                </b-row>
-
-              </b-card>
-              <b-card
-                  :class="{ 'day-mode': isDayMode, 'night-mode': !isDayMode }"
-              >
-                <b-row>
-                  <b-col cols="3">
-                    <b-button
-                        v-ripple.400="'rgba(113, 102, 240, 0.15)'"
-                        variant="primary"
-                        @click="setvalue(fcnvalueprefix)"
-                    >写入
-                    </b-button>
-                  </b-col>
-                  <b-col cols="9">
+              <b-row>
+                <b-col cols="3">
+                  <b-button
+                    v-ripple.400="'rgba(113, 102, 240, 0.15)'"
+                    variant="primary"
+                    @click="getvalue(fcnvalueprefix)"
+                  >读取
+                  </b-button>
+                </b-col>
+                <b-col cols="9">
+                  <b-card-body>
                     <b-row>
                       <b-col cols="3">
-                        <b-card-text style="margin-left: 20px">
-                          写入值为:
-                        </b-card-text>
+                        <b-card-text>读取值为:</b-card-text>
                       </b-col>
                       <b-col cols="3">
                         <b-form
-                            style="border-bottom: 1px solid #ccc; padding-inline: 20px;"
+                          style="border-bottom: 1px solid #ccc; padding-inline: 20px;margin-top: 20px"
                         >
-                          {{ valuesum }}
+                          {{ resp }}
                         </b-form>
                       </b-col>
                     </b-row>
-                  </b-col>
-                </b-row>
-                <b-card-body style="display: flex; align-items: center; justify-content: center;">
-                  <b-form-spinbutton
-                      id="sb-vertical"
-                      v-model="valueset1"
-                      min="0"
-                      max="9"
-                      vertical
-                  />
-                  <b-form-spinbutton
-                      id="sb-vertical"
-                      v-model="valueset2"
-                      min="0"
-                      max="9"
-                      vertical
-                  />
-                  <b-form-spinbutton
-                      id="sb-vertical"
-                      v-model="valueset3"
-                      min="0"
-                      max="9"
-                      vertical
-                  />
-                  <b-form-spinbutton
-                      id="sb-vertical"
-                      v-model="valueset4"
-                      min="0"
-                      max="9"
-                      vertical
-                  />
-                </b-card-body>
-              </b-card>
-            </b-collapse>
+                  </b-card-body>
+                </b-col>
+              </b-row>
+
+            </b-card>
+            <b-card
+              v-show="showCard"
+              :class="{ 'day-mode': isDayMode, 'night-mode': !isDayMode }"
+            >
+              <b-row>
+                <b-col cols="3">
+                  <b-button
+                    v-ripple.400="'rgba(113, 102, 240, 0.15)'"
+                    variant="primary"
+                    @click="setvalue(fcnvalueprefix)"
+                  >写入
+                  </b-button>
+                </b-col>
+                <b-col cols="9">
+                  <b-row>
+                    <b-col cols="3">
+                      <b-card-text style="margin-left: 20px">
+                        写入值为:
+                      </b-card-text>
+                    </b-col>
+                    <b-col cols="3">
+                      <b-form
+                        style="border-bottom: 1px solid #ccc; padding-inline: 20px;"
+                      >
+                        {{ valuesum }}
+                      </b-form>
+                    </b-col>
+                  </b-row>
+                </b-col>
+              </b-row>
+              <b-card-body style="display: flex; align-items: center; justify-content: center;">
+                <b-form-spinbutton
+                  id="sb-vertical"
+                  v-model="valueset1"
+                  min="0"
+                  max="9"
+                  vertical
+                />
+                <b-form-spinbutton
+                  id="sb-vertical"
+                  v-model="valueset2"
+                  min="0"
+                  max="9"
+                  vertical
+                />
+                <b-form-spinbutton
+                  id="sb-vertical"
+                  v-model="valueset3"
+                  min="0"
+                  max="9"
+                  vertical
+                />
+                <b-form-spinbutton
+                  id="sb-vertical"
+                  v-model="valueset4"
+                  min="0"
+                  max="9"
+                  vertical
+                />
+              </b-card-body>
+            </b-card>
+            <!--            </b-collapse>-->
           </b-card>
         </div>
         <b-button
@@ -1476,103 +1497,105 @@
               >{{ fcnname }}
               </b-button>
             </b-card-header>
-            <b-collapse
-                id="accordion-1"
-                accordion="my-accordion"
-                role="tabpanel"
+            <!--            <b-collapse-->
+            <!--              id="accordion-1"-->
+            <!--              accordion="my-accordion"-->
+            <!--              role="tabpanel"-->
+            <!--            >-->
+            <b-card
+              v-show="showCard"
+              :class="{ 'day-mode': isDayMode, 'night-mode': !isDayMode }"
             >
-              <b-card
-                  :class="{ 'day-mode': isDayMode, 'night-mode': !isDayMode }"
-              >
-                <b-row>
-                  <b-col cols="3">
-                    <b-button
-                        v-ripple.400="'rgba(113, 102, 240, 0.15)'"
-                        variant="primary"
-                        @click="getvalue(fcnvalueprefix)"
-                    >读取
-                    </b-button>
-                  </b-col>
-                  <b-col cols="9">
-                    <b-card-body>
-                      <b-row>
-                        <b-col cols="3">
-                          <b-card-text>读取值为:</b-card-text>
-                        </b-col>
-                        <b-col cols="3">
-                          <b-form
-                              style="border-bottom: 1px solid #ccc; padding-inline: 20px;"
-                          >
-                            {{ resp }}
-                          </b-form>
-                        </b-col>
-                      </b-row>
-                    </b-card-body>
-                  </b-col>
-                </b-row>
-
-              </b-card>
-              <b-card
-                  :class="{ 'day-mode': isDayMode, 'night-mode': !isDayMode }"
-              >
-                <b-row>
-                  <b-col cols="3">
-                    <b-button
-                        v-ripple.400="'rgba(113, 102, 240, 0.15)'"
-                        variant="primary"
-                        @click="setvalue(fcnvalueprefix)"
-                    >写入
-                    </b-button>
-                  </b-col>
-                  <b-col cols="9">
+              <b-row>
+                <b-col cols="3">
+                  <b-button
+                    v-ripple.400="'rgba(113, 102, 240, 0.15)'"
+                    variant="primary"
+                    @click="getvalue(fcnvalueprefix)"
+                  >读取
+                  </b-button>
+                </b-col>
+                <b-col cols="9">
+                  <b-card-body>
                     <b-row>
                       <b-col cols="3">
-                        <b-card-text style="margin-left: 20px">
-                          写入值为:
-                        </b-card-text>
+                        <b-card-text>读取值为:</b-card-text>
                       </b-col>
                       <b-col cols="3">
                         <b-form
-                            style="border-bottom: 1px solid #ccc; padding-inline: 20px;"
+                          style="border-bottom: 1px solid #ccc; padding-inline: 20px;margin-top: 20px"
                         >
-                          {{ valuesum }}
+                          {{ resp }}
                         </b-form>
                       </b-col>
                     </b-row>
-                  </b-col>
-                </b-row>
-                <b-card-body style="display: flex; align-items: center; justify-content: center;">
-                  <b-form-spinbutton
-                      id="sb-vertical"
-                      v-model="valueset1"
-                      min="0"
-                      max="9"
-                      vertical
-                  />
-                  <b-form-spinbutton
-                      id="sb-vertical"
-                      v-model="valueset2"
-                      min="0"
-                      max="9"
-                      vertical
-                  />
-                  <b-form-spinbutton
-                      id="sb-vertical"
-                      v-model="valueset3"
-                      min="0"
-                      max="9"
-                      vertical
-                  />
-                  <b-form-spinbutton
-                      id="sb-vertical"
-                      v-model="valueset4"
-                      min="0"
-                      max="9"
-                      vertical
-                  />
-                </b-card-body>
-              </b-card>
-            </b-collapse>
+                  </b-card-body>
+                </b-col>
+              </b-row>
+
+            </b-card>
+            <b-card
+              v-show="showCard"
+              :class="{ 'day-mode': isDayMode, 'night-mode': !isDayMode }"
+            >
+              <b-row>
+                <b-col cols="3">
+                  <b-button
+                    v-ripple.400="'rgba(113, 102, 240, 0.15)'"
+                    variant="primary"
+                    @click="setvalue(fcnvalueprefix)"
+                  >写入
+                  </b-button>
+                </b-col>
+                <b-col cols="9">
+                  <b-row>
+                    <b-col cols="3">
+                      <b-card-text style="margin-left: 20px">
+                        写入值为:
+                      </b-card-text>
+                    </b-col>
+                    <b-col cols="3">
+                      <b-form
+                        style="border-bottom: 1px solid #ccc; padding-inline: 20px;"
+                      >
+                        {{ valuesum }}
+                      </b-form>
+                    </b-col>
+                  </b-row>
+                </b-col>
+              </b-row>
+              <b-card-body style="display: flex; align-items: center; justify-content: center;">
+                <b-form-spinbutton
+                  id="sb-vertical"
+                  v-model="valueset1"
+                  min="0"
+                  max="9"
+                  vertical
+                />
+                <b-form-spinbutton
+                  id="sb-vertical"
+                  v-model="valueset2"
+                  min="0"
+                  max="9"
+                  vertical
+                />
+                <b-form-spinbutton
+                  id="sb-vertical"
+                  v-model="valueset3"
+                  min="0"
+                  max="9"
+                  vertical
+                />
+                <b-form-spinbutton
+                  id="sb-vertical"
+                  v-model="valueset4"
+                  min="0"
+                  max="9"
+                  vertical
+                />
+              </b-card-body>
+            </b-card>
+            <!--            </b-collapse>-->
           </b-card>
         </div>
         <b-button
@@ -1780,103 +1803,105 @@
               >{{ fcnname }}
               </b-button>
             </b-card-header>
-            <b-collapse
-                id="accordion-1"
-                accordion="my-accordion"
-                role="tabpanel"
+            <!--            <b-collapse-->
+            <!--              id="accordion-1"-->
+            <!--              accordion="my-accordion"-->
+            <!--              role="tabpanel"-->
+            <!--            >-->
+            <b-card
+              v-show="showCard"
+              :class="{ 'day-mode': isDayMode, 'night-mode': !isDayMode }"
             >
-              <b-card
-                  :class="{ 'day-mode': isDayMode, 'night-mode': !isDayMode }"
-              >
-                <b-row>
-                  <b-col cols="3">
-                    <b-button
-                        v-ripple.400="'rgba(113, 102, 240, 0.15)'"
-                        variant="primary"
-                        @click="getvalue(fcnvalueprefix)"
-                    >读取
-                    </b-button>
-                  </b-col>
-                  <b-col cols="9">
-                    <b-card-body>
-                      <b-row>
-                        <b-col cols="3">
-                          <b-card-text>读取值为:</b-card-text>
-                        </b-col>
-                        <b-col cols="3">
-                          <b-form
-                              style="border-bottom: 1px solid #ccc; padding-inline: 20px;"
-                          >
-                            {{ resp }}
-                          </b-form>
-                        </b-col>
-                      </b-row>
-                    </b-card-body>
-                  </b-col>
-                </b-row>
-
-              </b-card>
-              <b-card
-                  :class="{ 'day-mode': isDayMode, 'night-mode': !isDayMode }"
-              >
-                <b-row>
-                  <b-col cols="3">
-                    <b-button
-                        v-ripple.400="'rgba(113, 102, 240, 0.15)'"
-                        variant="primary"
-                        @click="setvalue(fcnvalueprefix)"
-                    >写入
-                    </b-button>
-                  </b-col>
-                  <b-col cols="9">
+              <b-row>
+                <b-col cols="3">
+                  <b-button
+                    v-ripple.400="'rgba(113, 102, 240, 0.15)'"
+                    variant="primary"
+                    @click="getvalue(fcnvalueprefix)"
+                  >读取
+                  </b-button>
+                </b-col>
+                <b-col cols="9">
+                  <b-card-body>
                     <b-row>
                       <b-col cols="3">
-                        <b-card-text style="margin-left: 20px">
-                          写入值为:
-                        </b-card-text>
+                        <b-card-text>读取值为:</b-card-text>
                       </b-col>
                       <b-col cols="3">
                         <b-form
-                            style="border-bottom: 1px solid #ccc; padding-inline: 20px;"
+                          style="border-bottom: 1px solid #ccc; padding-inline: 20px;margin-top: 20px"
                         >
-                          {{ valuesum }}
+                          {{ resp }}
                         </b-form>
                       </b-col>
                     </b-row>
-                  </b-col>
-                </b-row>
-                <b-card-body style="display: flex; align-items: center; justify-content: center;">
-                  <b-form-spinbutton
-                      id="sb-vertical"
-                      v-model="valueset1"
-                      min="0"
-                      max="9"
-                      vertical
-                  />
-                  <b-form-spinbutton
-                      id="sb-vertical"
-                      v-model="valueset2"
-                      min="0"
-                      max="9"
-                      vertical
-                  />
-                  <b-form-spinbutton
-                      id="sb-vertical"
-                      v-model="valueset3"
-                      min="0"
-                      max="9"
-                      vertical
-                  />
-                  <b-form-spinbutton
-                      id="sb-vertical"
-                      v-model="valueset4"
-                      min="0"
-                      max="9"
-                      vertical
-                  />
-                </b-card-body>
-              </b-card>
-            </b-collapse>
+                  </b-card-body>
+                </b-col>
+              </b-row>
+
+            </b-card>
+            <b-card
+              v-show="showCard"
+              :class="{ 'day-mode': isDayMode, 'night-mode': !isDayMode }"
+            >
+              <b-row>
+                <b-col cols="3">
+                  <b-button
+                    v-ripple.400="'rgba(113, 102, 240, 0.15)'"
+                    variant="primary"
+                    @click="setvalue(fcnvalueprefix)"
+                  >写入
+                  </b-button>
+                </b-col>
+                <b-col cols="9">
+                  <b-row>
+                    <b-col cols="3">
+                      <b-card-text style="margin-left: 20px">
+                        写入值为:
+                      </b-card-text>
+                    </b-col>
+                    <b-col cols="3">
+                      <b-form
+                        style="border-bottom: 1px solid #ccc; padding-inline: 20px;"
+                      >
+                        {{ valuesum }}
+                      </b-form>
+                    </b-col>
+                  </b-row>
+                </b-col>
+              </b-row>
+              <b-card-body style="display: flex; align-items: center; justify-content: center;">
+                <b-form-spinbutton
+                  id="sb-vertical"
+                  v-model="valueset1"
+                  min="0"
+                  max="9"
+                  vertical
+                />
+                <b-form-spinbutton
+                  id="sb-vertical"
+                  v-model="valueset2"
+                  min="0"
+                  max="9"
+                  vertical
+                />
+                <b-form-spinbutton
+                  id="sb-vertical"
+                  v-model="valueset3"
+                  min="0"
+                  max="9"
+                  vertical
+                />
+                <b-form-spinbutton
+                  id="sb-vertical"
+                  v-model="valueset4"
+                  min="0"
+                  max="9"
+                  vertical
+                />
+              </b-card-body>
+            </b-card>
+            <!--            </b-collapse>-->
           </b-card>
         </div>
         <b-button
@@ -2050,103 +2075,105 @@
               >{{ fcnname }}
               </b-button>
             </b-card-header>
-            <b-collapse
-                id="accordion-1"
-                accordion="my-accordion"
-                role="tabpanel"
+            <!--            <b-collapse-->
+            <!--              id="accordion-1"-->
+            <!--              accordion="my-accordion"-->
+            <!--              role="tabpanel"-->
+            <!--            >-->
+            <b-card
+              v-show="showCard"
+              :class="{ 'day-mode': isDayMode, 'night-mode': !isDayMode }"
             >
-              <b-card
-                  :class="{ 'day-mode': isDayMode, 'night-mode': !isDayMode }"
-              >
-                <b-row>
-                  <b-col cols="3">
-                    <b-button
-                        v-ripple.400="'rgba(113, 102, 240, 0.15)'"
-                        variant="primary"
-                        @click="getvalue(fcnvalueprefix)"
-                    >读取
-                    </b-button>
-                  </b-col>
-                  <b-col cols="9">
-                    <b-card-body>
-                      <b-row>
-                        <b-col cols="3">
-                          <b-card-text>读取值为:</b-card-text>
-                        </b-col>
-                        <b-col cols="3">
-                          <b-form
-                              style="border-bottom: 1px solid #ccc; padding-inline: 20px;"
-                          >
-                            {{ resp }}
-                          </b-form>
-                        </b-col>
-                      </b-row>
-                    </b-card-body>
-                  </b-col>
-                </b-row>
-
-              </b-card>
-              <b-card
-                  :class="{ 'day-mode': isDayMode, 'night-mode': !isDayMode }"
-              >
-                <b-row>
-                  <b-col cols="3">
-                    <b-button
-                        v-ripple.400="'rgba(113, 102, 240, 0.15)'"
-                        variant="primary"
-                        @click="setvalue(fcnvalueprefix)"
-                    >写入
-                    </b-button>
-                  </b-col>
-                  <b-col cols="9">
+              <b-row>
+                <b-col cols="3">
+                  <b-button
+                    v-ripple.400="'rgba(113, 102, 240, 0.15)'"
+                    variant="primary"
+                    @click="getvalue(fcnvalueprefix)"
+                  >读取
+                  </b-button>
+                </b-col>
+                <b-col cols="9">
+                  <b-card-body>
                     <b-row>
                       <b-col cols="3">
-                        <b-card-text style="margin-left: 20px">
-                          写入值为:
-                        </b-card-text>
+                        <b-card-text>读取值为:</b-card-text>
                       </b-col>
                       <b-col cols="3">
                         <b-form
-                            style="border-bottom: 1px solid #ccc; padding-inline: 20px;"
+                          style="border-bottom: 1px solid #ccc; padding-inline: 20px;margin-top: 20px"
                         >
-                          {{ valuesum }}
+                          {{ resp }}
                         </b-form>
                       </b-col>
                     </b-row>
-                  </b-col>
-                </b-row>
-                <b-card-body style="display: flex; align-items: center; justify-content: center;">
-                  <b-form-spinbutton
-                      id="sb-vertical"
-                      v-model="valueset1"
-                      min="0"
-                      max="9"
-                      vertical
-                  />
-                  <b-form-spinbutton
-                      id="sb-vertical"
-                      v-model="valueset2"
-                      min="0"
-                      max="9"
-                      vertical
-                  />
-                  <b-form-spinbutton
-                      id="sb-vertical"
-                      v-model="valueset3"
-                      min="0"
-                      max="9"
-                      vertical
-                  />
-                  <b-form-spinbutton
-                      id="sb-vertical"
-                      v-model="valueset4"
-                      min="0"
-                      max="9"
-                      vertical
-                  />
-                </b-card-body>
-              </b-card>
-            </b-collapse>
+                  </b-card-body>
+                </b-col>
+              </b-row>
+
+            </b-card>
+            <b-card
+              v-show="showCard"
+              :class="{ 'day-mode': isDayMode, 'night-mode': !isDayMode }"
+            >
+              <b-row>
+                <b-col cols="3">
+                  <b-button
+                    v-ripple.400="'rgba(113, 102, 240, 0.15)'"
+                    variant="primary"
+                    @click="setvalue(fcnvalueprefix)"
+                  >写入
+                  </b-button>
+                </b-col>
+                <b-col cols="9">
+                  <b-row>
+                    <b-col cols="3">
+                      <b-card-text style="margin-left: 20px">
+                        写入值为:
+                      </b-card-text>
+                    </b-col>
+                    <b-col cols="3">
+                      <b-form
+                        style="border-bottom: 1px solid #ccc; padding-inline: 20px;"
+                      >
+                        {{ valuesum }}
+                      </b-form>
+                    </b-col>
+                  </b-row>
+                </b-col>
+              </b-row>
+              <b-card-body style="display: flex; align-items: center; justify-content: center;">
+                <b-form-spinbutton
+                  id="sb-vertical"
+                  v-model="valueset1"
+                  min="0"
+                  max="9"
+                  vertical
+                />
+                <b-form-spinbutton
+                  id="sb-vertical"
+                  v-model="valueset2"
+                  min="0"
+                  max="9"
+                  vertical
+                />
+                <b-form-spinbutton
+                  id="sb-vertical"
+                  v-model="valueset3"
+                  min="0"
+                  max="9"
+                  vertical
+                />
+                <b-form-spinbutton
+                  id="sb-vertical"
+                  v-model="valueset4"
+                  min="0"
+                  max="9"
+                  vertical
+                />
+              </b-card-body>
+            </b-card>
+            <!--            </b-collapse>-->
           </b-card>
         </div>
         <b-button
@@ -2241,103 +2268,105 @@
               >{{ fcnname }}
               </b-button>
             </b-card-header>
-            <b-collapse
-                id="accordion-1"
-                accordion="my-accordion"
-                role="tabpanel"
+            <!--            <b-collapse-->
+            <!--              id="accordion-1"-->
+            <!--              accordion="my-accordion"-->
+            <!--              role="tabpanel"-->
+            <!--            >-->
+            <b-card
+              v-show="showCard"
+              :class="{ 'day-mode': isDayMode, 'night-mode': !isDayMode }"
             >
-              <b-card
-                  :class="{ 'day-mode': isDayMode, 'night-mode': !isDayMode }"
-              >
-                <b-row>
-                  <b-col cols="3">
-                    <b-button
-                        v-ripple.400="'rgba(113, 102, 240, 0.15)'"
-                        variant="primary"
-                        @click="getvalue(fcnvalueprefix)"
-                    >读取
-                    </b-button>
-                  </b-col>
-                  <b-col cols="9">
-                    <b-card-body>
-                      <b-row>
-                        <b-col cols="3">
-                          <b-card-text>读取值为:</b-card-text>
-                        </b-col>
-                        <b-col cols="3">
-                          <b-form
-                              style="border-bottom: 1px solid #ccc; padding-inline: 20px;"
-                          >
-                            {{ resp }}
-                          </b-form>
-                        </b-col>
-                      </b-row>
-                    </b-card-body>
-                  </b-col>
-                </b-row>
-
-              </b-card>
-              <b-card
-                  :class="{ 'day-mode': isDayMode, 'night-mode': !isDayMode }"
-              >
-                <b-row>
-                  <b-col cols="3">
-                    <b-button
-                        v-ripple.400="'rgba(113, 102, 240, 0.15)'"
-                        variant="primary"
-                        @click="setvalue(fcnvalueprefix)"
-                    >写入
-                    </b-button>
-                  </b-col>
-                  <b-col cols="9">
+              <b-row>
+                <b-col cols="3">
+                  <b-button
+                    v-ripple.400="'rgba(113, 102, 240, 0.15)'"
+                    variant="primary"
+                    @click="getvalue(fcnvalueprefix)"
+                  >读取
+                  </b-button>
+                </b-col>
+                <b-col cols="9">
+                  <b-card-body>
                     <b-row>
                       <b-col cols="3">
-                        <b-card-text style="margin-left: 20px">
-                          写入值为:
-                        </b-card-text>
+                        <b-card-text>读取值为:</b-card-text>
                       </b-col>
                       <b-col cols="3">
                         <b-form
-                            style="border-bottom: 1px solid #ccc; padding-inline: 20px;"
+                          style="border-bottom: 1px solid #ccc; padding-inline: 20px;margin-top: 20px"
                         >
-                          {{ valuesum }}
+                          {{ resp }}
                         </b-form>
                       </b-col>
                     </b-row>
-                  </b-col>
-                </b-row>
-                <b-card-body style="display: flex; align-items: center; justify-content: center;">
-                  <b-form-spinbutton
-                      id="sb-vertical"
-                      v-model="valueset1"
-                      min="0"
-                      max="9"
-                      vertical
-                  />
-                  <b-form-spinbutton
-                      id="sb-vertical"
-                      v-model="valueset2"
-                      min="0"
-                      max="9"
-                      vertical
-                  />
-                  <b-form-spinbutton
-                      id="sb-vertical"
-                      v-model="valueset3"
-                      min="0"
-                      max="9"
-                      vertical
-                  />
-                  <b-form-spinbutton
-                      id="sb-vertical"
-                      v-model="valueset4"
-                      min="0"
-                      max="9"
-                      vertical
-                  />
-                </b-card-body>
-              </b-card>
-            </b-collapse>
+                  </b-card-body>
+                </b-col>
+              </b-row>
+
+            </b-card>
+            <b-card
+              v-show="showCard"
+              :class="{ 'day-mode': isDayMode, 'night-mode': !isDayMode }"
+            >
+              <b-row>
+                <b-col cols="3">
+                  <b-button
+                    v-ripple.400="'rgba(113, 102, 240, 0.15)'"
+                    variant="primary"
+                    @click="setvalue(fcnvalueprefix)"
+                  >写入
+                  </b-button>
+                </b-col>
+                <b-col cols="9">
+                  <b-row>
+                    <b-col cols="3">
+                      <b-card-text style="margin-left: 20px">
+                        写入值为:
+                      </b-card-text>
+                    </b-col>
+                    <b-col cols="3">
+                      <b-form
+                        style="border-bottom: 1px solid #ccc; padding-inline: 20px;"
+                      >
+                        {{ valuesum }}
+                      </b-form>
+                    </b-col>
+                  </b-row>
+                </b-col>
+              </b-row>
+              <b-card-body style="display: flex; align-items: center; justify-content: center;">
+                <b-form-spinbutton
+                  id="sb-vertical"
+                  v-model="valueset1"
+                  min="0"
+                  max="9"
+                  vertical
+                />
+                <b-form-spinbutton
+                  id="sb-vertical"
+                  v-model="valueset2"
+                  min="0"
+                  max="9"
+                  vertical
+                />
+                <b-form-spinbutton
+                  id="sb-vertical"
+                  v-model="valueset3"
+                  min="0"
+                  max="9"
+                  vertical
+                />
+                <b-form-spinbutton
+                  id="sb-vertical"
+                  v-model="valueset4"
+                  min="0"
+                  max="9"
+                  vertical
+                />
+              </b-card-body>
+            </b-card>
+            <!--            </b-collapse>-->
           </b-card>
         </div>
         <b-button
@@ -2460,43 +2489,44 @@
               >{{ fcnname }}
               </b-button>
             </b-card-header>
-            <b-collapse
-              id="accordion-1"
-              accordion="my-accordion"
-              role="tabpanel"
+            <!--            <b-collapse-->
+            <!--              id="accordion-1"-->
+            <!--              accordion="my-accordion"-->
+            <!--              role="tabpanel"-->
+            <!--            >-->
+            <b-card
+              v-show="showCard"
+              :class="{ 'day-mode': isDayMode, 'night-mode': !isDayMode }"
             >
-              <b-card
-                  :class="{ 'day-mode': isDayMode, 'night-mode': !isDayMode }"
-              >
-                <b-row>
-                  <b-col cols="4">
-                    <b-button
-                        v-ripple.400="'rgba(113, 102, 240, 0.15)'"
-                        variant="primary"
-                        @click="getvalue(fcnvalueprefix)"
-                    >发送控制命令
-                    </b-button>
-                  </b-col>
-                  <b-col cols="8">
-                    <b-card-body>
-                      <b-row>
-                        <b-col cols="4">
-                          <b-card-text>收到信息为:</b-card-text>
-                        </b-col>
-                        <b-col cols="3">
-                          <b-form
-                              style="border-bottom: 1px solid #ccc; padding-inline: 20px;"
-                          >
-                            {{ resp }}
-                          </b-form>
-                        </b-col>
-                      </b-row>
-                    </b-card-body>
-                  </b-col>
-                </b-row>
+              <b-row>
+                <b-col cols="4">
+                  <b-button
+                    v-ripple.400="'rgba(113, 102, 240, 0.15)'"
+                    variant="primary"
+                    @click="getvalue(fcnvalueprefix)"
+                  >发送控制命令
+                  </b-button>
+                </b-col>
+                <b-col cols="8">
+                  <b-card-body>
+                    <b-row>
+                      <b-col cols="4">
+                        <b-card-text>收到信息为:</b-card-text>
+                      </b-col>
+                      <b-col cols="3">
+                        <b-form
+                          style="border-bottom: 1px solid #ccc; padding-inline: 20px;margin-top: 20px"
+                        >
+                          {{ resp }}
+                        </b-form>
+                      </b-col>
+                    </b-row>
+                  </b-card-body>
+                </b-col>
+              </b-row>
 
-              </b-card>
-            </b-collapse>
+            </b-card>
+            <!--            </b-collapse>-->
           </b-card>
         </div>
         <b-button
@@ -2661,103 +2691,105 @@
               >{{ fcnname }}
               </b-button>
             </b-card-header>
-            <b-collapse
-                id="accordion-1"
-                accordion="my-accordion"
-                role="tabpanel"
+            <!--            <b-collapse-->
+            <!--              id="accordion-1"-->
+            <!--              accordion="my-accordion"-->
+            <!--              role="tabpanel"-->
+            <!--            >-->
+            <b-card
+              v-show="showCard"
+              :class="{ 'day-mode': isDayMode, 'night-mode': !isDayMode }"
             >
-              <b-card
-                  :class="{ 'day-mode': isDayMode, 'night-mode': !isDayMode }"
-              >
-                <b-row>
-                  <b-col cols="4">
-                    <b-button
-                        v-ripple.400="'rgba(113, 102, 240, 0.15)'"
-                        variant="primary"
-                        @click="getvalue(fcnvalueprefix)"
-                    >读取指定录波
-                    </b-button>
-                  </b-col>
-                  <b-col cols="8">
-                    <b-card-body>
-                      <b-row>
-                        <b-col cols="4">
-                          <b-card-text>读取值为:</b-card-text>
-                        </b-col>
-                        <b-col cols="3">
-                          <b-form
-                              style="border-bottom: 1px solid #ccc; padding-inline: 20px;"
-                          >
-                            {{ resp }}
-                          </b-form>
-                        </b-col>
-                      </b-row>
-                    </b-card-body>
-                  </b-col>
-                </b-row>
-
-              </b-card>
-              <b-card
-                  :class="{ 'day-mode': isDayMode, 'night-mode': !isDayMode }"
-              >
-                <b-row>
-                  <b-col cols="4">
-                    <b-button
-                        v-ripple.400="'rgba(113, 102, 240, 0.15)'"
-                        variant="primary"
-                        @click="setvalue(fcnvalueprefix)"
-                    >写入
-                    </b-button>
-                  </b-col>
-                  <b-col cols="8">
+              <b-row>
+                <b-col cols="4">
+                  <b-button
+                    v-ripple.400="'rgba(113, 102, 240, 0.15)'"
+                    variant="primary"
+                    @click="getvalue(fcnvalueprefix)"
+                  >读取指定录波
+                  </b-button>
+                </b-col>
+                <b-col cols="8">
+                  <b-card-body>
                     <b-row>
                       <b-col cols="4">
-                        <b-card-text style="margin-left: 20px">
-                          写入值为:
-                        </b-card-text>
+                        <b-card-text>读取值为:</b-card-text>
                       </b-col>
                       <b-col cols="3">
                         <b-form
-                            style="border-bottom: 1px solid #ccc; padding-inline: 20px;"
+                          style="border-bottom: 1px solid #ccc; padding-inline: 20px;margin-top: 20px"
                         >
-                          {{ valuesum }}
+                          {{ resp }}
                         </b-form>
                       </b-col>
                     </b-row>
-                  </b-col>
-                </b-row>
-                <b-card-body style="display: flex; align-items: center; justify-content: center;">
-                  <b-form-spinbutton
-                      id="sb-vertical"
-                      v-model="valueset1"
-                      min="0"
-                      max="9"
-                      vertical
-                  />
-                  <b-form-spinbutton
-                      id="sb-vertical"
-                      v-model="valueset2"
-                      min="0"
-                      max="9"
-                      vertical
-                  />
-                  <b-form-spinbutton
-                      id="sb-vertical"
-                      v-model="valueset3"
-                      min="0"
-                      max="9"
-                      vertical
-                  />
-                  <b-form-spinbutton
-                      id="sb-vertical"
-                      v-model="valueset4"
-                      min="0"
-                      max="9"
-                      vertical
-                  />
-                </b-card-body>
-              </b-card>
-            </b-collapse>
+                  </b-card-body>
+                </b-col>
+              </b-row>
+
+            </b-card>
+            <b-card
+              v-show="showCard"
+              :class="{ 'day-mode': isDayMode, 'night-mode': !isDayMode }"
+            >
+              <b-row>
+                <b-col cols="4">
+                  <b-button
+                    v-ripple.400="'rgba(113, 102, 240, 0.15)'"
+                    variant="primary"
+                    @click="setvalue(fcnvalueprefix)"
+                  >写入
+                  </b-button>
+                </b-col>
+                <b-col cols="8">
+                  <b-row>
+                    <b-col cols="4">
+                      <b-card-text style="margin-left: 20px">
+                        写入值为:
+                      </b-card-text>
+                    </b-col>
+                    <b-col cols="3">
+                      <b-form
+                        style="border-bottom: 1px solid #ccc; padding-inline: 20px;"
+                      >
+                        {{ valuesum }}
+                      </b-form>
+                    </b-col>
+                  </b-row>
+                </b-col>
+              </b-row>
+              <b-card-body style="display: flex; align-items: center; justify-content: center;">
+                <b-form-spinbutton
+                  id="sb-vertical"
+                  v-model="valueset1"
+                  min="0"
+                  max="9"
+                  vertical
+                />
+                <b-form-spinbutton
+                  id="sb-vertical"
+                  v-model="valueset2"
+                  min="0"
+                  max="9"
+                  vertical
+                />
+                <b-form-spinbutton
+                  id="sb-vertical"
+                  v-model="valueset3"
+                  min="0"
+                  max="9"
+                  vertical
+                />
+                <b-form-spinbutton
+                  id="sb-vertical"
+                  v-model="valueset4"
+                  min="0"
+                  max="9"
+                  vertical
+                />
+              </b-card-body>
+            </b-card>
+            <!--            </b-collapse>-->
           </b-card>
         </div>
         <b-button
@@ -2863,103 +2895,105 @@
               >{{ fcnname }}
               </b-button>
             </b-card-header>
-            <b-collapse
-                id="accordion-1"
-                accordion="my-accordion"
-                role="tabpanel"
+            <!--            <b-collapse-->
+            <!--              id="accordion-1"-->
+            <!--              accordion="my-accordion"-->
+            <!--              role="tabpanel"-->
+            <!--            >-->
+            <b-card
+              v-show="showCard"
+              :class="{ 'day-mode': isDayMode, 'night-mode': !isDayMode }"
             >
-              <b-card
-                  :class="{ 'day-mode': isDayMode, 'night-mode': !isDayMode }"
-              >
-                <b-row>
-                  <b-col cols="3">
-                    <b-button
-                        v-ripple.400="'rgba(113, 102, 240, 0.15)'"
-                        variant="primary"
-                        @click="getvalue(fcnvalueprefix)"
-                    >读取
-                    </b-button>
-                  </b-col>
-                  <b-col cols="9">
-                    <b-card-body>
-                      <b-row>
-                        <b-col cols="3">
-                          <b-card-text>读取值为:</b-card-text>
-                        </b-col>
-                        <b-col cols="3">
-                          <b-form
-                              style="border-bottom: 1px solid #ccc; padding-inline: 20px;"
-                          >
-                            {{ resp }}
-                          </b-form>
-                        </b-col>
-                      </b-row>
-                    </b-card-body>
-                  </b-col>
-                </b-row>
-
-              </b-card>
-              <b-card
-                  :class="{ 'day-mode': isDayMode, 'night-mode': !isDayMode }"
-              >
-                <b-row>
-                  <b-col cols="3">
-                    <b-button
-                        v-ripple.400="'rgba(113, 102, 240, 0.15)'"
-                        variant="primary"
-                        @click="setvalue(fcnvalueprefix)"
-                    >写入
-                    </b-button>
-                  </b-col>
-                  <b-col cols="9">
+              <b-row>
+                <b-col cols="3">
+                  <b-button
+                    v-ripple.400="'rgba(113, 102, 240, 0.15)'"
+                    variant="primary"
+                    @click="getvalue(fcnvalueprefix)"
+                  >读取
+                  </b-button>
+                </b-col>
+                <b-col cols="9">
+                  <b-card-body>
                     <b-row>
                       <b-col cols="3">
-                        <b-card-text style="margin-left: 20px">
-                          写入值为:
-                        </b-card-text>
+                        <b-card-text>读取值为:</b-card-text>
                       </b-col>
                       <b-col cols="3">
                         <b-form
-                            style="border-bottom: 1px solid #ccc; padding-inline: 20px;"
+                          style="border-bottom: 1px solid #ccc; padding-inline: 20px;margin-top: 20px"
                         >
-                          {{ valuesum }}
+                          {{ resp }}
                         </b-form>
                       </b-col>
                     </b-row>
-                  </b-col>
-                </b-row>
-                <b-card-body style="display: flex; align-items: center; justify-content: center;">
-                  <b-form-spinbutton
-                      id="sb-vertical"
-                      v-model="valueset1"
-                      min="0"
-                      max="9"
-                      vertical
-                  />
-                  <b-form-spinbutton
-                      id="sb-vertical"
-                      v-model="valueset2"
-                      min="0"
-                      max="9"
-                      vertical
-                  />
-                  <b-form-spinbutton
-                      id="sb-vertical"
-                      v-model="valueset3"
-                      min="0"
-                      max="9"
-                      vertical
-                  />
-                  <b-form-spinbutton
-                      id="sb-vertical"
-                      v-model="valueset4"
-                      min="0"
-                      max="9"
-                      vertical
-                  />
-                </b-card-body>
-              </b-card>
-            </b-collapse>
+                  </b-card-body>
+                </b-col>
+              </b-row>
+
+            </b-card>
+            <b-card
+              v-show="showCard"
+              :class="{ 'day-mode': isDayMode, 'night-mode': !isDayMode }"
+            >
+              <b-row>
+                <b-col cols="3">
+                  <b-button
+                    v-ripple.400="'rgba(113, 102, 240, 0.15)'"
+                    variant="primary"
+                    @click="setvalue(fcnvalueprefix)"
+                  >写入
+                  </b-button>
+                </b-col>
+                <b-col cols="9">
+                  <b-row>
+                    <b-col cols="3">
+                      <b-card-text style="margin-left: 20px">
+                        写入值为:
+                      </b-card-text>
+                    </b-col>
+                    <b-col cols="3">
+                      <b-form
+                        style="border-bottom: 1px solid #ccc; padding-inline: 20px;"
+                      >
+                        {{ valuesum }}
+                      </b-form>
+                    </b-col>
+                  </b-row>
+                </b-col>
+              </b-row>
+              <b-card-body style="display: flex; align-items: center; justify-content: center;">
+                <b-form-spinbutton
+                  id="sb-vertical"
+                  v-model="valueset1"
+                  min="0"
+                  max="9"
+                  vertical
+                />
+                <b-form-spinbutton
+                  id="sb-vertical"
+                  v-model="valueset2"
+                  min="0"
+                  max="9"
+                  vertical
+                />
+                <b-form-spinbutton
+                  id="sb-vertical"
+                  v-model="valueset3"
+                  min="0"
+                  max="9"
+                  vertical
+                />
+                <b-form-spinbutton
+                  id="sb-vertical"
+                  v-model="valueset4"
+                  min="0"
+                  max="9"
+                  vertical
+                />
+              </b-card-body>
+            </b-card>
+            <!--            </b-collapse>-->
           </b-card>
         </div>
         <b-button
@@ -3134,7 +3168,7 @@
       <b-tab
         class="custom-tab2"
         style="text-align:center"
-        @click="changeTabname('装置复位重启')"
+        @click="changeTabnameRestart('装置复位重启')"
       >
         <template #title>
           <feather-icon icon="WifiIcon" />
@@ -3170,36 +3204,38 @@
               >{{ fcnname }}
               </b-button>
             </b-card-header>
-            <b-collapse
-              id="accordion-1"
-              accordion="my-accordion"
-              role="tabpanel"
+            <!--            <b-collapse-->
+            <!--              id="accordion-1"-->
+            <!--              accordion="my-accordion"-->
+            <!--              role="tabpanel"-->
+            <!--            >-->
+            <b-card
+              :class="{ 'day-mode': isDayMode, 'night-mode': !isDayMode }"
             >
-              <b-card :class="{ 'day-mode': isDayMode, 'night-mode': !isDayMode }">
-                <b-button
-                  v-ripple.400="'rgba(113, 102, 240, 0.15)'"
-                  variant="primary"
-                  @click="getvalue(text_area)"
-                >发送重启指令或自定义指令
-                </b-button>
-                <b-form-textarea
-                  id="textarea"
-                  v-model="text_area"
-                  placeholder="0x01A100000005FEE1D2C3B4"
-                  rows="1"
-                  max-rows="1"
-                  :class="{ 'day-mode': isDayMode, 'night-mode': !isDayMode }"
-                />
-                <b-row style="display: flex; align-items: center; justify-content: center;">
-                    <b-card-text>收到反馈值为:</b-card-text>
-                    <b-form
-                        style="border-bottom: 1px solid #ccc; padding-inline: 20px;"
-                    >
-                      {{ resp }}
-                    </b-form>
-                </b-row>
-              </b-card>
-            </b-collapse>
+              <b-button
+                v-ripple.400="'rgba(113, 102, 240, 0.15)'"
+                variant="primary"
+                @click="getvalue(text_area)"
+              >发送重启指令或自定义指令
+              </b-button>
+              <b-form-textarea
+                id="textarea"
+                v-model="text_area"
+                placeholder="0x01A100000005FEE1D2C3B4"
+                rows="1"
+                max-rows="1"
+                :class="{ 'day-mode': isDayMode, 'night-mode': !isDayMode }"
+              />
+              <b-row style="display: flex; align-items: center; justify-content: center;">
+                <b-card-text>收到反馈值为:</b-card-text>
+                <b-form
+                  style="border-bottom: 1px solid #ccc; padding-inline: 20px;"
+                >
+                  {{ resp }}
+                </b-form>
+              </b-row>
+            </b-card>
+            <!--            </b-collapse>-->
 
           </b-card>
         </div>
@@ -3228,6 +3264,7 @@ import {
   BCardTitle,
   BFormTextarea,
   BFormSpinbutton,
+  BForm,
 } from 'bootstrap-vue'
 
 import Ripple from 'vue-ripple-directive'
@@ -3258,6 +3295,7 @@ export default {
     BCard,
     BFormInput,
     BFormTextarea,
+    BForm,
   },
   directives: {
     Ripple,
@@ -3265,6 +3303,7 @@ export default {
   },
   data() {
     return {
+      showCard: false,
       isDayMode: true,
       resp: '',
       // 定义一个字符串数组strarray
@@ -3300,7 +3339,7 @@ export default {
   },
   mounted() {
     // Truncate the label on component mount to fit the button width
-    this.truncateLabel()
+    // this.truncateLabel()
 
     // 每5分钟自动保存数据
     // setInterval(this.saveData, 5 * 60 * 1000);
@@ -3358,10 +3397,12 @@ export default {
     changeTabname(Fcnn) {
       this.fcnname = Fcnn
       this.fcnvalueprefix = '0x00'
+      this.showCard = false
     },
     changeProp(Fcnn, Addr) {
       this.fcnname = Fcnn
       this.fcnvalueprefix = Addr
+      this.showCard = true
     },
     changeProps(Fcnn, Addr, Notepad_index) {
       this.fcnname = Fcnn
@@ -3383,6 +3424,7 @@ export default {
       Notepad_context[13] = 'RS485通讯状态标志'
       Notepad_context[14] = '扩展跳闸状态(1-有故障)：0位-PT断线跳闸有故障|| 1位-扩展跳闸状态备用 || 2位-备用 || 3位-备用 || 4位-备用 || 5位-备用 || 6位-备用 '
       this.Notepad_context = Notepad_context[Notepad_index]
+      this.showCard = true
     },
 
     // 保存该页面所有数据

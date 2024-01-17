@@ -1,5 +1,5 @@
 <template>
-  <b-card style="background-color: #f2f4f6;">
+  <b-card style="background-color: #f2f4f6;position: absolute">
 
     <b-card>
       <b-button
@@ -115,10 +115,10 @@
               <b-tab
                 title="设备信息"
                 active
+                style="overflow-x: scroll;"
               >
                 <b-card
-                  class="overflow-auto"
-                  style="background-color: #57585b;overflow-x: scroll"
+                  style="background-color: #57585b;width: 100vh"
                 >
                   <b-card-text style="margin-bottom: 25px;color: #fdfcfc;flex-direction: row;align-items: center;"><span>相电压</span>
                     <span
@@ -168,9 +168,9 @@
 
               <b-tab
                 title="详情信息"
-                style="overflow: scroll"
+                style="overflow-x: scroll"
               >
-                <b-card style="background-color: #57585b;">
+                <b-card style="background-color: #57585b;width: 100vh">
                   <b-row v-show="currentEquipPage === 1">
                     <b-card-text style="color: #ffffff">A相电压:
                       <span
@@ -457,6 +457,7 @@ import {
   BTable,
   BTabs,
   BCollapse,
+  BRow,
 } from 'bootstrap-vue'
 import axios from 'axios'
 
@@ -476,6 +477,7 @@ export default {
     BTab,
     BTabs,
     BCollapse,
+    BRow,
   },
   data() {
     return {
@@ -512,7 +514,7 @@ export default {
       TotalKvarH2: 0,
 
       currentEquipPage: 1,
-
+      currenttime:'',
       isrecord: false,
       isdianli: false,
       ishistory: false,
@@ -581,7 +583,7 @@ export default {
     this.startDataUpdates() // 初始化设备信息
 
     this.timer = setInterval(() => {
-      this.updateData()
+      this.startDataUpdates()
     }, 5000) // 5秒请求一次多功能表数据
 
     console.log('Component mounted')
@@ -609,7 +611,7 @@ export default {
         this.Frequency = (Math.random() * 80 + 200).toFixed(2)
         this.TotalKWH = (Math.random() * 250 + 150).toFixed(2)
         this.TotalKvarH = (Math.random() * 70 + 200).toFixed(2)
-      }, 2000) // 每2秒更新一次数据
+      }, 3000) // 每2秒更新一次数据
     },
 
     // startDataUpdates() {

@@ -1,0 +1,22 @@
+Capture is on
+Received data from http://192.168.6.185/gets: {
+  jiedifen: 0,
+  houmen: 0,
+  qianmen: 0,
+  duanluhe: 0,
+  jiedihe: 0,
+  gongzuowei: 0,
+  shiyanwei: 0,
+  duanlufen: 0
+}
+Data Sent to Frontend: {
+  qianmen: 0,
+  houmen: 0,
+  shiyanwei: 0,
+  gongzuowei: 0,
+  jiedifen: 0,
+  jiedihe: 0,
+  duanluhe: 0,
+  duanlufen: 0
+}
+Data sent to /getdata on the frontend

@@ -1,109 +1,110 @@
 <template>
   <b-container fluid>
-
-    <b-row style="width: 100vh">
-      <b-col cols="6">
-        <b-card>
-          <b-form-checkbox
+    <b-card style="position: absolute;background-color: transparent;width: 100%">
+      <b-row style="width: 100vh">
+        <b-col cols="6">
+          <b-card>
+            <b-form-checkbox
               v-model="checkedstatus"
               @change="showKalmanChange"
-          >
-            显示卡尔曼温度预测曲线,超温告警,邮件提醒
-          </b-form-checkbox>
-        </b-card>
-      </b-col>
+            >
+              显示卡尔曼温度预测曲线,超温告警,邮件提醒
+            </b-form-checkbox>
+          </b-card>
+        </b-col>
 
-      <b-col cols="4">
-        <div>
-          <label
+        <b-col cols="6">
+          <div>
+            <label
               for="temperature"
               style="font-size: 15px"
-          >选择温度：</label>
-          <b-form-select
+            >选择温度：</label>
+            <b-form-select
               id="temperature"
               v-model="selectedTemperature"
               :options="temperature_options"
               style="width: 100px"
-          />
-          <p style="font-size: 15px">
-            当前会超温预警的温度是: {{ selectedTemperature }}°C
-          </p>
-        </div>
-      </b-col>
-    </b-row>
+            />
+            <p style="font-size: 15px">
+              当前会超温预警的温度是: {{ selectedTemperature }}°C
+            </p>
+          </div>
+        </b-col>
+      </b-row>
 
-    <b-row style="width: 100vh">
-      <b-col cols="6">
-        <b-card>
-          <div
+      <b-row style="width: 100%">
+        <b-col cols="6">
+          <b-card class="hidden-chart">
+            <div
               ref="chart1"
-              style="width: 350px;height: 380px"
-          />
-          <div ref="chart1-kalman" />
-        </b-card>
-      </b-col>
-      <b-col cols="6">
-        <b-card>
-          <div
+              style="width: 350px;height: 380px;"
+            />
+            <div ref="chart1-kalman" />
+          </b-card>
+        </b-col>
+        <b-col cols="6">
+          <b-card class="hidden-chart">
+            <div
               ref="chart2"
               style="width: 350px;height: 380px"
-          />
-          <div ref="chart2-kalman" />
-        </b-card>
-      </b-col>
-    </b-row>
+            />
+            <div ref="chart2-kalman" />
+          </b-card>
+        </b-col>
+      </b-row>
 
-    <b-row style="width: 100vh">
-      <b-col cols="6">
-        <b-card>
-          <div
+      <b-row style="width: 100%">
+        <b-col cols="6">
+          <b-card class="hidden-chart">
+            <div
               ref="chart3"
               style="width: 350px;height: 380px"
-          />
-          <div ref="chart3-kalman" />
-        </b-card>
-      </b-col>
-      <b-col cols="6">
-        <b-card>
-          <div
+            />
+            <div ref="chart3-kalman" />
+          </b-card>
+        </b-col>
+        <b-col cols="6">
+          <b-card class="hidden-chart">
+            <div
               ref="chart4"
               style="width: 350px;height: 380px"
-          />
-          <div ref="chart4-kalman" />
-        </b-card>
-      </b-col>
-    </b-row>
+            />
+            <div ref="chart4-kalman" />
+          </b-card>
+        </b-col>
+      </b-row>
 
-    <b-row style="width: 100vh">
-      <b-col cols="6">
-        <b-card>
-          <div
+      <b-row style="width: 100%">
+        <b-col cols="6">
+          <b-card class="hidden-chart">
+            <div
               ref="chart5"
               style="width: 350px;height: 380px"
-          />
-          <div ref="chart5-kalman" />
-        </b-card>
-      </b-col>
-      <b-col cols="6">
-        <b-card>
-          <div
+            />
+            <div ref="chart5-kalman" />
+          </b-card>
+        </b-col>
+        <b-col cols="6">
+          <b-card class="hidden-chart">
+            <div
               ref="chart6"
               style="width: 350px;height: 380px"
-          />
-          <div ref="chart6-kalman" />
-        </b-card>
-      </b-col>
-    </b-row>
+            />
+            <div ref="chart6-kalman" />
+          </b-card>
+        </b-col>
+      </b-row>
+    </b-card>
 
     <!--    <div>Email Address: {{ emailAddress }}</div>-->
 
     <div>
       <!-- 弹窗告警  -->
       <b-modal
-          ref="modalRef"
-          v-model="showModal"
-          title="warning"
-          hide-footer
+        ref="modalRef"
+        v-model="showModal"
+        title="warning"
+        hide-footer
       >
         <h3 class="custom-title">
           温度预测超过100°
@@ -112,17 +113,17 @@
           请注意处理！
         </h3>
         <b-button
-            class="mt-3"
-            block
-            variant="primary"
-            @click="closeModal"
+          class="mt-3"
+          block
+          variant="primary"
+          @click="closeModal"
         >
           关闭
         </b-button>
       </b-modal>
     </div>
 
-  </b-container fluid>
+  </b-container>
 </template>
 
 <script>
@@ -871,19 +872,19 @@ export default {
     // setInterval(this.saveData, 5 * 60 * 1000);
 
     // 监听窗口大小变化事件
-    window.addEventListener('resize', this.handleResize)
+    // window.addEventListener('resize', this.handleResize)
   },
 
   beforeDestroy() {
     // 移除窗口大小变化事件监听器
-    window.removeEventListener('resize', this.handleResize)
+    // window.removeEventListener('resize', this.handleResize)
   },
 
   methods: {
-    handleResize() {
-      // 在窗口大小变化时重新调整图表大小
-      this.resizeCharts()
-    },
+    // handleResize() {
+    //   // 在窗口大小变化时重新调整图表大小
+    //   this.resizeCharts()
+    // },
 
     initCharts() {
       // 初始化图表的代码，可以根据需要调整
@@ -905,15 +906,15 @@ export default {
       // ... 初始化其他图表
     },
 
-    resizeCharts() {
-      // 在窗口大小变化时调整图表大小
-      this.chart1.resize()
-      this.chart2.resize()
-      this.chart3.resize()
-      this.chart4.resize()
-      this.chart5.resize()
-      this.chart6.resize()
-    },
+    // resizeCharts() {
+    //   // 在窗口大小变化时调整图表大小
+    //   this.chart1.resize()
+    //   this.chart2.resize()
+    //   this.chart3.resize()
+    //   this.chart4.resize()
+    //   this.chart5.resize()
+    //   this.chart6.resize()
+    // },
     closeModal() {
       this.$refs.modalRef.hide()// 隐藏弹窗
     },
@@ -1029,7 +1030,6 @@ export default {
       return this.temperature1, this.temperature2, this.temperature3, this.temperature4, this.temperature5, this.temperature6
     },
 
-
     // generateData() {
     //   axios.get('http://localhost:10866/getdbtemperature').then(response => {
     //     this.temperature1 = response.data.map(item => item.sensor1)
@@ -1069,4 +1069,3 @@ export default {
 }
 
 </style>
-

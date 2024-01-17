@@ -6,7 +6,7 @@ let mainWindow;
 function createWindow() {
   mainWindow = new BrowserWindow({
     width: 1080,
-    height: 800,
+    height: 800,  // 7寸【屏
     webPreferences: {
       nodeIntegration: true,
       preload: path.join(__dirname, 'preload.js'),
