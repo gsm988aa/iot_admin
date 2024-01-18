@@ -165,6 +165,14 @@
         <RealTimeVideo />
       </b-tab>
 
+      <b-tab
+          v-if="isAdmin || activeTab === 11"
+          title="西二配电"
+          style="overflow: hidden;width: 100vh"
+      >
+        <XiPei />
+      </b-tab>
+
       <!-- 其他管理员权限Tabs -->
     </b-tabs>
   </div>
@@ -187,10 +195,12 @@ import YiJianShunKong from './YiJianShunKong.vue'
 import SheBeiCanShu from './SheBeiCanShu.vue'
 import Mcp from './Mcp.vue'
 import RealTimeVideo from '@/views/RealTimeVideo.vue'
+import XiPei from '@/views/XiPei.vue'
 
 export default {
   name: 'Hello',
   components: {
+    XiPei,
     RealTimeVideo,
     Mcp,
     SheBeiCanShu,
@@ -231,6 +241,7 @@ export default {
         { title: 'Tab 10', content: '设备参数' },
         { title: 'Tab 11', content: '微机综保' },
         { title: 'Tab 12', content: '实时监控' },
+        { title: 'Tab 13', content: '西二配电' },
       ],
     }
   },

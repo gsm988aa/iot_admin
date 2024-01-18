@@ -52,12 +52,16 @@
               湿度
             </b-card-text>
           </div>
-          <div style="display: flex; flex-direction: column;margin-top: -168px;margin-left:350px;gap: 120px;">
+          <div style="display: flex; flex-direction: column;margin-top: -168px;margin-left:360px;gap: 110px;">
             <dv-decoration-7 style="width:150px;height:30px;margin-left: -120px;scale: 2.2;color: #fff5ef;text-align: center">
-              _0°C_
+              <b-card-text style="margin-top: 12px;padding-left: 10px; padding-right: 10px;font-size: 20px">
+                {{ temperData }}°C
+              </b-card-text>
             </dv-decoration-7>
             <dv-decoration-7 style="width:150px;height:30px;margin-left: -120px;scale: 2.2;color: #fff5ef">
-              _0°C_
+              <b-card-text style="margin-top: 12px;padding-left: 10px; padding-right: 10px;font-size: 20px">
+                {{ wetData }}°C
+              </b-card-text>
             </dv-decoration-7>
           </div>
         </dv-border-box-10>
@@ -86,24 +90,24 @@
                 功率因数
               </b-card-text>
 
-              <div style="display: flex; flex-direction: column;margin-top: -510px;margin-left:270px;gap: 50px;">
+              <div style="display: flex; flex-direction: column;margin-top: -510px;margin-left:230px;gap: 50px;">
                 <b-card-text style="font-size: 40px; color: #ffdc3e;font-weight: bold">
-                  ..
+                  {{ UaData }}
                 </b-card-text>
                 <b-card-text style="font-size: 40px; color: #3ede0c;font-weight: bold">
-                  ..
+                  {{ IaData }}
                 </b-card-text>
                 <b-card-text style="font-size: 40px; color: #12fcbc;font-weight: bold">
-                  ..
+                  {{ UaData }}
                 </b-card-text>
                 <b-card-text style="font-size: 40px; color: #ff9c51;font-weight: bold">
-                  ..
+                  {{ PaData }}
                 </b-card-text>
                 <b-card-text style="font-size: 40px; color: #ff6049;font-weight: bold;">
-                  ..
+                  {{ PaData }}
                 </b-card-text>
                 <b-card-text style="font-size: 40px; color: #cb94e7;font-weight: bold">
-                  ..
+                  0.95
                 </b-card-text>
               </div>
 
@@ -143,7 +147,9 @@
       style="width: 700px;height: 700px;margin-top: -900px;position: absolute;margin-left: 400px;display: none"
       class="gif1"
     >
-      <b-card-text style="font-size: 40px;color: #fff5ef;margin-top: 20px">监控画面</b-card-text>
+      <b-card-text style="font-size: 40px;color: #fff5ef;margin-top: 20px">
+        监控画面
+      </b-card-text>
     </div>
 
   </b-card>
@@ -171,6 +177,11 @@ export default {
   },
   data() {
     return {
+      temperData: '',
+      wetData: '',
+      UaData: '',
+      IaData: '',
+      PaData: '',
       scene: new THREE.Scene(),
       camera: new THREE.PerspectiveCamera(),
       shexiangtou: new THREE.Group(),
@@ -428,7 +439,7 @@ export default {
     // 创建圆柱体的网格对象
     const cylinder = new THREE.Mesh(cylinderGeometry, material40)
     // 设置圆柱体的位置和旋转
-    cylinder.position.set(3, 1.1, -2)
+    cylinder.position.set(2.7, 1.1, -2)
     cylinder.rotation.set(0, Math.PI / 4, 0) // 绕 y 轴旋转 45 度
     // 将圆柱体添加到场景中
     scene.add(cylinder)
@@ -443,7 +454,7 @@ export default {
     // 创建球体的网格对象
     const sphere = new THREE.Mesh(sphereGeometry, material30)
     // 设置球体的位置
-    sphere.position.set(3, 1, -2) // 设置球体的位置坐标
+    sphere.position.set(2.7, 1, -2) // 设置球体的位置坐标
 
     // 添加光源
     const light = new THREE.DirectionalLight(0xffffff, 4.2)
@@ -466,7 +477,7 @@ export default {
     // 创建球体的网格对象
     const sphere2 = new THREE.Mesh(sphereGeometry2, material31)
     // 设置球体的位置
-    sphere2.position.set(3, 1, -1.93) // 设置球体的位置坐标
+    sphere2.position.set(2.7, 1, -1.93) // 设置球体的位置坐标
 
     // 将球体添加到场景中
     scene.add(sphere2)
@@ -696,7 +707,6 @@ export default {
     scene.add(shexiangtou)
     this.scene.add(this.shexiangtou)
 
-
     scene.add(clonedGroup1) // 将克隆的模型添加到场景
     scene.add(clonedGroup2)
     scene.add(clonedGroup3)
@@ -738,8 +748,50 @@ export default {
     }
 
     animate()
+    // 使用定时器每2秒更新数据
+    setInterval(() => {
+      this.updateTemData()
+      this.updateWetData()
+      this.updateUaData()
+      this.updateIaData()
+      this.updatePaData()
+    }, 2000)
   },
   methods: {
+    updateTemData() {
+      // 生成30到60之间的随机数给温度
+      const randomTemperature1 = Math.floor(Math.random() * (30 - 10 + 1)) + 20
+      // 更新数据
+      this.temperData = randomTemperature1
+    },
+
+    updateWetData() {
+      // 生成30到60之间的随机数给湿度
+      const randomTemperature2 = Math.floor(Math.random() * (65 - 45 + 1)) + 45
+      // 更新数据
+      this.wetData = randomTemperature2
+    },
+
+    updateUaData() {
+      // 生成200到290之间的随机数给电压
+      const randomTemperature3 = Math.floor(Math.random() * (290 - 200) + 200).toFixed(1)
+      // 更新数据
+      this.UaData = randomTemperature3
+    },
+
+    updateIaData() {
+      // 生成10到20之间的随机数给电流
+      const randomTemperature4 = Math.floor(Math.random() * (20 - 10) + 10).toFixed(1)
+      // 更新数据
+      this.IaData = randomTemperature4
+    },
+
+    updatePaData() {
+      // 生成60到120之间的随机数给电流
+      const randomTemperature5 = Math.floor(Math.random() * (5000 - 2000 + 1)) + 2000
+      // 更新数据
+      this.PaData = randomTemperature5
+    },
 
     onMouseMove(event) {
       // 计算鼠标的归一化设备坐标(NDC)
@@ -754,9 +806,8 @@ export default {
       const intersects = this.raycaster.intersectObjects(this.shexiangtou.children, true)
       console.log('Intersects:', intersects)
 
-
       // 如果鼠标的y坐标在0.3到0.4之间，显示div，否则隐藏
-      if ((this.mouse.x >= 0.2 && this.mouse.x <= 0.5) && (this.mouse.y >= 0.2 && this.mouse.y <= 0.5)) {
+      if ((this.mouse.x >= 0.15 && this.mouse.x <= 0.35) && (this.mouse.y >= 0.2 && this.mouse.y <= 0.5)) {
         document.getElementById('Scamera').style.display = 'block'
       } else {
         document.getElementById('Scamera').style.display = 'none'
@@ -786,7 +837,7 @@ export default {
   background-position: center center;
   font-family: 新宋体;
   text-align: center;
-  color: #6cd6fd;
+  color: #cbeefc;
   font-weight: bold;
   font-size: 50px;
 }
