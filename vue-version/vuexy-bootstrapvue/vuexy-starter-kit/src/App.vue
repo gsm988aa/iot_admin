@@ -60,6 +60,7 @@ export default {
     // Set Theme Breakpoints
     const breakpoints = ['xs', 'sm', 'md', 'lg', 'xl']
 
+
     // eslint-disable-next-line no-plusplus
     for (let i = 0, len = breakpoints.length; i < len; i++) {
       $themeBreakpoints[breakpoints[i]] = Number(useCssVar(`--breakpoint-${breakpoints[i]}`, document.documentElement).value.slice(0, -2))
