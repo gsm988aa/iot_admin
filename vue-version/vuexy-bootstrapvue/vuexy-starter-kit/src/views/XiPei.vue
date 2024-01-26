@@ -23,7 +23,11 @@
             :fields="['unit','图1', '图2', '图3', '图4', '图5', '图6']"
             :thead-class="'d-none'"
             bordered
-          />
+          >
+            <template #cell(unit)="data">
+              <span class="unit-text-color">{{ data.value }}</span>
+            </template>
+          </b-table>
         </b-collapse>
         <b-button
           variant="primary"
@@ -542,4 +546,7 @@ export default {
 /*  width: 100%;*/
 /*  height: 100%;*/
 /*}*/
+.unit-text-color{
+  color: #0c1d2f;
+}
 </style>

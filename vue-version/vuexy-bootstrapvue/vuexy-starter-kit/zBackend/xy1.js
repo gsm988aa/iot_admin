@@ -13,27 +13,27 @@ const path = require('path');
 
 app.use(
 cors({
-        origin: ['http://localhost:8888','http://localhost:9999', 'http://10.168.1.220:8888', 'http://localhost:8080', 'http://10.168.1.103:7777','http://10.168.1.103', 'http://10.168.1.103','http://192.168.2.56'],
+        origin: ['http://localhost:8888','http://localhost:10866','http://localhost:9999', 'http://10.168.1.220:8888', 'http://localhost:8080', 'http://10.168.1.103:7777','http://10.168.1.103', 'http://10.168.1.103','http://192.168.2.56'],
     }),
 )
 app9999.use(
     cors({
-        origin: ['http://localhost:8888','http://localhost:9999', 'http://10.168.1.220:8888', 'http://localhost:8080', 'http://10.168.1.103:7777','http://10.168.1.103', 'http://10.168.1.103','http://192.168.2.56'],
+        origin: ['http://localhost:8888','http://localhost:10866','http://localhost:9999', 'http://10.168.1.220:8888', 'http://localhost:8080', 'http://10.168.1.103:7777','http://10.168.1.103', 'http://10.168.1.103','http://192.168.2.56'],
     }),
 )
 
 // 创建串口连接
-const Serialport_Data = new SerialPort('COM4', { baudRate: 9600 });
+const Serialport_Data = new SerialPort('COM5', { baudRate: 9600 });
 // Serialport_Data.setMaxListeners = 150;
 // const parser =  Serialport_Data.pipe(new Readline({ delimiter: '\n' }));
-const port = 10866;
+
 const server = http.createServer(app);
 
 let receivedData = '';
 let lastReceivedData = ''; // 存储最新的数据
 Serialport_Data.on('data', (data) => {
   receivedData += data.toString('hex'); 
-   if (receivedData.length > 246) {
+   if (receivedData.length > 85) {
     console.log('Received data (hex):', receivedData);
     // 解析receivedData
     equipData(receivedData);
@@ -42,14 +42,14 @@ Serialport_Data.on('data', (data) => {
   }
 });
 
-
 Serialport_Data.on('error', (error) => {
   console.error('Serial port error:', error);
 });
 
 const sendSerialData = () => {
-  const hexData = '01030006003CA5DA';
-
+  // const hexData = '01030006003CA5DA';
+     const hexData = '010400000028F014';
+                   
   return new Promise((resolve, reject) => {
     Serialport_Data.write(Buffer.from(hexData, 'hex'), (error) => {
       if (error) {
@@ -61,40 +61,9 @@ const sendSerialData = () => {
   });
 };
 
-function equipData(data) {
-  console.log('Equip data:', data);
-  // return data;
-}
+function equipData(packetData) {
+  console.log('Equip data:', packetData);
 
-sendSerialData()
-  .then((sentData) => {
-    console.log('Data sent successfully:', sentData);
-  })
-  .catch((error) => {
-    console.error('Error sending data:', error);
-  });
-
- setInterval(() => { // 设置每5秒发送一次指令并返回数据
-  sendSerialData()
-    .then((sentData) => {
-      console.log('Data sent successfully:', sentData);
-    })
-    .catch((error) => {
-      console.error('Error sending data:', error);
-    });
-}, 5000);
-
-app.get('/equipData',  (req, res) => {
-
-  try {
-    // 假设已经接收到十六进制数据作为字符串
-    const packetData = lastReceivedData;
-    console.log('Value of packetData:', packetData);
-     // receivedData = '';
-
-    // 检查数据是否有效，长度是否为2的倍数
-    if (packetData) {
-          
       // 转化为10进制
       const aPhaseVoltage = parseInt(packetData.slice(10, 14), 16) / 10;
       const bPhaseVoltage = parseInt(packetData.slice(18, 22), 16) / 10;
@@ -127,43 +96,40 @@ app.get('/equipData',  (req, res) => {
       const TotalKWH2 = parseInt(packetData.slice(226, 230), 16) / 100;
       const TotalKvarH = parseInt(packetData.slice(234, 238), 16) / 100;
       const TotalKvarH2 = parseInt(packetData.slice(242, 246), 16) / 100;
-      // // 打印上述所有信息
+
         console.log("Received hex data:", packetData);
-        // console.log("aPhaseVoltage:", aPhaseVoltage);
-        // console.log("bPhaseVoltage:", bPhaseVoltage);
-        // console.log("cPhaseVoltage:", cPhaseVoltage);
-        // console.log("ablineVoltage:", ablineVoltage);
-        // console.log("bclineVoltage:", bclineVoltage);
-        // console.log("calineVoltage:", calineVoltage);
-        // console.log("aPhaseCurrent:", aPhaseCurrent);
-        // console.log("bPhaseCurrent:", bPhaseCurrent);
-        // console.log("cPhaseCurrent:", cPhaseCurrent);
-        // console.log("aphaseActivePower:", aphaseActivePower);
-        // console.log("bphaseActivePower:", bphaseActivePower);
-        // console.log("cphaseActivePower:", cphaseActivePower);
-        // console.log("TotalActivePower:", TotalActivePower);
-        // console.log("aphaseReactivePower:", aphaseReactivePower);
-        // console.log("bphaseReactivePower:", bphaseReactivePower);
-        // console.log("cphaseReactivePower:", cphaseReactivePower);
-        // console.log("totalReactivePower:", totalReactivePower);
-        // console.log("aphaseApperantPower:", aphaseApperantPower);
-        // console.log("bphaseApperantPower:", bphaseApperantPower);
-        // console.log("cphaseApperantPower:", cphaseApperantPower);
-        // console.log("TotalApperantPower:", TotalApperantPower);
-        // console.log("aphasePowerFactor:", aphasePowerFactor);
-        // console.log("bphasePowerFactor:", bphasePowerFactor);
-        // console.log("cphasePowerFactor:", cphasePowerFactor);
-        // console.log("PowerFactor:", PowerFactor);
-        // console.log("Frequency:", Frequency);
-        // console.log("TotalKWH:", TotalKWH);
-        // console.log("TotalKWH2:", TotalKWH2);
-        // console.log("TotalKvarH:", TotalKvarH);
-        // console.log("TotalKvarH2:", TotalKvarH2);
+        console.log("aPhaseVoltage:", aPhaseVoltage);
+        console.log("bPhaseVoltage:", bPhaseVoltage);
+        console.log("cPhaseVoltage:", cPhaseVoltage);
+        console.log("ablineVoltage:", ablineVoltage);
+        console.log("bclineVoltage:", bclineVoltage);
+        console.log("calineVoltage:", calineVoltage);
+        console.log("aPhaseCurrent:", aPhaseCurrent);
+        console.log("bPhaseCurrent:", bPhaseCurrent);
+        console.log("cPhaseCurrent:", cPhaseCurrent);
+        console.log("aphaseActivePower:", aphaseActivePower);
+        console.log("bphaseActivePower:", bphaseActivePower);
+        console.log("cphaseActivePower:", cphaseActivePower);
+        console.log("TotalActivePower:", TotalActivePower);
+        console.log("aphaseReactivePower:", aphaseReactivePower);
+        console.log("bphaseReactivePower:", bphaseReactivePower);
+        console.log("cphaseReactivePower:", cphaseReactivePower);
+        console.log("totalReactivePower:", totalReactivePower);
+        console.log("aphaseApperantPower:", aphaseApperantPower);
+        console.log("bphaseApperantPower:", bphaseApperantPower);
+        console.log("cphaseApperantPower:", cphaseApperantPower);
+        console.log("TotalApperantPower:", TotalApperantPower);
+        console.log("aphasePowerFactor:", aphasePowerFactor);
+        console.log("bphasePowerFactor:", bphasePowerFactor);
+        console.log("cphasePowerFactor:", cphasePowerFactor);
+        console.log("PowerFactor:", PowerFactor);
+        console.log("Frequency:", Frequency);
+        console.log("TotalKWH:", TotalKWH);
+        console.log("TotalKWH2:", TotalKWH2);
+        console.log("TotalKvarH:", TotalKvarH);
+        console.log("TotalKvarH2:", TotalKvarH2);
 
-
-        // const parsedData = equipData(packetData);
-      // 更新lastReceivedData对象
-      res.json({
+      return {
         aPhaseVoltage,
         bPhaseVoltage,
         cPhaseVoltage,
@@ -194,7 +160,31 @@ app.get('/equipData',  (req, res) => {
         TotalKWH2,
         TotalKvarH,
         TotalKvarH2
-      });
+      }
+}
+
+ setInterval(() => { // 设置每5秒发送一次指令并返回数据
+  sendSerialData()
+    .then((sentData) => {
+      console.log('Data sent successfully:', sentData);
+    })
+    .catch((error) => {
+      console.error('Error sending data:', error);
+    });
+}, 5000);
+
+app.get('/equipData',  (req, res) => {
+
+  try {
+    // 假设已经接收到十六进制数据作为字符串
+    const packetData = lastReceivedData;
+    console.log('Value of packetData:', packetData);
+     // receivedData = '';
+
+    // 检查数据是否有效，长度是否为2的倍数
+    if (packetData) {
+          const parsedData = equipData(packetData);
+          res.json(parsedData);
 
     } else {
       res.status(400).send('Invalid data received');
@@ -205,9 +195,10 @@ app.get('/equipData',  (req, res) => {
   }
 });
 
+const CanShuport = 10866;
 // 启动HTTP服务器
-server.listen(10866, 'localhost', () => {
-  console.log('Server running at http://localhost:10866/');
+server.listen(CanShuport, 'localhost', () => {
+  console.log('Server running at http://localhost:10866');
 });
 
 

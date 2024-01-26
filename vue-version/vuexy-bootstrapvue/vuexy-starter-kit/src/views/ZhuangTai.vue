@@ -1,545 +1,369 @@
 <template>
-  <div style="width: 2000px;position: absolute">
-    <b-card style="position: relative;width: 100%;">
-
-      <b-table
-          striped
-          hover
-          :items="items"
-          thead-class="text-center"
-          bordered
-          style="table-layout: fixed; width: 100%;"
+  <b-card
+      style="  height: 680px;width:700px;font-size: 26px;position: fixed;"
+      header="开关状态示意图(超级管理员可见)"
+  >
+    <b-row>
+      <!-- 多状态按钮 -->
+      <b-col
+          cols="12"
+          sm="6"
+          md="3"
       >
-        <template
-            #cell(AH201)="row"
-            style="justify-content: center"
-        >
-          <img
-              v-if="shiyanwei === 1"
-              src="@/assets/images/201/AH201shiyan.svg"
-              style="max-width: 100%; max-height: 100%"
-          >
-          <img
-              v-else-if="gongzuowei === 1"
-              src="@/assets/images/201/AH201gongzuo.svg"
-              style="max-width: 100%; max-height: 100%"
-          >
-          <img
-              v-else-if="duanluhe === 1"
-              src="@/assets/images/201/AH201duanluhe.svg"
-              style="max-width: 100%; max-height: 100%"
-          >
-          <img
-              v-else-if="duanlufen === 1"
-              src="@/assets/images/201/AH201duanlufen.svg"
-              style="max-width: 100%; max-height: 100%"
-          >
-          <img
-              v-else
-              src="@/assets/images/AH201.svg"
-              style="max-width: 100%; max-height: 100%"
-          >
-        </template>
+        <b-card style="width: 300px">
+          <div style="display: flex;flex-direction: column;width: 130px;margin-top: -40px;gap: 10px">
+            <b-button
+                pill
+                variant="warning"
+                @click="onupdate"
+            >
+              开启更新状态
+            </b-button>
+            <b-button
+                pill
+                variant="info"
+                @click="offupdate"
+            >
+              关闭更新状态
+            </b-button>
 
-        <template
-            #cell(AH202)="row"
-            style="justify-content: center"
-        >
-          <img
-              v-if="shiyanwei === 1"
-              src="@/assets/images/202/AH202shiyan.svg"
-              style="max-width: 100%; max-height: 100%"
-          >
-          <img
-              v-else-if="gongzuowei === 1"
-              src="@/assets/images/202/AH202gongzuo.svg"
-              style="max-width: 100%; max-height: 100%"
-          >
-          <img
-              v-else-if="duanluhe === 1"
-              src="@/assets/images/202/AH202duanluhe.svg"
-              style="max-width: 100%; max-height: 100%"
-          >
-          <img
-              v-else-if="duanlufen === 1"
-              src="@/assets/images/202/AH202duanlufen.svg"
-              style="max-width: 100%; max-height: 100%"
-          >
-          <img
-              v-else-if="jiedihe === 1"
-              src="@/assets/images/202/AH202jiedihe.svg"
-              style="max-width: 100%; max-height: 100%"
-          >
-          <img
-              v-else-if="jiedifen === 1"
-              src="@/assets/images/202/AH202jiedifen.svg"
-              style="max-width: 100%; max-height: 100%"
-          >
-          <img
-              v-else
-              src="@/assets/images/AH202.svg"
-              style="max-width: 100%; max-height: 100%"
-          >
-        </template>
+          </div>
 
-        <template
-            #cell(AH203)="row"
-            style="justify-content: center"
-        >
-          <img
-              v-if="shiyanwei === 1"
-              src="@/assets/images/202/AH202shiyan.svg"
-              style="max-width: 100%; max-height: 100%"
-          >
-          <img
-              v-else-if="gongzuowei === 1"
-              src="@/assets/images/202/AH202gongzuo.svg"
-              style="max-width: 100%; max-height: 100%"
-          >
-          <img
-              v-else-if="duanluhe === 1"
-              src="@/assets/images/202/AH202duanluhe.svg"
-              style="max-width: 100%; max-height: 100%"
-          >
-          <img
-              v-else-if="duanlufen === 1"
-              src="@/assets/images/202/AH202duanlufen.svg"
-              style="max-width: 100%; max-height: 100%"
-          >
-          <img
-              v-else-if="jiedihe === 1"
-              src="@/assets/images/202/AH202jiedihe.svg"
-              style="max-width: 100%; max-height: 100%"
-          >
-          <img
-              v-else-if="jiedifen === 1"
-              src="@/assets/images/202/AH202jiedifen.svg"
-              style="max-width: 100%; max-height: 100%"
-          >
-          <img
-              v-else
-              src="@/assets/images/AH202.svg"
-              style="max-width: 100%; max-height: 100%"
-          >
-        </template>
 
-        <template
-            #cell(AH204)="row"
-            style="justify-content: center"
-        >
-          <img
-              v-if="shiyanwei === 1"
-              src="@/assets/images/204/AH204shiyan.svg"
-              style="max-width: 100%; max-height: 100%"
-          >
-          <img
-              v-else-if="gongzuowei === 1"
-              src="@/assets/images/204/AH204gongzuo.svg"
-              style="max-width: 100%; max-height: 100%"
-          >
-          <img
-              v-else-if="duanluhe === 1"
-              src="@/assets/images/204/AH204duanluhe.svg"
-              style="max-width: 100%; max-height: 100%"
-          >
-          <img
-              v-else-if="duanlufen === 1"
-              src="@/assets/images/204/AH204duanlufen.svg"
-              style="max-width: 100%; max-height: 100%"
-          >
-          <img
-              v-else-if="jiedihe === 1"
-              src="@/assets/images/204/AH204jiedihe.svg"
-              style="max-width: 100%; max-height: 100%"
-          >
-          <img
-              v-else-if="jiedifen === 1"
-              src="@/assets/images/204/AH204jiedifen.svg"
-              style="max-width: 100%; max-height: 100%"
-          >
-          <img
-              v-else
-              src="@/assets/images/AH204.svg"
-              style="max-width: 100%; max-height: 100%"
-          >
-        </template>
+          <!--            如果shiyanwei=0 代表没到位 如果 shiyanwei=1 代表到位-->
+          <b-row style="margin-left: 10px;display: block;padding:20px 10px;height: 520px;width: 100vh;position: fixed;z-index: -2;">
+            <h6 class="title">
+              试验位置：</h6>
+            <b-row>
+              <b-form-radio
+                  v-model="shiyanwei"
+                  value="0"
+                  :disabled="isLocked"
+                  style="padding: 0px 20px"
+              >
+                还未到位
+              </b-form-radio>
+              <b-form-radio
+                  v-model="shiyanwei"
+                  value="1"
+                  class="custom-radio"
+                  :disabled="isLocked"
+              >
+                已到位
+              </b-form-radio>
+            </b-row>
 
-        <template
-            #cell(AH205)="row"
-            style="justify-content: center"
-        >
-          <img
-              v-if="shiyanwei === 1"
-              src="@/assets/images/204/AH204shiyan.svg"
-              style="max-width: 100%; max-height: 100%"
-          >
-          <img
-              v-else-if="gongzuowei === 1"
-              src="@/assets/images/204/AH204gongzuo.svg"
-              style="max-width: 100%; max-height: 100%"
-          >
-          <img
-              v-else-if="duanluhe === 1"
-              src="@/assets/images/204/AH204duanluhe.svg"
-              style="max-width: 100%; max-height: 100%"
-          >
-          <img
-              v-else-if="duanlufen === 1"
-              src="@/assets/images/204/AH204duanlufen.svg"
-              style="max-width: 100%; max-height: 100%"
-          >
-          <img
-              v-else-if="jiedihe === 1"
-              src="@/assets/images/204/AH204jiedihe.svg"
-              style="max-width: 100%; max-height: 100%"
-          >
-          <img
-              v-else-if="jiedifen === 1"
-              src="@/assets/images/204/AH204jiedifen.svg"
-              style="max-width: 100%; max-height: 100%"
-          >
-          <img
-              v-else
-              src="@/assets/images/AH204.svg"
-              style="max-width: 100%; max-height: 100%"
-          >
-        </template>
+            <h6 class="title">
+              工作位置：
+            </h6>
+            <b-row>
+              <b-form-radio
+                  v-model="gongzuowei"
+                  value="0"
+                  :disabled="isLocked"
+                  style="padding: 0px 20px"
+              >
+                还未到位
+              </b-form-radio>
+              <b-form-radio
+                  v-model="gongzuowei"
+                  value="1"
+                  class="custom-radio"
+                  :disabled="isLocked"
+              >
+                已到位
+              </b-form-radio>
+            </b-row>
 
-        <template
-            #cell(AH206)="row"
-            style="justify-content: center"
-        >
-          <img
-              v-if="shiyanwei === 1"
-              src="@/assets/images/206/AH206shiyan.svg"
-              style="max-width: 100%; max-height: 100%"
-          >
-          <img
-              v-else-if="gongzuowei === 1"
-              src="@/assets/images/206/AH206gongzuo.svg"
-              style="max-width: 100%; max-height: 100%"
-          >
-          <img
-              v-else-if="duanluhe === 1"
-              src="@/assets/images/206/AH206duanluhe.svg"
-              style="max-width: 100%; max-height: 100%"
-          >
-          <img
-              v-else-if="duanlufen === 1"
-              src="@/assets/images/206/AH206duanlufen.svg"
-              style="max-width: 100%; max-height: 100%"
-          >
-          <img
-              v-else
-              src="@/assets/images/AH206.svg"
-              style="max-width: 100%; max-height: 100%"
-          >
-        </template>
+            <h6 class="title">
+              接地开关分断：
+            </h6>
+            <b-row>
+              <b-form-radio
+                  v-model="jiedifen"
+                  value="0"
+                  :disabled="isLocked"
+                  style="padding: 0px 20px"
+              >
+                还未分断
+              </b-form-radio>
+              <b-form-radio
+                  v-model="jiedifen"
+                  value="1"
+                  class="custom-radio"
+                  :disabled="isLocked"
+              >
+                已分断
+              </b-form-radio>
+            </b-row>
 
-        <template
-            #cell(AH200)="row"
-            style="justify-content: center"
-        >
-          <img
-              src="@/assets/images/AH200.svg"
-              style="max-width: 100%; max-height: 100%"
-          >
-        </template>
+            <h6 class="title">
+              接地开关闭合：
+            </h6>
+            <b-row>
+              <b-form-radio
+                  v-model="jiedihe"
+                  value="0"
+                  :disabled="isLocked"
+                  style="padding: 0px 20px"
+              >
+                还未闭合
+              </b-form-radio>
+              <b-form-radio
+                  v-model="jiedihe"
+                  value="1"
+                  class="custom-radio"
+                  :disabled="isLocked"
+              >
+                已闭合
+              </b-form-radio>
+            </b-row>
 
-        <template
-            #cell(AH207)="row"
-            style="justify-content: center"
-        >
-          <img
-              v-if="shiyanwei === 1"
-              src="@/assets/images/204/AH204shiyan.svg"
-              style="max-width: 100%; max-height: 100%"
-          >
-          <img
-              v-else-if="gongzuowei === 1"
-              src="@/assets/images/204/AH204gongzuo.svg"
-              style="max-width: 100%; max-height: 100%"
-          >
-          <img
-              v-else-if="duanluhe === 1"
-              src="@/assets/images/204/AH204duanluhe.svg"
-              style="max-width: 100%; max-height: 100%"
-          >
-          <img
-              v-else-if="duanlufen === 1"
-              src="@/assets/images/204/AH204duanlufen.svg"
-              style="max-width: 100%; max-height: 100%"
-          >
-          <img
-              v-else-if="jiedihe === 1"
-              src="@/assets/images/204/AH204jiedihe.svg"
-              style="max-width: 100%; max-height: 100%"
-          >
-          <img
-              v-else-if="jiedifen === 1"
-              src="@/assets/images/204/AH204jiedifen.svg"
-              style="max-width: 100%; max-height: 100%"
-          >
-          <img
-              v-else
-              src="@/assets/images/AH204.svg"
-              style="max-width: 100%; max-height: 100%"
-          >
-        </template>
+            <h6 class="title">
+              断路合闸：
+            </h6>
+            <b-row>
+              <b-form-radio
+                  v-model="duanluhe"
+                  value="0"
+                  :disabled="isLocked"
+                  style="padding: 0px 20px"
+              >
+                还未合闸
+              </b-form-radio>
+              <b-form-radio
+                  v-model="duanluhe"
+                  value="1"
+                  class="custom-radio"
+                  :disabled="isLocked"
+              >
+                已合闸
+              </b-form-radio>
+            </b-row>
 
-        <template
-            #cell(AH208)="row"
-            style="justify-content: center"
-        >
-          <img
-              v-if="shiyanwei === 1"
-              src="@/assets/images/204/AH204shiyan.svg"
-              style="max-width: 100%; max-height: 100%"
-          >
-          <img
-              v-else-if="gongzuowei === 1"
-              src="@/assets/images/204/AH204gongzuo.svg"
-              style="max-width: 100%; max-height: 100%"
-          >
-          <img
-              v-else-if="duanluhe === 1"
-              src="@/assets/images/204/AH204duanluhe.svg"
-              style="max-width: 100%; max-height: 100%"
-          >
-          <img
-              v-else-if="duanlufen === 1"
-              src="@/assets/images/204/AH204duanlufen.svg"
-              style="max-width: 100%; max-height: 100%"
-          >
-          <img
-              v-else-if="jiedihe === 1"
-              src="@/assets/images/204/AH204jiedihe.svg"
-              style="max-width: 100%; max-height: 100%"
-          >
-          <img
-              v-else-if="jiedifen === 1"
-              src="@/assets/images/204/AH204jiedifen.svg"
-              style="max-width: 100%; max-height: 100%"
-          >
-          <img
-              v-else
-              src="@/assets/images/AH204.svg"
-              style="max-width: 100%; max-height: 100%"
-          >
-        </template>
+            <h6 class="title">
+              断路分闸：
+            </h6>
+            <b-row>
+              <b-form-radio
+                  v-model="duanlufen"
+                  value="0"
+                  :disabled="isLocked"
+                  style="padding: 0px 20px"
+              >
+                还未分闸
+              </b-form-radio>
+              <b-form-radio
+                  v-model="duanlufen"
+                  value="1"
+                  class="custom-radio"
+                  :disabled="isLocked"
+              >
+                已分闸
+              </b-form-radio>
+            </b-row>
 
-        <template
-            #cell(AH209)="row"
-            style="justify-content: center"
-        >
-          <img
-              v-if="shiyanwei === 1"
-              src="@/assets/images/202/AH202shiyan.svg"
-              style="max-width: 100%; max-height: 100%"
-          >
-          <img
-              v-else-if="gongzuowei === 1"
-              src="@/assets/images/202/AH202gongzuo.svg"
-              style="max-width: 100%; max-height: 100%"
-          >
-          <img
-              v-else-if="duanluhe === 1"
-              src="@/assets/images/202/AH202duanluhe.svg"
-              style="max-width: 100%; max-height: 100%"
-          >
-          <img
-              v-else-if="duanlufen === 1"
-              src="@/assets/images/202/AH202duanlufen.svg"
-              style="max-width: 100%; max-height: 100%"
-          >
-          <img
-              v-else-if="jiedihe === 1"
-              src="@/assets/images/202/AH202jiedihe.svg"
-              style="max-width: 100%; max-height: 100%"
-          >
-          <img
-              v-else-if="jiedifen === 1"
-              src="@/assets/images/202/AH202jiedifen.svg"
-              style="max-width: 100%; max-height: 100%"
-          >
-          <img
-              v-else
-              src="@/assets/images/AH202.svg"
-              style="max-width: 100%; max-height: 100%"
-          >
-        </template>
+            <h6 class="title">
+              前门闭锁条件：
+            </h6>
+            <b-row>
+              <b-form-radio
+                  v-model="qianmen"
+                  value="0"
+                  :disabled="isLocked"
+                  style="padding: 0px 20px"
+              >
+                未满足
+              </b-form-radio>
+              <b-form-radio
+                  v-model="qianmen"
+                  value="1"
+                  class="custom-radio"
+                  :disabled="isLocked"
+              >
+                已满足
+              </b-form-radio>
+            </b-row>
 
-        <template
-            #cell(AH210)="row"
-            style="justify-content: center"
-        >
-          <img
-              v-if="shiyanwei === 1"
-              src="@/assets/images/202/AH202shiyan.svg"
-              style="max-width: 100%; max-height: 100%"
-          >
-          <img
-              v-else-if="gongzuowei === 1"
-              src="@/assets/images/202/AH202gongzuo.svg"
-              style="max-width: 100%; max-height: 100%"
-          >
-          <img
-              v-else-if="duanluhe === 1"
-              src="@/assets/images/202/AH202duanluhe.svg"
-              style="max-width: 100%; max-height: 100%"
-          >
-          <img
-              v-else-if="duanlufen === 1"
-              src="@/assets/images/202/AH202duanlufen.svg"
-              style="max-width: 100%; max-height: 100%"
-          >
-          <img
-              v-else-if="jiedihe === 1"
-              src="@/assets/images/202/AH202jiedihe.svg"
-              style="max-width: 100%; max-height: 100%"
-          >
-          <img
-              v-else-if="jiedifen === 1"
-              src="@/assets/images/202/AH202jiedifen.svg"
-              style="max-width: 100%; max-height: 100%"
-          >
-          <img
-              v-else
-              src="@/assets/images/AH202.svg"
-              style="max-width: 100%; max-height: 100%"
-          >
-        </template>
+            <h6 class="title">
+              后门闭锁条件：
+            </h6>
+            <b-row>
+              <b-form-radio
+                  v-model="houmen"
+                  value="0"
+                  :disabled="isLocked"
+                  style="padding: 0px 20px"
+              >
+                未满足
+              </b-form-radio>
+              <b-form-radio
+                  v-model="houmen"
+                  value="1"
+                  class="custom-radio"
+                  :disabled="isLocked"
+              >
+                已满足
+              </b-form-radio>
+            </b-row>
+          </b-row>
+        </b-card>
 
-        <template
-            #cell(AH211)="row"
-            style="justify-content: center"
-        >
-          <img
-              v-if="shiyanwei === 1"
-              src="@/assets/images/201/AH201shiyan.svg"
-              style="max-width: 100%; max-height: 100%"
-          >
-          <img
-              v-else-if="gongzuowei === 1"
-              src="@/assets/images/201/AH201gongzuo.svg"
-              style="max-width: 100%; max-height: 100%"
-          >
-          <img
-              v-else-if="duanluhe === 1"
-              src="@/assets/images/201/AH201duanluhe.svg"
-              style="max-width: 100%; max-height: 100%"
-          >
-          <img
-              v-else-if="duanlufen === 1"
-              src="@/assets/images/201/AH201duanlufen.svg"
-              style="max-width: 100%; max-height: 100%"
-          >
-          <img
-              v-else
-              src="@/assets/images/AH201.svg"
-              style="max-width: 100%; max-height: 100%"
-          >
-        </template>
-      </b-table>
+      </b-col>
 
-      <div>
+      <!-- 多状态svg图 -->
+      <b-col
+          cols="12" sm="6" md="3"
+          style="width: 100vh;"
+      >
+        <!--        <b-card style="scale: 0.65;margin-top:-180px;margin-left:50px;background-color: transparent;">-->
+        <!--          <img src="@/assets/images/duandian2.png"/>-->
+        <!--        </b-card>-->
 
-        <b-collapse v-model="isCollapsed">
-          <b-table
-              striped
-              hover
-              :items="dataitems"
-              thead-class="table"
-              class="text-sty"
-              no-header
-              :fields="['unit','AH201', 'AH202', 'AH203', 'AH204', 'AH205', 'AH206','AH200', 'AH207', 'AH208', 'AH209', 'AH210', 'AH211']"
-              :thead-class="'d-none'"
-              bordered
-          />
-        </b-collapse>
-        <b-button
-            variant="primary"
-            @click="toggleCollapse"
-        >
-          {{ isCollapsed ? '收起' : '展开' }}
-        </b-button>
-      </div>
 
-      <b-card style="margin-left: 40px;width: 100%;background-color: transparent;z-index: 9999">
-        <b-card-text style="font-family: 黑体; font-size: 16px;">
-          仿真测试:
-        </b-card-text>
-        <br>
+        <b-card class="fixed-card">
 
-        <div style="flex-direction: row;margin-left: 50px">
-          <b-button
-              variant="outline-primary"
-              @click="toggleshiyanwei"
-          >
-            更改第一台试验位置
-          </b-button>
-          <b-button
-              variant="outline-secondary"
-              style="margin-left: 65px"
-              @click="togglegongzuowei"
-          >
-            更改第二台工作位置
-          </b-button>
-        </div>
-        <br/>
+          <b-row style="justify-content: center;position: fixed;">
+            <img
+                src="@/assets/images/kaiguan/1.svg"
+                class="responsive-svg"
+                alt="SVG Image"
+            >
+          </b-row>
 
-        <div style="flex-direction: row;margin-left: 50px">
-          <b-button
-              variant="outline-success"
-              @click="toggleduanluhe"
-          >
-            更改第三台断路器合闸
-          </b-button>
-          <b-button
-              variant="outline-danger"
-              style="margin-left: 50px"
-              @click="toggleduanlufen"
-          >
-            更改第四台断路器分闸
-          </b-button>
-        </div>
-        <br/>
+          <b-row style="justify-content: center;position: fixed;">
+            <img
+                v-if="shiyanwei === 1"
+                src="@/assets/images/kaiguan/2/2_shiyan.svg"
+                class="responsive-svg"
+                alt="SVG Image"
+            >
+            <img
+                v-else-if="gongzuowei === 1"
+                src="@/assets/images/kaiguan/2/2_gongzuo.svg"
+                class="responsive-svg"
+                alt="SVG Image"
+            >
+            <img
+                v-else-if="gongzuowei === 0 && shiyanwei === 0"
+                src="@/assets/images/kaiguan/2/2_zhongjian.svg"
+                class="responsive-svg"
+                alt="SVG Image"
+            >
+          </b-row>
 
-        <div style="flex-direction: row;margin-left: 50px">
-          <b-button
-              variant="outline-warning"
-              @click="togglejiedifen"
-          >
-            更改第五台接地刀分闸
-          </b-button>
-          <b-button
-              variant="outline-info"
-              style="margin-left: 50px"
-              @click="togglejiedihe"
-          >
-            更改第六台接地刀合闸
-          </b-button>
-        </div>
+          <b-row style="justify-content: center;position: fixed;">
+            <img
+                v-if="duanluhe === 1"
+                src="@/assets/images/kaiguan/3/3_fen.svg"
+                class="responsive-svg"
+                alt="SVG Image"
+            >
+            <img
+                v-else-if="duanlufen === 1"
+                src="@/assets/images/kaiguan/3/3_he.svg"
+                class="responsive-svg"
+                alt="SVG Image"
+            >
+            <img
+                v-else-if="duanluhe === 0 && duanlufen === 0"
+                src="@/assets/images/kaiguan/3/3_no.svg"
+                class="responsive-svg"
+                alt="SVG Image"
+            >
+          </b-row>
 
-      </b-card>
+          <b-row style="justify-content: center;position: fixed;">
+            <img
+                v-if="shiyanwei===1"
+                src="@/assets/images/kaiguan/4/4_shiyan.svg"
+                class="responsive-svg"
+                alt="SVG Image"
+            >
+            <img
+                v-else-if="gongzuowei===1"
+                src="@/assets/images/kaiguan/4/4_gongzuo.svg"
+                class="responsive-svg"
+                alt="SVG Image"
+            >
+            <img
+                v-else-if="gongzuowei === 0 && shiyanwei === 0"
+                src="@/assets/images/kaiguan/4/4_zhongjian.svg"
+                class="responsive-svg"
+                alt="SVG Image"
+            >
+          </b-row>
 
-    </b-card>
-  </div>
+          <b-row style="justify-content: center;position: fixed;">
+            <img
+
+                src="@/assets/images/kaiguan/5.svg"
+                class="responsive-svg"
+                alt="SVG Image"
+            >
+          </b-row>
+
+          <b-row style="justify-content: center;position: fixed;">
+            <img
+                v-if="jiedifen === 1"
+                src="@/assets/images/kaiguan/6/6_fen.svg"
+                class="responsive-svg"
+                alt="SVG Image"
+            >
+            <img
+                v-else-if="jiedihe === 1"
+                src="@/assets/images/kaiguan/6/6_he.svg"
+                class="responsive-svg"
+                alt="SVG Image"
+            >
+            <img
+                v-else-if="jiedifen === 0 && jiedihe === 0"
+                src="@/assets/images/kaiguan/6/6_no.svg"
+                class="responsive-svg"
+                alt="SVG Image"
+            >
+          </b-row>
+
+          <b-row style="justify-content: center;position: fixed;">
+            <img
+                src="@/assets/images/kaiguan/7.svg"
+                class="responsive-svg"
+                alt="SVG Image"
+            >
+          </b-row>
+
+        </b-card>
+      </b-col>
+    </b-row>
+    <!--    <b-form-input class="input" />-->
+  </b-card>
 </template>
 
 <script>
 import {
-  BTable, BCard, BButton, BCollapse, BCardText, BRow, BCol,
+  BRow, BCol, BCard, BCardText, BButton, BFormRadio,
 } from 'bootstrap-vue'
-import ZhuangTaiImages from '@/views/ZhuangTaiImages.vue'
+import axios from 'axios'
+import clouds from 'vanta/src/vanta.clouds'
+import * as THREE from 'three'
+// eslint-disable-next-line no-unused-vars
 
 export default {
   components: {
-    BTable, BCard, ZhuangTaiImages, BButton, BCollapse, BCardText, BRow, BCol,
+    BRow,
+
+    BCol,
+    BCard,
+    BCardText,
+    BButton,
+    BFormRadio,
   },
   data() {
     return {
-      isCollapsed: true,
+      status: '未储能', // 初始文本状态
+
+      isLocked: true, // 控制是否锁定复选框
+
       shiyanwei: 0,
       gongzuowei: 0,
       jiedifen: 0,
@@ -548,144 +372,139 @@ export default {
       duanlufen: 0,
       qianmen: 0,
       houmen: 0,
-      dataitems: [
-        {
-          unit: 'Uab', AH201: 0, AH202: '10.1KV', AH203: '10.1KV', AH204: 0, AH205: '10.1KV', AH206: '10.1KV', AH207: '10.1KV', AH208: '10.1KV', AH209: 0, AH210: '10.1KV', AH211: '10.1KV',
-        },
-        {
-          unit: 'Ubc', AH201: 0, AH202: '10.1KV', AH203: '10.1KV', AH204: 0, AH205: '10.1KV', AH206: '10.1KV', AH207: '10.1KV', AH208: '10.1KV', AH209: 0, AH210: '10.1KV', AH211: '10.1KV',
-        },
-        {
-          unit: 'Uac', AH201: 0, AH202: '10.1KV', AH203: '10.1KV', AH204: 0, AH205: '10.1KV', AH206: '10.1KV', AH207: '10.1KV', AH208: '10.1KV', AH209: 0, AH210: '10.1KV', AH211: '10.1KV',
-        },
-        {
-          unit: 'Ia', AH201: 0.0, AH202: 0.0, AH203: 0.0, AH204: 0.0, AH205: 0.0, AH206: 0.0, AH207: 0.0, AH208: 0.0, AH209: 0.0, AH210: 0.0, AH211: 0.0,
-        },
-        {
-          unit: 'Ib', AH201: 0.6, AH202: 0.6, AH203: 0.6, AH204: 0.6, AH205: 0.6, AH206: 0.6, AH207: 0.0, AH208: 0.0, AH209: 0.0, AH210: 0.0, AH211: 0.0,
-        },
-        {
-          unit: 'Ic', AH201: 0.1, AH202: 0.1, AH203: 0.1, AH204: 0.1, AH205: 0.1, AH206: 0.1, AH207: 0.0, AH208: 0.0, AH209: 0.0, AH210: 0.0, AH211: 0.0,
-        },
-        {
-          unit: 'P功率', AH201: '50.1KW', AH202: '30.1KV', AH203: '40.1KV', AH204: '60.1KW', AH205: '20.1KV', AH206: '50.1KV', AH200: '', AH207: '30.1KV', AH208: '40.1KV', AH209: '60.1KW', AH210: '20.1KV', AH211: '50.1KV',
-        },
-        {
-          unit: 'T1°C', AH201: 22.0, AH202: 22.0, AH203: 22.0, AH204: 22.0, AH205: 22.0, AH206: 22.0, AH207: 22.0, AH208: 22.0, AH209: 22.0, AH210: 22.0, AH211: 22.0,
-        },
-        {
-          unit: 'T2°C', AH201: 10.6, AH202: 10.6, AH203: 10.6, AH204: 10.6, AH205: 10.6, AH206: 10.6, AH207: 10.6, AH208: 10.6, AH209: 10.6, AH210: 10.6, AH211: 10.6,
-        },
-        {
-          unit: '负载率', AH201: '0.0%', AH202: '0.0%', AH203: '0.0%', AH204: '0.0%', AH205: '0.0%', AH206: '0.0%', AH200: '', 图8: '0.0%', AH208: '0.0%', AH209: '0.0%', AH210: '0.0%', AH211: '0.0%',
-        },
-      ],
-      items: [
-        {
-          参数: '',
-          AH201: 'value1_row1',
-          AH202: 'value2_row1',
-          AH203: 'value3_row1',
-          AH204: 'value4_row1',
-          AH205: 'value5_row1',
-          AH206: 'value6_row1',
-          AH200: 'value1_row1',
-          AH207: 'value2_row1',
-          AH208: 'value3_row1',
-          AH209: 'value4_row1',
-          AH210: 'value5_row1',
-          AH211: 'value6_row1',
-        },
-      ],
+
     }
   },
-  mounted() {
-    // 使用定时器每2秒更新数据
-    setInterval(() => {
-      this.updateUData()
-      this.updateIData()
-      this.updateTempData()
-    }, 2000)
+  created() {
+
   },
+  beforeMount() {
+    axios.get('http://localhost:9999/switch_one')
+        .then(response => {
+
+        })
+        .catch(err => {
+          console.log(err)
+        })
+  },
+  mounted() {
+    setInterval(() => {
+      axios.post('http://localhost:9999/getdata')
+          .then(response => {
+            this.qianmen = response.data.qianmen
+            this.houmen = response.data.houmen
+            this.duanlufen = response.data.duanlufen
+            this.duanluhe = response.data.duanluhe
+            this.jiedifen = response.data.jiedifen
+            this.jiedihe = response.data.jiedihe
+            this.gongzuowei = response.data.gongzuowei
+            this.shiyanwei = response.data.shiyanwei
+
+            // this.data = res.data
+            console.log(this.data)
+          })
+          .catch(err => {
+            console.log(err)
+          })
+    }, 3000)
+  },
+  beforeDestroy() {
+    axios.get('http://localhost:9999/switch_zero')
+        .then(res => {
+          console.log(res)
+        })
+        .catch(err => {
+          console.log(err)
+        })
+  },
+
   methods: {
-    toggleCollapse() {
-      this.isCollapsed = !this.isCollapsed
+    onupdate() {
+      console.log('click on')
+      axios.get('http://localhost:9999/switch_one')
+          .then(response => {
+            console.log('click on1')
+            // console.log(response.data)
+          })
+          .catch(err => {
+            console.log(err)
+          })
     },
-    toggleshiyanwei() {
-      this.shiyanwei = this.shiyanwei === 0 ? 1 : 0
-    },
-    togglegongzuowei() {
-      this.gongzuowei = this.gongzuowei === 0 ? 1 : 0
-    },
-    toggleduanluhe() {
-      this.duanluhe = this.duanluhe === 0 ? 1 : 0
-    },
-    toggleduanlufen() {
-      this.duanlufen = this.duanlufen === 0 ? 1 : 0
-    },
-    togglejiedihe() {
-      this.jiedihe = this.jiedihe === 0 ? 1 : 0
-    },
-    togglejiedifen() {
-      this.jiedifen = this.jiedifen === 0 ? 1 : 0
-    },
-
-    updateUData() { // 随机生成电压数据
-      // 获取前三行数据
-      for (let i = 0; i < 3; i += 1) {
-        const row = this.dataitems[i]
-        Object.keys(row).forEach(key => {
-          if (key !== 'unit') {
-            // 生成10到110之间的随机数
-            row[key] = `${(Math.random() * (50 - 10 + 1) + 10).toFixed(1)}KV`
-          }
-        })
-      }
-    },
-
-    updateIData() { // 随机生成电流数据
-      // 获取电流数据
-      for (let i = 3; i < 6; i += 1) {
-        const row = this.dataitems[i]
-        Object.keys(row).forEach(key => {
-          if (key !== 'unit') {
-            // 生成10到110之间的随机数
-            row[key] = `${Math.floor(Math.random() * (15 - 10 + 1) + 2)}A`
-          }
-        })
-      }
-    },
-
-    updateTempData() { // 随机生成温度数据
-      // 获取电流数据
-      for (let i = 7; i < 9; i += 1) {
-        const row = this.dataitems[i]
-        Object.keys(row).forEach(key => {
-          if (key !== 'unit') {
-            // 生成10到110之间的随机数
-            row[key] = `${Math.floor(Math.random() * (60 - 10 + 1) + 20).toFixed(1)}°C`
-          }
-        })
-      }
+    offupdate() {
+      console.log('click off')
+      axios.get('http://localhost:9999/switch_zero')
+          // eslint-disable-next-line no-unused-vars
+          .then(response => {
+            console.log('click off1')
+            // console.log(response.data)
+          })
+          .catch(err => {
+            console.log(err)
+          })
     },
 
   },
 }
 </script>
 
-<style scoped>
-.text-center th {
+<style>
+.input{
+  height: 60px;
   text-align: center;
+  font-size: 25px;
 }
 
-.table thead th {
-  display: none;
+.title{
+  font-family: 新宋体,serif;
+  font-size: 16px;
+  font-weight: bolder;
 }
-.text-sty{
-  color: #109f0c;
-  font-size: 17px;
-  text-align: center;
+.custom-control-input:checked ~ .custom-control-label::before,
+.custom-radio .custom-control-input:checked:disabled ~ .custom-control-label::before {
+  background-color: #33ff44;
+  border: #09280b;
+}
+.icon-radio{
+  margin-left: 10px;
+}
+.custom-radio .custom-control-label {
+  color: #000000 !important; /* Use !important to ensure it takes precedence */
+
+}
+.responsive-svg{
+  padding: 0;
+  border: 0;
+  height: 100vh;
   width: 100%;
-  table-layout: fixed;
+}
+.fixed-card {
+  background-color: transparent;
+  margin-top: -650px;
+  transform: scale(3);
+  margin-right: -180px;
+  margin-left: 100px;
+  z-index: 9999;
+}
+@media (width: 1024px) {
+  .fixed-card {
+    transform: scale(3);
+    margin-top: -400px;
+  }
+}
+
+@media (width: 1080px) {
+  .fixed-card {
+    transform: scale(3);
+    margin-top: -600px;
+  }
+}
+@media (max-width: 799px) {
+
+  .fixed-card {
+    transform: scale(3);
+    margin-right: 150px;
+    margin-left: 300px;
+    margin-top: -800px;
+  }
 }
 </style>

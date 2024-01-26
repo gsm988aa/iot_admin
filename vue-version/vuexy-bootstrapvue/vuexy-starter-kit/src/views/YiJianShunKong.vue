@@ -205,7 +205,6 @@ export default {
 
       isDisabled: false,
 
-      visible: false,
 
     }
   },

@@ -172,201 +172,202 @@
               >
                 <b-card style="background-color: #57585b;width: 100vh">
                   <b-row v-show="currentEquipPage === 1">
-                    <b-card-text style="color: #ffffff">A相电压:
+                    <b-card-text style="color: #eabe62">A相电压:
                       <span
                           class="data-value"
-                          style="margin-left: 20px;"
-                      >{{ aPhaseVoltage }}</span> <span style="margin-left: 10px">V</span>
+                          style="margin-left: 20px;color: #ffffff"
+                      >{{ aPhaseVoltage }}</span> <span style="margin-left: 10px;color: #ffffff">V</span>
                     </b-card-text>
-                    <b-card-text style="color: #ffffff;margin-top: 25px">B相电压:
+                    <b-card-text style="color: #eabe62;">B相电压:
                       <span
                           class="data-value"
-                          style="margin-left: 20px;"
-                      >{{ bPhaseVoltage }}</span> <span style="margin-left: 10px">V</span>
+                          style="margin-left: 20px;color: #ffffff"
+                      >{{ bPhaseVoltage }}</span> <span style="margin-left: 10px;color: #ffffff">V</span>
                     </b-card-text>
-                    <b-card-text style="color: #ffffff;margin-top: 25px">C相电压:
+                    <b-card-text style="color: #eabe62;margin-left: 40px;">C相电压:
                       <span
                           class="data-value"
-                          style="margin-left: 20px;"
-                      >{{ cPhaseVoltage }}</span> <span style="margin-left: 10px">V</span>
+                          style="margin-left: 20px;color: #ffffff"
+                      >{{ cPhaseVoltage }}</span> <span style="margin-left: 10px;color: #ffffff">V</span>
                     </b-card-text>
-                    <b-card-text style="color: #ffffff;margin-top: 25px">AB线电压:
+                    <b-card-text style="color: #eabe62;margin-top: 25px">AB线电压:
                       <span
                         class="data-value"
-                        style="margin-left: 20px;"
-                      >{{ ablineVoltage }}</span> <span style="margin-left: 10px">V</span>
+                        style="margin-left: 20px;color: #ffffff"
+                      >{{ ablineVoltage }}</span> <span style="margin-left: 10px;color: #ffffff">V</span>
                     </b-card-text>
-                    <b-card-text style="color: #ffffff;margin-top: 25px">BC线电压:
+                    <b-card-text style="color: #eabe62;margin-top: 25px;margin-left: 50px">BC线电压:
                       <span
                           class="data-value"
-                          style="margin-left: 20px;"
-                      >{{ bclineVoltage }}</span> <span style="margin-left: 10px">V</span>
+                          style="margin-left: 20px;color: #ffffff"
+                      >{{ bclineVoltage }}</span> <span style="margin-left: 10px;color: #ffffff">V</span>
                     </b-card-text>
-                    <b-card-text style="color: #ffffff;margin-top: 25px">CA线电压:
+                    <b-card-text style="color: #eabe62;margin-top: 25px;margin-left: 25px;">CA线电压:
                       <span
                           class="data-value"
-                          style="margin-left: 20px;"
-                      >{{ calineVoltage }}</span> <span style="margin-left: 10px">V</span>
+                          style="margin-left: 20px;color: #ffffff"
+                      >{{ calineVoltage }}</span> <span style="margin-left: 10px;color: #ffffff">V</span>
                     </b-card-text>
-                    <b-card-text style="color: #ffffff;margin-top: 25px">A相电流:
+                    <b-card-text style="color: #eabe62;margin-top: 25px">A相电流:
                       <span
                           class="data-value"
-                          style="margin-left: 20px;"
-                      >{{ aPhaseCurrent }}</span> <span style="margin-left: 10px">A</span>
+                          style="margin-left: 20px;color: #ffffff"
+                      >{{ aPhaseCurrent }}</span> <span style="margin-left: 10px;color: #ffffff">A</span>
                     </b-card-text>
-                    <b-card-text style="color: #ffffff;margin-top: 25px">B相电流:
+                    <b-card-text style="color: #eabe62;margin-top: 25px;margin-left: 35px">B相电流:
                       <span
                           class="data-value"
-                          style="margin-left: 20px;"
-                      >{{ bPhaseCurrent }}</span> <span style="margin-left: 10px">A</span>
+                          style="margin-left: 20px;color: #ffffff"
+                      >{{ bPhaseCurrent }}</span> <span style="margin-left: 10px;color: #ffffff">A</span>
                     </b-card-text>
-                    <b-card-text style="color: #ffffff;margin-top: 25px">C相电流:
+                    <b-card-text style="color: #eabe62;margin-top: 25px;margin-left: 40px">C相电流:
                       <span
                           class="data-value"
-                          style="margin-left: 20px;"
-                      >{{ cPhaseCurrent }}</span> <span style="margin-left: 10px">A</span>
+                          style="margin-left: 20px;color: #ffffff"
+                      >{{ cPhaseCurrent }}</span> <span style="margin-left: 10px;color: #ffffff">A</span>
                     </b-card-text>
-                    <b-button variant="primary" @click="nextPage(2)">下一页</b-button>
+
+                    <b-button style="margin-top: 40px;margin-right: 100px" variant="primary" @click="nextPage(2)">下一页</b-button>
                   </b-row>
 
                   <b-row v-show="currentEquipPage === 2">
-                    <b-card-text style="color: #ffffff">A相有功功率:
+                    <b-card-text style="color: #eabe62">A相有功功率:
                       <span
                           class="data-value"
-                          style="margin-left: 20px;"
-                      >{{ aphaseActivePower }}</span> <span style="margin-left: 10px">W</span>
+                          style="margin-left: 20px;color: #ffffff"
+                      >{{ aphaseActivePower }}</span> <span style="margin-left: 10px;color: #ffffff">W</span>
                     </b-card-text>
-                    <b-card-text style="color: #ffffff;margin-top: 25px">B相有功功率:
+                    <b-card-text style="color: #eabe62;margin-left: 50px">B相有功功率:
                       <span
                           class="data-value"
-                          style="margin-left: 20px;"
-                      >{{ bphaseActivePower }}</span> <span style="margin-left: 10px">W</span>
+                          style="margin-left: 20px;color: #ffffff"
+                      >{{ bphaseActivePower }}</span> <span style="margin-left: 10px;color: #ffffff">W</span>
                     </b-card-text>
-                    <b-card-text style="color: #ffffff;margin-top: 25px">C相有功功率:
+                    <b-card-text style="color: #eabe62;">C相有功功率:
                       <span
                           class="data-value"
-                          style="margin-left: 20px;"
-                      >{{ cphaseActivePower }}</span> <span style="margin-left: 10px">W</span>
+                          style="margin-left: 20px;color: #ffffff"
+                      >{{ cphaseActivePower }}</span> <span style="margin-left: 10px;color: #ffffff">W</span>
                     </b-card-text>
-                    <b-card-text style="color: #ffffff;margin-top: 25px">总有功功率:
+                    <b-card-text style="color: #eabe62;margin-top: 25px">总有功功率:
                       <span
                           class="data-value"
-                          style="margin-left: 20px;"
-                      >{{ TotalActivePower }}</span> <span style="margin-left: 10px">A</span>
+                          style="margin-left: 20px;color: #ffffff"
+                      >{{ TotalActivePower }}</span> <span style="margin-left: 10px;color: #ffffff">A</span>
                     </b-card-text>
-                    <b-card-text style="color: #ffffff;margin-top: 25px">A相无功功率:
+                    <b-card-text style="color: #eabe62;margin-top: 25px">A相无功功率:
                       <span
                           class="data-value"
-                          style="margin-left: 20px;"
-                      >{{ aphaseReactivePower }}</span> <span style="margin-left: 10px">A</span>
+                          style="margin-left: 20px;color: #ffffff"
+                      >{{ aphaseReactivePower }}</span> <span style="margin-left: 10px;color: #ffffff">A</span>
                     </b-card-text>
-                    <b-card-text style="color: #ffffff;margin-top: 25px">B相无功功率:
+                    <b-card-text style="color: #eabe62;margin-top: 25px;margin-left: 17px">B相无功功率:
                       <span
                           class="data-value"
-                          style="margin-left: 20px;"
-                      >{{ bphaseReactivePower }}</span> <span style="margin-left: 10px">A</span>
+                          style="margin-left: 20px;color: #ffffff"
+                      >{{ bphaseReactivePower }}</span> <span style="margin-left: 10px;color: #ffffff">A</span>
                     </b-card-text>
-                    <b-card-text style="color: #ffffff;margin-top: 25px">C相无功功率:
+                    <b-card-text style="color: #eabe62;margin-top: 25px">C相无功功率:
                       <span
                           class="data-value"
-                          style="margin-left: 20px;"
-                      >{{ cphaseReactivePower }}</span> <span style="margin-left: 10px">A</span>
+                          style="margin-left: 20px;color: #ffffff"
+                      >{{ cphaseReactivePower }}</span> <span style="margin-left: 10px;color: #ffffff">A</span>
                     </b-card-text>
-                    <b-card-text style="color: #ffffff;margin-top: 25px">总无功功率:
+                    <b-card-text style="color: #eabe62;margin-top: 25px;margin-left: 46px">总无功功率:
                       <span
                           class="data-value"
-                          style="margin-left: 20px;"
-                      >{{ totalReactivePower }}</span> <span style="margin-left: 10px">A</span>
+                          style="margin-left: 20px;color: #ffffff"
+                      >{{ totalReactivePower }}</span> <span style="margin-left: 10px;color: #ffffff">A</span>
                     </b-card-text>
-                    <b-card-text style="color: #ffffff;margin-top: 25px">A相位视在功率:
+                    <b-card-text style="color: #eabe62;margin-top: 25px;margin-left: 37px">A相视在功率:
                       <span
                           class="data-value"
-                          style="margin-left: 20px;"
-                      >{{ aphaseApperantPower }}</span> <span style="margin-left: 10px">A</span>
+                          style="margin-left: 20px;color: #ffffff"
+                      >{{ aphaseApperantPower }}</span> <span style="margin-left: 10px;color: #ffffff">A</span>
                     </b-card-text>
-                    <b-button variant="primary" @click="previousPage(currentEquipPage - 1)">上一页</b-button>
-                    <b-button variant="info" @click="nextPage(currentEquipPage + 1)" class="button-down">下一页</b-button>
+                    <b-button style="margin-top: 40px" variant="primary" @click="previousPage(currentEquipPage - 1)">上一页</b-button>
+                    <b-button style="margin-top: 40px" variant="info" @click="nextPage(currentEquipPage + 1)" class="button-down">下一页</b-button>
                   </b-row>
 
                   <b-row v-show="currentEquipPage === 3">
-                    <b-card-text style="color: #ffffff">B相位视在功率:
+                    <b-card-text style="color: #eabe62">B相位视在功率:
                       <span
                           class="data-value"
-                          style="margin-left: 20px;"
-                      >{{ bphaseApperantPower }}</span> <span style="margin-left: 10px">A</span>
+                          style="margin-left: 20px;color: #ffffff"
+                      >{{ bphaseApperantPower }}</span> <span style="margin-left: 10px;color: #ffffff">A</span>
                     </b-card-text>
-                    <b-card-text style="color: #ffffff;margin-top: 25px">C相位视在功率
+                    <b-card-text style="color: #eabe62;">C相位视在功率
                       <span
                           class="data-value"
-                          style="margin-left: 20px;"
-                      >{{ cphaseApperantPower }}</span> <span style="margin-left: 10px">A</span>
+                          style="margin-left: 20px;color: #ffffff"
+                      >{{ cphaseApperantPower }}</span> <span style="margin-left: 10px;color: #ffffff">A</span>
                     </b-card-text>
-                    <b-card-text style="color: #ffffff;margin-top: 25px">总视在功率:
+                    <b-card-text style="color: #eabe62;">总视在功率:
                       <span
                           class="data-value"
-                          style="margin-left: 20px;"
-                      >{{ TotalApperantPower }}</span> <span style="margin-left: 10px">A</span>
+                          style="margin-left: 20px;color: #ffffff"
+                      >{{ TotalApperantPower }}</span> <span style="margin-left: 10px;color: #ffffff">A</span>
                     </b-card-text>
-                    <b-card-text style="color: #ffffff;margin-top: 25px">A相位功率因数:
+                    <b-card-text style="color: #eabe62;margin-top: 25px">A相位功率因数:
                       <span
                           class="data-value"
-                          style="margin-left: 20px;"
-                      >{{ aphasePowerFactor }}</span> <span style="margin-left: 10px">A</span>
+                          style="margin-left: 20px;color: #ffffff"
+                      >{{ aphasePowerFactor }}</span> <span style="margin-left: 10px;color: #ffffff">A</span>
                     </b-card-text>
-                    <b-card-text style="color: #ffffff;margin-top: 25px">B相位功率因数:
+                    <b-card-text style="color: #eabe62;margin-top: 25px">B相位功率因数:
                       <span
                           class="data-value"
-                          style="margin-left: 20px;"
-                      >{{ bphasePowerFactor }}</span> <span style="margin-left: 10px">A</span>
+                          style="margin-left: 20px;color: #ffffff"
+                      >{{ bphasePowerFactor }}</span> <span style="margin-left: 10px;color: #ffffff">A</span>
                     </b-card-text>
-                    <b-card-text style="color: #ffffff;margin-top: 25px">C相位功率因数:
+                    <b-card-text style="color: #eabe62;margin-top: 25px">C相位功率因数:
                       <span
                           class="data-value"
-                          style="margin-left: 20px;"
-                      >{{ cphasePowerFactor }}</span> <span style="margin-left: 10px">A</span>
+                          style="margin-left: 20px;color: #ffffff"
+                      >{{ cphasePowerFactor }}</span> <span style="margin-left: 10px;color: #ffffff">A</span>
                     </b-card-text>
-                    <b-card-text style="color: #ffffff;margin-top: 25px">功率因数:
+                    <b-card-text style="color: #eabe62;margin-top: 25px">功率因数:
                       <span
                           class="data-value"
-                          style="margin-left: 20px;"
-                      >{{ PowerFactor }}</span> <span style="margin-left: 10px">A</span>
+                          style="margin-left: 20px;color: #ffffff"
+                      >{{ PowerFactor }}</span> <span style="margin-left: 10px;color: #ffffff">A</span>
                     </b-card-text>
-                    <b-card-text style="color: #ffffff;margin-top: 25px">频率:
+                    <b-card-text style="color: #eabe62;margin-top: 25px">频率:
                       <span
                           class="data-value"
-                          style="margin-left: 20px;"
-                      >{{ Frequency }}</span> <span style="margin-left: 10px">A</span>
+                          style="margin-left: 20px;color: #ffffff"
+                      >{{ Frequency }}</span> <span style="margin-left: 10px;color: #ffffff">A</span>
                     </b-card-text>
-                    <b-card-text style="color: #ffffff;margin-top: 25px">总千瓦时:
+                    <b-card-text style="color: #eabe62;margin-top: 25px">总千瓦时:
                       <span
                           class="data-value"
-                          style="margin-left: 20px;"
-                      >{{ TotalKWH }}</span> <span style="margin-left: 10px">A</span>
+                          style="margin-left: 20px;color: #ffffff"
+                      >{{ TotalKWH }}</span> <span style="margin-left: 10px;color: #ffffff">A</span>
                     </b-card-text>
-                    <b-button variant="primary" @click="previousPage(currentEquipPage - 1)">上一页</b-button>
-                    <b-button variant="info" @click="nextPage(currentEquipPage + 1)" class="button-down">下一页</b-button>
+                    <b-button style="margin-top: 40px;margin-right: 100px" variant="primary" @click="previousPage(currentEquipPage - 1)">上一页</b-button>
+                    <b-button style="margin-top: 40px;margin-left: -90px" variant="info" @click="nextPage(currentEquipPage + 1)" class="button-down">下一页</b-button>
                   </b-row>
 
                   <b-row v-show="currentEquipPage === 4">
-                    <b-card-text style="color: #ffffff">总千瓦时2:
+                    <b-card-text style="color: #eabe62">总千瓦时2:
                       <span
                           class="data-value"
-                          style="margin-left: 20px;"
-                      >{{ TotalKWH2 }}</span> <span style="margin-left: 10px">A</span>
+                          style="margin-left: 20px;color: #ffffff"
+                      >{{ TotalKWH2 }}</span> <span style="margin-left: 10px;color: #ffffff">A</span>
                     </b-card-text>
-                    <b-card-text style="color: #ffffff;margin-top: 25px">总无功电能:
+                    <b-card-text style="color: #eabe62;">总无功电能:
                       <span
                           class="data-value"
-                          style="margin-left: 20px;"
-                      >{{ TotalKvarH }}</span> <span style="margin-left: 10px">A</span>
+                          style="margin-left: 20px;color: #ffffff"
+                      >{{ TotalKvarH }}</span> <span style="margin-left: 10px;color: #ffffff">A</span>
                     </b-card-text>
-                    <b-card-text style="color: #ffffff;margin-top: 25px">总无功电能2:
+                    <b-card-text style="color: #eabe62;">总无功电能2:
                       <span
                           class="data-value"
-                          style="margin-left: 20px;"
-                      >{{ TotalKvarH2 }}</span> <span style="margin-left: 10px">A</span>
+                          style="margin-left: 20px;color: #ffffff"
+                      >{{ TotalKvarH2 }}</span> <span style="margin-left: 10px;color: #ffffff">A</span>
                     </b-card-text>
-                    <b-button variant="primary" @click="previousPage(currentEquipPage - 1)">上一页</b-button>
+                    <b-button style="margin-top: 40px" variant="primary" @click="previousPage(currentEquipPage - 1)">上一页</b-button>
                   </b-row>
 
                 </b-card>
