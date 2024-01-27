@@ -384,7 +384,7 @@ export default {
           this.isDisabled = false
           this.text = '指令发送成功！'
           // eslint-disable-next-line no-unused-vars
-          axios.post('http://192.168.6.185/restart').then(response => {
+          axios.post('http://192.168.6.185/reboot').then(response => {
           })
         }, 1000)
         this.text = '执行控制器复位'

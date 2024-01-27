@@ -76,15 +76,15 @@
         </div>
       </b-tab>
 
-      <b-tab
-          title="示意图"
-          style="overflow: hidden;width: 100vh"
-      >
-        <div v-if="isAdmin || activeTab === 1 || (username === 'observer' && password === 'observer')">
-          <!-- Tab 2 内容 -->
-          <ZhuangTai />
-        </div>
-      </b-tab>
+<!--      <b-tab-->
+<!--          title="示意图"-->
+<!--          style="overflow: hidden;width: 100vh"-->
+<!--      >-->
+<!--        <div v-if="isAdmin || activeTab === 1 || (username === 'observer' && password === 'observer')">-->
+<!--          &lt;!&ndash; Tab 2 内容 &ndash;&gt;-->
+<!--          <ZhuangTai />-->
+<!--        </div>-->
+<!--      </b-tab>-->
       <b-tab title="紧急分闸">
         <div v-if="isAdmin || activeTab === 2 || (username === 'observer' && password === 'observer')">
           <JinJiFenZha />
@@ -106,21 +106,21 @@
 
         <!-- Tab 7 内容 -->
       </b-tab>
-      <b-tab
-          v-if="isAdmin || activeTab === 5"
-          title="一键顺控"
-      >
-        <YiJianShunKong />
+<!--      <b-tab-->
+<!--          v-if="isAdmin || activeTab === 5"-->
+<!--          title="一键顺控"-->
+<!--      >-->
+<!--        <YiJianShunKong />-->
 
-        <!-- Tab 8 内容 -->
-      </b-tab>
-      <b-tab
-          v-if="isAdmin || activeTab === 6"
-          title="ChartGPT"
-      >
-        <ChatAI />
-        <!-- Tab 8 内容 -->
-      </b-tab>
+<!--        &lt;!&ndash; Tab 8 内容 &ndash;&gt;-->
+<!--      </b-tab>-->
+<!--      <b-tab-->
+<!--          v-if="isAdmin || activeTab === 6"-->
+<!--          title="ChartGPT"-->
+<!--      >-->
+<!--        <ChatAI />-->
+<!--        &lt;!&ndash; Tab 8 内容 &ndash;&gt;-->
+<!--      </b-tab>-->
 
       <!-- Tab 9 内容 -->
       <!--      <b-tab-->
@@ -143,7 +143,7 @@
 
       <b-tab
           v-if="isAdmin || activeTab === 9"
-          title="设备参数"
+          title="一键顺控"
           style="overflow: hidden;width: 100vh"
       >
         <SheBeiCanShu />
@@ -173,6 +173,14 @@
       <!--        <XiPei />-->
       <!--      </b-tab>-->
 
+            <b-tab
+                v-if="isAdmin || activeTab === 12"
+                title="微机参数"
+                style="overflow: hidden;width: 100vh"
+            >
+              <YaoCeJiLiang />
+            </b-tab>
+
       <!-- 其他管理员权限Tabs -->
     </b-tabs>
   </div>
@@ -183,36 +191,38 @@ import {
 } from 'bootstrap-vue'
 
 // import DuoDianCeWen from '@/views/DuoDianCeWen.vue'
-import ChatAI from '@/views/ChatAI.vue'
+// import ChatAI from '@/views/ChatAI.vue'
 // import ThreeD from '@/views/ThreeD.vue'
 // import BigData from '@/views/BigData.vue'
 import * as THREE from 'three'
 import clouds from 'vanta/src/vanta.clouds'
 import JinJiFenZha from './JinJiFenZha.vue'
-import ZhuangTai from './ZhuangTai.vue'
+// import ZhuangTai from './ZhuangTai.vue'
 import SheZhi from './SheZhi.vue'
-import YiJianShunKong from './YiJianShunKong.vue'
+// import YiJianShunKong from './YiJianShunKong.vue'
 import SheBeiCanShu from './SheBeiCanShu.vue'
 import Mcp from './Mcp.vue'
+import YaoCeJiLiang from '@/views/YaoCeJiLiang'
 // import RealTimeVideo from '@/views/RealTimeVideo.vue'
 // import XiPei from '@/views/XiPei.vue'
 
 export default {
   name: 'Hello',
   components: {
+    YaoCeJiLiang,
     // XiPei,
     // RealTimeVideo,
     Mcp,
     SheBeiCanShu,
     // ThreeD,
     // BigData,
-    ChatAI,
+    // ChatAI,
     BRow,
     BCol,
     BCard,
     // DuoDianCeWen,
-    YiJianShunKong,
-    ZhuangTai,
+    // YiJianShunKong,
+    // ZhuangTai,
     SheZhi,
     BTabs,
     BTab,
@@ -229,19 +239,20 @@ export default {
       activeTab: 0,
       tabs: [
         { title: '用户登录', content: '用户登录' },
-        { title: 'Tab 1', content: '系统状态' },
+        // { title: 'Tab 1', content: '系统状态' },
         { title: 'Tab 2', content: '紧急分闸' },
         { title: 'Tab 3', content: '电力状态' },
         // { title: 'Tab 4', content: '多点测温' },
         { title: 'Tab 5', content: '设置' },
-        { title: 'Tab 6', content: '一键顺控' },
+        // { title: 'Tab 6', content: '一键顺控' },
         { title: 'Tab 7', content: 'Tab 8 内容 (管理员权限)' },
         // { title: 'Tab 8', content: '数据分析' },
         // { title: 'Tab 9', content: '3D模型图' },
-        { title: 'Tab 10', content: '设备参数' },
+        { title: 'Tab 10', content: '一键顺控' },
         { title: 'Tab 11', content: '微机综保' },
         // { title: 'Tab 12', content: '实时监控' },
         // { title: 'Tab 13', content: '西二配电' },
+        { title: 'Tab 14', content: '微机参数' },
       ],
     }
   },
