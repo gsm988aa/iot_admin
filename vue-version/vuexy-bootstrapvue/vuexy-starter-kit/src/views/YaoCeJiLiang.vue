@@ -1,5 +1,5 @@
 <template>
-  <div style="width: 2000px;position: absolute;flex-direction: column">
+  <div style="width: 100%;position: absolute;flex-direction: column">
 
     <b-card style="position: relative;width: 100%">
 
@@ -544,6 +544,13 @@ export default {
     this.NineData()
     this.TenData()
     this.ElevenData()
+    this.oneJiLiangData()
+    this.twoJiLiangData()
+    this.threeJiLiangData()
+    this.sixJiLiangData()
+    this.nineJiLiangData()
+    this.tenJiLiangData()
+    this.elevenJiLiangData()
 
     // 定时更新数据
     setInterval(() => {
@@ -554,6 +561,14 @@ export default {
       this.NineData()
       this.TenData()
       this.ElevenData()
+
+      this.oneJiLiangData()
+      this.twoJiLiangData()
+      this.threeJiLiangData()
+      this.sixJiLiangData()
+      this.nineJiLiangData()
+      this.tenJiLiangData()
+      this.elevenJiLiangData()
     }, 5000)
   },
   methods: {
@@ -607,7 +622,7 @@ export default {
     },
 
     OneData() {
-      axios.get('http://192.168.2.51:3000')
+      axios.get('http://192.168.6.121/yaoce')
         .then(response => {
           const hexData = response.data.yaoce
           // 从第7个字符开始，每8个字符为一组
@@ -796,6 +811,147 @@ export default {
 
             // 更新数据项数组中的AH211列
             this.dataitems[index].AH211 = formattedValue
+          })
+        })
+        .catch(error => {
+          console.error('Error fetching data:', error)
+        })
+    },
+
+    oneJiLiangData() {
+      axios.get('http://192.168.6.121/jiliang')
+        .then(response => {
+          const hexJiLiangData = response.data.jiliang
+          // 从第7个字符开始，每8个字符为一组
+          const hexDataWithoutSpaces = hexJiLiangData.replace(/\s+/g, '') // 去掉空格
+          const slicedData = hexDataWithoutSpaces.slice(6)
+          const hexValues = slicedData.match(/.{1,8}/g)
+          hexValues.forEach((value, index) => {
+            const floatValue = this.hexToFloat(value) // 转换为浮点数
+            const formattedValue = floatValue.toFixed(2) // 格式化为小数点后两位的字符串
+
+            // 更新数据项数组中的AH201列
+            this.jiliangitems[index].AH201 = formattedValue
+          })
+        })
+        .catch(error => {
+          console.error('Error fetching data:', error)
+        })
+    },
+    twoJiLiangData() {
+      axios.get('http://192.168.6.122/jiliang')
+        .then(response => {
+          const hexJiLiangData = response.data.jiliang
+          // 从第7个字符开始，每8个字符为一组
+          const hexDataWithoutSpaces = hexJiLiangData.replace(/\s+/g, '') // 去掉空格
+          const slicedData = hexDataWithoutSpaces.slice(6)
+          const hexValues = slicedData.match(/.{1,8}/g)
+          hexValues.forEach((value, index) => {
+            const floatValue = this.hexToFloat(value) // 转换为浮点数
+            const formattedValue = floatValue.toFixed(2) // 格式化为小数点后两位的字符串
+
+            // 更新数据项数组中的AH202列
+            this.jiliangitems[index].AH202 = formattedValue
+          })
+        })
+        .catch(error => {
+          console.error('Error fetching data:', error)
+        })
+    },
+    threeJiLiangData() {
+      axios.get('http://192.168.6.123/jiliang')
+        .then(response => {
+          const hexJiLiangData = response.data.jiliang
+          // 从第7个字符开始，每8个字符为一组
+          const hexDataWithoutSpaces = hexJiLiangData.replace(/\s+/g, '') // 去掉空格
+          const slicedData = hexDataWithoutSpaces.slice(6)
+          const hexValues = slicedData.match(/.{1,8}/g)
+          hexValues.forEach((value, index) => {
+            const floatValue = this.hexToFloat(value) // 转换为浮点数
+            const formattedValue = floatValue.toFixed(2) // 格式化为小数点后两位的字符串
+
+            // 更新数据项数组中的AH203列
+            this.jiliangitems[index].AH203 = formattedValue
+          })
+        })
+        .catch(error => {
+          console.error('Error fetching data:', error)
+        })
+    },
+    sixJiLiangData() {
+      axios.get('http://192.168.6.126/jiliang')
+        .then(response => {
+          const hexJiLiangData = response.data.jiliang
+          // 从第7个字符开始，每8个字符为一组
+          const hexDataWithoutSpaces = hexJiLiangData.replace(/\s+/g, '') // 去掉空格
+          const slicedData = hexDataWithoutSpaces.slice(6)
+          const hexValues = slicedData.match(/.{1,8}/g)
+          hexValues.forEach((value, index) => {
+            const floatValue = this.hexToFloat(value) // 转换为浮点数
+            const formattedValue = floatValue.toFixed(2) // 格式化为小数点后两位的字符串
+
+            // 更新数据项数组中的AH206列
+            this.jiliangitems[index].AH206 = formattedValue
+          })
+        })
+        .catch(error => {
+          console.error('Error fetching data:', error)
+        })
+    },
+    nineJiLiangData() {
+      axios.get('http://192.168.6.129/jiliang')
+        .then(response => {
+          const hexJiLiangData = response.data.jiliang
+          // 从第7个字符开始，每8个字符为一组
+          const hexDataWithoutSpaces = hexJiLiangData.replace(/\s+/g, '') // 去掉空格
+          const slicedData = hexDataWithoutSpaces.slice(6)
+          const hexValues = slicedData.match(/.{1,8}/g)
+          hexValues.forEach((value, index) => {
+            const floatValue = this.hexToFloat(value) // 转换为浮点数
+            const formattedValue = floatValue.toFixed(2) // 格式化为小数点后两位的字符串
+
+            // 更新数据项数组中的AH209列
+            this.jiliangitems[index].AH209 = formattedValue
+          })
+        })
+        .catch(error => {
+          console.error('Error fetching data:', error)
+        })
+    },
+    tenJiLiangData() {
+      axios.get('http://192.168.6.130/jiliang')
+        .then(response => {
+          const hexJiLiangData = response.data.jiliang
+          // 从第7个字符开始，每8个字符为一组
+          const hexDataWithoutSpaces = hexJiLiangData.replace(/\s+/g, '') // 去掉空格
+          const slicedData = hexDataWithoutSpaces.slice(6)
+          const hexValues = slicedData.match(/.{1,8}/g)
+          hexValues.forEach((value, index) => {
+            const floatValue = this.hexToFloat(value) // 转换为浮点数
+            const formattedValue = floatValue.toFixed(2) // 格式化为小数点后两位的字符串
+
+            // 更新数据项数组中的AH210列
+            this.jiliangitems[index].AH210 = formattedValue
+          })
+        })
+        .catch(error => {
+          console.error('Error fetching data:', error)
+        })
+    },
+    elevenJiLiangData() {
+      axios.get('http://192.168.6.131/jiliang')
+        .then(response => {
+          const hexJiLiangData = response.data.jiliang
+          // 从第7个字符开始，每8个字符为一组
+          const hexDataWithoutSpaces = hexJiLiangData.replace(/\s+/g, '') // 去掉空格
+          const slicedData = hexDataWithoutSpaces.slice(6)
+          const hexValues = slicedData.match(/.{1,8}/g)
+          hexValues.forEach((value, index) => {
+            const floatValue = this.hexToFloat(value) // 转换为浮点数
+            const formattedValue = floatValue.toFixed(2) // 格式化为小数点后两位的字符串
+
+            // 更新数据项数组中的AH211列
+            this.jiliangitems[index].AH211 = formattedValue
           })
         })
         .catch(error => {

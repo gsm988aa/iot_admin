@@ -1467,7 +1467,7 @@ export default {
           this.isDisabled = false
           this.text = '指令发送成功！'
           // eslint-disable-next-line no-unused-vars
-          axios.post('http://192.168.6.121/hezha')
+          axios.post('http://192.168.6.104/hezha')
             .then(response => {
             })
         }, 1000)
@@ -1496,7 +1496,7 @@ export default {
           this.isDisabled = false
           this.text = '指令发送成功！'
           // eslint-disable-next-line no-unused-vars
-          axios.post('http://192.168.6.121/hezha')
+          axios.post('http://192.168.6.105/hezha')
             .then(response => {
             })
         }, 1000)
@@ -1551,7 +1551,7 @@ export default {
           this.isDisabled = false
           this.text = '指令发送成功！'
           // eslint-disable-next-line no-unused-vars
-          axios.post('http://192.168.6.121/hezha')
+          axios.post('http://192.168.6.107/hezha')
               .then(response => {
               })
         }, 1000)
@@ -1578,7 +1578,7 @@ export default {
           this.isDisabled = false
           this.text = '指令发送成功！'
           // eslint-disable-next-line no-unused-vars
-          axios.post('http://192.168.6.121/hezha')
+          axios.post('http://192.168.6.108/hezha')
               .then(response => {
               })
         }, 1000)
@@ -3064,45 +3064,6 @@ export default {
       }
     },
 
-    
-    updateUData() { // 随机生成电压数据
-      // 获取前三行数据
-      for (let i = 0; i < 6; i += 1) {
-        const row = this.dataitems[i]
-        Object.keys(row).forEach(key => {
-          if (key !== 'unit') {
-            // 生成10到110之间的随机数
-            row[key] = `${(Math.random() * (50 - 10 + 1) + 10).toFixed(1)}KV`
-          }
-        })
-      }
-    },
-
-    updateIData() { // 随机生成电流数据
-      // 获取电流数据
-      for (let i = 6; i < 10; i += 1) {
-        const row = this.dataitems[i]
-        Object.keys(row).forEach(key => {
-          if (key !== 'unit') {
-            // 生成10到110之间的随机数
-            row[key] = `${Math.floor(Math.random() * (15 - 10 + 1) + 2)}A`
-          }
-        })
-      }
-    },
-
-    updateTempData() { // 随机生成温度数据
-      // 获取电流数据
-      for (let i = 10; i < 12; i += 1) {
-        const row = this.dataitems[i]
-        Object.keys(row).forEach(key => {
-          if (key !== 'unit') {
-            // 生成10到110之间的随机数
-            row[key] = `${(Math.random() * (100 - 20 + 1) + 40).toFixed(1)}KV`
-          }
-        })
-      }
-    },
 
   },
 }
