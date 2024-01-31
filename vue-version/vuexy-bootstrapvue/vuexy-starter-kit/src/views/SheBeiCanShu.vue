@@ -16,49 +16,28 @@
         bordered
         style="table-layout: fixed; width: 100%"
       >
-        <!--        <template-->
-        <!--          #cell(unit)="row"-->
-        <!--          style="justify-content: center;"-->
-        <!--        >-->
-
-        <!--          <b-button-->
-        <!--            pill-->
-        <!--            variant="warning"-->
-        <!--            @click="onupdate"-->
-        <!--          >-->
-        <!--            开启更新状态-->
-        <!--          </b-button>-->
-
-        <!--          <b-button-->
-        <!--            pill-->
-        <!--            variant="info"-->
-        <!--            @click="offupdate"-->
-        <!--          >-->
-        <!--            关闭更新状态-->
-        <!--          </b-button>-->
-        <!--        </template>-->
 
         <template
           #cell(AH201)="row"
           style="justify-content: center;"
         >
           <img
-            v-if="hezha01 === 1"
+            v-if="cheru01 === 1"
             src="@/assets/images/201/AH201shiyan.svg"
             style="max-width: 100%; max-height: 100%"
           >
           <img
-            v-else-if="fenzha01 === 1"
+            v-else-if="chechu01 === 1"
             src="@/assets/images/201/AH201gongzuo.svg"
             style="max-width: 100%; max-height: 100%"
           >
           <img
-            v-else-if="cheru01 === 1"
+            v-else-if="hezha01 === 1"
             src="@/assets/images/201/AH201duanluhe.svg"
             style="max-width: 100%; max-height: 100%"
           >
           <img
-            v-else-if="chechu01 === 1"
+            v-else-if="fenzha01 === 1"
             src="@/assets/images/201/AH201duanlufen.svg"
             style="max-width: 100%; max-height: 100%"
           >
@@ -74,22 +53,22 @@
           style="justify-content: center"
         >
           <img
-            v-if="hezha02 === 1"
+            v-if="cheru02 === 1"
             src="@/assets/images/202/AH202shiyan.svg"
             style="max-width: 100%; max-height: 100%"
           >
           <img
-            v-else-if="fenzha02 === 1"
+            v-else-if="chechu02 === 1"
             src="@/assets/images/202/AH202gongzuo.svg"
             style="max-width: 100%; max-height: 100%"
           >
           <img
-            v-else-if="cheru02 === 1"
+            v-else-if="hezha02 === 1"
             src="@/assets/images/202/AH202duanluhe.svg"
             style="max-width: 100%; max-height: 100%"
           >
           <img
-            v-else-if="chechu02 === 1"
+            v-else-if="fenezha02 === 1"
             src="@/assets/images/202/AH202duanlufen.svg"
             style="max-width: 100%; max-height: 100%"
           >
@@ -115,22 +94,22 @@
           style="justify-content: center"
         >
           <img
-            v-if="hezha03 === 1"
+            v-if="cheru03 === 1"
             src="@/assets/images/202/AH202shiyan.svg"
             style="max-width: 100%; max-height: 100%"
           >
           <img
-            v-else-if="fenzha03 === 1"
+            v-else-if="chechu03 === 1"
             src="@/assets/images/202/AH202gongzuo.svg"
             style="max-width: 100%; max-height: 100%"
           >
           <img
-            v-else-if="cheru03 === 1"
+            v-else-if="hezha03 === 1"
             src="@/assets/images/202/AH202duanluhe.svg"
             style="max-width: 100%; max-height: 100%"
           >
           <img
-            v-else-if="chechu03 === 1"
+            v-else-if="fenezha03 === 1"
             src="@/assets/images/202/AH202duanlufen.svg"
             style="max-width: 100%; max-height: 100%"
           >
@@ -156,22 +135,22 @@
           style="justify-content: center"
         >
           <img
-            v-if="hezha04 === 1"
+            v-if="cheru04 === 1"
             src="@/assets/images/204/AH204shiyan.svg"
             style="max-width: 100%; max-height: 100%"
           >
           <img
-            v-else-if="fenzha04 === 1"
+            v-else-if="chechu04 === 1"
             src="@/assets/images/204/AH204gongzuo.svg"
             style="max-width: 100%; max-height: 100%"
           >
           <img
-            v-else-if="cheru04 === 1"
+            v-else-if="hezha04 === 1"
             src="@/assets/images/204/AH204duanluhe.svg"
             style="max-width: 100%; max-height: 100%"
           >
           <img
-            v-else-if="chechu04 === 1"
+            v-else-if="fenezha04 === 1"
             src="@/assets/images/204/AH204duanlufen.svg"
             style="max-width: 100%; max-height: 100%"
           >
@@ -197,22 +176,22 @@
           style="justify-content: center"
         >
           <img
-            v-if="hezha05 === 1"
+            v-if="cheru05 === 1"
             src="@/assets/images/204/AH204shiyan.svg"
             style="max-width: 100%; max-height: 100%"
           >
           <img
-            v-else-if="fenzha05 === 1"
+            v-else-if="chechu05 === 1"
             src="@/assets/images/204/AH204gongzuo.svg"
             style="max-width: 100%; max-height: 100%"
           >
           <img
-            v-else-if="cheru05 === 1"
+            v-else-if="hezha05 === 1"
             src="@/assets/images/204/AH204duanluhe.svg"
             style="max-width: 100%; max-height: 100%"
           >
           <img
-            v-else-if="chechu05 === 1"
+            v-else-if="fenezha05 === 1"
             src="@/assets/images/204/AH204duanlufen.svg"
             style="max-width: 100%; max-height: 100%"
           >
@@ -238,22 +217,22 @@
           style="justify-content: center"
         >
           <img
-            v-if="hezha06 === 1"
+            v-if="cheru06 === 1"
             src="@/assets/images/206/AH206shiyan.svg"
             style="max-width: 100%; max-height: 100%"
           >
           <img
-            v-else-if="fenzha06 === 1"
+            v-else-if="chechu06 === 1"
             src="@/assets/images/206/AH206gongzuo.svg"
             style="max-width: 100%; max-height: 100%"
           >
           <img
-            v-else-if="cheru06 === 1"
+            v-else-if="hezha06 === 1"
             src="@/assets/images/206/AH206duanluhe.svg"
             style="max-width: 100%; max-height: 100%"
           >
           <img
-            v-else-if="chechu06 === 1"
+            v-else-if="fenezha06 === 1"
             src="@/assets/images/206/AH206duanlufen.svg"
             style="max-width: 100%; max-height: 100%"
           >
@@ -279,22 +258,22 @@
           style="justify-content: center"
         >
           <img
-            v-if="hezha07 === 1"
+            v-if="cheru07 === 1"
             src="@/assets/images/204/AH204shiyan.svg"
             style="max-width: 100%; max-height: 100%"
           >
           <img
-            v-else-if="fenzha07 === 1"
+            v-else-if="chechu07 === 1"
             src="@/assets/images/204/AH204gongzuo.svg"
             style="max-width: 100%; max-height: 100%"
           >
           <img
-            v-else-if="cheru07 === 1"
+            v-else-if="hezha07 === 1"
             src="@/assets/images/204/AH204duanluhe.svg"
             style="max-width: 100%; max-height: 100%"
           >
           <img
-            v-else-if="chechu07 === 1"
+            v-else-if="fenezha07 === 1"
             src="@/assets/images/204/AH204duanlufen.svg"
             style="max-width: 100%; max-height: 100%"
           >
@@ -320,22 +299,22 @@
           style="justify-content: center"
         >
           <img
-            v-if="hezha08 === 1"
+            v-if="cheru08 === 1"
             src="@/assets/images/204/AH204shiyan.svg"
             style="max-width: 100%; max-height: 100%"
           >
           <img
-            v-else-if="fenzha08 === 1"
+            v-else-if="chechu08 === 1"
             src="@/assets/images/204/AH204gongzuo.svg"
             style="max-width: 100%; max-height: 100%"
           >
           <img
-            v-else-if="cheru08 === 1"
+            v-else-if="hezha08 === 1"
             src="@/assets/images/204/AH204duanluhe.svg"
             style="max-width: 100%; max-height: 100%"
           >
           <img
-            v-else-if="chechu08 === 1"
+            v-else-if="fenezha08 === 1"
             src="@/assets/images/204/AH204duanlufen.svg"
             style="max-width: 100%; max-height: 100%"
           >
@@ -361,22 +340,22 @@
           style="justify-content: center"
         >
           <img
-            v-if="hezha09 === 1"
+            v-if="cheru09 === 1"
             src="@/assets/images/202/AH202shiyan.svg"
             style="max-width: 100%; max-height: 100%"
           >
           <img
-            v-else-if="fenzha09 === 1"
+            v-else-if="chechu09 === 1"
             src="@/assets/images/202/AH202gongzuo.svg"
             style="max-width: 100%; max-height: 100%"
           >
           <img
-            v-else-if="cheru09 === 1"
+            v-else-if="hezha09 === 1"
             src="@/assets/images/202/AH202duanluhe.svg"
             style="max-width: 100%; max-height: 100%"
           >
           <img
-            v-else-if="chechu09 === 1"
+            v-else-if="fenezha09 === 1"
             src="@/assets/images/202/AH202duanlufen.svg"
             style="max-width: 100%; max-height: 100%"
           >
@@ -402,22 +381,22 @@
           style="justify-content: center"
         >
           <img
-            v-if="hezha10 === 1"
+            v-if="cheru10 === 1"
             src="@/assets/images/202/AH202shiyan.svg"
             style="max-width: 100%; max-height: 100%"
           >
           <img
-            v-else-if="fenzha10 === 1"
+            v-else-if="chechu10 === 1"
             src="@/assets/images/202/AH202gongzuo.svg"
             style="max-width: 100%; max-height: 100%"
           >
           <img
-            v-else-if="cheru10 === 1"
+            v-else-if="hezha10 === 1"
             src="@/assets/images/202/AH202duanluhe.svg"
             style="max-width: 100%; max-height: 100%"
           >
           <img
-            v-else-if="chechu10 === 1"
+            v-else-if="fenezha10 === 1"
             src="@/assets/images/202/AH202duanlufen.svg"
             style="max-width: 100%; max-height: 100%"
           >
@@ -443,22 +422,22 @@
           style="justify-content: center"
         >
           <img
-            v-if="hezha11 === 1"
+            v-if="cheru11 === 1"
             src="@/assets/images/201/AH201shiyan.svg"
             style="max-width: 100%; max-height: 100%"
           >
           <img
-            v-else-if="fenzha11 === 1"
+            v-else-if="chechu11 === 1"
             src="@/assets/images/201/AH201gongzuo.svg"
             style="max-width: 100%; max-height: 100%"
           >
           <img
-            v-else-if="cheru11 === 1"
+            v-else-if="hezha11 === 1"
             src="@/assets/images/201/AH201duanluhe.svg"
             style="max-width: 100%; max-height: 100%"
           >
           <img
-            v-else-if="chechu11 === 1"
+            v-else-if="fenezha11 === 1"
             src="@/assets/images/201/AH201duanlufen.svg"
             style="max-width: 100%; max-height: 100%"
           >
@@ -1216,10 +1195,117 @@
 
             </div>
 
+
+
+
           </template>
 
         </b-table>
 
+        <b-row>
+          <b-button
+              variant="outline-primary"
+              @click="start201gaojing"
+          >
+            开启AH201示意图
+          </b-button>
+          &nbsp
+          <b-button
+              variant="outline-danger"
+              @click="stop201gaojing"
+          >
+            关闭AH201示意图
+          </b-button>
+          &nbsp
+          <b-button
+              variant="outline-primary"
+              @click="start202gaojing"
+          >
+            开启AH202示意图
+          </b-button>
+          &nbsp
+          <b-button
+              variant="outline-danger"
+              @click="stop202gaojing"
+          >
+            关闭AH202示意图
+          </b-button>
+          &nbsp
+          <b-button
+              variant="outline-primary"
+              @click="start203gaojing"
+          >
+            开启AH203示意图
+          </b-button>
+          &nbsp
+          <b-button
+              variant="outline-danger"
+              @click="stop203gaojing"
+          >
+            关闭AH203示意图
+          </b-button>
+          &nbsp
+          <br>      <br>
+          <b-button
+              variant="outline-primary"
+              @click="start206gaojing"
+          >
+            开启AH206示意图
+          </b-button>
+          &nbsp
+          <b-button
+              variant="outline-danger"
+              @click="stop206gaojing"
+          >
+            关闭AH206示意图
+          </b-button>
+          &nbsp
+
+          <b-button
+              variant="outline-primary"
+              @click="start209gaojing"
+          >
+            开启AH209示意图
+          </b-button>
+          &nbsp
+          <b-button
+              variant="outline-danger"
+              @click="stop209gaojing"
+          >
+            关闭AH209示意图
+          </b-button>
+          &nbsp
+
+          <b-button
+              variant="outline-primary"
+              @click="start210gaojing"
+          >
+            开启AH210示意图
+          </b-button>
+          &nbsp
+          <b-button
+              variant="outline-danger"
+              @click="stop210gaojing"
+          >
+            关闭AH210示意图
+          </b-button>
+          &nbsp
+
+          <b-button
+              variant="outline-primary"
+              @click="start211gaojing"
+          >
+            开启AH211示意图
+          </b-button>
+          &nbsp
+          <b-button
+              variant="outline-danger"
+              @click="stop211gaojing"
+          >
+            关闭AH211示意图
+          </b-button>
+          &nbsp
+        </b-row>
       </div>
 
       <!--      </b-card>-->
@@ -1364,10 +1450,14 @@ export default {
   methods: {
 
     togglehezha01(append = false) {
-      this.hezha01 = 1
-      this.fenzha01 = 0
-      this.cheru01 = 0
-      this.chechu01 = 0
+      axios.get('http://192.168.6.101/getss')
+          .then(response => {
+            const {data} = response;
+            console.log(data);
+
+            // 根据实际需求更新hezha01对应的数据属性的值
+            this.hezha01 = data.hezhawei
+          })
 
       if (!this.isDisabled) {
         this.$bvToast.toast('AH201正在合闸,请勿做其他操作...', {
@@ -1390,12 +1480,14 @@ export default {
       }
     },
     togglehezha02(append = false) {
-      this.hezha02 = 1
-      this.fenzha02 = 0
-      this.cheru02 = 0
-      this.chechu02 = 0
-      this.daohe02 = 0
-      this.daofen02 = 0
+      axios.get('http://192.168.6.102/getss')
+          .then(response => {
+            const {data} = response;
+            console.log(data);
+
+            // 根据实际需求更新hezha01对应的数据属性的值
+            this.hezha02 = data.hezhawei
+          })
 
       if (!this.isDisabled) {
         this.$bvToast.toast('AH202正在合闸,请勿做其他操作...', {
@@ -1418,12 +1510,14 @@ export default {
       }
     },
     togglehezha03(append = false) {
-      this.hezha03 = 1
-      this.fenzha03 = 0
-      this.cheru03 = 0
-      this.chechu03 = 0
-      this.daohe03 = 0
-      this.daofen03 = 0
+      axios.get('http://192.168.6.103/getss')
+          .then(response => {
+            const {data} = response;
+            console.log(data);
+
+            // 根据实际需求更新hezha01对应的数据属性的值
+            this.hezha03 = data.hezhawei
+          })
 
       if (!this.isDisabled) {
         this.$bvToast.toast('AH203正在合闸,请勿做其他操作...', {
@@ -1447,12 +1541,14 @@ export default {
     },
 
     togglehezha04(append = false) {
-      this.hezha04 = 1
-      this.fenzha04 = 0
-      this.cheru04 = 0
-      this.chechu04 = 0
-      this.daohe04 = 0
-      this.daofen04 = 0
+      axios.get('http://192.168.6.104/getss')
+          .then(response => {
+            const {data} = response;
+            console.log(data);
+
+            // 根据实际需求更新hezha01对应的数据属性的值
+            this.hezha04 = data.hezhawei
+          })
 
       if (!this.isDisabled) {
         this.$bvToast.toast('AH204正在合闸,请勿做其他操作...', {
@@ -1476,12 +1572,14 @@ export default {
     },
 
     togglehezha05(append = false) {
-      this.hezha05 = 1
-      this.fenzha05 = 0
-      this.cheru05 = 0
-      this.chechu05 = 0
-      this.daohe05 = 0
-      this.daofen05 = 0
+      axios.get('http://192.168.6.105/getss')
+          .then(response => {
+            const {data} = response;
+            console.log(data);
+
+            // 根据实际需求更新hezha01对应的数据属性的值
+            this.hezha05 = data.hezhawei
+          })
 
       if (!this.isDisabled) {
         this.$bvToast.toast('AH203正在合闸,请勿做其他操作...', {
@@ -1505,10 +1603,14 @@ export default {
     },
 
     togglehezha06(append = false) {
-      this.hezha06 = 1
-      this.fenzha06 = 0
-      this.cheru06 = 0
-      this.chechu06 = 0
+      axios.get('http://192.168.6.106/getss')
+          .then(response => {
+            const {data} = response;
+            console.log(data);
+
+            // 根据实际需求更新hezha01对应的数据属性的值
+            this.hezha06 = data.hezhawei
+          })
 
       if (!this.isDisabled) {
         this.$bvToast.toast('AH206正在合闸,请勿做其他操作...', {
@@ -1531,12 +1633,14 @@ export default {
       }
     },
     togglehezha07(append = false) {
-      this.hezha07 = 1
-      this.fenzha07 = 0
-      this.cheru07 = 0
-      this.chechu07 = 0
-      this.daohe07 = 0
-      this.daofen07 = 0
+      axios.get('http://192.168.6.107/getss')
+          .then(response => {
+            const {data} = response;
+            console.log(data);
+
+            // 根据实际需求更新hezha01对应的数据属性的值
+            this.hezha07 = data.hezhawei
+          })
 
       if (!this.isDisabled) {
         this.$bvToast.toast('AH207正在合闸,请勿做其他操作...', {
@@ -1560,10 +1664,14 @@ export default {
     },
 
     togglehezha08(append = false) {
-      this.hezha08 = 1
-      this.fenzha08 = 0
-      this.cheru08 = 0
-      this.chechu08 = 0
+      axios.get('http://192.168.6.108/getss')
+          .then(response => {
+            const {data} = response;
+            console.log(data);
+
+            // 根据实际需求更新hezha01对应的数据属性的值
+            this.hezha08 = data.hezhawei
+          })
 
       if (!this.isDisabled) {
         this.$bvToast.toast('AH208正在合闸,请勿做其他操作...', {
@@ -1586,12 +1694,14 @@ export default {
       }
     },
     togglehezha09(append = false) {
-      this.hezha09 = 1
-      this.fenzha09 = 0
-      this.cheru09 = 0
-      this.chechu09 = 0
-      this.daohe09 = 0
-      this.daofen09 = 0
+      axios.get('http://192.168.6.109/getss')
+          .then(response => {
+            const {data} = response;
+            console.log(data);
+
+            // 根据实际需求更新hezha01对应的数据属性的值
+            this.hezha09 = data.hezhawei
+          })
 
       if (!this.isDisabled) {
         this.$bvToast.toast('AH209正在合闸,请勿做其他操作...', {
@@ -1614,12 +1724,14 @@ export default {
       }
     },
     togglehezha10(append = false) {
-      this.hezha10 = 1
-      this.fenzha10 = 0
-      this.cheru10 = 0
-      this.chechu10 = 0
-      this.daohe10 = 0
-      this.daofen10 = 0
+      axios.get('http://192.168.6.110/getss')
+          .then(response => {
+            const {data} = response;
+            console.log(data);
+
+            // 根据实际需求更新hezha01对应的数据属性的值
+            this.hezha10 = data.hezhawei
+          })
 
       if (!this.isDisabled) {
         this.$bvToast.toast('AH210正在合闸,请勿做其他操作...', {
@@ -1642,12 +1754,14 @@ export default {
       }
     },
     togglehezha11(append = false) {
-      this.hezha11 = 1
-      this.fenzha11 = 0
-      this.cheru11 = 0
-      this.chechu11 = 0
-      this.daohe11 = 0
-      this.daofen11 = 0
+      axios.get('http://192.168.6.111/getss')
+          .then(response => {
+            const {data} = response;
+            console.log(data);
+
+            // 根据实际需求更新hezha01对应的数据属性的值
+            this.hezha11 = data.hezhawei
+          })
 
       if (!this.isDisabled) {
         this.$bvToast.toast('AH211正在合闸,请勿做其他操作...', {
@@ -1671,10 +1785,14 @@ export default {
     },
 
     togglefenzha01(append = false) {
-      this.hezha01 = 0
-      this.fenzha01 = 1
-      this.cheru01 = 0
-      this.chechu01 = 0
+      axios.get('http://192.168.6.101/getss')
+          .then(response => {
+            const {data} = response;
+            console.log(data);
+
+            // 根据实际需求更新hezha01对应的数据属性的值
+            this.fenzha01 = !data.hezhawei
+          })
 
       if (!this.isDisabled) {
         this.$bvToast.toast('AH201正在分闸,请勿做其他操作...', {
@@ -1698,12 +1816,14 @@ export default {
     },
 
     togglefenzha02(append = false) {
-      this.hezha02 = 0
-      this.fenzha02 = 1
-      this.cheru02 = 0
-      this.chechu02 = 0
-      this.daohe02 = 0
-      this.daofen02 = 0
+      axios.get('http://192.168.6.101/getss')
+          .then(response => {
+            const {data} = response;
+            console.log(data);
+
+            // 根据实际需求更新hezha01对应的数据属性的值
+            this.fenzha02 = !data.hezhawei
+          })
 
       // this.fenzha02 = this.fenzha02 === 0 ? 1 : 0
       if (!this.isDisabled) {
@@ -1727,12 +1847,14 @@ export default {
       }
     },
     togglefenzha03(append = false) {
-      this.hezha03 = 0
-      this.fenzha03 = 1
-      this.cheru03 = 0
-      this.chechu03 = 0
-      this.daohe03 = 0
-      this.daofen03 = 0
+      axios.get('http://192.168.6.101/getss')
+          .then(response => {
+            const {data} = response;
+            console.log(data);
+
+            // 根据实际需求更新hezha01对应的数据属性的值
+            this.fenzha03 = !data.hezhawei
+          })
 
       if (!this.isDisabled) {
         this.$bvToast.toast('AH203正在分闸,请勿做其他操作...', {
@@ -1755,12 +1877,14 @@ export default {
       }
     },
     togglefenzha04(append = false) {
-      this.hezha04 = 0
-      this.fenzha04 = 1
-      this.cheru04 = 0
-      this.chechu04 = 0
-      this.daohe04 = 0
-      this.daofen04 = 0
+      axios.get('http://192.168.6.101/getss')
+          .then(response => {
+            const {data} = response;
+            console.log(data);
+
+            // 根据实际需求更新hezha01对应的数据属性的值
+            this.fenzha04 = !data.hezhawei
+          })
 
       if (!this.isDisabled) {
         this.$bvToast.toast('AH204正在分闸,请勿做其他操作...', {
@@ -1784,12 +1908,14 @@ export default {
     },
 
     togglefenzha05(append = false) {
-      this.hezha05 = 0
-      this.fenzha05 = 1
-      this.cheru05 = 0
-      this.chechu05 = 0
-      this.daohe05 = 0
-      this.daofen05 = 0
+      axios.get('http://192.168.6.101/getss')
+          .then(response => {
+            const {data} = response;
+            console.log(data);
+
+            // 根据实际需求更新hezha01对应的数据属性的值
+            this.fenzha05 = !data.hezhawei
+          })
 
       if (!this.isDisabled) {
         this.$bvToast.toast('AH205正在分闸,请勿做其他操作...', {
@@ -1812,10 +1938,14 @@ export default {
       }
     },
     togglefenzha06(append = false) {
-      this.hezha06 = 0
-      this.fenzha06 = 1
-      this.cheru06 = 0
-      this.chechu06 = 0
+      axios.get('http://192.168.6.101/getss')
+          .then(response => {
+            const {data} = response;
+            console.log(data);
+
+            // 根据实际需求更新hezha01对应的数据属性的值
+            this.fenzha06 = !data.hezhawei
+          })
 
       if (!this.isDisabled) {
         this.$bvToast.toast('AH206正在分闸,请勿做其他操作...', {
@@ -1838,12 +1968,14 @@ export default {
       }
     },
     togglefenzha07(append = false) {
-      this.hezha07 = 0
-      this.fenzha07 = 1
-      this.cheru07 = 0
-      this.chechu07 = 0
-      this.daohe07 = 0
-      this.daofen07 = 0
+      axios.get('http://192.168.6.101/getss')
+          .then(response => {
+            const {data} = response;
+            console.log(data);
+
+            // 根据实际需求更新hezha01对应的数据属性的值
+            this.fenzha07 = !data.hezhawei
+          })
 
       if (!this.isDisabled) {
         this.$bvToast.toast('AH207正在分闸,请勿做其他操作...', {
@@ -1867,12 +1999,14 @@ export default {
     },
 
     togglefenzha08(append = false) {
-      this.hezha08 = 0
-      this.fenzha08 = 1
-      this.cheru08 = 0
-      this.chechu08 = 0
-      this.daohe08 = 0
-      this.daofen08 = 0
+      axios.get('http://192.168.6.101/getss')
+          .then(response => {
+            const {data} = response;
+            console.log(data);
+
+            // 根据实际需求更新hezha01对应的数据属性的值
+            this.fenzha08 = !data.hezhawei
+          })
 
       if (!this.isDisabled) {
         this.$bvToast.toast('AH208正在分闸,请勿做其他操作...', {
@@ -1895,12 +2029,14 @@ export default {
       }
     },
     togglefenzha09(append = false) {
-      this.hezha09 = 0
-      this.fenzha09 = 1
-      this.cheru09 = 0
-      this.chechu09 = 0
-      this.daohe09 = 0
-      this.daofen09 = 0
+      axios.get('http://192.168.6.101/getss')
+          .then(response => {
+            const {data} = response;
+            console.log(data);
+
+            // 根据实际需求更新hezha01对应的数据属性的值
+            this.fenzha09 = !data.hezhawei
+          })
 
       if (!this.isDisabled) {
         this.$bvToast.toast('AH209正在分闸,请勿做其他操作...', {
@@ -1923,12 +2059,14 @@ export default {
       }
     },
     togglefenzha10(append = false) {
-      this.hezha10 = 0
-      this.fenzha10 = 1
-      this.cheru10 = 0
-      this.chechu10 = 0
-      this.daohe10 = 0
-      this.daofen10 = 0
+      axios.get('http://192.168.6.101/getss')
+          .then(response => {
+            const {data} = response;
+            console.log(data);
+
+            // 根据实际需求更新hezha01对应的数据属性的值
+            this.fenzha10 = !data.hezhawei
+          })
 
       if (!this.isDisabled) {
         this.$bvToast.toast('AH210正在分闸,请勿做其他操作...', {
@@ -1951,12 +2089,14 @@ export default {
       }
     },
     togglefenzha11(append = false) {
-      this.hezha11 = 0
-      this.fenzha11 = 1
-      this.cheru11 = 0
-      this.chechu11 = 0
-      this.daohe11 = 0
-      this.daofen11 = 0
+      axios.get('http://192.168.6.101/getss')
+          .then(response => {
+            const {data} = response;
+            console.log(data);
+
+            // 根据实际需求更新hezha01对应的数据属性的值
+            this.fenzha11 = !data.hezhawei
+          })
 
       if (!this.isDisabled) {
         this.$bvToast.toast('AH211正在分闸,请勿做其他操作...', {
@@ -1980,10 +2120,14 @@ export default {
     },
 
     togglecheru01(append = false) {
-      this.hezha01 = 0
-      this.fenzha01 = 0
-      this.cheru01 = 1
-      this.chechu01 = 0
+      axios.get('http://192.168.6.101/getss')
+          .then(response => {
+            const {data} = response;
+            console.log(data);
+
+            // 根据实际需求更新hezha01对应的数据属性的值
+            this.cheru01 = !data.shiyanwei
+          })
 
       if (!this.isDisabled) {
         this.$bvToast.toast('AH201正在手车驶入,请勿做其他操作...', {
@@ -2006,12 +2150,14 @@ export default {
       }
     },
     togglecheru02(append = false) {
-      this.hezha02 = 0
-      this.fenzha02 = 0
-      this.cheru02 = 1
-      this.chechu02 = 0
-      this.daohe02 = 0
-      this.daofen02 = 0
+      axios.get('http://192.168.6.101/getss')
+          .then(response => {
+            const {data} = response;
+            console.log(data);
+
+            // 根据实际需求更新hezha01对应的数据属性的值
+            this.cheru02 = !data.shiyanwei
+          })
 
       if (!this.isDisabled) {
         this.$bvToast.toast('AH202正在手车驶入,请勿做其他操作...', {
@@ -2034,12 +2180,14 @@ export default {
       }
     },
     togglecheru03(append = false) {
-      this.hezha03 = 0
-      this.fenzha03 = 0
-      this.cheru03 = 1
-      this.chechu03 = 0
-      this.daohe03 = 0
-      this.daofen03 = 0
+      axios.get('http://192.168.6.101/getss')
+          .then(response => {
+            const {data} = response;
+            console.log(data);
+
+            // 根据实际需求更新hezha01对应的数据属性的值
+            this.cheru03 = !data.shiyanwei
+          })
 
       if (!this.isDisabled) {
         this.$bvToast.toast('AH203正在手车驶入,请勿做其他操作...', {
@@ -2063,10 +2211,14 @@ export default {
     },
 
     togglecheru06(append = false) {
-      this.hezha06 = 0
-      this.fenzha06 = 0
-      this.cheru06 = 1
-      this.chechu06 = 0
+      axios.get('http://192.168.6.101/getss')
+          .then(response => {
+            const {data} = response;
+            console.log(data);
+
+            // 根据实际需求更新hezha01对应的数据属性的值
+            this.cheru06 = !data.shiyanwei
+          })
 
       if (!this.isDisabled) {
         this.$bvToast.toast('AH206正在手车驶入,请勿做其他操作...', {
@@ -2089,12 +2241,14 @@ export default {
       }
     },
     togglecheru09(append = false) {
-      this.hezha09 = 0
-      this.fenzha09 = 0
-      this.cheru09 = 1
-      this.chechu09 = 0
-      this.daohe09 = 0
-      this.daofen09 = 0
+      axios.get('http://192.168.6.101/getss')
+          .then(response => {
+            const {data} = response;
+            console.log(data);
+
+            // 根据实际需求更新hezha01对应的数据属性的值
+            this.cheru09 = !data.shiyanwei
+          })
 
       if (!this.isDisabled) {
         this.$bvToast.toast('AH209正在手车驶入,请勿做其他操作...', {
@@ -2117,12 +2271,14 @@ export default {
       }
     },
     togglecheru10(append = false) {
-      this.hezha10 = 0
-      this.fenzha10 = 0
-      this.cheru10 = 1
-      this.chechu10 = 0
-      this.daohe10 = 0
-      this.daofen10 = 0
+      axios.get('http://192.168.6.101/getss')
+          .then(response => {
+            const {data} = response;
+            console.log(data);
+
+            // 根据实际需求更新hezha01对应的数据属性的值
+            this.cheru10 = !data.shiyanwei
+          })
 
       if (!this.isDisabled) {
         this.$bvToast.toast('AH210正在手车驶入,请勿做其他操作...', {
@@ -2145,13 +2301,14 @@ export default {
       }
     },
     togglecheru11(append = false) {
-      // this.cheru11 = this.cheru11 === 0 ? 1 : 0
-      this.hezha11 = 0
-      this.fenzha11 = 0
-      this.cheru11 = 1
-      this.chechu11 = 0
-      this.daohe11 = 0
-      this.daofen11 = 0
+      axios.get('http://192.168.6.101/getss')
+          .then(response => {
+            const {data} = response;
+            console.log(data);
+
+            // 根据实际需求更新hezha01对应的数据属性的值
+            this.cheru11 = !data.shiyanwei
+          })
 
       if (!this.isDisabled) {
         this.$bvToast.toast('AH211正在手车驶入,请勿做其他操作...', {
@@ -2175,10 +2332,15 @@ export default {
     },
 
     togglechechu01(append = false) {
-      this.hezha01 = 0
-      this.fenzha01 = 0
-      this.cheru01 = 0
-      this.chechu01 = 1
+      axios.get('http://192.168.6.101/getss')
+          .then(response => {
+            const {data} = response;
+            console.log(data);
+
+            // 根据实际需求更新hezha01对应的数据属性的值
+            this.chechu01 = !data.gongzuowei
+          })
+      
       if (!this.isDisabled) {
         this.$bvToast.toast('AH201正在手车驶出,请勿做其他操作...', {
           title: '温馨提示',
@@ -2200,12 +2362,14 @@ export default {
       }
     },
     togglechechu02(append = false) {
-      this.hezha02 = 0
-      this.fenzha02 = 0
-      this.cheru02 = 0
-      this.chechu02 = 1
-      this.daohe02 = 0
-      this.daofen02 = 0
+      axios.get('http://192.168.6.101/getss')
+          .then(response => {
+            const {data} = response;
+            console.log(data);
+
+            // 根据实际需求更新hezha01对应的数据属性的值
+            this.chechu02 = !data.gongzuowei
+          })
 
       if (!this.isDisabled) {
         this.$bvToast.toast('AH202正在手车驶出,请勿做其他操作...', {
@@ -2228,12 +2392,14 @@ export default {
       }
     },
     togglechechu03(append = false) {
-      this.hezha03 = 0
-      this.fenzha03 = 0
-      this.cheru03 = 0
-      this.chechu03 = 1
-      this.daohe03 = 0
-      this.daofen03 = 0
+      axios.get('http://192.168.6.101/getss')
+          .then(response => {
+            const {data} = response;
+            console.log(data);
+
+            // 根据实际需求更新hezha01对应的数据属性的值
+            this.chechu03 = !data.gongzuowei
+          })
 
       this.$bvToast.toast('AH203正在手车驶出,请勿做其他操作...', {
         title: '温馨提示',
@@ -2256,12 +2422,14 @@ export default {
 
 
     togglechechu06(append = false) {
-      this.hezha06 = 0
-      this.fenzha06 = 0
-      this.cheru06 = 0
-      this.chechu06 = 1
-      this.daohe06 = 0
-      this.daofen06 = 0
+      axios.get('http://192.168.6.101/getss')
+          .then(response => {
+            const {data} = response;
+            console.log(data);
+
+            // 根据实际需求更新hezha01对应的数据属性的值
+            this.chechu06 = !data.gongzuowei
+          })
 
       this.$bvToast.toast('AH205正在手车驶出,请勿做其他操作...', {
         title: '温馨提示',
@@ -2282,12 +2450,14 @@ export default {
       this.text = '执行手车驶出'
     },
     togglechechu09(append = false) {
-      this.hezha09 = 0
-      this.fenzha09 = 0
-      this.cheru09 = 0
-      this.chechu09 = 1
-      this.daohe09 = 0
-      this.daofen09 = 0
+      axios.get('http://192.168.6.101/getss')
+          .then(response => {
+            const {data} = response;
+            console.log(data);
+
+            // 根据实际需求更新hezha01对应的数据属性的值
+            this.chechu09 = !data.gongzuowei
+          })
 
       this.$bvToast.toast('AH209正在手车驶出,请勿做其他操作...', {
         title: '温馨提示',
@@ -2309,12 +2479,14 @@ export default {
     },
 
     togglechechu10(append = false) {
-      this.hezha10 = 0
-      this.fenzha10 = 0
-      this.cheru10 = 1
-      this.chechu10 = 0
-      this.daohe10 = 0
-      this.daofen10 = 0
+      axios.get('http://192.168.6.101/getss')
+          .then(response => {
+            const {data} = response;
+            console.log(data);
+
+            // 根据实际需求更新hezha01对应的数据属性的值
+            this.chechu10 = !data.gongzuowei
+          })
 
       this.$bvToast.toast('AH205正在手车驶出,请勿做其他操作...', {
         title: '温馨提示',
@@ -2336,12 +2508,14 @@ export default {
     },
 
     togglechechu11(append = false) {
-      this.hezha11 = 0
-      this.fenzha11 = 0
-      this.cheru11 = 0
-      this.chechu11 = 1
-      this.daohe11 = 0
-      this.daofen11 = 0
+      axios.get('http://192.168.6.101/getss')
+          .then(response => {
+            const {data} = response;
+            console.log(data);
+
+            // 根据实际需求更新hezha01对应的数据属性的值
+            this.chechu11 = !data.gongzuowei
+          })
 
       this.$bvToast.toast('AH211正在手车驶出,请勿做其他操作...', {
         title: '温馨提示',
@@ -2363,12 +2537,14 @@ export default {
     },
 
     toggledaohe02(append = false) {
-      this.hezha02 = 0
-      this.fenzha02 = 0
-      this.cheru02 = 0
-      this.chechu02 = 0
-      this.daohe02 = 1
-      this.daofen02 = 0
+      axios.get('http://192.168.6.101/getss')
+          .then(response => {
+            const {data} = response;
+            console.log(data);
+
+            // 根据实际需求更新hezha01对应的数据属性的值
+            this.daohe02 = data.jiedihe
+          })
 
       if (!this.isDisabled) {
         this.$bvToast.toast('AH202正在闭合接地刀中,请勿做其他操作...', {
@@ -2389,12 +2565,14 @@ export default {
       }
     },
     toggledaohe03(append = false) {
-      this.hezha03 = 0
-      this.fenzha03 = 0
-      this.cheru03 = 0
-      this.chechu03 = 0
-      this.daohe03 = 1
-      this.daofen03 = 0
+      axios.get('http://192.168.6.101/getss')
+          .then(response => {
+            const {data} = response;
+            console.log(data);
+
+            // 根据实际需求更新hezha01对应的数据属性的值
+            this.daohe03 = data.jiedihe
+          })
 
       if (!this.isDisabled) {
         this.$bvToast.toast('AH203正在闭合接地刀中,请勿做其他操作...', {
@@ -2415,12 +2593,14 @@ export default {
       }
     },
     toggledaohe09(append = false) {
-      this.hezha09 = 0
-      this.fenzha09 = 0
-      this.cheru09 = 0
-      this.chechu09 = 0
-      this.daohe09 = 1
-      this.daofen09 = 0
+      axios.get('http://192.168.6.101/getss')
+          .then(response => {
+            const {data} = response;
+            console.log(data);
+
+            // 根据实际需求更新hezha01对应的数据属性的值
+            this.daohe09 = data.jiedihe
+          })
 
       if (!this.isDisabled) {
         this.$bvToast.toast('AH209正在闭合接地刀中,请勿做其他操作...', {
@@ -2441,12 +2621,14 @@ export default {
       }
     },
     toggledaohe10(append = false) {
-      this.hezha10 = 0
-      this.fenzha10 = 0
-      this.cheru10 = 0
-      this.chechu10 = 0
-      this.daohe10 = 1
-      this.daofen10 = 0
+      axios.get('http://192.168.6.101/getss')
+          .then(response => {
+            const {data} = response;
+            console.log(data);
+
+            // 根据实际需求更新hezha01对应的数据属性的值
+            this.daohe10 = data.jiedihe
+          })
 
       if (!this.isDisabled) {
         this.$bvToast.toast('AH210正在闭合接地刀中,请勿做其他操作...', {
@@ -2467,12 +2649,14 @@ export default {
       }
     },
     toggledaohe11(append = false) {
-      this.hezha11 = 0
-      this.fenzha11 = 0
-      this.cheru11 = 0
-      this.chechu11 = 0
-      this.daohe11 = 1
-      this.daofen11 = 0
+      axios.get('http://192.168.6.101/getss')
+          .then(response => {
+            const {data} = response;
+            console.log(data);
+
+            // 根据实际需求更新hezha01对应的数据属性的值
+            this.daohe11 = data.jiedihe
+          })
 
       if (!this.isDisabled) {
         this.$bvToast.toast('AH211正在闭合接地刀中,请勿做其他操作...', {
@@ -2494,12 +2678,14 @@ export default {
     },
 
     toggledaofen02(append = false) {
-      this.hezha02 = 0
-      this.fenzha02 = 0
-      this.cheru02 = 0
-      this.chechu02 = 0
-      this.daohe02 = 0
-      this.daofen02 = 1
+      axios.get('http://192.168.6.101/getss')
+          .then(response => {
+            const {data} = response;
+            console.log(data);
+
+            // 根据实际需求更新hezha01对应的数据属性的值
+            this.daofen02 = !data.jiedihe
+          })
 
       if (!this.isDisabled) {
         this.$bvToast.toast('AH202正在断开接地刀中,请勿做其他操作...', {
@@ -2520,12 +2706,14 @@ export default {
       }
     },
     toggledaofen03(append = false) {
-      this.hezha03 = 0
-      this.fenzha03 = 0
-      this.cheru03 = 0
-      this.chechu03 = 0
-      this.daohe03 = 0
-      this.daofen03 = 1
+      axios.get('http://192.168.6.101/getss')
+          .then(response => {
+            const {data} = response;
+            console.log(data);
+
+            // 根据实际需求更新hezha01对应的数据属性的值
+            this.daofen03 = !data.jiedihe
+          })
 
       if (!this.isDisabled) {
         this.$bvToast.toast('AH203正在断开接地刀中,请勿做其他操作...', {
@@ -2546,12 +2734,14 @@ export default {
       }
     },
     toggledaofen09(append = false) {
-      this.hezha09 = 0
-      this.fenzha09 = 0
-      this.cheru09 = 0
-      this.chechu09 = 0
-      this.daohe09 = 0
-      this.daofen09 = 1
+      axios.get('http://192.168.6.101/getss')
+          .then(response => {
+            const {data} = response;
+            console.log(data);
+
+            // 根据实际需求更新hezha01对应的数据属性的值
+            this.daofen09 = !data.jiedihe
+          })
 
       if (!this.isDisabled) {
         this.$bvToast.toast('AH209正在断开接地刀中,请勿做其他操作...', {
@@ -2572,12 +2762,14 @@ export default {
       }
     },
     toggledaofen10(append = false) {
-      this.hezha10 = 0
-      this.fenzha10 = 0
-      this.cheru10 = 0
-      this.chechu10 = 0
-      this.daohe10 = 0
-      this.daofen10 = 1
+      axios.get('http://192.168.6.101/getss')
+          .then(response => {
+            const {data} = response;
+            console.log(data);
+
+            // 根据实际需求更新hezha01对应的数据属性的值
+            this.daofen10 = !data.jiedihe
+          })
 
       if (!this.isDisabled) {
         this.$bvToast.toast('AH210正在断开接地刀中,请勿做其他操作...', {
@@ -2598,12 +2790,14 @@ export default {
       }
     },
     toggledaofen11(append = false) {
-      this.hezha11 = 0
-      this.fenzha11 = 0
-      this.cheru11 = 0
-      this.chechu11 = 0
-      this.daohe11 = 0
-      this.daofen11 = 1
+      axios.get('http://192.168.6.101/getss')
+          .then(response => {
+            const {data} = response;
+            console.log(data);
+
+            // 根据实际需求更新hezha01对应的数据属性的值
+            this.daofen11 = !data.jiedihe
+          })
 
       if (!this.isDisabled) {
         this.$bvToast.toast('AH211正在断开接地刀中,请勿做其他操作...', {
@@ -2771,7 +2965,7 @@ export default {
         this.text = '执行一键送电'
       }
     },
-    
+
     toggleyiduan01(append = false) {
 
       if (!this.isDisabled) {
