@@ -11,19 +11,15 @@
           <!-- Tab 1 内容 -->
           <div>
             <!-- vanta -->
-            <div
-                ref="vantaRef"
-                style="width:100%;height:100vh;position: relative;"
-            />
 
             <div class="my_title">
-              <b-card style="background-color: rgba(232,232,232,20%); display: flex;">
+              <b-card style="background-color: rgba(222,221,221,0.2); display: flex;">
                 <h6 class="home-text">
-                  默认管理员账户是admin 管理员拥有控制权限 普通用户有观察权限 超级管理员有邮件预警 示意图权限</h6>
+                  默认管理员账户是admin 管理员拥有控制权限 普通用户有观察权限 </h6>
                 <h6 class="introduction">
-                  这是一段介绍文字:{{ ChuanCan }}
+                   普通用户密码是：{{ ChuanCan*0 }} 0
                 </h6>
-                <br>
+
                 <h6 style="color: #000000;font-size: 16px;font-family: 微软雅黑">
                   如需要控制智能柜请输入管理员/超级管理员账户与密码：
                 </h6>
@@ -32,14 +28,22 @@
                     placeholder="用户名"
                 >{{ username }}
                 </b-form-input>
+                <h5>密码请点击以下两个按键输入密码  已输入数字：{{ shiwei*10 + gewei}}</h5>
+                <b-form-spinbutton
+                    v-model="shiwei"
+                    min="0"
+                    max="9"
+                    wrap
+                    vertical
+                />
+                <b-form-spinbutton
+                    v-model="gewei"
+                    min="0"
+                    max="9"
+                    wrap
+                    vertical
+                />
 
-                <b-form-input
-                    v-model="password"
-                    type="password"
-                    placeholder="密码"
-                >
-                  {{ password }}
-                </b-form-input>
                 <b-row style="align-items: center;justify-content: center">
                   <b-button
                       variant="danger"
@@ -85,12 +89,12 @@
 <!--          <ZhuangTai />-->
 <!--        </div>-->
 <!--      </b-tab>-->
-      <b-tab title="紧急分闸">
-        <div v-if="isAdmin || activeTab === 2 || (username === 'observer' && password === 'observer')">
-          <JinJiFenZha />
-          <!-- Tab 3 内容 -->
-        </div>
-      </b-tab>
+<!--      <b-tab title="紧急分闸">-->
+<!--        <div v-if="isAdmin || activeTab === 2 || (username === 'observer' && password === 'observer')">-->
+<!--          <JinJiFenZha />-->
+<!--          &lt;!&ndash; Tab 3 内容 &ndash;&gt;-->
+<!--        </div>-->
+<!--      </b-tab>-->
 
       <!--      <b-tab title="多点测温">-->
       <!--        <div v-if="isAdmin || activeTab === 3 || (username === 'observer' && password === 'observer')">-->
@@ -98,14 +102,14 @@
       <!--          <DuoDianCeWen />-->
       <!--        </div>-->
       <!--      </b-tab>-->
-      <b-tab
-          v-if="isAdmin || activeTab === 4"
-          title="设置"
-      >
-        <SheZhi />
+<!--      <b-tab-->
+<!--          v-if="isAdmin || activeTab === 4"-->
+<!--          title="设置"-->
+<!--      >-->
+<!--        <SheZhi />-->
 
-        <!-- Tab 7 内容 -->
-      </b-tab>
+<!--        &lt;!&ndash; Tab 7 内容 &ndash;&gt;-->
+<!--      </b-tab>-->
 <!--      <b-tab-->
 <!--          v-if="isAdmin || activeTab === 5"-->
 <!--          title="一键顺控"-->
@@ -142,28 +146,39 @@
       <!--      </b-tab>-->
 
       <b-tab
-          v-if="isAdmin || activeTab === 9"
+          v-if="isAdmin || activeTab === 1"
           title="一键顺控"
           style="overflow: hidden;width: 100vh"
       >
-        <SheBeiCanShu />
+        <yijian201 />
       </b-tab>
+
 
       <b-tab
-          v-if="isAdmin || activeTab === 10"
-          title="微机综保"
+          v-if="isAdmin || activeTab === 2"
+          title="示意图"
           style="overflow: hidden;width: 100vh"
       >
-        <Mcp />
+        <AH201 />
       </b-tab>
 
-      <!--      <b-tab-->
-      <!--          v-if="isAdmin || activeTab === 11"-->
-      <!--          title="实时监控"-->
-      <!--          style="overflow: hidden;width: 100vh"-->
-      <!--      >-->
-      <!--        <RealTimeVideo />-->
-      <!--      </b-tab>-->
+<!--      <b-tab-->
+<!--          v-if="isAdmin === false  || activeTab === 10 || isAdmin=== true  "-->
+<!--          title="微机告警"-->
+<!--          style="overflow: hidden;width: 100vh"-->
+<!--      >-->
+<!--        <Mcp1 />-->
+<!--      </b-tab>-->
+
+
+<!--            <b-tab-->
+<!--                v-if="isAdmin === true || activeTab === 11   "-->
+<!--                title="参数与摄像"-->
+<!--                style="overflow: hidden;width: 100vh"-->
+<!--            >-->
+<!--&lt;!&ndash;              <RealTimeVideo />&ndash;&gt;-->
+<!--              <Mcp2 />-->
+<!--            </b-tab>-->
 
       <!--      <b-tab-->
       <!--          v-if="isAdmin || activeTab === 11"-->
@@ -174,12 +189,20 @@
       <!--      </b-tab>-->
 
             <b-tab
-                v-if="isAdmin || activeTab === 12"
-                title="微机参数"
+                v-if="isAdmin=== false    || activeTab === 12 ||  isAdmin=== true  "
+                title="遥测计量"
                 style="overflow: hidden;width: 100vh"
             >
               <YaoCeJiLiang />
             </b-tab>
+
+                  <b-tab
+                      v-if="isAdmin || activeTab === 3"
+                      title="联排示意图"
+                      style="overflow: hidden;width: 100vh"
+                  >
+                    <LianPaiZhuangTai />
+                  </b-tab>
 
       <!-- 其他管理员权限Tabs -->
     </b-tabs>
@@ -187,7 +210,7 @@
 </template>
 <script>
 import {
-  BRow, BCol, BTab, BTabs, BCard, BButton, BFormInput,
+  BRow, BCol, BTab, BTabs, BCard, BButton, BFormInput, BFormSpinbutton,
 } from 'bootstrap-vue'
 
 // import DuoDianCeWen from '@/views/DuoDianCeWen.vue'
@@ -196,63 +219,108 @@ import {
 // import BigData from '@/views/BigData.vue'
 import * as THREE from 'three'
 import clouds from 'vanta/src/vanta.clouds'
+import YaoCeJiLiang from '@/views/YaoCeJiLiang.vue'
 import JinJiFenZha from './JinJiFenZha.vue'
 // import ZhuangTai from './ZhuangTai.vue'
 import SheZhi from './SheZhi.vue'
 // import YiJianShunKong from './YiJianShunKong.vue'
 import SheBeiCanShu from './SheBeiCanShu.vue'
 import Mcp from './Mcp.vue'
-import YaoCeJiLiang from '@/views/YaoCeJiLiang'
+import Mcp1 from '@/views/Mcp1.vue'
+import Mcp2 from '@/views/Mcp2.vue'
 // import RealTimeVideo from '@/views/RealTimeVideo.vue'
 // import XiPei from '@/views/XiPei.vue'
+
+import AH201 from '@/views/shiyitu/AH201.vue'
+import AH202 from '@/views/shiyitu/AH202.vue'
+import AH203 from '@/views/shiyitu/AH203.vue'
+import AH206 from '@/views/shiyitu/AH206.vue'
+import AH209 from '@/views/shiyitu/AH209.vue'
+import AH210 from '@/views/shiyitu/AH210.vue'
+import AH211 from '@/views/shiyitu/AH211.vue'
+
+import yijian201 from '@/views/yijianshunkong/yijian201.vue'
+import yijian202 from '@/views/yijianshunkong/yijian202.vue'
+import yijian203 from '@/views/yijianshunkong/yijian203.vue'
+import yijian206 from '@/views/yijianshunkong/yijian206.vue'
+import yijian209 from '@/views/yijianshunkong/yijian209.vue'
+import yijian210 from '@/views/yijianshunkong/yijian210.vue'
+import yijian211 from '@/views/yijianshunkong/yijian211.vue'
+
+import LianPaiZhuangTai from '@/views/LianPaiZhuangTai.vue'
 
 export default {
   name: 'Hello',
   components: {
+    LianPaiZhuangTai,
+    AH201,
+    AH202,
+    AH203,
+    AH206,
+    AH209,
+    AH210,
+    AH211,
+    yijian201,
+    yijian202,
+    yijian203,
+    yijian206,
+    yijian209,
+    yijian210,
+    yijian211,
+
+    Mcp2,
+    Mcp1,
     YaoCeJiLiang,
     // XiPei,
     // RealTimeVideo,
-    Mcp,
+    // Mcp,
     SheBeiCanShu,
     // ThreeD,
     // BigData,
     // ChatAI,
+    // eslint-disable-next-line vue/no-unused-components
+    BFormSpinbutton,
     BRow,
+    // eslint-disable-next-line vue/no-unused-components
     BCol,
     BCard,
     // DuoDianCeWen,
     // YiJianShunKong,
     // ZhuangTai,
-    SheZhi,
+    // SheZhi,
     BTabs,
     BTab,
     BFormInput,
     BButton,
-    JinJiFenZha,
+    // JinJiFenZha,
   },
   data() {
     return {
       username: 'admin',
       adminpass: '',
-      password: 'admin',
+      password: 99,
+      gewei: 0,
+      shiwei: 0,
       isAdmin: false,
       activeTab: 0,
       tabs: [
         { title: '用户登录', content: '用户登录' },
+        { title: 'Tab 2', content: '一键顺控' },
+        { title: 'Tab 3', content: '示意图' },
+        { title: 'Tab 4', content: '联排示意图' },
         // { title: 'Tab 1', content: '系统状态' },
-        { title: 'Tab 2', content: '紧急分闸' },
-        { title: 'Tab 3', content: '电力状态' },
+        // { title: 'Tab 2', content: '紧急分闸' },
+        // { title: 'Tab 3', content: '电力状态' },
         // { title: 'Tab 4', content: '多点测温' },
-        { title: 'Tab 5', content: '设置' },
+        // { title: 'Tab 5', content: '设置' },
         // { title: 'Tab 6', content: '一键顺控' },
-        { title: 'Tab 7', content: 'Tab 8 内容 (管理员权限)' },
+        // { title: 'Tab 7', content: 'Tab 8 内容 (管理员权限)' },
         // { title: 'Tab 8', content: '数据分析' },
-        // { title: 'Tab 9', content: '3D模型图' },
-        { title: 'Tab 10', content: '一键顺控' },
-        { title: 'Tab 11', content: '微机综保' },
-        // { title: 'Tab 12', content: '实时监控' },
+        // { title: 'Tab 9', content: '微机告警' },
+        // { title: 'Tab 11', content: '参数整定' },
+        // { title: 'Tab 12', content: '遥测计量' },
         // { title: 'Tab 13', content: '西二配电' },
-        { title: 'Tab 14', content: '微机参数' },
+        // { title: 'Tab 14', content: '微机参数' },
       ],
     }
   },
@@ -275,10 +343,11 @@ export default {
   },
   methods: {
     login() {
-      console.log('adminpass==', this.adminpass)
+      // console.log('adminpass==', this.adminpass)
       // 模拟验证用户名和密码
-      if (this.username === 'admin' && this.password === this.adminpass) {
-        console.log('here', this.adminpass)
+      let passx = this.shiwei * 10 + this.gewei
+      if (this.username === 'admin' && passx === this.adminpass) {
+        // console.log('here', this.adminpass)
         this.isAdmin = true
         this.$refs.loginModal.show()
       } else if (this.username === 'observer' && this.password === 'observer') {

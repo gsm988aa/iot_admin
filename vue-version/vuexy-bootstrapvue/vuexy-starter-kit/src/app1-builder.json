@@ -1,0 +1,9 @@
+{
+  "directories": {
+    "output": "exeAPP"
+  },
+    "productName": "App2Installer",
+  "win": {
+    "target": "nsis"
+  }
+}

@@ -1,5 +1,5 @@
 {
-  "name": "vuexy-vuejs-react-html-laravel-admin-dashboard-template",
+  "name": "duodiancewen",
   "version": "6.4.0",
   "private": true,
   "scripts": {
@@ -105,14 +105,15 @@
   },
   "build": {
     "appId": "com.example.myapp",
-    "productName": "XYD",
+    "productName": "zhuangtai",
     "directories": {
-      "output": "exeFile"
+      "output": "exeStatus"
     },
     "win": {
-      "icon": "build/icon.ico"
+        "target":"nsis",
+      "icon": "build/xyd.ico"
     }
   },
-  "description": "XYD",
+  "description": "zhuangtai",
   "author": "Liu"
 }

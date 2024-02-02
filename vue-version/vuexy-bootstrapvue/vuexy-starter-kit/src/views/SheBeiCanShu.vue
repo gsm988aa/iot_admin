@@ -1,1231 +1,1321 @@
 <template>
-  <div style="width: 2000px;position: absolute">
+  <div style="overflow: auto;width: 100%;">
+    <div style="width: 2000px">
 
-    <b-spinner
-      v-if="isDisabled"
-      label="Loading..."
-    />
+      <b-spinner
+          v-if="isDisabled"
+          label="Loading..."
+      />
 
-    <b-card style="position: relative;width: 100%">
+      <b-card style="position: relative;width: 100%">
 
-      <b-table
-        striped
-        hover
-        :items="items"
-        thead-class="text-center"
-        bordered
-        style="table-layout: fixed; width: 100%"
-      >
-        <!--        <template-->
-        <!--          #cell(unit)="row"-->
-        <!--          style="justify-content: center;"-->
-        <!--        >-->
-
-        <!--          <b-button-->
-        <!--            pill-->
-        <!--            variant="warning"-->
-        <!--            @click="onupdate"-->
-        <!--          >-->
-        <!--            开启更新状态-->
-        <!--          </b-button>-->
-
-        <!--          <b-button-->
-        <!--            pill-->
-        <!--            variant="info"-->
-        <!--            @click="offupdate"-->
-        <!--          >-->
-        <!--            关闭更新状态-->
-        <!--          </b-button>-->
-        <!--        </template>-->
-
-        <template
-          #cell(AH201)="row"
-          style="justify-content: center;"
-        >
-          <img
-            v-if="hezha01 === 1"
-            src="@/assets/images/201/AH201shiyan.svg"
-            style="max-width: 100%; max-height: 100%"
-          >
-          <img
-            v-else-if="fenzha01 === 1"
-            src="@/assets/images/201/AH201gongzuo.svg"
-            style="max-width: 100%; max-height: 100%"
-          >
-          <img
-            v-else-if="cheru01 === 1"
-            src="@/assets/images/201/AH201duanluhe.svg"
-            style="max-width: 100%; max-height: 100%"
-          >
-          <img
-            v-else-if="chechu01 === 1"
-            src="@/assets/images/201/AH201duanlufen.svg"
-            style="max-width: 100%; max-height: 100%"
-          >
-          <img
-            v-else
-            src="@/assets/images/AH201.svg"
-            style="max-width: 100%; max-height: 100%"
-          >
-        </template>
-
-        <template
-          #cell(AH202)="row"
-          style="justify-content: center"
-        >
-          <img
-            v-if="hezha02 === 1"
-            src="@/assets/images/202/AH202shiyan.svg"
-            style="max-width: 100%; max-height: 100%"
-          >
-          <img
-            v-else-if="fenzha02 === 1"
-            src="@/assets/images/202/AH202gongzuo.svg"
-            style="max-width: 100%; max-height: 100%"
-          >
-          <img
-            v-else-if="cheru02 === 1"
-            src="@/assets/images/202/AH202duanluhe.svg"
-            style="max-width: 100%; max-height: 100%"
-          >
-          <img
-            v-else-if="chechu02 === 1"
-            src="@/assets/images/202/AH202duanlufen.svg"
-            style="max-width: 100%; max-height: 100%"
-          >
-          <img
-            v-else-if="daohe02 === 1"
-            src="@/assets/images/202/AH202jiedihe.svg"
-            style="max-width: 100%; max-height: 100%"
-          >
-          <img
-            v-else-if="daofen02 === 1"
-            src="@/assets/images/202/AH202jiedifen.svg"
-            style="max-width: 100%; max-height: 100%"
-          >
-          <img
-            v-else
-            src="@/assets/images/AH202.svg"
-            style="max-width: 100%; max-height: 100%"
-          >
-        </template>
-
-        <template
-          #cell(AH203)="row"
-          style="justify-content: center"
-        >
-          <img
-            v-if="hezha03 === 1"
-            src="@/assets/images/202/AH202shiyan.svg"
-            style="max-width: 100%; max-height: 100%"
-          >
-          <img
-            v-else-if="fenzha03 === 1"
-            src="@/assets/images/202/AH202gongzuo.svg"
-            style="max-width: 100%; max-height: 100%"
-          >
-          <img
-            v-else-if="cheru03 === 1"
-            src="@/assets/images/202/AH202duanluhe.svg"
-            style="max-width: 100%; max-height: 100%"
-          >
-          <img
-            v-else-if="chechu03 === 1"
-            src="@/assets/images/202/AH202duanlufen.svg"
-            style="max-width: 100%; max-height: 100%"
-          >
-          <img
-            v-else-if="daohe03 === 1"
-            src="@/assets/images/202/AH202jiedihe.svg"
-            style="max-width: 100%; max-height: 100%"
-          >
-          <img
-            v-else-if="daofen03 === 1"
-            src="@/assets/images/202/AH202jiedifen.svg"
-            style="max-width: 100%; max-height: 100%"
-          >
-          <img
-            v-else
-            src="@/assets/images/AH202.svg"
-            style="max-width: 100%; max-height: 100%"
-          >
-        </template>
-
-        <template
-          #cell(AH204)="row"
-          style="justify-content: center"
-        >
-          <img
-            v-if="hezha04 === 1"
-            src="@/assets/images/204/AH204shiyan.svg"
-            style="max-width: 100%; max-height: 100%"
-          >
-          <img
-            v-else-if="fenzha04 === 1"
-            src="@/assets/images/204/AH204gongzuo.svg"
-            style="max-width: 100%; max-height: 100%"
-          >
-          <img
-            v-else-if="cheru04 === 1"
-            src="@/assets/images/204/AH204duanluhe.svg"
-            style="max-width: 100%; max-height: 100%"
-          >
-          <img
-            v-else-if="chechu04 === 1"
-            src="@/assets/images/204/AH204duanlufen.svg"
-            style="max-width: 100%; max-height: 100%"
-          >
-          <img
-            v-else-if="daohe04 === 1"
-            src="@/assets/images/204/AH204jiedihe.svg"
-            style="max-width: 100%; max-height: 100%"
-          >
-          <img
-            v-else-if="daofen04 === 1"
-            src="@/assets/images/204/AH204jiedifen.svg"
-            style="max-width: 100%; max-height: 100%"
-          >
-          <img
-            v-else
-            src="@/assets/images/AH204.svg"
-            style="max-width: 100%; max-height: 100%"
-          >
-        </template>
-
-        <template
-          #cell(AH205)="row"
-          style="justify-content: center"
-        >
-          <img
-            v-if="hezha05 === 1"
-            src="@/assets/images/204/AH204shiyan.svg"
-            style="max-width: 100%; max-height: 100%"
-          >
-          <img
-            v-else-if="fenzha05 === 1"
-            src="@/assets/images/204/AH204gongzuo.svg"
-            style="max-width: 100%; max-height: 100%"
-          >
-          <img
-            v-else-if="cheru05 === 1"
-            src="@/assets/images/204/AH204duanluhe.svg"
-            style="max-width: 100%; max-height: 100%"
-          >
-          <img
-            v-else-if="chechu05 === 1"
-            src="@/assets/images/204/AH204duanlufen.svg"
-            style="max-width: 100%; max-height: 100%"
-          >
-          <img
-            v-else-if="daohe05 === 1"
-            src="@/assets/images/204/AH204jiedihe.svg"
-            style="max-width: 100%; max-height: 100%"
-          >
-          <img
-            v-else-if="daofen05 === 1"
-            src="@/assets/images/204/AH204jiedifen.svg"
-            style="max-width: 100%; max-height: 100%"
-          >
-          <img
-            v-else
-            src="@/assets/images/AH204.svg"
-            style="max-width: 100%; max-height: 100%"
-          >
-        </template>
-
-        <template
-          #cell(AH206)="row"
-          style="justify-content: center"
-        >
-          <img
-            v-if="hezha06 === 1"
-            src="@/assets/images/206/AH206shiyan.svg"
-            style="max-width: 100%; max-height: 100%"
-          >
-          <img
-            v-else-if="fenzha06 === 1"
-            src="@/assets/images/206/AH206gongzuo.svg"
-            style="max-width: 100%; max-height: 100%"
-          >
-          <img
-            v-else-if="cheru06 === 1"
-            src="@/assets/images/206/AH206duanluhe.svg"
-            style="max-width: 100%; max-height: 100%"
-          >
-          <img
-            v-else-if="chechu06 === 1"
-            src="@/assets/images/206/AH206duanlufen.svg"
-            style="max-width: 100%; max-height: 100%"
-          >
-          <img
-            v-else
-            src="@/assets/images/AH206.svg"
-            style="max-width: 100%; max-height: 100%"
-          >
-        </template>
-
-        <template
-          #cell(AH200)="row"
-          style="justify-content: center"
-        >
-          <img
-            src="@/assets/images/AH200.svg"
-            style="max-width: 100%; max-height: 100%"
-          >
-        </template>
-
-        <template
-          #cell(AH207)="row"
-          style="justify-content: center"
-        >
-          <img
-            v-if="hezha07 === 1"
-            src="@/assets/images/204/AH204shiyan.svg"
-            style="max-width: 100%; max-height: 100%"
-          >
-          <img
-            v-else-if="fenzha07 === 1"
-            src="@/assets/images/204/AH204gongzuo.svg"
-            style="max-width: 100%; max-height: 100%"
-          >
-          <img
-            v-else-if="cheru07 === 1"
-            src="@/assets/images/204/AH204duanluhe.svg"
-            style="max-width: 100%; max-height: 100%"
-          >
-          <img
-            v-else-if="chechu07 === 1"
-            src="@/assets/images/204/AH204duanlufen.svg"
-            style="max-width: 100%; max-height: 100%"
-          >
-          <img
-            v-else-if="daohe07 === 1"
-            src="@/assets/images/204/AH204jiedihe.svg"
-            style="max-width: 100%; max-height: 100%"
-          >
-          <img
-            v-else-if="daofen07 === 1"
-            src="@/assets/images/204/AH204jiedifen.svg"
-            style="max-width: 100%; max-height: 100%"
-          >
-          <img
-            v-else
-            src="@/assets/images/AH204.svg"
-            style="max-width: 100%; max-height: 100%"
-          >
-        </template>
-
-        <template
-          #cell(AH208)="row"
-          style="justify-content: center"
-        >
-          <img
-            v-if="hezha08 === 1"
-            src="@/assets/images/204/AH204shiyan.svg"
-            style="max-width: 100%; max-height: 100%"
-          >
-          <img
-            v-else-if="fenzha08 === 1"
-            src="@/assets/images/204/AH204gongzuo.svg"
-            style="max-width: 100%; max-height: 100%"
-          >
-          <img
-            v-else-if="cheru08 === 1"
-            src="@/assets/images/204/AH204duanluhe.svg"
-            style="max-width: 100%; max-height: 100%"
-          >
-          <img
-            v-else-if="chechu08 === 1"
-            src="@/assets/images/204/AH204duanlufen.svg"
-            style="max-width: 100%; max-height: 100%"
-          >
-          <img
-            v-else-if="daohe08 === 1"
-            src="@/assets/images/204/AH204jiedihe.svg"
-            style="max-width: 100%; max-height: 100%"
-          >
-          <img
-            v-else-if="daofen08 === 1"
-            src="@/assets/images/204/AH204jiedifen.svg"
-            style="max-width: 100%; max-height: 100%"
-          >
-          <img
-            v-else
-            src="@/assets/images/AH204.svg"
-            style="max-width: 100%; max-height: 100%"
-          >
-        </template>
-
-        <template
-          #cell(AH209)="row"
-          style="justify-content: center"
-        >
-          <img
-            v-if="hezha09 === 1"
-            src="@/assets/images/202/AH202shiyan.svg"
-            style="max-width: 100%; max-height: 100%"
-          >
-          <img
-            v-else-if="fenzha09 === 1"
-            src="@/assets/images/202/AH202gongzuo.svg"
-            style="max-width: 100%; max-height: 100%"
-          >
-          <img
-            v-else-if="cheru09 === 1"
-            src="@/assets/images/202/AH202duanluhe.svg"
-            style="max-width: 100%; max-height: 100%"
-          >
-          <img
-            v-else-if="chechu09 === 1"
-            src="@/assets/images/202/AH202duanlufen.svg"
-            style="max-width: 100%; max-height: 100%"
-          >
-          <img
-            v-else-if="daohe09 === 1"
-            src="@/assets/images/202/AH202jiedihe.svg"
-            style="max-width: 100%; max-height: 100%"
-          >
-          <img
-            v-else-if="daofen09 === 1"
-            src="@/assets/images/202/AH202jiedifen.svg"
-            style="max-width: 100%; max-height: 100%"
-          >
-          <img
-            v-else
-            src="@/assets/images/AH202.svg"
-            style="max-width: 100%; max-height: 100%"
-          >
-        </template>
-
-        <template
-          #cell(AH210)="row"
-          style="justify-content: center"
-        >
-          <img
-            v-if="hezha10 === 1"
-            src="@/assets/images/202/AH202shiyan.svg"
-            style="max-width: 100%; max-height: 100%"
-          >
-          <img
-            v-else-if="fenzha10 === 1"
-            src="@/assets/images/202/AH202gongzuo.svg"
-            style="max-width: 100%; max-height: 100%"
-          >
-          <img
-            v-else-if="cheru10 === 1"
-            src="@/assets/images/202/AH202duanluhe.svg"
-            style="max-width: 100%; max-height: 100%"
-          >
-          <img
-            v-else-if="chechu10 === 1"
-            src="@/assets/images/202/AH202duanlufen.svg"
-            style="max-width: 100%; max-height: 100%"
-          >
-          <img
-            v-else-if="daohe10 === 1"
-            src="@/assets/images/202/AH202jiedihe.svg"
-            style="max-width: 100%; max-height: 100%"
-          >
-          <img
-            v-else-if="daofen10 === 1"
-            src="@/assets/images/202/AH202jiedifen.svg"
-            style="max-width: 100%; max-height: 100%"
-          >
-          <img
-            v-else
-            src="@/assets/images/AH202.svg"
-            style="max-width: 100%; max-height: 100%"
-          >
-        </template>
-
-        <template
-          #cell(AH211)="row"
-          style="justify-content: center"
-        >
-          <img
-            v-if="hezha11 === 1"
-            src="@/assets/images/201/AH201shiyan.svg"
-            style="max-width: 100%; max-height: 100%"
-          >
-          <img
-            v-else-if="fenzha11 === 1"
-            src="@/assets/images/201/AH201gongzuo.svg"
-            style="max-width: 100%; max-height: 100%"
-          >
-          <img
-            v-else-if="cheru11 === 1"
-            src="@/assets/images/201/AH201duanluhe.svg"
-            style="max-width: 100%; max-height: 100%"
-          >
-          <img
-            v-else-if="chechu11 === 1"
-            src="@/assets/images/201/AH201duanlufen.svg"
-            style="max-width: 100%; max-height: 100%"
-          >
-          <img
-            v-else
-            src="@/assets/images/AH201.svg"
-            style="max-width: 100%; max-height: 100%"
-          >
-        </template>
-      </b-table>
-
-      <div />
-
-      <!--      <b-card style="width: 100%;background-color: transparent;z-index: 9999">-->
-      <!--        <b-card-text style="font-family: 黑体; font-size: 16px;">-->
-      <!--          仿真测试:-->
-      <!--        </b-card-text>-->
-      <!--        <br>-->
-      <div>
         <b-table
-          striped
-          hover
-          :items="buttonitems"
-          thead-class="table"
-          style="table-layout: fixed;width: 100%"
-          :fields="['unit','AH201', 'AH202', 'AH203', 'AH204', 'AH205', 'AH206','AH200', 'AH207', 'AH208', 'AH209', 'AH210', 'AH211']"
-          :thead-class="'d-none'"
-          bordered
+            striped
+            hover
+            :items="items"
+            thead-class="text-center"
+            bordered
+            style="table-layout: fixed; width: 100%"
         >
-          <template #cell(AH201)="data">
 
-            <div style="display: flex; flex-direction: column;width: 100%;margin-top: -170px">
-              <!--                点击位置后要再点一遍-->
-              <!--                <br />-->
-              <!--                复位后才能点其他按钮-->
-              <b-button
-                variant="outline-primary"
-                class="button-3d-1"
-                :disabled="isDisabled"
-                @click="togglehezha01"
-              >
-                合闸
-              </b-button>
-              <br>
-              <b-button
-                variant="outline-secondary"
-                class="button-3d-2"
-                :disabled="isDisabled"
-                @click="togglefenzha01"
-              >
-                分闸
-              </b-button>
-              <br>
-              <b-button
-                variant="outline-success"
-                class="button-3d-3"
-                :disabled="isDisabled"
-                @click="togglecheru01"
-              >
-                手车驶入
-              </b-button>
-              <br>
-              <b-button
-                variant="outline-danger"
-                class="button-3d-4"
-                :disabled="isDisabled"
-                @click="togglechechu01"
-              >
-                手车驶出
-              </b-button>
-              <br>
-              <b-button
-                variant="outline-warning"
-                class="button-3d-5"
-                :disabled="isDisabled"
-                @click="toggleyigong01"
-              >
-                一键送电
-              </b-button>
-              <br>
-              <b-button
-                variant="outline-info"
-                class="button-3d-6"
-                :disabled="isDisabled"
-                @click="toggleyiduan01"
-              >
-                一键断电
-              </b-button>
-              <br>
-              <b-button
-                variant="outline-primary"
-                class="button-3d-9"
-                :disabled="isDisabled"
-                @click="togglefuwei01"
-              >
-                复位
-              </b-button>
-            </div>
-
-          </template>
-
-          <template #cell(AH202)="data">
-
-            <div
-              style="display: flex; flex-direction: column;width: 100%;"
+          <template
+              #cell(AH201)="row"
+              style="justify-content: center;"
+          >
+            <img
+                v-if="cheru01 === 1"
+                src="@/assets/images/201/AH201shiyan.svg"
+                style="max-width: 100%; max-height: 100%"
             >
-              <!--                点击位置后要再点一遍-->
-              <!--                <br />-->
-              <!--                复位后才能点其他按钮-->
-              <b-button
-                variant="outline-primary"
-                class="button-3d-1"
-                :disabled="isDisabled"
-                @click="togglehezha02"
-              >
-                合闸
-              </b-button>
-              <br>
-              <b-button
-                variant="outline-secondary"
-                class="button-3d-2"
-                :disabled="isDisabled"
-                @click="togglefenzha02"
-              >
-                分闸
-              </b-button>
-              <br>
-              <b-button
-                variant="outline-success"
-                class="button-3d-3"
-                :disabled="isDisabled"
-                @click="togglecheru02"
-              >
-                手车驶入
-              </b-button>
-              <br>
-              <b-button
-                variant="outline-danger"
-                class="button-3d-4"
-                :disabled="isDisabled"
-                @click="togglechechu02"
-              >
-                手车驶出
-              </b-button>
-              <br>
-              <b-button
-                variant="outline-warning"
-                class="button-3d-5"
-                :disabled="isDisabled"
-                @click="toggleyigong02"
-              >
-                一键送电
-              </b-button>
-              <br>
-              <b-button
-                variant="outline-info"
-                class="button-3d-6"
-                :disabled="isDisabled"
-                @click="toggleyiduan02"
-              >
-                一键断电
-              </b-button>
-              <br>
-              <b-button
-                variant="outline-warning"
-                class="button-3d-7"
-                :disabled="isDisabled"
-                @click="toggledaohe02"
-              >
-                接地刀合
-              </b-button>
-              <br>
-              <b-button
-                variant="outline-danger"
-                class="button-3d-8"
-                :disabled="isDisabled"
-                @click="toggledaofen02"
-              >
-                接地刀分
-              </b-button>
-              <br>
-              <b-button
-                variant="outline-primary"
-                class="button-3d-9"
-                :disabled="isDisabled"
-                @click="togglefuwei02"
-              >
-                复位
-              </b-button>
-
-            </div>
-
-          </template>
-
-          <template #cell(AH203)="data">
-
-            <div
-              style="display: flex; flex-direction: column;width: 100%;"
+            <img
+                v-else-if="chechu01 === 1"
+                src="@/assets/images/201/AH201gongzuo.svg"
+                style="max-width: 100%; max-height: 100%"
             >
-              <!--                点击位置后要再点一遍-->
-              <!--                <br />-->
-              <!--                复位后才能点其他按钮-->
-              <b-button
-                variant="outline-primary"
-                class="button-3d-1"
-                :disabled="isDisabled"
-                @click="togglehezha03"
-              >
-                合闸
-              </b-button>
-              <br>
-              <b-button
-                variant="outline-secondary"
-                class="button-3d-2"
-                :disabled="isDisabled"
-                @click="togglefenzha03"
-              >
-                分闸
-              </b-button>
-              <br>
-              <b-button
-                variant="outline-success"
-                class="button-3d-3"
-                :disabled="isDisabled"
-                @click="togglecheru03"
-              >
-                手车驶入
-              </b-button>
-              <br>
-              <b-button
-                variant="outline-danger"
-                class="button-3d-4"
-                :disabled="isDisabled"
-                @click="togglechechu03"
-              >
-                手车驶出
-              </b-button>
-              <br>
-              <b-button
-                variant="outline-warning"
-                class="button-3d-5"
-                :disabled="isDisabled"
-                @click="toggleyigong03"
-              >
-                一键送电
-              </b-button>
-              <br>
-              <b-button
-                variant="outline-info"
-                class="button-3d-6"
-                :disabled="isDisabled"
-                @click="toggleyiduan03"
-              >
-                一键断电
-              </b-button>
-              <br>
-              <b-button
-                variant="outline-warning"
-                class="button-3d-7"
-                :disabled="isDisabled"
-                @click="toggledaohe03"
-              >
-                接地刀合
-              </b-button>
-              <br>
-              <b-button
-                variant="outline-danger"
-                class="button-3d-8"
-                :disabled="isDisabled"
-                @click="toggledaofen03"
-              >
-                接地刀分
-              </b-button>
-              <br>
-              <b-button
-                variant="outline-primary"
-                class="button-3d-9"
-                :disabled="isDisabled"
-                @click="togglefuwei03"
-              >
-                复位
-              </b-button>
-
-            </div>
-
-          </template>
-
-          <template #cell(AH204)="data">
-
-            <div
-              style="display: flex; flex-direction: column;width: 100%;margin-top: -360px"
+            <img
+                v-else-if="hezha01 === 1"
+                src="@/assets/images/201/AH201duanluhe.svg"
+                style="max-width: 100%; max-height: 100%"
             >
-              <!--                点击位置后要再点一遍-->
-              <!--                <br />-->
-              <!--                复位后才能点其他按钮-->
-
-              <b-button
-                variant="outline-primary"
-                class="button-3d-1"
-                :disabled="isDisabled"
-                @click="togglehezha04"
-              >
-                合闸
-              </b-button>
-              <br>
-              <b-button
-                variant="outline-secondary"
-                class="button-3d-2"
-                :disabled="isDisabled"
-                @click="togglefenzha04"
-              >
-                分闸
-              </b-button>
-
-            </div>
-
-          </template>
-
-          <template #cell(AH205)="data">
-
-            <div
-              style="display: flex; flex-direction: column;width: 100%;margin-top: -360px"
+            <img
+                v-else-if="fenzha01 === 1"
+                src="@/assets/images/201/AH201duanlufen.svg"
+                style="max-width: 100%; max-height: 100%"
             >
-              <!--                点击位置后要再点一遍-->
-              <!--                <br />-->
-              <!--                复位后才能点其他按钮-->
-
-              <b-button
-                variant="outline-primary"
-                class="button-3d-1"
-                :disabled="isDisabled"
-                @click="togglehezha05"
-              >
-                合闸
-              </b-button>
-              <br>
-              <b-button
-                variant="outline-secondary"
-                class="button-3d-2"
-                :disabled="isDisabled"
-                @click="togglefenzha05"
-              >
-                分闸
-              </b-button>
-
-            </div>
-
-          </template>
-
-          <template #cell(AH206)="data">
-
-            <div style="display: flex; flex-direction: column;width: 100%;margin-top: -170px">
-              <!--                点击位置后要再点一遍-->
-              <!--                <br />-->
-              <!--                复位后才能点其他按钮-->
-              <b-button
-                variant="outline-primary"
-                class="button-3d-1"
-                :disabled="isDisabled"
-                @click="togglehezha06"
-              >
-                合闸
-              </b-button>
-              <br>
-              <b-button
-                variant="outline-secondary"
-                class="button-3d-2"
-                :disabled="isDisabled"
-                @click="togglefenzha06"
-              >
-                分闸
-              </b-button>
-              <br>
-              <b-button
-                variant="outline-success"
-                class="button-3d-3"
-                :disabled="isDisabled"
-                @click="togglecheru06"
-              >
-                手车驶入
-              </b-button>
-              <br>
-              <b-button
-                variant="outline-danger"
-                class="button-3d-4"
-                :disabled="isDisabled"
-                @click="togglechechu06"
-              >
-                手车驶出
-              </b-button>
-              <br>
-              <b-button
-                variant="outline-warning"
-                class="button-3d-5"
-                :disabled="isDisabled"
-                @click="toggleyigong06"
-              >
-                一键送电
-              </b-button>
-              <br>
-              <b-button
-                variant="outline-info"
-                class="button-3d-6"
-                :disabled="isDisabled"
-                @click="toggleyiduan06"
-              >
-                一键断电
-              </b-button>
-              <br>
-              <b-button
-                variant="outline-primary"
-                class="button-3d-9"
-                :disabled="isDisabled"
-                @click="togglefuwei06"
-              >
-                复位
-              </b-button>
-
-            </div>
-
-          </template>
-
-          <template #cell(AH207)="data">
-
-            <div
-              style="display: flex; flex-direction: column;width: 100%;margin-top: -360px"
+            <img
+                v-else
+                src="@/assets/images/AH201.svg"
+                style="max-width: 100%; max-height: 100%"
             >
-              <!--                点击位置后要再点一遍-->
-              <!--                <br />-->
-              <!--                复位后才能点其他按钮-->
-
-              <b-button
-                variant="outline-primary"
-                class="button-3d-1"
-                :disabled="isDisabled"
-                @click="togglehezha07"
-              >
-                合闸
-              </b-button>
-              <br>
-              <b-button
-                variant="outline-secondary"
-                class="button-3d-2"
-                :disabled="isDisabled"
-                @click="togglefenzha07"
-              >
-                分闸
-              </b-button>
-
-            </div>
-
           </template>
 
-          <template #cell(AH208)="data">
-
-            <div
-              style="display: flex; flex-direction: column;width: 100%;margin-top: -360px"
+          <template
+              #cell(AH202)="row"
+              style="justify-content: center"
+          >
+            <img
+                v-if="cheru02 === 1"
+                src="@/assets/images/202/AH202shiyan.svg"
+                style="max-width: 100%; max-height: 100%"
             >
-              <!--                点击位置后要再点一遍-->
-              <!--                <br />-->
-              <!--                复位后才能点其他按钮-->
-
-              <b-button
-                variant="outline-primary"
-                class="button-3d-1"
-                :disabled="isDisabled"
-                @click="togglehezha08"
-              >
-                合闸
-              </b-button>
-              <br>
-              <b-button
-                variant="outline-secondary"
-                class="button-3d-2"
-                :disabled="isDisabled"
-                @click="togglefenzha08"
-              >
-                分闸
-              </b-button>
-            </div>
-
-          </template>
-
-          <template #cell(AH209)="data">
-
-            <div
-              style="display: flex; flex-direction: column;width: 100%;"
+            <img
+                v-else-if="chechu02 === 1"
+                src="@/assets/images/202/AH202gongzuo.svg"
+                style="max-width: 100%; max-height: 100%"
             >
-              <!--                点击位置后要再点一遍-->
-              <!--                <br />-->
-              <!--                复位后才能点其他按钮-->
-              <b-button
-                variant="outline-primary"
-                class="button-3d-1"
-                :disabled="isDisabled"
-                @click="togglehezha09"
-              >
-                合闸
-              </b-button>
-              <br>
-              <b-button
-                variant="outline-secondary"
-                class="button-3d-2"
-                :disabled="isDisabled"
-                @click="togglefenzha09"
-              >
-                分闸
-              </b-button>
-              <br>
-              <b-button
-                variant="outline-success"
-                class="button-3d-3"
-                :disabled="isDisabled"
-                @click="togglecheru09"
-              >
-                手车驶入
-              </b-button>
-              <br>
-              <b-button
-                variant="outline-danger"
-                class="button-3d-4"
-                :disabled="isDisabled"
-                @click="togglechechu09"
-              >
-                手车驶出
-              </b-button>
-              <br>
-              <b-button
-                variant="outline-warning"
-                class="button-3d-5"
-                :disabled="isDisabled"
-                @click="toggleyigong09"
-              >
-                一键送电
-              </b-button>
-              <br>
-              <b-button
-                variant="outline-info"
-                class="button-3d-6"
-                :disabled="isDisabled"
-                @click="toggleyiduan09"
-              >
-                一键断电
-              </b-button>
-              <br>
-              <b-button
-                variant="outline-warning"
-                class="button-3d-7"
-                :disabled="isDisabled"
-                @click="toggledaohe09"
-              >
-                接地刀合
-              </b-button>
-              <br>
-              <b-button
-                variant="outline-danger"
-                class="button-3d-8"
-                :disabled="isDisabled"
-                @click="toggledaofen09"
-              >
-                接地刀分
-              </b-button>
-              <br>
-              <b-button
-                variant="outline-primary"
-                class="button-3d-9"
-                :disabled="isDisabled"
-                @click="togglefuwei09"
-              >
-                复位
-              </b-button>
-
-            </div>
-
-          </template>
-
-          <template #cell(AH210)="data">
-
-            <div
-              style="display: flex; flex-direction: column;width: 100%;"
+            <img
+                v-else-if="hezha02 === 1"
+                src="@/assets/images/202/AH202duanluhe.svg"
+                style="max-width: 100%; max-height: 100%"
             >
-              <!--                点击位置后要再点一遍-->
-              <!--                <br />-->
-              <!--                复位后才能点其他按钮-->
-              <b-button
-                variant="outline-primary"
-                class="button-3d-1"
-                :disabled="isDisabled"
-                @click="togglehezha10"
-              >
-                合闸
-              </b-button>
-              <br>
-              <b-button
-                variant="outline-secondary"
-                class="button-3d-2"
-                :disabled="isDisabled"
-                @click="togglefenzha10"
-              >
-                分闸
-              </b-button>
-              <br>
-              <b-button
-                variant="outline-success"
-                class="button-3d-3"
-                :disabled="isDisabled"
-                @click="togglecheru10"
-              >
-                手车驶入
-              </b-button>
-              <br>
-              <b-button
-                variant="outline-danger"
-                class="button-3d-4"
-                :disabled="isDisabled"
-                @click="togglechechu10"
-              >
-                手车驶出
-              </b-button>
-              <br>
-              <b-button
-                variant="outline-warning"
-                class="button-3d-5"
-                :disabled="isDisabled"
-                @click="toggleyigong10"
-              >
-                一键送电
-              </b-button>
-              <br>
-              <b-button
-                variant="outline-info"
-                class="button-3d-6"
-                :disabled="isDisabled"
-                @click="toggleyiduan10"
-              >
-                一键断电
-              </b-button>
-              <br>
-              <b-button
-                variant="outline-warning"
-                class="button-3d-7"
-                :disabled="isDisabled"
-                @click="toggledaohe10"
-              >
-                接地刀合
-              </b-button>
-              <br>
-              <b-button
-                variant="outline-danger"
-                class="button-3d-8"
-                :disabled="isDisabled"
-                @click="toggledaofen10"
-              >
-                接地刀分
-              </b-button>
-              <br>
-              <b-button
-                variant="outline-primary"
-                class="button-3d-9"
-                :disabled="isDisabled"
-                @click="togglefuwei10"
-              >
-                复位
-              </b-button>
-
-            </div>
-
-          </template>
-
-          <template #cell(AH211)="data">
-
-            <div
-              style="display: flex; flex-direction: column;width: 100%;"
+            <img
+                v-else-if="fenzha02 === 1"
+                src="@/assets/images/202/AH202duanlufen.svg"
+                style="max-width: 100%; max-height: 100%"
             >
-              <b-button
-                variant="outline-primary"
-                class="button-3d-1"
-                :disabled="isDisabled"
-                @click="togglehezha11"
-              >
-                合闸
-              </b-button>
-              <br>
-              <b-button
-                variant="outline-secondary"
-                class="button-3d-2"
-                :disabled="isDisabled"
-                @click="togglefenzha11"
-              >
-                分闸
-              </b-button>
-              <br>
-              <b-button
-                variant="outline-success"
-                class="button-3d-3"
-                :disabled="isDisabled"
-                @click="togglecheru11"
-              >
-                手车驶入
-              </b-button>
-              <br>
-              <b-button
-                variant="outline-danger"
-                class="button-3d-4"
-                :disabled="isDisabled"
-                @click="togglechechu11"
-              >
-                手车驶出
-              </b-button>
-              <br>
-              <b-button
-                variant="outline-warning"
-                class="button-3d-5"
-                :disabled="isDisabled"
-                @click="toggleyigong11"
-              >
-                一键送电
-              </b-button>
-              <br>
-              <b-button
-                variant="outline-info"
-                class="button-3d-6"
-                :disabled="isDisabled"
-                @click="toggleyiduan11"
-              >
-                一键断电
-              </b-button>
-              <br>
-              <b-button
-                variant="outline-warning"
-                class="button-3d-7"
-                :disabled="isDisabled"
-                @click="toggledaohe11"
-              >
-                接地刀合
-              </b-button>
-              <br>
-              <b-button
-                variant="outline-danger"
-                class="button-3d-8"
-                :disabled="isDisabled"
-                @click="toggledaofen11"
-              >
-                接地刀分
-              </b-button>
-              <br>
-              <b-button
-                variant="outline-primary"
-                class="button-3d-9"
-                :disabled="isDisabled"
-                @click="togglefuwei11"
-              >
-                复位
-              </b-button>
-
-            </div>
-
+            <img
+                v-else-if="daohe02 === 1"
+                src="@/assets/images/202/AH202jiedihe.svg"
+                style="max-width: 100%; max-height: 100%"
+            >
+            <img
+                v-else-if="daofen02 === 1"
+                src="@/assets/images/202/AH202jiedifen.svg"
+                style="max-width: 100%; max-height: 100%"
+            >
+            <img
+                v-else
+                src="@/assets/images/AH202.svg"
+                style="max-width: 100%; max-height: 100%"
+            >
           </template>
 
+          <template
+              #cell(AH203)="row"
+              style="justify-content: center"
+          >
+            <img
+                v-if="cheru03 === 1"
+                src="@/assets/images/202/AH202shiyan.svg"
+                style="max-width: 100%; max-height: 100%"
+            >
+            <img
+                v-else-if="chechu03 === 1"
+                src="@/assets/images/202/AH202gongzuo.svg"
+                style="max-width: 100%; max-height: 100%"
+            >
+            <img
+                v-else-if="hezha03 === 1"
+                src="@/assets/images/202/AH202duanluhe.svg"
+                style="max-width: 100%; max-height: 100%"
+            >
+            <img
+                v-else-if="fenzha03 === 1"
+                src="@/assets/images/202/AH202duanlufen.svg"
+                style="max-width: 100%; max-height: 100%"
+            >
+            <img
+                v-else-if="daohe03 === 1"
+                src="@/assets/images/202/AH202jiedihe.svg"
+                style="max-width: 100%; max-height: 100%"
+            >
+            <img
+                v-else-if="daofen03 === 1"
+                src="@/assets/images/202/AH202jiedifen.svg"
+                style="max-width: 100%; max-height: 100%"
+            >
+            <img
+                v-else
+                src="@/assets/images/AH202.svg"
+                style="max-width: 100%; max-height: 100%"
+            >
+          </template>
+
+          <template
+              #cell(AH204)="row"
+              style="justify-content: center"
+          >
+            <img
+                v-if="cheru04 === 1"
+                src="@/assets/images/204/AH204shiyan.svg"
+                style="max-width: 100%; max-height: 100%"
+            >
+            <img
+                v-else-if="chechu04 === 1"
+                src="@/assets/images/204/AH204gongzuo.svg"
+                style="max-width: 100%; max-height: 100%"
+            >
+            <img
+                v-else-if="hezha04 === 1"
+                src="@/assets/images/204/AH204duanluhe.svg"
+                style="max-width: 100%; max-height: 100%"
+            >
+            <img
+                v-else-if="fenzha04 === 1"
+                src="@/assets/images/204/AH204duanlufen.svg"
+                style="max-width: 100%; max-height: 100%"
+            >
+            <img
+                v-else-if="daohe04 === 1"
+                src="@/assets/images/204/AH204jiedihe.svg"
+                style="max-width: 100%; max-height: 100%"
+            >
+            <img
+                v-else-if="daofen04 === 1"
+                src="@/assets/images/204/AH204jiedifen.svg"
+                style="max-width: 100%; max-height: 100%"
+            >
+            <img
+                v-else
+                src="@/assets/images/AH204.svg"
+                style="max-width: 100%; max-height: 100%"
+            >
+          </template>
+
+          <template
+              #cell(AH205)="row"
+              style="justify-content: center"
+          >
+            <img
+                v-if="cheru05 === 1"
+                src="@/assets/images/204/AH204shiyan.svg"
+                style="max-width: 100%; max-height: 100%"
+            >
+            <img
+                v-else-if="chechu05 === 1"
+                src="@/assets/images/204/AH204gongzuo.svg"
+                style="max-width: 100%; max-height: 100%"
+            >
+            <img
+                v-else-if="hezha05 === 1"
+                src="@/assets/images/204/AH204duanluhe.svg"
+                style="max-width: 100%; max-height: 100%"
+            >
+            <img
+                v-else-if="fenzha05 === 1"
+                src="@/assets/images/204/AH204duanlufen.svg"
+                style="max-width: 100%; max-height: 100%"
+            >
+            <img
+                v-else-if="daohe05 === 1"
+                src="@/assets/images/204/AH204jiedihe.svg"
+                style="max-width: 100%; max-height: 100%"
+            >
+            <img
+                v-else-if="daofen05 === 1"
+                src="@/assets/images/204/AH204jiedifen.svg"
+                style="max-width: 100%; max-height: 100%"
+            >
+            <img
+                v-else
+                src="@/assets/images/AH204.svg"
+                style="max-width: 100%; max-height: 100%"
+            >
+          </template>
+
+          <template
+              #cell(AH206)="row"
+              style="justify-content: center"
+          >
+            <img
+                v-if="cheru06 === 1"
+                src="@/assets/images/206/AH206shiyan.svg"
+                style="max-width: 100%; max-height: 100%"
+            >
+            <img
+                v-else-if="chechu06 === 1"
+                src="@/assets/images/206/AH206gongzuo.svg"
+                style="max-width: 100%; max-height: 100%"
+            >
+            <img
+                v-else-if="hezha06 === 1"
+                src="@/assets/images/206/AH206duanluhe.svg"
+                style="max-width: 100%; max-height: 100%"
+            >
+            <img
+                v-else-if="fenzha06 === 1"
+                src="@/assets/images/206/AH206duanlufen.svg"
+                style="max-width: 100%; max-height: 100%"
+            >
+            <img
+                v-else
+                src="@/assets/images/AH206.svg"
+                style="max-width: 100%; max-height: 100%"
+            >
+          </template>
+
+          <template
+              #cell(AH200)="row"
+              style="justify-content: center"
+          >
+            <img
+                src="@/assets/images/AH200.svg"
+                style="max-width: 100%; max-height: 100%"
+            >
+          </template>
+
+          <template
+              #cell(AH207)="row"
+              style="justify-content: center"
+          >
+            <img
+                v-if="cheru07 === 1"
+                src="@/assets/images/204/AH204shiyan.svg"
+                style="max-width: 100%; max-height: 100%"
+            >
+            <img
+                v-else-if="chechu07 === 1"
+                src="@/assets/images/204/AH204gongzuo.svg"
+                style="max-width: 100%; max-height: 100%"
+            >
+            <img
+                v-else-if="hezha07 === 1"
+                src="@/assets/images/204/AH204duanluhe.svg"
+                style="max-width: 100%; max-height: 100%"
+            >
+            <img
+                v-else-if="fenzha07 === 1"
+                src="@/assets/images/204/AH204duanlufen.svg"
+                style="max-width: 100%; max-height: 100%"
+            >
+            <img
+                v-else-if="daohe07 === 1"
+                src="@/assets/images/204/AH204jiedihe.svg"
+                style="max-width: 100%; max-height: 100%"
+            >
+            <img
+                v-else-if="daofen07 === 1"
+                src="@/assets/images/204/AH204jiedifen.svg"
+                style="max-width: 100%; max-height: 100%"
+            >
+            <img
+                v-else
+                src="@/assets/images/AH204.svg"
+                style="max-width: 100%; max-height: 100%"
+            >
+          </template>
+
+          <template
+              #cell(AH208)="row"
+              style="justify-content: center"
+          >
+            <img
+                v-if="cheru08 === 1"
+                src="@/assets/images/204/AH204shiyan.svg"
+                style="max-width: 100%; max-height: 100%"
+            >
+            <img
+                v-else-if="chechu08 === 1"
+                src="@/assets/images/204/AH204gongzuo.svg"
+                style="max-width: 100%; max-height: 100%"
+            >
+            <img
+                v-else-if="hezha08 === 1"
+                src="@/assets/images/204/AH204duanluhe.svg"
+                style="max-width: 100%; max-height: 100%"
+            >
+            <img
+                v-else-if="fenzha08 === 1"
+                src="@/assets/images/204/AH204duanlufen.svg"
+                style="max-width: 100%; max-height: 100%"
+            >
+            <img
+                v-else-if="daohe08 === 1"
+                src="@/assets/images/204/AH204jiedihe.svg"
+                style="max-width: 100%; max-height: 100%"
+            >
+            <img
+                v-else-if="daofen08 === 1"
+                src="@/assets/images/204/AH204jiedifen.svg"
+                style="max-width: 100%; max-height: 100%"
+            >
+            <img
+                v-else
+                src="@/assets/images/AH204.svg"
+                style="max-width: 100%; max-height: 100%"
+            >
+          </template>
+
+          <template
+              #cell(AH209)="row"
+              style="justify-content: center"
+          >
+            <img
+                v-if="cheru09 === 1"
+                src="@/assets/images/202/AH202shiyan.svg"
+                style="max-width: 100%; max-height: 100%"
+            >
+            <img
+                v-else-if="chechu09 === 1"
+                src="@/assets/images/202/AH202gongzuo.svg"
+                style="max-width: 100%; max-height: 100%"
+            >
+            <img
+                v-else-if="hezha09 === 1"
+                src="@/assets/images/202/AH202duanluhe.svg"
+                style="max-width: 100%; max-height: 100%"
+            >
+            <img
+                v-else-if="fenzha09 === 1"
+                src="@/assets/images/202/AH202duanlufen.svg"
+                style="max-width: 100%; max-height: 100%"
+            >
+            <img
+                v-else-if="daohe09 === 1"
+                src="@/assets/images/202/AH202jiedihe.svg"
+                style="max-width: 100%; max-height: 100%"
+            >
+            <img
+                v-else-if="daofen09 === 1"
+                src="@/assets/images/202/AH202jiedifen.svg"
+                style="max-width: 100%; max-height: 100%"
+            >
+            <img
+                v-else
+                src="@/assets/images/AH202.svg"
+                style="max-width: 100%; max-height: 100%"
+            >
+          </template>
+
+          <template
+              #cell(AH210)="row"
+              style="justify-content: center"
+          >
+            <img
+                v-if="cheru10 === 1"
+                src="@/assets/images/202/AH202shiyan.svg"
+                style="max-width: 100%; max-height: 100%"
+            >
+            <img
+                v-else-if="chechu10 === 1"
+                src="@/assets/images/202/AH202gongzuo.svg"
+                style="max-width: 100%; max-height: 100%"
+            >
+            <img
+                v-else-if="hezha10 === 1"
+                src="@/assets/images/202/AH202duanluhe.svg"
+                style="max-width: 100%; max-height: 100%"
+            >
+            <img
+                v-else-if="fenzha10 === 1"
+                src="@/assets/images/202/AH202duanlufen.svg"
+                style="max-width: 100%; max-height: 100%"
+            >
+            <img
+                v-else-if="daohe10 === 1"
+                src="@/assets/images/202/AH202jiedihe.svg"
+                style="max-width: 100%; max-height: 100%"
+            >
+            <img
+                v-else-if="daofen10 === 1"
+                src="@/assets/images/202/AH202jiedifen.svg"
+                style="max-width: 100%; max-height: 100%"
+            >
+            <img
+                v-else
+                src="@/assets/images/AH202.svg"
+                style="max-width: 100%; max-height: 100%"
+            >
+          </template>
+
+          <template
+              #cell(AH211)="row"
+              style="justify-content: center"
+          >
+            <img
+                v-if="cheru11 === 1"
+                src="@/assets/images/201/AH201shiyan.svg"
+                style="max-width: 100%; max-height: 100%"
+            >
+            <img
+                v-else-if="chechu11 === 1"
+                src="@/assets/images/201/AH201gongzuo.svg"
+                style="max-width: 100%; max-height: 100%"
+            >
+            <img
+                v-else-if="hezha11 === 1"
+                src="@/assets/images/201/AH201duanluhe.svg"
+                style="max-width: 100%; max-height: 100%"
+            >
+            <img
+                v-else-if="fenzha11 === 1"
+                src="@/assets/images/201/AH201duanlufen.svg"
+                style="max-width: 100%; max-height: 100%"
+            >
+            <img
+                v-else
+                src="@/assets/images/AH201.svg"
+                style="max-width: 100%; max-height: 100%"
+            >
+          </template>
         </b-table>
 
-      </div>
+        <div />
+
+        <!--      <b-card style="width: 100%;background-color: transparent;z-index: 9999">-->
+        <!--        <b-card-text style="font-family: 黑体; font-size: 16px;">-->
+        <!--          仿真测试:-->
+        <!--        </b-card-text>-->
+        <!--        <br>-->
+        <div>
+          <b-table
+              striped
+              hover
+              :items="buttonitems"
+              thead-class="table"
+              style="table-layout: fixed;width: 100%"
+              :fields="['unit','AH201', 'AH202', 'AH203', 'AH204', 'AH205', 'AH206','AH200', 'AH207', 'AH208', 'AH209', 'AH210', 'AH211']"
+              :thead-class="'d-none'"
+              bordered
+          >
+            <template #cell(AH201)="data">
+
+              <div style="display: flex; flex-direction: column;width: 100%;margin-top: -170px">
+                <!--                点击位置后要再点一遍-->
+                <!--                <br />-->
+                <!--                复位后才能点其他按钮-->
+                <b-button
+                    variant="outline-primary"
+                    class="button-3d-1"
+                    :disabled="isDisabled"
+                    @click="togglehezha01"
+                >
+                  合闸
+                </b-button>
+                <br>
+                <b-button
+                    variant="outline-secondary"
+                    class="button-3d-2"
+                    :disabled="isDisabled"
+                    @click="togglefenzha01"
+                >
+                  分闸
+                </b-button>
+                <br>
+                <b-button
+                    variant="outline-success"
+                    class="button-3d-3"
+                    :disabled="isDisabled"
+                    @click="togglecheru01"
+                >
+                  手车驶入
+                </b-button>
+                <br>
+                <b-button
+                    variant="outline-danger"
+                    class="button-3d-4"
+                    :disabled="isDisabled"
+                    @click="togglechechu01"
+                >
+                  手车驶出
+                </b-button>
+                <br>
+                <b-button
+                    variant="outline-warning"
+                    class="button-3d-5"
+                    :disabled="isDisabled"
+                    @click="toggleyigong01"
+                >
+                  一键送电
+                </b-button>
+                <br>
+                <b-button
+                    variant="outline-info"
+                    class="button-3d-6"
+                    :disabled="isDisabled"
+                    @click="toggleyiduan01"
+                >
+                  一键断电
+                </b-button>
+                <br>
+                <b-button
+                    variant="outline-primary"
+                    class="button-3d-9"
+                    :disabled="isDisabled"
+                    @click="togglefuwei01"
+                >
+                  复位
+                </b-button>
+              </div>
+
+            </template>
+
+            <template #cell(AH202)="data">
+
+              <div
+                  style="display: flex; flex-direction: column;width: 100%;"
+              >
+                <!--                点击位置后要再点一遍-->
+                <!--                <br />-->
+                <!--                复位后才能点其他按钮-->
+                <b-button
+                    variant="outline-primary"
+                    class="button-3d-1"
+                    :disabled="isDisabled"
+                    @click="togglehezha02"
+                >
+                  合闸
+                </b-button>
+                <br>
+                <b-button
+                    variant="outline-secondary"
+                    class="button-3d-2"
+                    :disabled="isDisabled"
+                    @click="togglefenzha02"
+                >
+                  分闸
+                </b-button>
+                <br>
+                <b-button
+                    variant="outline-success"
+                    class="button-3d-3"
+                    :disabled="isDisabled"
+                    @click="togglecheru02"
+                >
+                  手车驶入
+                </b-button>
+                <br>
+                <b-button
+                    variant="outline-danger"
+                    class="button-3d-4"
+                    :disabled="isDisabled"
+                    @click="togglechechu02"
+                >
+                  手车驶出
+                </b-button>
+                <br>
+                <b-button
+                    variant="outline-warning"
+                    class="button-3d-5"
+                    :disabled="isDisabled"
+                    @click="toggleyigong02"
+                >
+                  一键送电
+                </b-button>
+                <br>
+                <b-button
+                    variant="outline-info"
+                    class="button-3d-6"
+                    :disabled="isDisabled"
+                    @click="toggleyiduan02"
+                >
+                  一键断电
+                </b-button>
+                <br>
+                <b-button
+                    variant="outline-warning"
+                    class="button-3d-7"
+                    :disabled="isDisabled"
+                    @click="toggledaohe02"
+                >
+                  接地刀合
+                </b-button>
+                <br>
+                <b-button
+                    variant="outline-danger"
+                    class="button-3d-8"
+                    :disabled="isDisabled"
+                    @click="toggledaofen02"
+                >
+                  接地刀分
+                </b-button>
+                <br>
+                <b-button
+                    variant="outline-primary"
+                    class="button-3d-9"
+                    :disabled="isDisabled"
+                    @click="togglefuwei02"
+                >
+                  复位
+                </b-button>
+
+              </div>
+
+            </template>
+
+            <template #cell(AH203)="data">
+
+              <div
+                  style="display: flex; flex-direction: column;width: 100%;"
+              >
+                <!--                点击位置后要再点一遍-->
+                <!--                <br />-->
+                <!--                复位后才能点其他按钮-->
+                <b-button
+                    variant="outline-primary"
+                    class="button-3d-1"
+                    :disabled="isDisabled"
+                    @click="togglehezha03"
+                >
+                  合闸
+                </b-button>
+                <br>
+                <b-button
+                    variant="outline-secondary"
+                    class="button-3d-2"
+                    :disabled="isDisabled"
+                    @click="togglefenzha03"
+                >
+                  分闸
+                </b-button>
+                <br>
+                <b-button
+                    variant="outline-success"
+                    class="button-3d-3"
+                    :disabled="isDisabled"
+                    @click="togglecheru03"
+                >
+                  手车驶入
+                </b-button>
+                <br>
+                <b-button
+                    variant="outline-danger"
+                    class="button-3d-4"
+                    :disabled="isDisabled"
+                    @click="togglechechu03"
+                >
+                  手车驶出
+                </b-button>
+                <br>
+                <b-button
+                    variant="outline-warning"
+                    class="button-3d-5"
+                    :disabled="isDisabled"
+                    @click="toggleyigong03"
+                >
+                  一键送电
+                </b-button>
+                <br>
+                <b-button
+                    variant="outline-info"
+                    class="button-3d-6"
+                    :disabled="isDisabled"
+                    @click="toggleyiduan03"
+                >
+                  一键断电
+                </b-button>
+                <br>
+                <b-button
+                    variant="outline-warning"
+                    class="button-3d-7"
+                    :disabled="isDisabled"
+                    @click="toggledaohe03"
+                >
+                  接地刀合
+                </b-button>
+                <br>
+                <b-button
+                    variant="outline-danger"
+                    class="button-3d-8"
+                    :disabled="isDisabled"
+                    @click="toggledaofen03"
+                >
+                  接地刀分
+                </b-button>
+                <br>
+                <b-button
+                    variant="outline-primary"
+                    class="button-3d-9"
+                    :disabled="isDisabled"
+                    @click="togglefuwei03"
+                >
+                  复位
+                </b-button>
+
+              </div>
+
+            </template>
+
+            <template #cell(AH204)="data">
+
+              <div
+                  style="display: flex; flex-direction: column;width: 100%;margin-top: -360px"
+              >
+                <!--                点击位置后要再点一遍-->
+                <!--                <br />-->
+                <!--                复位后才能点其他按钮-->
+
+                <b-button
+                    variant="outline-primary"
+                    class="button-3d-1"
+                    :disabled="isDisabled"
+                    @click="togglehezha04"
+                >
+                  合闸
+                </b-button>
+                <br>
+                <b-button
+                    variant="outline-secondary"
+                    class="button-3d-2"
+                    :disabled="isDisabled"
+                    @click="togglefenzha04"
+                >
+                  分闸
+                </b-button>
+
+              </div>
+
+            </template>
+
+            <template #cell(AH205)="data">
+
+              <div
+                  style="display: flex; flex-direction: column;width: 100%;margin-top: -360px"
+              >
+                <!--                点击位置后要再点一遍-->
+                <!--                <br />-->
+                <!--                复位后才能点其他按钮-->
+
+                <b-button
+                    variant="outline-primary"
+                    class="button-3d-1"
+                    :disabled="isDisabled"
+                    @click="togglehezha05"
+                >
+                  合闸
+                </b-button>
+                <br>
+                <b-button
+                    variant="outline-secondary"
+                    class="button-3d-2"
+                    :disabled="isDisabled"
+                    @click="togglefenzha05"
+                >
+                  分闸
+                </b-button>
+
+              </div>
+
+            </template>
+
+            <template #cell(AH206)="data">
+
+              <div style="display: flex; flex-direction: column;width: 100%;margin-top: -170px">
+                <!--                点击位置后要再点一遍-->
+                <!--                <br />-->
+                <!--                复位后才能点其他按钮-->
+                <b-button
+                    variant="outline-primary"
+                    class="button-3d-1"
+                    :disabled="isDisabled"
+                    @click="togglehezha06"
+                >
+                  合闸
+                </b-button>
+                <br>
+                <b-button
+                    variant="outline-secondary"
+                    class="button-3d-2"
+                    :disabled="isDisabled"
+                    @click="togglefenzha06"
+                >
+                  分闸
+                </b-button>
+                <br>
+                <b-button
+                    variant="outline-success"
+                    class="button-3d-3"
+                    :disabled="isDisabled"
+                    @click="togglecheru06"
+                >
+                  手车驶入
+                </b-button>
+                <br>
+                <b-button
+                    variant="outline-danger"
+                    class="button-3d-4"
+                    :disabled="isDisabled"
+                    @click="togglechechu06"
+                >
+                  手车驶出
+                </b-button>
+                <br>
+                <b-button
+                    variant="outline-warning"
+                    class="button-3d-5"
+                    :disabled="isDisabled"
+                    @click="toggleyigong06"
+                >
+                  一键送电
+                </b-button>
+                <br>
+                <b-button
+                    variant="outline-info"
+                    class="button-3d-6"
+                    :disabled="isDisabled"
+                    @click="toggleyiduan06"
+                >
+                  一键断电
+                </b-button>
+                <br>
+                <b-button
+                    variant="outline-primary"
+                    class="button-3d-9"
+                    :disabled="isDisabled"
+                    @click="togglefuwei06"
+                >
+                  复位
+                </b-button>
+
+              </div>
+
+            </template>
+
+            <template #cell(AH207)="data">
+
+              <div
+                  style="display: flex; flex-direction: column;width: 100%;margin-top: -360px"
+              >
+                <!--                点击位置后要再点一遍-->
+                <!--                <br />-->
+                <!--                复位后才能点其他按钮-->
+
+                <b-button
+                    variant="outline-primary"
+                    class="button-3d-1"
+                    :disabled="isDisabled"
+                    @click="togglehezha07"
+                >
+                  合闸
+                </b-button>
+                <br>
+                <b-button
+                    variant="outline-secondary"
+                    class="button-3d-2"
+                    :disabled="isDisabled"
+                    @click="togglefenzha07"
+                >
+                  分闸
+                </b-button>
+
+              </div>
+
+            </template>
+
+            <template #cell(AH208)="data">
+
+              <div
+                  style="display: flex; flex-direction: column;width: 100%;margin-top: -360px"
+              >
+                <!--                点击位置后要再点一遍-->
+                <!--                <br />-->
+                <!--                复位后才能点其他按钮-->
+
+                <b-button
+                    variant="outline-primary"
+                    class="button-3d-1"
+                    :disabled="isDisabled"
+                    @click="togglehezha08"
+                >
+                  合闸
+                </b-button>
+                <br>
+                <b-button
+                    variant="outline-secondary"
+                    class="button-3d-2"
+                    :disabled="isDisabled"
+                    @click="togglefenzha08"
+                >
+                  分闸
+                </b-button>
+              </div>
+
+            </template>
+
+            <template #cell(AH209)="data">
+
+              <div
+                  style="display: flex; flex-direction: column;width: 100%;"
+              >
+                <!--                点击位置后要再点一遍-->
+                <!--                <br />-->
+                <!--                复位后才能点其他按钮-->
+                <b-button
+                    variant="outline-primary"
+                    class="button-3d-1"
+                    :disabled="isDisabled"
+                    @click="togglehezha09"
+                >
+                  合闸
+                </b-button>
+                <br>
+                <b-button
+                    variant="outline-secondary"
+                    class="button-3d-2"
+                    :disabled="isDisabled"
+                    @click="togglefenzha09"
+                >
+                  分闸
+                </b-button>
+                <br>
+                <b-button
+                    variant="outline-success"
+                    class="button-3d-3"
+                    :disabled="isDisabled"
+                    @click="togglecheru09"
+                >
+                  手车驶入
+                </b-button>
+                <br>
+                <b-button
+                    variant="outline-danger"
+                    class="button-3d-4"
+                    :disabled="isDisabled"
+                    @click="togglechechu09"
+                >
+                  手车驶出
+                </b-button>
+                <br>
+                <b-button
+                    variant="outline-warning"
+                    class="button-3d-5"
+                    :disabled="isDisabled"
+                    @click="toggleyigong09"
+                >
+                  一键送电
+                </b-button>
+                <br>
+                <b-button
+                    variant="outline-info"
+                    class="button-3d-6"
+                    :disabled="isDisabled"
+                    @click="toggleyiduan09"
+                >
+                  一键断电
+                </b-button>
+                <br>
+                <b-button
+                    variant="outline-warning"
+                    class="button-3d-7"
+                    :disabled="isDisabled"
+                    @click="toggledaohe09"
+                >
+                  接地刀合
+                </b-button>
+                <br>
+                <b-button
+                    variant="outline-danger"
+                    class="button-3d-8"
+                    :disabled="isDisabled"
+                    @click="toggledaofen09"
+                >
+                  接地刀分
+                </b-button>
+                <br>
+                <b-button
+                    variant="outline-primary"
+                    class="button-3d-9"
+                    :disabled="isDisabled"
+                    @click="togglefuwei09"
+                >
+                  复位
+                </b-button>
+
+              </div>
+
+            </template>
+
+            <template #cell(AH210)="data">
+
+              <div
+                  style="display: flex; flex-direction: column;width: 100%;"
+              >
+                <!--                点击位置后要再点一遍-->
+                <!--                <br />-->
+                <!--                复位后才能点其他按钮-->
+                <b-button
+                    variant="outline-primary"
+                    class="button-3d-1"
+                    :disabled="isDisabled"
+                    @click="togglehezha10"
+                >
+                  合闸
+                </b-button>
+                <br>
+                <b-button
+                    variant="outline-secondary"
+                    class="button-3d-2"
+                    :disabled="isDisabled"
+                    @click="togglefenzha10"
+                >
+                  分闸
+                </b-button>
+                <br>
+                <b-button
+                    variant="outline-success"
+                    class="button-3d-3"
+                    :disabled="isDisabled"
+                    @click="togglecheru10"
+                >
+                  手车驶入
+                </b-button>
+                <br>
+                <b-button
+                    variant="outline-danger"
+                    class="button-3d-4"
+                    :disabled="isDisabled"
+                    @click="togglechechu10"
+                >
+                  手车驶出
+                </b-button>
+                <br>
+                <b-button
+                    variant="outline-warning"
+                    class="button-3d-5"
+                    :disabled="isDisabled"
+                    @click="toggleyigong10"
+                >
+                  一键送电
+                </b-button>
+                <br>
+                <b-button
+                    variant="outline-info"
+                    class="button-3d-6"
+                    :disabled="isDisabled"
+                    @click="toggleyiduan10"
+                >
+                  一键断电
+                </b-button>
+                <br>
+                <b-button
+                    variant="outline-warning"
+                    class="button-3d-7"
+                    :disabled="isDisabled"
+                    @click="toggledaohe10"
+                >
+                  接地刀合
+                </b-button>
+                <br>
+                <b-button
+                    variant="outline-danger"
+                    class="button-3d-8"
+                    :disabled="isDisabled"
+                    @click="toggledaofen10"
+                >
+                  接地刀分
+                </b-button>
+                <br>
+                <b-button
+                    variant="outline-primary"
+                    class="button-3d-9"
+                    :disabled="isDisabled"
+                    @click="togglefuwei10"
+                >
+                  复位
+                </b-button>
+
+              </div>
+
+            </template>
+
+            <template #cell(AH211)="data">
+
+              <div
+                  style="display: flex; flex-direction: column;width: 100%;"
+              >
+                <b-button
+                    variant="outline-primary"
+                    class="button-3d-1"
+                    :disabled="isDisabled"
+                    @click="togglehezha11"
+                >
+                  合闸
+                </b-button>
+                <br>
+                <b-button
+                    variant="outline-secondary"
+                    class="button-3d-2"
+                    :disabled="isDisabled"
+                    @click="togglefenzha11"
+                >
+                  分闸
+                </b-button>
+                <br>
+                <b-button
+                    variant="outline-success"
+                    class="button-3d-3"
+                    :disabled="isDisabled"
+                    @click="togglecheru11"
+                >
+                  手车驶入
+                </b-button>
+                <br>
+                <b-button
+                    variant="outline-danger"
+                    class="button-3d-4"
+                    :disabled="isDisabled"
+                    @click="togglechechu11"
+                >
+                  手车驶出
+                </b-button>
+                <br>
+                <b-button
+                    variant="outline-warning"
+                    class="button-3d-5"
+                    :disabled="isDisabled"
+                    @click="toggleyigong11"
+                >
+                  一键送电
+                </b-button>
+                <br>
+                <b-button
+                    variant="outline-info"
+                    class="button-3d-6"
+                    :disabled="isDisabled"
+                    @click="toggleyiduan11"
+                >
+                  一键断电
+                </b-button>
+                <br>
+                <b-button
+                    variant="outline-warning"
+                    class="button-3d-7"
+                    :disabled="isDisabled"
+                    @click="toggledaohe11"
+                >
+                  接地刀合
+                </b-button>
+                <br>
+                <b-button
+                    variant="outline-danger"
+                    class="button-3d-8"
+                    :disabled="isDisabled"
+                    @click="toggledaofen11"
+                >
+                  接地刀分
+                </b-button>
+                <br>
+                <b-button
+                    variant="outline-primary"
+                    class="button-3d-9"
+                    :disabled="isDisabled"
+                    @click="togglefuwei11"
+                >
+                  复位
+                </b-button>
+
+              </div>
+
+
+
+
+            </template>
+
+          </b-table>
+
+          <b-row>
+            <b-button
+                variant="outline-primary"
+                @click="start201gaojing"
+            >
+              开启AH201示意图
+            </b-button>
+
+            <b-button
+                variant="outline-danger"
+                @click="stop201gaojing"
+            >
+              关闭AH201示意图
+            </b-button>
+
+            <b-button
+                variant="outline-primary"
+                @click="start202gaojing"
+            >
+              开启AH202示意图
+            </b-button>
+
+            <b-button
+                variant="outline-danger"
+                @click="stop202gaojing"
+            >
+              关闭AH202示意图
+            </b-button>
+
+            <b-button
+                variant="outline-primary"
+                @click="start203gaojing"
+            >
+              开启AH203示意图
+            </b-button>
+
+            <b-button
+                variant="outline-danger"
+                @click="stop203gaojing"
+            >
+              关闭AH203示意图
+            </b-button>
+
+            <br>      <br>
+            <b-button
+                variant="outline-primary"
+                @click="start206gaojing"
+            >
+              开启AH206示意图
+            </b-button>
+
+            <b-button
+                variant="outline-danger"
+                @click="stop206gaojing"
+            >
+              关闭AH206示意图
+            </b-button>
+
+
+            <b-button
+                variant="outline-primary"
+                @click="start209gaojing"
+            >
+              开启AH209示意图
+            </b-button>
+
+            <b-button
+                variant="outline-danger"
+                @click="stop209gaojing"
+            >
+              关闭AH209示意图
+            </b-button>
+
+            <b-button
+                variant="outline-primary"
+                @click="start210gaojing"
+            >
+              开启AH210示意图
+            </b-button>
+
+            <b-button
+                variant="outline-danger"
+                @click="stop210gaojing"
+            >
+              关闭AH210示意图
+            </b-button>
+
+
+            <b-button
+                variant="outline-primary"
+                @click="start211gaojing"
+            >
+              开启AH211示意图
+            </b-button>
+
+            <b-button
+                variant="outline-danger"
+                @click="stop211gaojing"
+            >
+              关闭AH211示意图
+            </b-button>
+
+          </b-row>
+        </div>
+      </b-card>
+    </div>
+  </div>
+
 
       <!--      </b-card>-->
 
-    </b-card>
-  </div>
+
+
 </template>
 
 <script>
@@ -1277,6 +1367,7 @@ export default {
       fenzha09: 0,
       fenzha10: 0,
       fenzha11: 0,
+
 
       daofen02: 0,
       daofen03: 0,
@@ -1362,12 +1453,159 @@ export default {
 
   },
   methods: {
+    start201gaojing() {
+      console.log('201遥测开始数据更新')
+      // 开启数据更新逻辑
+      this.timer = setInterval(() => {
+        axios.get('http://192.168.6.101/getss')
+            .then(response => {
+              const { data } = response;
+              console.log(data);
+              // 在这里可以对接收到的数据进行处理
+            })
+            .catch(error => {
+              console.error('数据获取失败', error);
+            });
+      }, 4000)
+    },
+    start202gaojing() {
+      console.log('202遥测开始数据更新')
+      // 开启数据更新逻辑
+      this.timer2 = setInterval(() => {
+        axios.get('http://192.168.6.102/getss')
+            .then(response => {
+              const { data } = response;
+              console.log(data);
+              // 在这里可以对接收到的数据进行处理
+            })
+            .catch(error => {
+              console.error('数据获取失败', error);
+            });
+      }, 4000)
+    },
+    start203gaojing() {
+      console.log('203遥测开始数据更新')
+      // 开启数据更新逻辑
+      this.timer3 = setInterval(() => {
+        axios.get('http://192.168.6.103/getss')
+            .then(response => {
+              const { data } = response;
+              console.log(data);
+              // 在这里可以对接收到的数据进行处理
+            })
+            .catch(error => {
+              console.error('数据获取失败', error);
+            });
+      }, 4000)
+    },
+    start206gaojing() {
+      console.log('206遥测开始数据更新')
+      // 开启数据更新逻辑
+      this.timer6 = setInterval(() => {
+        axios.get('http://192.168.6.106/getss')
+            .then(response => {
+              const { data } = response;
+              console.log(data);
+              // 在这里可以对接收到的数据进行处理
+            })
+            .catch(error => {
+              console.error('数据获取失败', error);
+            });
+      }, 4000)
+    },
+    start209gaojing() {
+      console.log('209遥测开始数据更新')
+      // 开启数据更新逻辑
+      this.timer9 = setInterval(() => {
+        axios.get('http://192.168.6.105/getss')
+            .then(response => {
+              const { data } = response;
+              console.log(data);
+              // 在这里可以对接收到的数据进行处理
+            })
+            .catch(error => {
+              console.error('数据获取失败', error);
+            });
+      }, 4000)
+    },
+    start210gaojing() {
+      console.log('210遥测开始数据更新')
+      // 开启数据更新逻辑
+      this.timer10 = setInterval(() => {
+        axios.get('http://192.168.6.106/getss')
+            .then(response => {
+              const { data } = response;
+              console.log(data);
+              // 在这里可以对接收到的数据进行处理
+            })
+            .catch(error => {
+              console.error('数据获取失败', error);
+            });
+      }, 4000)
+    },
+    start211gaojing() {
+      console.log('211遥测开始数据更新')
+      // 开启数据更新逻辑
+      this.timer11 = setInterval(() => {
+        axios.get('http://192.168.6.107/getss')
+            .then(response => {
+              const { data } = response;
+              console.log(data);
+              // 在这里可以对接收到的数据进行处理
+            })
+            .catch(error => {
+              console.error('数据获取失败', error);
+            });
+      }, 4000)
+    },
+
+    stop201gaojing() {
+      console.log('201遥测停止数据更新')
+      // 停止数据更新逻辑
+      clearInterval(this.timer)
+    },
+    stop202gaojing() {
+      console.log('202遥测停止数据更新')
+      // 停止数据更新逻辑
+      clearInterval(this.timer2)
+    },
+    stop203gaojing() {
+      console.log('203遥测停止数据更新')
+      // 停止数据更新逻辑
+      clearInterval(this.timer3)
+    },
+    stop206gaojing() {
+      console.log('206遥测停止数据更新')
+      // 停止数据更新逻辑
+      clearInterval(this.timer6)
+    },
+    stop209gaojing() {
+      console.log('209遥测停止数据更新')
+      // 停止数据更新逻辑
+      clearInterval(this.timer9)
+    },
+    stop210gaojing() {
+      console.log('210遥测停止数据更新')
+      // 停止数据更新逻辑
+      clearInterval(this.timer10)
+    },
+    stop211gaojing() {
+      console.log('211遥测停止数据更新')
+      // 停止数据更新逻辑
+      clearInterval(this.timer11)
+    },
+
+
 
     togglehezha01(append = false) {
-      this.hezha01 = 1
-      this.fenzha01 = 0
-      this.cheru01 = 0
-      this.chechu01 = 0
+      axios.get('http://192.168.6.101/getss')
+          .then(response => {
+            const {data} = response;
+            console.log(data);
+
+            // 根据实际需求更新hezha01对应的数据属性的值
+            this.hezha01 = data.hezhawei
+          })
 
       if (!this.isDisabled) {
         this.$bvToast.toast('AH201正在合闸,请勿做其他操作...', {
@@ -1383,19 +1621,21 @@ export default {
           this.text = '指令发送成功！'
           // eslint-disable-next-line no-unused-vars
           axios.post('http://192.168.6.101/hezha')
-            .then(response => {
-            })
+              .then(response => {
+              })
         }, 1000)
         this.text = '执行合闸'
       }
     },
     togglehezha02(append = false) {
-      this.hezha02 = 1
-      this.fenzha02 = 0
-      this.cheru02 = 0
-      this.chechu02 = 0
-      this.daohe02 = 0
-      this.daofen02 = 0
+      axios.get('http://192.168.6.102/getss')
+          .then(response => {
+            const {data} = response;
+            console.log(data);
+
+            // 根据实际需求更新hezha01对应的数据属性的值
+            this.hezha02 = data.hezhawei
+          })
 
       if (!this.isDisabled) {
         this.$bvToast.toast('AH202正在合闸,请勿做其他操作...', {
@@ -1411,19 +1651,21 @@ export default {
           this.text = '指令发送成功！'
           // eslint-disable-next-line no-unused-vars
           axios.post('http://192.168.6.102/hezha')
-            .then(response => {
-            })
+              .then(response => {
+              })
         }, 1000)
         this.text = '执行合闸'
       }
     },
     togglehezha03(append = false) {
-      this.hezha03 = 1
-      this.fenzha03 = 0
-      this.cheru03 = 0
-      this.chechu03 = 0
-      this.daohe03 = 0
-      this.daofen03 = 0
+      axios.get('http://192.168.6.103/getss')
+          .then(response => {
+            const {data} = response;
+            console.log(data);
+
+            // 根据实际需求更新hezha01对应的数据属性的值
+            this.hezha03 = data.hezhawei
+          })
 
       if (!this.isDisabled) {
         this.$bvToast.toast('AH203正在合闸,请勿做其他操作...', {
@@ -1439,20 +1681,22 @@ export default {
           this.text = '指令发送成功！'
           // eslint-disable-next-line no-unused-vars
           axios.post('http://192.168.6.103/hezha')
-            .then(response => {
-            })
+              .then(response => {
+              })
         }, 1000)
         this.text = '执行合闸'
       }
     },
 
     togglehezha04(append = false) {
-      this.hezha04 = 1
-      this.fenzha04 = 0
-      this.cheru04 = 0
-      this.chechu04 = 0
-      this.daohe04 = 0
-      this.daofen04 = 0
+      axios.get('http://192.168.6.104/getss')
+          .then(response => {
+            const {data} = response;
+            console.log(data);
+
+            // 根据实际需求更新hezha01对应的数据属性的值
+            this.hezha04 = data.hezhawei
+          })
 
       if (!this.isDisabled) {
         this.$bvToast.toast('AH204正在合闸,请勿做其他操作...', {
@@ -1467,21 +1711,23 @@ export default {
           this.isDisabled = false
           this.text = '指令发送成功！'
           // eslint-disable-next-line no-unused-vars
-          axios.post('http://192.168.6.121/hezha')
-            .then(response => {
-            })
+          axios.post('http://192.168.6.104/hezha')
+              .then(response => {
+              })
         }, 1000)
         this.text = '执行合闸'
       }
     },
 
     togglehezha05(append = false) {
-      this.hezha05 = 1
-      this.fenzha05 = 0
-      this.cheru05 = 0
-      this.chechu05 = 0
-      this.daohe05 = 0
-      this.daofen05 = 0
+      axios.get('http://192.168.6.105/getss')
+          .then(response => {
+            const {data} = response;
+            console.log(data);
+
+            // 根据实际需求更新hezha01对应的数据属性的值
+            this.hezha05 = data.hezhawei
+          })
 
       if (!this.isDisabled) {
         this.$bvToast.toast('AH203正在合闸,请勿做其他操作...', {
@@ -1496,19 +1742,23 @@ export default {
           this.isDisabled = false
           this.text = '指令发送成功！'
           // eslint-disable-next-line no-unused-vars
-          axios.post('http://192.168.6.121/hezha')
-            .then(response => {
-            })
+          axios.post('http://192.168.6.105/hezha')
+              .then(response => {
+              })
         }, 1000)
         this.text = '执行合闸'
       }
     },
 
     togglehezha06(append = false) {
-      this.hezha06 = 1
-      this.fenzha06 = 0
-      this.cheru06 = 0
-      this.chechu06 = 0
+      axios.get('http://192.168.6.104/getss')
+          .then(response => {
+            const {data} = response;
+            console.log(data);
+
+            // 根据实际需求更新hezha01对应的数据属性的值
+            this.hezha06 = data.hezhawei
+          })
 
       if (!this.isDisabled) {
         this.$bvToast.toast('AH206正在合闸,请勿做其他操作...', {
@@ -1523,20 +1773,22 @@ export default {
           this.isDisabled = false
           this.text = '指令发送成功！'
           // eslint-disable-next-line no-unused-vars
-          axios.post('http://192.168.6.106/hezha')
-            .then(response => {
-            })
+          axios.post('http://192.168.6.104/hezha')
+              .then(response => {
+              })
         }, 1000)
         this.text = '执行合闸'
       }
     },
     togglehezha07(append = false) {
-      this.hezha07 = 1
-      this.fenzha07 = 0
-      this.cheru07 = 0
-      this.chechu07 = 0
-      this.daohe07 = 0
-      this.daofen07 = 0
+      axios.get('http://192.168.6.107/getss')
+          .then(response => {
+            const {data} = response;
+            console.log(data);
+
+            // 根据实际需求更新hezha01对应的数据属性的值
+            this.hezha07 = data.hezhawei
+          })
 
       if (!this.isDisabled) {
         this.$bvToast.toast('AH207正在合闸,请勿做其他操作...', {
@@ -1551,7 +1803,7 @@ export default {
           this.isDisabled = false
           this.text = '指令发送成功！'
           // eslint-disable-next-line no-unused-vars
-          axios.post('http://192.168.6.121/hezha')
+          axios.post('http://192.168.6.107/hezha')
               .then(response => {
               })
         }, 1000)
@@ -1560,10 +1812,14 @@ export default {
     },
 
     togglehezha08(append = false) {
-      this.hezha08 = 1
-      this.fenzha08 = 0
-      this.cheru08 = 0
-      this.chechu08 = 0
+      axios.get('http://192.168.6.108/getss')
+          .then(response => {
+            const {data} = response;
+            console.log(data);
+
+            // 根据实际需求更新hezha01对应的数据属性的值
+            this.hezha08 = data.hezhawei
+          })
 
       if (!this.isDisabled) {
         this.$bvToast.toast('AH208正在合闸,请勿做其他操作...', {
@@ -1578,7 +1834,7 @@ export default {
           this.isDisabled = false
           this.text = '指令发送成功！'
           // eslint-disable-next-line no-unused-vars
-          axios.post('http://192.168.6.121/hezha')
+          axios.post('http://192.168.6.108/hezha')
               .then(response => {
               })
         }, 1000)
@@ -1586,12 +1842,14 @@ export default {
       }
     },
     togglehezha09(append = false) {
-      this.hezha09 = 1
-      this.fenzha09 = 0
-      this.cheru09 = 0
-      this.chechu09 = 0
-      this.daohe09 = 0
-      this.daofen09 = 0
+      axios.get('http://192.168.6.105/getss')
+          .then(response => {
+            const {data} = response;
+            console.log(data);
+
+            // 根据实际需求更新hezha01对应的数据属性的值
+            this.hezha09 = data.hezhawei
+          })
 
       if (!this.isDisabled) {
         this.$bvToast.toast('AH209正在合闸,请勿做其他操作...', {
@@ -1606,20 +1864,22 @@ export default {
           this.isDisabled = false
           this.text = '指令发送成功！'
           // eslint-disable-next-line no-unused-vars
-          axios.post('http://192.168.6.109/hezha')
-            .then(response => {
-            })
+          axios.post('http://192.168.6.105/hezha')
+              .then(response => {
+              })
         }, 1000)
         this.text = '执行合闸'
       }
     },
     togglehezha10(append = false) {
-      this.hezha10 = 1
-      this.fenzha10 = 0
-      this.cheru10 = 0
-      this.chechu10 = 0
-      this.daohe10 = 0
-      this.daofen10 = 0
+      axios.get('http://192.168.6.106/getss')
+          .then(response => {
+            const {data} = response;
+            console.log(data);
+
+            // 根据实际需求更新hezha01对应的数据属性的值
+            this.hezha10 = data.hezhawei
+          })
 
       if (!this.isDisabled) {
         this.$bvToast.toast('AH210正在合闸,请勿做其他操作...', {
@@ -1634,20 +1894,22 @@ export default {
           this.isDisabled = false
           this.text = '指令发送成功！'
           // eslint-disable-next-line no-unused-vars
-          axios.post('http://192.168.6.110/hezha')
-            .then(response => {
-            })
+          axios.post('http://192.168.6.106/hezha')
+              .then(response => {
+              })
         }, 1000)
         this.text = '执行合闸'
       }
     },
     togglehezha11(append = false) {
-      this.hezha11 = 1
-      this.fenzha11 = 0
-      this.cheru11 = 0
-      this.chechu11 = 0
-      this.daohe11 = 0
-      this.daofen11 = 0
+      axios.get('http://192.168.6.107/getss')
+          .then(response => {
+            const {data} = response;
+            console.log(data);
+
+            // 根据实际需求更新hezha01对应的数据属性的值
+            this.hezha11 = data.hezhawei
+          })
 
       if (!this.isDisabled) {
         this.$bvToast.toast('AH211正在合闸,请勿做其他操作...', {
@@ -1662,19 +1924,23 @@ export default {
           this.isDisabled = false
           this.text = '指令发送成功！'
           // eslint-disable-next-line no-unused-vars
-          axios.post('http://192.168.6.111/hezha')
-            .then(response => {
-            })
+          axios.post('http://192.168.6.107/hezha')
+              .then(response => {
+              })
         }, 1000)
         this.text = '执行合闸'
       }
     },
 
     togglefenzha01(append = false) {
-      this.hezha01 = 0
-      this.fenzha01 = 1
-      this.cheru01 = 0
-      this.chechu01 = 0
+      axios.get('http://192.168.6.101/getss')
+          .then(response => {
+            const {data} = response;
+            console.log(data);
+
+            // 根据实际需求更新hezha01对应的数据属性的值
+            this.fenzha01 = !data.hezhawei
+          })
 
       if (!this.isDisabled) {
         this.$bvToast.toast('AH201正在分闸,请勿做其他操作...', {
@@ -1690,20 +1956,22 @@ export default {
           this.text = '指令发送成功！'
           // eslint-disable-next-line no-unused-vars
           axios.post('http://192.168.6.101/fenzha')
-            .then(response => {
-            })
+              .then(response => {
+              })
         }, 1000)
         this.text = '执行分闸'
       }
     },
 
     togglefenzha02(append = false) {
-      this.hezha02 = 0
-      this.fenzha02 = 1
-      this.cheru02 = 0
-      this.chechu02 = 0
-      this.daohe02 = 0
-      this.daofen02 = 0
+      axios.get('http://192.168.6.101/getss')
+          .then(response => {
+            const {data} = response;
+            console.log(data);
+
+            // 根据实际需求更新hezha01对应的数据属性的值
+            this.fenzha02 = !data.hezhawei
+          })
 
       // this.fenzha02 = this.fenzha02 === 0 ? 1 : 0
       if (!this.isDisabled) {
@@ -1720,19 +1988,21 @@ export default {
           this.text = '指令发送成功！'
           // eslint-disable-next-line no-unused-vars
           axios.post('http://192.168.6.102/fenzha')
-            .then(response => {
-            })
+              .then(response => {
+              })
         }, 1000)
         this.text = '执行分闸'
       }
     },
     togglefenzha03(append = false) {
-      this.hezha03 = 0
-      this.fenzha03 = 1
-      this.cheru03 = 0
-      this.chechu03 = 0
-      this.daohe03 = 0
-      this.daofen03 = 0
+      axios.get('http://192.168.6.101/getss')
+          .then(response => {
+            const {data} = response;
+            console.log(data);
+
+            // 根据实际需求更新hezha01对应的数据属性的值
+            this.fenzha03 = !data.hezhawei
+          })
 
       if (!this.isDisabled) {
         this.$bvToast.toast('AH203正在分闸,请勿做其他操作...', {
@@ -1748,19 +2018,21 @@ export default {
           this.text = '指令发送成功！'
           // eslint-disable-next-line no-unused-vars
           axios.post('http://192.168.6.103/fenzha')
-            .then(response => {
-            })
+              .then(response => {
+              })
         }, 1000)
         this.text = '执行分闸'
       }
     },
     togglefenzha04(append = false) {
-      this.hezha04 = 0
-      this.fenzha04 = 1
-      this.cheru04 = 0
-      this.chechu04 = 0
-      this.daohe04 = 0
-      this.daofen04 = 0
+      axios.get('http://192.168.6.101/getss')
+          .then(response => {
+            const {data} = response;
+            console.log(data);
+
+            // 根据实际需求更新hezha01对应的数据属性的值
+            this.fenzha04 = !data.hezhawei
+          })
 
       if (!this.isDisabled) {
         this.$bvToast.toast('AH204正在分闸,请勿做其他操作...', {
@@ -1784,12 +2056,14 @@ export default {
     },
 
     togglefenzha05(append = false) {
-      this.hezha05 = 0
-      this.fenzha05 = 1
-      this.cheru05 = 0
-      this.chechu05 = 0
-      this.daohe05 = 0
-      this.daofen05 = 0
+      axios.get('http://192.168.6.101/getss')
+          .then(response => {
+            const {data} = response;
+            console.log(data);
+
+            // 根据实际需求更新hezha01对应的数据属性的值
+            this.fenzha05 = !data.hezhawei
+          })
 
       if (!this.isDisabled) {
         this.$bvToast.toast('AH205正在分闸,请勿做其他操作...', {
@@ -1812,10 +2086,14 @@ export default {
       }
     },
     togglefenzha06(append = false) {
-      this.hezha06 = 0
-      this.fenzha06 = 1
-      this.cheru06 = 0
-      this.chechu06 = 0
+      axios.get('http://192.168.6.101/getss')
+          .then(response => {
+            const {data} = response;
+            console.log(data);
+
+            // 根据实际需求更新hezha01对应的数据属性的值
+            this.fenzha06 = !data.hezhawei
+          })
 
       if (!this.isDisabled) {
         this.$bvToast.toast('AH206正在分闸,请勿做其他操作...', {
@@ -1830,20 +2108,22 @@ export default {
           this.isDisabled = false
           this.text = '指令发送成功！'
           // eslint-disable-next-line no-unused-vars
-          axios.post('http://192.168.6.106/fenzha')
-            .then(response => {
-            })
+          axios.post('http://192.168.6.104/fenzha')
+              .then(response => {
+              })
         }, 1000)
         this.text = '执行分闸'
       }
     },
     togglefenzha07(append = false) {
-      this.hezha07 = 0
-      this.fenzha07 = 1
-      this.cheru07 = 0
-      this.chechu07 = 0
-      this.daohe07 = 0
-      this.daofen07 = 0
+      axios.get('http://192.168.6.101/getss')
+          .then(response => {
+            const {data} = response;
+            console.log(data);
+
+            // 根据实际需求更新hezha01对应的数据属性的值
+            this.fenzha07 = !data.hezhawei
+          })
 
       if (!this.isDisabled) {
         this.$bvToast.toast('AH207正在分闸,请勿做其他操作...', {
@@ -1867,12 +2147,14 @@ export default {
     },
 
     togglefenzha08(append = false) {
-      this.hezha08 = 0
-      this.fenzha08 = 1
-      this.cheru08 = 0
-      this.chechu08 = 0
-      this.daohe08 = 0
-      this.daofen08 = 0
+      axios.get('http://192.168.6.101/getss')
+          .then(response => {
+            const {data} = response;
+            console.log(data);
+
+            // 根据实际需求更新hezha01对应的数据属性的值
+            this.fenzha08 = !data.hezhawei
+          })
 
       if (!this.isDisabled) {
         this.$bvToast.toast('AH208正在分闸,请勿做其他操作...', {
@@ -1895,12 +2177,14 @@ export default {
       }
     },
     togglefenzha09(append = false) {
-      this.hezha09 = 0
-      this.fenzha09 = 1
-      this.cheru09 = 0
-      this.chechu09 = 0
-      this.daohe09 = 0
-      this.daofen09 = 0
+      axios.get('http://192.168.6.101/getss')
+          .then(response => {
+            const {data} = response;
+            console.log(data);
+
+            // 根据实际需求更新hezha01对应的数据属性的值
+            this.fenzha09 = !data.hezhawei
+          })
 
       if (!this.isDisabled) {
         this.$bvToast.toast('AH209正在分闸,请勿做其他操作...', {
@@ -1915,20 +2199,22 @@ export default {
           this.isDisabled = false
           this.text = '指令发送成功！'
           // eslint-disable-next-line no-unused-vars
-          axios.post('http://192.168.6.109/fenzha')
-            .then(response => {
-            })
+          axios.post('http://192.168.6.105/fenzha')
+              .then(response => {
+              })
         }, 1000)
         this.text = '执行分闸'
       }
     },
     togglefenzha10(append = false) {
-      this.hezha10 = 0
-      this.fenzha10 = 1
-      this.cheru10 = 0
-      this.chechu10 = 0
-      this.daohe10 = 0
-      this.daofen10 = 0
+      axios.get('http://192.168.6.101/getss')
+          .then(response => {
+            const {data} = response;
+            console.log(data);
+
+            // 根据实际需求更新hezha01对应的数据属性的值
+            this.fenzha10 = !data.hezhawei
+          })
 
       if (!this.isDisabled) {
         this.$bvToast.toast('AH210正在分闸,请勿做其他操作...', {
@@ -1943,20 +2229,22 @@ export default {
           this.isDisabled = false
           this.text = '指令发送成功！'
           // eslint-disable-next-line no-unused-vars
-          axios.post('http://192.168.6.110/fenzha')
-            .then(response => {
-            })
+          axios.post('http://192.168.6.106/fenzha')
+              .then(response => {
+              })
         }, 1000)
         this.text = '执行分闸'
       }
     },
     togglefenzha11(append = false) {
-      this.hezha11 = 0
-      this.fenzha11 = 1
-      this.cheru11 = 0
-      this.chechu11 = 0
-      this.daohe11 = 0
-      this.daofen11 = 0
+      axios.get('http://192.168.6.101/getss')
+          .then(response => {
+            const {data} = response;
+            console.log(data);
+
+            // 根据实际需求更新hezha01对应的数据属性的值
+            this.fenzha11 = !data.hezhawei
+          })
 
       if (!this.isDisabled) {
         this.$bvToast.toast('AH211正在分闸,请勿做其他操作...', {
@@ -1971,19 +2259,23 @@ export default {
           this.isDisabled = false
           this.text = '指令发送成功！'
           // eslint-disable-next-line no-unused-vars
-          axios.post('http://192.168.6.111/fenzha')
-            .then(response => {
-            })
+          axios.post('http://192.168.6.107/fenzha')
+              .then(response => {
+              })
         }, 1000)
         this.text = '执行分闸'
       }
     },
 
     togglecheru01(append = false) {
-      this.hezha01 = 0
-      this.fenzha01 = 0
-      this.cheru01 = 1
-      this.chechu01 = 0
+      axios.get('http://192.168.6.101/getss')
+          .then(response => {
+            const {data} = response;
+            console.log(data);
+
+            // 根据实际需求更新hezha01对应的数据属性的值
+            this.cheru01 = !data.shiyanwei
+          })
 
       if (!this.isDisabled) {
         this.$bvToast.toast('AH201正在手车驶入,请勿做其他操作...', {
@@ -1999,19 +2291,21 @@ export default {
           this.text = '指令发送成功！'
           // eslint-disable-next-line no-unused-vars
           axios.post('http://192.168.6.101/cheru')
-            .then(response => {
-            })
+              .then(response => {
+              })
         }, 1000)
         this.text = '执行手车驶入'
       }
     },
     togglecheru02(append = false) {
-      this.hezha02 = 0
-      this.fenzha02 = 0
-      this.cheru02 = 1
-      this.chechu02 = 0
-      this.daohe02 = 0
-      this.daofen02 = 0
+      axios.get('http://192.168.6.101/getss')
+          .then(response => {
+            const {data} = response;
+            console.log(data);
+
+            // 根据实际需求更新hezha01对应的数据属性的值
+            this.cheru02 = !data.shiyanwei
+          })
 
       if (!this.isDisabled) {
         this.$bvToast.toast('AH202正在手车驶入,请勿做其他操作...', {
@@ -2027,19 +2321,21 @@ export default {
           this.text = '指令发送成功！'
           // eslint-disable-next-line no-unused-vars
           axios.post('http://192.168.6.102/cheru')
-            .then(response => {
-            })
+              .then(response => {
+              })
         }, 1000)
         this.text = '执行手车驶入'
       }
     },
     togglecheru03(append = false) {
-      this.hezha03 = 0
-      this.fenzha03 = 0
-      this.cheru03 = 1
-      this.chechu03 = 0
-      this.daohe03 = 0
-      this.daofen03 = 0
+      axios.get('http://192.168.6.101/getss')
+          .then(response => {
+            const {data} = response;
+            console.log(data);
+
+            // 根据实际需求更新hezha01对应的数据属性的值
+            this.cheru03 = !data.shiyanwei
+          })
 
       if (!this.isDisabled) {
         this.$bvToast.toast('AH203正在手车驶入,请勿做其他操作...', {
@@ -2055,18 +2351,22 @@ export default {
           this.text = '指令发送成功！'
           // eslint-disable-next-line no-unused-vars
           axios.post('http://192.168.6.103/cheru')
-            .then(response => {
-            })
+              .then(response => {
+              })
         }, 1000)
         this.text = '执行手车驶入'
       }
     },
 
     togglecheru06(append = false) {
-      this.hezha06 = 0
-      this.fenzha06 = 0
-      this.cheru06 = 1
-      this.chechu06 = 0
+      axios.get('http://192.168.6.101/getss')
+          .then(response => {
+            const {data} = response;
+            console.log(data);
+
+            // 根据实际需求更新hezha01对应的数据属性的值
+            this.cheru06 = !data.shiyanwei
+          })
 
       if (!this.isDisabled) {
         this.$bvToast.toast('AH206正在手车驶入,请勿做其他操作...', {
@@ -2081,20 +2381,22 @@ export default {
           this.isDisabled = false
           this.text = '指令发送成功！'
           // eslint-disable-next-line no-unused-vars
-          axios.post('http://192.168.6.106/cheru')
-            .then(response => {
-            })
+          axios.post('http://192.168.6.104/cheru')
+              .then(response => {
+              })
         }, 1000)
         this.text = '执行手车驶入'
       }
     },
     togglecheru09(append = false) {
-      this.hezha09 = 0
-      this.fenzha09 = 0
-      this.cheru09 = 1
-      this.chechu09 = 0
-      this.daohe09 = 0
-      this.daofen09 = 0
+      axios.get('http://192.168.6.101/getss')
+          .then(response => {
+            const {data} = response;
+            console.log(data);
+
+            // 根据实际需求更新hezha01对应的数据属性的值
+            this.cheru09 = !data.shiyanwei
+          })
 
       if (!this.isDisabled) {
         this.$bvToast.toast('AH209正在手车驶入,请勿做其他操作...', {
@@ -2109,20 +2411,22 @@ export default {
           this.isDisabled = false
           this.text = '指令发送成功！'
           // eslint-disable-next-line no-unused-vars
-          axios.post('http://192.168.6.109/cheru')
-            .then(response => {
-            })
+          axios.post('http://192.168.6.105/cheru')
+              .then(response => {
+              })
         }, 1000)
         this.text = '执行手车驶入'
       }
     },
     togglecheru10(append = false) {
-      this.hezha10 = 0
-      this.fenzha10 = 0
-      this.cheru10 = 1
-      this.chechu10 = 0
-      this.daohe10 = 0
-      this.daofen10 = 0
+      axios.get('http://192.168.6.101/getss')
+          .then(response => {
+            const {data} = response;
+            console.log(data);
+
+            // 根据实际需求更新hezha01对应的数据属性的值
+            this.cheru10 = !data.shiyanwei
+          })
 
       if (!this.isDisabled) {
         this.$bvToast.toast('AH210正在手车驶入,请勿做其他操作...', {
@@ -2137,21 +2441,22 @@ export default {
           this.isDisabled = false
           this.text = '指令发送成功！'
           // eslint-disable-next-line no-unused-vars
-          axios.post('http://192.168.6.110/cheru')
-            .then(response => {
-            })
+          axios.post('http://192.168.6.106/cheru')
+              .then(response => {
+              })
         }, 1000)
         this.text = '执行手车驶入'
       }
     },
     togglecheru11(append = false) {
-      // this.cheru11 = this.cheru11 === 0 ? 1 : 0
-      this.hezha11 = 0
-      this.fenzha11 = 0
-      this.cheru11 = 1
-      this.chechu11 = 0
-      this.daohe11 = 0
-      this.daofen11 = 0
+      axios.get('http://192.168.6.101/getss')
+          .then(response => {
+            const {data} = response;
+            console.log(data);
+
+            // 根据实际需求更新hezha01对应的数据属性的值
+            this.cheru11 = !data.shiyanwei
+          })
 
       if (!this.isDisabled) {
         this.$bvToast.toast('AH211正在手车驶入,请勿做其他操作...', {
@@ -2166,19 +2471,24 @@ export default {
           this.isDisabled = false
           this.text = '指令发送成功！'
           // eslint-disable-next-line no-unused-vars
-          axios.post('http://192.168.6.111/cheru')
-            .then(response => {
-            })
+          axios.post('http://192.168.6.107/cheru')
+              .then(response => {
+              })
         }, 1000)
         this.text = '执行手车驶入'
       }
     },
 
     togglechechu01(append = false) {
-      this.hezha01 = 0
-      this.fenzha01 = 0
-      this.cheru01 = 0
-      this.chechu01 = 1
+      axios.get('http://192.168.6.101/getss')
+          .then(response => {
+            const {data} = response;
+            console.log(data);
+
+            // 根据实际需求更新hezha01对应的数据属性的值
+            this.chechu01 = !data.gongzuowei
+          })
+
       if (!this.isDisabled) {
         this.$bvToast.toast('AH201正在手车驶出,请勿做其他操作...', {
           title: '温馨提示',
@@ -2193,19 +2503,21 @@ export default {
           this.text = '指令发送成功！'
           // eslint-disable-next-line no-unused-vars
           axios.post('http://192.168.6.101/chechu')
-            .then(response => {
-            })
+              .then(response => {
+              })
         }, 1000)
         this.text = '执行手车驶出'
       }
     },
     togglechechu02(append = false) {
-      this.hezha02 = 0
-      this.fenzha02 = 0
-      this.cheru02 = 0
-      this.chechu02 = 1
-      this.daohe02 = 0
-      this.daofen02 = 0
+      axios.get('http://192.168.6.101/getss')
+          .then(response => {
+            const {data} = response;
+            console.log(data);
+
+            // 根据实际需求更新hezha01对应的数据属性的值
+            this.chechu02 = !data.gongzuowei
+          })
 
       if (!this.isDisabled) {
         this.$bvToast.toast('AH202正在手车驶出,请勿做其他操作...', {
@@ -2221,19 +2533,21 @@ export default {
           this.text = '指令发送成功！'
           // eslint-disable-next-line no-unused-vars
           axios.post('http://192.168.6.102/chechu')
-            .then(response => {
-            })
+              .then(response => {
+              })
         }, 1000)
         this.text = '执行手车驶出'
       }
     },
     togglechechu03(append = false) {
-      this.hezha03 = 0
-      this.fenzha03 = 0
-      this.cheru03 = 0
-      this.chechu03 = 1
-      this.daohe03 = 0
-      this.daofen03 = 0
+      axios.get('http://192.168.6.101/getss')
+          .then(response => {
+            const {data} = response;
+            console.log(data);
+
+            // 根据实际需求更新hezha01对应的数据属性的值
+            this.chechu03 = !data.gongzuowei
+          })
 
       this.$bvToast.toast('AH203正在手车驶出,请勿做其他操作...', {
         title: '温馨提示',
@@ -2248,20 +2562,79 @@ export default {
         this.text = '指令发送成功！'
         // eslint-disable-next-line no-unused-vars
         axios.post('http://192.168.6.103/chechu')
-          .then(response => {
-          })
+            .then(response => {
+            })
       }, 1000)
       this.text = '执行手车驶出'
     },
 
 
     togglechechu06(append = false) {
-      this.hezha06 = 0
-      this.fenzha06 = 0
-      this.cheru06 = 0
-      this.chechu06 = 1
-      this.daohe06 = 0
-      this.daofen06 = 0
+      axios.get('http://192.168.6.101/getss')
+          .then(response => {
+            const {data} = response;
+            console.log(data);
+
+            // 根据实际需求更新hezha01对应的数据属性的值
+            this.chechu06 = !data.gongzuowei
+          })
+
+      this.$bvToast.toast('AH205正在手车驶出,请勿做其他操作...', {
+        title: '温馨提示',
+        autoHideDelay: 1000,
+        appendToast: Boolean(append),
+      })
+      this.isDisabled = true
+      setTimeout(() => {
+        console.log('Button 8 clicked!')
+        this.text = 'Button 8 clicked!'
+        this.isDisabled = false
+        this.text = '指令发送成功！'
+        // eslint-disable-next-line no-unused-vars
+        axios.post('http://192.168.6.104/chechu')
+            .then(response => {
+            })
+      }, 1000)
+      this.text = '执行手车驶出'
+    },
+    togglechechu09(append = false) {
+      axios.get('http://192.168.6.101/getss')
+          .then(response => {
+            const {data} = response;
+            console.log(data);
+
+            // 根据实际需求更新hezha01对应的数据属性的值
+            this.chechu09 = !data.gongzuowei
+          })
+
+      this.$bvToast.toast('AH209正在手车驶出,请勿做其他操作...', {
+        title: '温馨提示',
+        autoHideDelay: 1000,
+        appendToast: Boolean(append),
+      })
+      this.isDisabled = true
+      setTimeout(() => {
+        console.log('Button 8 clicked!')
+        this.text = 'Button 8 clicked!'
+        this.isDisabled = false
+        this.text = '指令发送成功！'
+        // eslint-disable-next-line no-unused-vars
+        axios.post('http://192.168.6.105/chechu')
+            .then(response => {
+            })
+      }, 1000)
+      this.text = '执行手车驶出'
+    },
+
+    togglechechu10(append = false) {
+      axios.get('http://192.168.6.101/getss')
+          .then(response => {
+            const {data} = response;
+            console.log(data);
+
+            // 根据实际需求更新hezha01对应的数据属性的值
+            this.chechu10 = !data.gongzuowei
+          })
 
       this.$bvToast.toast('AH205正在手车驶出,请勿做其他操作...', {
         title: '温馨提示',
@@ -2276,72 +2649,21 @@ export default {
         this.text = '指令发送成功！'
         // eslint-disable-next-line no-unused-vars
         axios.post('http://192.168.6.106/chechu')
-          .then(response => {
-          })
-      }, 1000)
-      this.text = '执行手车驶出'
-    },
-    togglechechu09(append = false) {
-      this.hezha09 = 0
-      this.fenzha09 = 0
-      this.cheru09 = 0
-      this.chechu09 = 1
-      this.daohe09 = 0
-      this.daofen09 = 0
-
-      this.$bvToast.toast('AH209正在手车驶出,请勿做其他操作...', {
-        title: '温馨提示',
-        autoHideDelay: 1000,
-        appendToast: Boolean(append),
-      })
-      this.isDisabled = true
-      setTimeout(() => {
-        console.log('Button 8 clicked!')
-        this.text = 'Button 8 clicked!'
-        this.isDisabled = false
-        this.text = '指令发送成功！'
-        // eslint-disable-next-line no-unused-vars
-        axios.post('http://192.168.6.109/chechu')
-          .then(response => {
-          })
-      }, 1000)
-      this.text = '执行手车驶出'
-    },
-
-    togglechechu10(append = false) {
-      this.hezha10 = 0
-      this.fenzha10 = 0
-      this.cheru10 = 1
-      this.chechu10 = 0
-      this.daohe10 = 0
-      this.daofen10 = 0
-
-      this.$bvToast.toast('AH205正在手车驶出,请勿做其他操作...', {
-        title: '温馨提示',
-        autoHideDelay: 1000,
-        appendToast: Boolean(append),
-      })
-      this.isDisabled = true
-      setTimeout(() => {
-        console.log('Button 8 clicked!')
-        this.text = 'Button 8 clicked!'
-        this.isDisabled = false
-        this.text = '指令发送成功！'
-        // eslint-disable-next-line no-unused-vars
-        axios.post('http://192.168.6.110/chechu')
-          .then(response => {
-          })
+            .then(response => {
+            })
       }, 1000)
       this.text = '执行手车驶出'
     },
 
     togglechechu11(append = false) {
-      this.hezha11 = 0
-      this.fenzha11 = 0
-      this.cheru11 = 0
-      this.chechu11 = 1
-      this.daohe11 = 0
-      this.daofen11 = 0
+      axios.get('http://192.168.6.101/getss')
+          .then(response => {
+            const {data} = response;
+            console.log(data);
+
+            // 根据实际需求更新hezha01对应的数据属性的值
+            this.chechu11 = !data.gongzuowei
+          })
 
       this.$bvToast.toast('AH211正在手车驶出,请勿做其他操作...', {
         title: '温馨提示',
@@ -2355,20 +2677,22 @@ export default {
         this.isDisabled = false
         this.text = '指令发送成功！'
         // eslint-disable-next-line no-unused-vars
-        axios.post('http://192.168.6.111/chechu')
-          .then(response => {
-          })
+        axios.post('http://192.168.6.107/chechu')
+            .then(response => {
+            })
       }, 1000)
       this.text = '执行手车驶出'
     },
 
     toggledaohe02(append = false) {
-      this.hezha02 = 0
-      this.fenzha02 = 0
-      this.cheru02 = 0
-      this.chechu02 = 0
-      this.daohe02 = 1
-      this.daofen02 = 0
+      axios.get('http://192.168.6.101/getss')
+          .then(response => {
+            const {data} = response;
+            console.log(data);
+
+            // 根据实际需求更新hezha01对应的数据属性的值
+            this.daohe02 = data.jiedihe
+          })
 
       if (!this.isDisabled) {
         this.$bvToast.toast('AH202正在闭合接地刀中,请勿做其他操作...', {
@@ -2389,12 +2713,14 @@ export default {
       }
     },
     toggledaohe03(append = false) {
-      this.hezha03 = 0
-      this.fenzha03 = 0
-      this.cheru03 = 0
-      this.chechu03 = 0
-      this.daohe03 = 1
-      this.daofen03 = 0
+      axios.get('http://192.168.6.101/getss')
+          .then(response => {
+            const {data} = response;
+            console.log(data);
+
+            // 根据实际需求更新hezha01对应的数据属性的值
+            this.daohe03 = data.jiedihe
+          })
 
       if (!this.isDisabled) {
         this.$bvToast.toast('AH203正在闭合接地刀中,请勿做其他操作...', {
@@ -2415,12 +2741,14 @@ export default {
       }
     },
     toggledaohe09(append = false) {
-      this.hezha09 = 0
-      this.fenzha09 = 0
-      this.cheru09 = 0
-      this.chechu09 = 0
-      this.daohe09 = 1
-      this.daofen09 = 0
+      axios.get('http://192.168.6.101/getss')
+          .then(response => {
+            const {data} = response;
+            console.log(data);
+
+            // 根据实际需求更新hezha01对应的数据属性的值
+            this.daohe09 = data.jiedihe
+          })
 
       if (!this.isDisabled) {
         this.$bvToast.toast('AH209正在闭合接地刀中,请勿做其他操作...', {
@@ -2434,19 +2762,21 @@ export default {
           this.text = 'Button 3 clicked!'
           this.isDisabled = false
           this.text = '指令发送成功！'
-          axios.post('http://192.168.6.109/daohe').then(response => {
+          axios.post('http://192.168.6.105/daohe').then(response => {
           })
         }, 1000)
         this.text = '执行闭合接地刀操作'
       }
     },
     toggledaohe10(append = false) {
-      this.hezha10 = 0
-      this.fenzha10 = 0
-      this.cheru10 = 0
-      this.chechu10 = 0
-      this.daohe10 = 1
-      this.daofen10 = 0
+      axios.get('http://192.168.6.101/getss')
+          .then(response => {
+            const {data} = response;
+            console.log(data);
+
+            // 根据实际需求更新hezha01对应的数据属性的值
+            this.daohe10 = data.jiedihe
+          })
 
       if (!this.isDisabled) {
         this.$bvToast.toast('AH210正在闭合接地刀中,请勿做其他操作...', {
@@ -2460,19 +2790,21 @@ export default {
           this.text = 'Button 3 clicked!'
           this.isDisabled = false
           this.text = '指令发送成功！'
-          axios.post('http://192.168.6.110/daohe').then(response => {
+          axios.post('http://192.168.6.106/daohe').then(response => {
           })
         }, 1000)
         this.text = '执行闭合接地刀操作'
       }
     },
     toggledaohe11(append = false) {
-      this.hezha11 = 0
-      this.fenzha11 = 0
-      this.cheru11 = 0
-      this.chechu11 = 0
-      this.daohe11 = 1
-      this.daofen11 = 0
+      axios.get('http://192.168.6.101/getss')
+          .then(response => {
+            const {data} = response;
+            console.log(data);
+
+            // 根据实际需求更新hezha01对应的数据属性的值
+            this.daohe11 = data.jiedihe
+          })
 
       if (!this.isDisabled) {
         this.$bvToast.toast('AH211正在闭合接地刀中,请勿做其他操作...', {
@@ -2486,7 +2818,7 @@ export default {
           this.text = 'Button 3 clicked!'
           this.isDisabled = false
           this.text = '指令发送成功！'
-          axios.post('http://192.168.6.111/daohe').then(response => {
+          axios.post('http://192.168.6.107/daohe').then(response => {
           })
         }, 1000)
         this.text = '执行闭合接地刀操作'
@@ -2494,12 +2826,14 @@ export default {
     },
 
     toggledaofen02(append = false) {
-      this.hezha02 = 0
-      this.fenzha02 = 0
-      this.cheru02 = 0
-      this.chechu02 = 0
-      this.daohe02 = 0
-      this.daofen02 = 1
+      axios.get('http://192.168.6.101/getss')
+          .then(response => {
+            const {data} = response;
+            console.log(data);
+
+            // 根据实际需求更新hezha01对应的数据属性的值
+            this.daofen02 = !data.jiedihe
+          })
 
       if (!this.isDisabled) {
         this.$bvToast.toast('AH202正在断开接地刀中,请勿做其他操作...', {
@@ -2520,12 +2854,14 @@ export default {
       }
     },
     toggledaofen03(append = false) {
-      this.hezha03 = 0
-      this.fenzha03 = 0
-      this.cheru03 = 0
-      this.chechu03 = 0
-      this.daohe03 = 0
-      this.daofen03 = 1
+      axios.get('http://192.168.6.101/getss')
+          .then(response => {
+            const {data} = response;
+            console.log(data);
+
+            // 根据实际需求更新hezha01对应的数据属性的值
+            this.daofen03 = !data.jiedihe
+          })
 
       if (!this.isDisabled) {
         this.$bvToast.toast('AH203正在断开接地刀中,请勿做其他操作...', {
@@ -2546,12 +2882,14 @@ export default {
       }
     },
     toggledaofen09(append = false) {
-      this.hezha09 = 0
-      this.fenzha09 = 0
-      this.cheru09 = 0
-      this.chechu09 = 0
-      this.daohe09 = 0
-      this.daofen09 = 1
+      axios.get('http://192.168.6.101/getss')
+          .then(response => {
+            const {data} = response;
+            console.log(data);
+
+            // 根据实际需求更新hezha01对应的数据属性的值
+            this.daofen09 = !data.jiedihe
+          })
 
       if (!this.isDisabled) {
         this.$bvToast.toast('AH209正在断开接地刀中,请勿做其他操作...', {
@@ -2565,19 +2903,21 @@ export default {
           this.text = 'Button 3 clicked!'
           this.isDisabled = false
           this.text = '指令发送成功！'
-          axios.post('http://192.168.6.109/daofen').then(response => {
+          axios.post('http://192.168.6.105/daofen').then(response => {
           })
         }, 1000)
         this.text = '执行断开接地刀操作'
       }
     },
     toggledaofen10(append = false) {
-      this.hezha10 = 0
-      this.fenzha10 = 0
-      this.cheru10 = 0
-      this.chechu10 = 0
-      this.daohe10 = 0
-      this.daofen10 = 1
+      axios.get('http://192.168.6.101/getss')
+          .then(response => {
+            const {data} = response;
+            console.log(data);
+
+            // 根据实际需求更新hezha01对应的数据属性的值
+            this.daofen10 = !data.jiedihe
+          })
 
       if (!this.isDisabled) {
         this.$bvToast.toast('AH210正在断开接地刀中,请勿做其他操作...', {
@@ -2591,19 +2931,21 @@ export default {
           this.text = 'Button 3 clicked!'
           this.isDisabled = false
           this.text = '指令发送成功！'
-          axios.post('http://192.168.6.110/daofen').then(response => {
+          axios.post('http://192.168.6.106/daofen').then(response => {
           })
         }, 1000)
         this.text = '执行断开接地刀操作'
       }
     },
     toggledaofen11(append = false) {
-      this.hezha11 = 0
-      this.fenzha11 = 0
-      this.cheru11 = 0
-      this.chechu11 = 0
-      this.daohe11 = 0
-      this.daofen11 = 1
+      axios.get('http://192.168.6.101/getss')
+          .then(response => {
+            const {data} = response;
+            console.log(data);
+
+            // 根据实际需求更新hezha01对应的数据属性的值
+            this.daofen11 = !data.jiedihe
+          })
 
       if (!this.isDisabled) {
         this.$bvToast.toast('AH211正在断开接地刀中,请勿做其他操作...', {
@@ -2617,7 +2959,7 @@ export default {
           this.text = 'Button 3 clicked!'
           this.isDisabled = false
           this.text = '指令发送成功！'
-          axios.post('http://192.168.6.111/jiedife').then(response => {
+          axios.post('http://192.168.6.107/jiedife').then(response => {
           })
         }, 1000)
         this.text = '执行断开接地刀操作'
@@ -2703,7 +3045,7 @@ export default {
           this.text = 'Button 3 clicked!'
           this.isDisabled = false
           this.text = '指令发送成功！'
-          axios.post('http://192.168.6.106/yigong').then(response => {
+          axios.post('http://192.168.6.104/yigong').then(response => {
           })
         }, 1000)
         this.text = '执行一键送电'
@@ -2724,7 +3066,7 @@ export default {
           this.text = 'Button 3 clicked!'
           this.isDisabled = false
           this.text = '指令发送成功！'
-          axios.post('http://192.168.6.109/yigong').then(response => {
+          axios.post('http://192.168.6.105/yigong').then(response => {
           })
         }, 1000)
         this.text = '执行一键送电'
@@ -2745,7 +3087,7 @@ export default {
           this.text = 'Button 3 clicked!'
           this.isDisabled = false
           this.text = '指令发送成功！'
-          axios.post('http://192.168.6.110/yigong').then(response => {
+          axios.post('http://192.168.6.106/yigong').then(response => {
           })
         }, 1000)
         this.text = '执行一键送电'
@@ -2765,13 +3107,13 @@ export default {
           this.text = 'Button 3 clicked!'
           this.isDisabled = false
           this.text = '指令发送成功！'
-          axios.post('http://192.168.6.111/yigong').then(response => {
+          axios.post('http://192.168.6.107/yigong').then(response => {
           })
         }, 1000)
         this.text = '执行一键送电'
       }
     },
-    
+
     toggleyiduan01(append = false) {
 
       if (!this.isDisabled) {
@@ -2849,7 +3191,7 @@ export default {
           this.text = 'Button 3 clicked!'
           this.isDisabled = false
           this.text = '指令发送成功！'
-          axios.post('http://192.168.6.106/yiduan').then(response => {
+          axios.post('http://192.168.6.104/yiduan').then(response => {
           })
         }, 1000)
         this.text = '执行一键断电'
@@ -2870,7 +3212,7 @@ export default {
           this.text = 'Button 3 clicked!'
           this.isDisabled = false
           this.text = '指令发送成功！'
-          axios.post('http://192.168.6.109/yiduan').then(response => {
+          axios.post('http://192.168.6.105/yiduan').then(response => {
           })
         }, 1000)
         this.text = '执行一键断电'
@@ -2891,7 +3233,7 @@ export default {
           this.text = 'Button 3 clicked!'
           this.isDisabled = false
           this.text = '指令发送成功！'
-          axios.post('http://192.168.6.110/yiduan').then(response => {
+          axios.post('http://192.168.6.106/yiduan').then(response => {
           })
         }, 1000)
         this.text = '执行一键断电'
@@ -2912,7 +3254,7 @@ export default {
           this.text = 'Button 3 clicked!'
           this.isDisabled = false
           this.text = '指令发送成功！'
-          axios.post('http://192.168.6.111/yiduan').then(response => {
+          axios.post('http://192.168.6.107/yiduan').then(response => {
           })
         }, 1000)
         this.text = '执行一键断电'
@@ -2995,7 +3337,7 @@ export default {
           this.text = 'Button 3 clicked!'
           this.isDisabled = false
           this.text = '指令发送成功！'
-          axios.post('http://192.168.6.106/reboot').then(response => {
+          axios.post('http://192.168.6.104/reboot').then(response => {
           })
         }, 1000)
         this.text = '执行复位'
@@ -3016,7 +3358,7 @@ export default {
           this.text = 'Button 3 clicked!'
           this.isDisabled = false
           this.text = '指令发送成功！'
-          axios.post('http://192.168.6.109/reboot').then(response => {
+          axios.post('http://192.168.6.105/reboot').then(response => {
           })
         }, 1000)
         this.text = '执行复位'
@@ -3037,7 +3379,7 @@ export default {
           this.text = 'Button 3 clicked!'
           this.isDisabled = false
           this.text = '指令发送成功！'
-          axios.post('http://192.168.6.110/reboot').then(response => {
+          axios.post('http://192.168.6.106/reboot').then(response => {
           })
         }, 1000)
         this.text = '执行复位'
@@ -3057,52 +3399,13 @@ export default {
           this.text = 'Button 3 clicked!'
           this.isDisabled = false
           this.text = '指令发送成功！'
-          axios.post('http://192.168.6.111/reboot').then(response => {
+          axios.post('http://192.168.6.107/reboot').then(response => {
           })
         }, 1000)
         this.text = '执行复位'
       }
     },
 
-    
-    updateUData() { // 随机生成电压数据
-      // 获取前三行数据
-      for (let i = 0; i < 6; i += 1) {
-        const row = this.dataitems[i]
-        Object.keys(row).forEach(key => {
-          if (key !== 'unit') {
-            // 生成10到110之间的随机数
-            row[key] = `${(Math.random() * (50 - 10 + 1) + 10).toFixed(1)}KV`
-          }
-        })
-      }
-    },
-
-    updateIData() { // 随机生成电流数据
-      // 获取电流数据
-      for (let i = 6; i < 10; i += 1) {
-        const row = this.dataitems[i]
-        Object.keys(row).forEach(key => {
-          if (key !== 'unit') {
-            // 生成10到110之间的随机数
-            row[key] = `${Math.floor(Math.random() * (15 - 10 + 1) + 2)}A`
-          }
-        })
-      }
-    },
-
-    updateTempData() { // 随机生成温度数据
-      // 获取电流数据
-      for (let i = 10; i < 12; i += 1) {
-        const row = this.dataitems[i]
-        Object.keys(row).forEach(key => {
-          if (key !== 'unit') {
-            // 生成10到110之间的随机数
-            row[key] = `${(Math.random() * (100 - 20 + 1) + 40).toFixed(1)}KV`
-          }
-        })
-      }
-    },
 
   },
 }
