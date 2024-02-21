@@ -1,5 +1,4 @@
 <template>
-<<<<<<< HEAD
   <b-card>
     <e-charts
       ref="chart1"
@@ -9,8 +8,6 @@
       auto-resize
     />
   </b-card>
-</template>
-=======
   <b-card style="width: 350px;height: 400px">
     <e-charts
       ref="chart1"
@@ -19,8 +16,6 @@
       theme="theme-color"
       auto-resize
     />
->>>>>>> 19c490a0b1be14226f2ef7acde327c07ea1dfae9
-
   </b-card>
 </template>
 <!--这个 文件实际上是个样式文件   不要写算法和数据进去运算
@@ -33,14 +28,13 @@ import 'echarts/lib/component/tooltip'
 import 'echarts/lib/component/legend'
 import 'echarts/lib/chart/line'
 import echarts from 'echarts/lib/export'
-<<<<<<< HEAD
+
 import axios from 'axios'
 import {
   BCard,
 } from 'bootstrap-vue'
-=======
+
 import { BCard } from 'bootstrap-vue'
->>>>>>> 19c490a0b1be14226f2ef7acde327c07ea1dfae9
 import theme from './theme.json'
 
 ECharts.registerTheme('theme-color', theme)
@@ -66,7 +60,6 @@ export default {
   },
   data() {
     return {
-<<<<<<< HEAD
       newdata: [],
       temperature1: [],
       counter: 0,
@@ -88,7 +81,6 @@ export default {
       x_update: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
       p_update: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 
-      checkedstatus: false,
 
       // 预测温度
       predictdata1: [0, 5, 0, 0, 0, 8, 0, 0, 0, 0],
@@ -103,11 +95,8 @@ export default {
 
       legendData: ['原始数据', '卡尔曼预测'],
 
-=======
-      temperature1: [],
       checkedstatus: false,
 
->>>>>>> 19c490a0b1be14226f2ef7acde327c07ea1dfae9
       chartData1: {
         // Make gradient line here
         visualMap: [{
@@ -141,16 +130,13 @@ export default {
         xAxis: [{
           boundaryGap: false,
           data: this.optionData.xAxisData,
-<<<<<<< HEAD
           // inverse: true, // 设置反向属性
           axisLabel: {
             formatter(value, index) {
-=======
           // data: this.temperature1,
           inverse: true, // 设置反向属性
           axisLabel: {
             formatter(value) {
->>>>>>> 19c490a0b1be14226f2ef7acde327c07ea1dfae9
               const date = new Date(value)
               // 显示几月几号： (date.getMonth() + 1),date.getDate(),
 
@@ -178,10 +164,7 @@ export default {
         series: [
           {
             name: '原始数据',
-<<<<<<< HEAD
-=======
             // data: [820, 932, 901, 934, 1290, 1330, 1320, 1340, 1360, 1380],
->>>>>>> 19c490a0b1be14226f2ef7acde327c07ea1dfae9
             type: 'line',
             itemStyle: {
               color: 'rgb(107,63,157)',
@@ -202,10 +185,8 @@ export default {
                 },
               ]),
             },
-<<<<<<< HEAD
             data: this.optionData.series,
           },
-=======
             data: [],
             // data: this.temperature1,
             // data: this.optionData.series[0],
@@ -300,7 +281,6 @@ export default {
             data: [],
             // data: this.optionData.series[0],
           },
->>>>>>> 19c490a0b1be14226f2ef7acde327c07ea1dfae9
           {
             name: 'chart1-kalman',
             type: 'line',
@@ -310,24 +290,20 @@ export default {
             symbol: 'emptyCircle',
             symbolSize: 6,
             areaStyle: {
-<<<<<<< HEAD
               color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
               ]),
             },
             data: this.optionData.series[1],
-=======
               color: new echarts.graphic.LinearGradient(0, 0, 0, 1, []),
             },
             data: this.optionData.series[1],
             // data: [820, 932, 901, 934, 1290, 1330, 1320, 1340, 1360, 1380],
             // data: [],
->>>>>>> 19c490a0b1be14226f2ef7acde327c07ea1dfae9
           },
         ],
       },
     }
   },
-<<<<<<< HEAD
   mounted() {
     this.intervalId = setInterval(() => {
       if (this.checkedstatus === true) {
@@ -485,7 +461,6 @@ export default {
       return this.temperature1
     },
   },
-=======
 
   computed: {
     isChartVisible() {
@@ -519,7 +494,6 @@ export default {
 
   // methods: {
   // },
->>>>>>> 19c490a0b1be14226f2ef7acde327c07ea1dfae9
 
 }
 </script>

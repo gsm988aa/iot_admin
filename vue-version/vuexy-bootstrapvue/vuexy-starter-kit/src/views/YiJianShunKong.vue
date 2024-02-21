@@ -8,39 +8,39 @@
 
         <div style="transform: scale(1);">
           <b-card
-              border-variant="primary"
-              header="Primary"
-              header-text-variant="white"
-              align="center"
+            border-variant="primary"
+            header="Primary"
+            header-text-variant="white"
+            align="center"
           >
             <b-spinner
-                v-if="isDisabled"
-                label="Loading..."
-                style="justify-content: center;margin-top: 120px;position:absolute"
+              v-if="isDisabled"
+              label="Loading..."
+              style="justify-content: center;margin-top: 120px;position:absolute"
             />
             <b-card-text style=" color: #8989cc;margin-right: 550px;position: absolute;top:15px;left:10px;">点击按钮发送快捷指令:
             </b-card-text>
-            <b-row style="">
-              <b-col cols="6">
+            <b-row style="justify-content: center">
+              <b-col cols="12" sm="6" md="3">
                 <b-button
-                    variant="danger"
-                    :disabled="isDisabled"
-                    class="btn-petal402"
-                    pill
-                    @click="handleHeZha"
+                  variant="danger"
+                  :disabled="isDisabled"
+                  class="btn-petal402"
+                  pill
+                  @click="handleHeZha"
                 >
                   合闸
                 </b-button>
                 <br>
                 <br>
               </b-col>
-              <b-col cols="6">
+              <b-col cols="12" sm="6" md="3">
                 <b-button
-                    variant="success"
-                    :disabled="isDisabled"
-                    class="btn-petal402"
-                    pill
-                    @click="handleFenZha"
+                  variant="success"
+                  :disabled="isDisabled"
+                  class="btn-petal402"
+                  pill
+                  @click="handleFenZha"
                 >
                   分闸
                 </b-button>
@@ -49,27 +49,27 @@
               </b-col>
             </b-row>
 
-            <b-row style="margin-top: 20px;">
-              <b-col cols="6">
+            <b-row style="margin-top: 20px;justify-content: center">
+              <b-col cols="12" sm="6" md="6">
                 <b-button
-                    variant="secondary"
-                    :disabled="isDisabled"
-                    class="btn-petal402"
-                    pill
-                    @click="handleCheRu"
+                  variant="secondary"
+                  :disabled="isDisabled"
+                  class="btn-petal402"
+                  pill
+                  @click="handleCheRu"
                 >
                   手车驶入
                 </b-button>
                 <br>
                 <br>
               </b-col>
-              <b-col cols="6">
+              <b-col cols="12" sm="6" md="6">
                 <b-button
-                    variant="warning"
-                    :disabled="isDisabled"
-                    class="btn-petal402"
-                    pill
-                    @click="handleCheChu"
+                  variant="warning"
+                  :disabled="isDisabled"
+                  class="btn-petal402"
+                  pill
+                  @click="handleCheChu"
                 >
                   手车驶出
                 </b-button>
@@ -78,27 +78,27 @@
               </b-col>
             </b-row>
 
-            <b-row style="margin-top: 20px">
-              <b-col cols="6">
+            <b-row style="margin-top: 20px;justify-content: center">
+              <b-col cols="12" sm="6" md="6">
                 <b-button
-                    variant="info"
-                    :disabled="isDisabled"
-                    class="btn-petal402"
-                    pill
-                    @click="handleYiGong"
+                  variant="info"
+                  :disabled="isDisabled"
+                  class="btn-petal402"
+                  pill
+                  @click="handleYiGong"
                 >
                   一键送电
                 </b-button>
                 <br>
                 <br>
               </b-col>
-              <b-col cols="6">
+              <b-col cols="12" sm="6" md="6">
                 <b-button
-                    variant="dark"
-                    :disabled="isDisabled"
-                    class="btn-petal402"
-                    pill
-                    @click="handleYiDuan"
+                  variant="dark"
+                  :disabled="isDisabled"
+                  class="btn-petal402"
+                  pill
+                  @click="handleYiDuan"
                 >
                   一键断电
                 </b-button>
@@ -107,14 +107,14 @@
               </b-col>
             </b-row>
 
-            <b-row style="margin-top: 20px">
-              <b-col cols="6">
+            <b-row style="margin-top: 20px;justify-content: center;">
+              <b-col cols="12" sm="6" md="6">
                 <b-button
-                    variant="light"
-                    :disabled="isDisabled"
-                    class="btn-petal403"
-                    pill
-                    @click="handleDaoRu"
+                  variant="light"
+                  :disabled="isDisabled"
+                  class="btn-petal403"
+                  pill
+                  @click="handleDaoRu"
                 >
                   闭合接地刀
                 </b-button>
@@ -122,33 +122,33 @@
                 <br>
               </b-col>
 
-              <b-col cols="6">
+              <b-col cols="12"
+sm="6" md="6">
                 <b-button
-                    variant="primary"
-                    :disabled="isDisabled"
-                    class="btn-petal402"
-                    pill
-                    @click="handleDaoChu"
+                  variant="primary"
+                  :disabled="isDisabled"
+                  class="btn-petal402"
+                  pill
+                  @click="handleDaoChu"
                 >
                   断开接地刀
                 </b-button>
                 <br>
                 <br>
 
-
               </b-col>
               <br>
               <br>
               <b-col cols="3">
                 <br>
-                </b-col>
-              <b-col cols="6">
+              </b-col>
+              <b-col cols="12" sm="6" md="6" >
                 <b-button
-                    variant="danger"
-                    :disabled="isDisabled"
-                    class="btn-petal402"
-                    pill
-                    @click="handleReboot"
+                  variant="danger"
+                  :disabled="isDisabled"
+                  class="btn-petal402"
+                  pill
+                  @click="handleReboot"
                 >
                   控制器复位
                 </b-button>
@@ -160,12 +160,10 @@
               </b-col>
             </b-row>
 
-
-
             <br>
             <b-form-input
-                v-model="text"
-                class="input"
+              v-model="text"
+              class="input"
             />
           </b-card>
 
@@ -207,7 +205,6 @@ export default {
 
       isDisabled: false,
 
-      visible: false,
 
     }
   },
@@ -235,7 +232,7 @@ export default {
           this.isDisabled = false
 
           this.text = '指令发送成功！'
-          axios.post('http://10.168.1.103/hezha').then(response => {
+          axios.post('http://192.168.6.185/hezha').then(response => {
           })
         }, 1000)
         this.text = '执行合闸'
@@ -253,7 +250,7 @@ export default {
           console.log('Button 2 clicked!')
           this.isDisabled = false
           this.text = '指令发送成功！'
-          axios.post('http://10.168.1.103/fenzha').then(response => {
+          axios.post('http://192.168.6.185/fenzha').then(response => {
           })
         }, 1000)
         this.text = '执行分闸'
@@ -272,7 +269,7 @@ export default {
           this.text = 'Button 3 clicked!'
           this.isDisabled = false
           this.text = '指令发送成功！'
-          axios.post('http://10.168.1.103/daoru').then(response => {
+          axios.post('http://192.168.6.185/daoru').then(response => {
           })
         }, 1000)
         this.text = '执行闭合接地刀操作'
@@ -291,7 +288,7 @@ export default {
           this.text = 'Button 3 clicked!'
           this.isDisabled = false
           this.text = '指令发送成功！'
-          axios.post('http://10.168.1.103/daochu').then(response => {
+          axios.post('http://192.168.6.185/daochu').then(response => {
           })
         }, 1000)
         this.text = '执行断开接地刀操作'
@@ -310,7 +307,7 @@ export default {
           this.text = 'Button 4 clicked!'
           this.isDisabled = false
           this.text = '发送指令完毕！'
-          axios.post('http://10.168.1.103/cheru').then(response => {
+          axios.post('http://192.168.6.185/cheru').then(response => {
           })
         }, 2000)
         this.text = '执行手车驶入'
@@ -329,7 +326,7 @@ export default {
           this.text = 'Button 5 clicked!'
           this.isDisabled = false
           this.text = '发送指令完毕！'
-          axios.post('http://10.168.1.103/chechu').then(response => {
+          axios.post('http://192.168.6.185/chechu').then(response => {
           })
         }, 2000)
         this.text = '执行手车驶出'
@@ -348,7 +345,7 @@ export default {
           this.text = 'Button 6 clicked!'
           this.isDisabled = false
           this.text = '指令发送成功！'
-          axios.post('http://10.168.1.103/yigong').then(response => {
+          axios.post('http://192.168.6.185/yigong').then(response => {
           })
         }, 1000)
         this.text = '执行一键供电,请勿做其他操作...'
@@ -367,7 +364,7 @@ export default {
           this.text = 'Button 7 clicked!'
           this.isDisabled = false
           this.text = '指令发送成功！'
-          axios.post('http://10.168.1.103/yiduan').then(() => {
+          axios.post('http://192.168.6.185/yiduan').then(response => {
           })
         }, 1000)
         this.text = '执行一键断电,请勿做其他操作...'
@@ -387,7 +384,7 @@ export default {
           this.isDisabled = false
           this.text = '指令发送成功！'
           // eslint-disable-next-line no-unused-vars
-          axios.post('http://10.168.1.103/restart').then(response => {
+          axios.post('http://192.168.6.185/reboot').then(response => {
           })
         }, 1000)
         this.text = '执行控制器复位'

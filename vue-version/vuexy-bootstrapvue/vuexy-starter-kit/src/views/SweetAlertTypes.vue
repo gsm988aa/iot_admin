@@ -153,4 +153,7 @@ export default {
   font-family: 宋体;
 
 }
+.demo-inline-spacing{
+  scale: 0.2;
+}
 </style>

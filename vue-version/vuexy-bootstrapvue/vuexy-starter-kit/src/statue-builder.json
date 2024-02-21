@@ -1,0 +1,10 @@
+{
+  "directories": {
+    "output": "exeStatus"
+  },
+  "productName": "ZhuangTai",
+  "win": {
+    "target": "nsis",
+    "icon": "xyd.ico"
+  }
+}

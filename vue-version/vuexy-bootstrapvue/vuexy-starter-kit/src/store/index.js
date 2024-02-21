@@ -10,7 +10,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    ChuanCan: 'admin',
+    ChuanCan: 99,
     isChartVisible: false,
     selectedTemperature: 30,
     emailAddress: '807683237@qq.com', // 用户的邮箱

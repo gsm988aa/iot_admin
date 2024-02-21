@@ -1,0 +1,1 @@
+Access to XMLHttpRequest at 'http://192.168.6.185/gets' from origin 'http://localhost:8888' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.

@@ -1,0 +1,22 @@
+<Resource>
+    <pages>
+        <page name="Screen0" id="0" />
+        <page name="Screen1" id="1" />
+    </pages>
+    <images>
+        <image id="0" url="d:\tft jianchuan\jinchuan\images\background.ICON" effect_width="480" effect_height="270" />
+        <image id="1" url="d:\tft jianchuan\jinchuan\images\金川素材\测温边框.png" effect_width="247" effect_height="48" />
+        <image id="2" url="d:\tft jianchuan\jinchuan\images\金川素材\测温下边框.png" effect_width="242" effect_height="44" />
+        <image id="3" url="d:\tft jianchuan\jinchuan\images\status.ICON" effect_width="172" effect_height="208" />
+        <image id="4" url="d:\tft jianchuan\jinchuan\images\金川素材\按钮 (2).png" effect_width="66" effect_height="34" />
+        <image id="5" url="d:\tft jianchuan\jinchuan\images\金川素材\按钮 (2).png" effect_width="51" effect_height="35" />
+        <image id="6" url="d:\tft jianchuan\jinchuan\images\金川素材\框.png" effect_width="86" effect_height="40" />
+        <image id="7" url="d:\tft jianchuan\jinchuan\images\金川素材\查看.png" effect_width="78" effect_height="24" />
+        <image id="8" url="d:\tft jianchuan\jinchuan\Images\新一代.png" effect_width="40" effect_height="39" />
+        <image id="9" url="d:\tft jianchuan\jinchuan\images\金川素材\head框.png" effect_width="126" effect_height="28" />
+        <image id="10" url="d:\tft jianchuan\jinchuan\Images\返回.png" effect_width="38" effect_height="28" />
+        <image id="11" url="d:\tft jianchuan\jinchuan\images\金川素材\背景3.png" effect_width="421" effect_height="243" />
+        <image id="12" url="d:\tft jianchuan\jinchuan\images\二维码.png" effect_width="164" effect_height="154" />
+    </images>
+    <waves />
+</Resource>

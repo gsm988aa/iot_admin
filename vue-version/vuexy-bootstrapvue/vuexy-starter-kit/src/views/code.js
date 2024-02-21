@@ -1,703 +1,204 @@
-export const codeBasic = `
-<template>
-  <!-- trigger buttons -->
-  <div class="demo-inline-spacing">
-    <b-button
-      v-ripple.400="'rgba(113, 102, 240, 0.15)'"
-      variant="outline-primary"
-      @click="showAlert"
-    >
-      Basic
-    </b-button>
-    <b-button
-      v-ripple.400="'rgba(113, 102, 240, 0.15)'"
-      variant="outline-primary"
-      @click="withTitle"
-    >
-      With Title
-    </b-button>
-    <b-button
-      v-ripple.400="'rgba(113, 102, 240, 0.15)'"
-      variant="outline-primary"
-      @click="withFooter"
-    >
-      With Footer
-    </b-button>
-    <b-button
-      v-ripple.400="'rgba(113, 102, 240, 0.15)'"
-      variant="outline-primary"
-      @click="withHtml"
-    >
-      HTML
-    </b-button>
-  </div>
-</template>
+const SerialPort = require('serialport');
+const Readline = require('@serialport/parser-readline');
+const express = require('express');
+const http = require('http');
+const path = require('path');
 
-<script>
-import {  BButton } from 'bootstrap-vue'
-import Ripple from 'vue-ripple-directive'
+// 创建串口连接
+const Serialport_Data = new SerialPort('COM4', { baudRate: 9600 });
+const parser =  Serialport_Data.pipe(new Readline({ delimiter: '\n' }));
 
-export default {
-  components: {
-    BButton,
-  },
-  directives: {
-    Ripple,
-  },
-  methods: {
+// 创建Express应用和HTTP服务器
+const app = express();
+const server = http.createServer(app);
 
-    // basic
-    showAlert() {
-      this.$swal({
-        title: 'Any fool can use a computer',
-        customClass: {
-          confirmButton: 'btn btn-primary',
-        },
-        buttonsStyling: false,
-      })
-    },
+// 用于处理index.html的路由
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'index.html'));
+});
 
-    // whith title
-    withTitle() {
-      this.$swal({
-        title: 'The Internet?,',
-        text: 'That thing is still around?',
-        customClass: {
-          confirmButton: 'btn btn-primary',
-        },
-        buttonsStyling: false,
-      })
-    },
 
-    // with footer
-    withFooter() {
-      this.$swal({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'Something went wrong!',
-        footer: '<a href="javascript:void(0)">Why do I have this issue?</a>',
-        customClass: {
-          confirmButton: 'btn btn-primary',
-        },
-        buttonsStyling: false,
-      })
-    },
+Serialport_Data.on('data', (data) => {
+  // 处理从串口接收到的数据
+  handleSerialData(data);
+});
 
-    // with html
-    withHtml() {
-      this.$swal({
-        title: '<span class="font-weight-bolder">HTML <u>example</u></span>',
-        icon: 'info',
-        html:
-          'You can use <span class="font-weight-bolder">bold text</span>, '
-          + '<a href="https://pixinvent.com/" target="_blank">links</a> '
-          + 'and other HTML tags',
-        showCloseButton: true,
-        showCancelButton: true,
-        focusConfirm: false,
-        confirmButtonText: 'Great!',
-        confirmButtonAriaLabel: 'Thumbs up, great!',
-        cancelButtonAriaLabel: 'Thumbs down',
-        customClass: {
-          confirmButton: 'btn btn-primary',
-          cancelButton: 'btn btn-outline-danger ml-1',
-        },
-        buttonsStyling: false,
-      })
-    },
-  },
-}
-</script>
-`
+// 01 03  00 06  00  3c   A5DA
+// 00
+// 1248= 16
+//  128 64 32 16 8421  0--65535   65536
+let lastReceivedData = {};
+// 将hexToFloat移到路由回调函数之外
+const hexToFloat = hex => {
+  const receivedDataBuffer = Buffer.from(hex, 'hex');
 
-export const codePosition = `
-<template>
-  <!-- trigger button -->
-  <div class="demo-inline-spacing">
-    <b-button
-      v-ripple.400="'rgba(113, 102, 240, 0.15)'"
-      variant="outline-primary"
-      @click="topStart"
-    >
-      Top Start
-    </b-button>
-    <b-button
-      v-ripple.400="'rgba(113, 102, 240, 0.15)'"
-      variant="outline-primary"
-      @click="topEnd"
-    >
-      Top End
-    </b-button>
-    <b-button
-      v-ripple.400="'rgba(113, 102, 240, 0.15)'"
-      variant="outline-primary"
-      @click="bottomStart"
-    >
-      Bottom Starts
-    </b-button>
-    <b-button
-      v-ripple.400="'rgba(113, 102, 240, 0.15)'"
-      variant="outline-primary"
-      @click="bottomEnd"
-    >
-      Bottom End
-    </b-button>
-  </div>
-</template>
+  if (receivedDataBuffer.length < 4) {
+    console.error('Hex string is too short to represent a float:', hex);
+    return null;
+  }
 
-<script>
-import { BButton } from 'bootstrap-vue'
-import Ripple from 'vue-ripple-directive'
+  const floatValue = receivedDataBuffer.readFloatBE(0);
+  return floatValue;
+};
 
-export default {
-  components: {
-    BButton,
-  },
-  directives: {
-    Ripple,
-  },
-  methods: {
+const sendSerialData = () => {
+  return new Promise((resolve, reject) => {
+    const hexData = "01030006003cA5DA";
 
-    // top start
-    topStart() {
-      this.$swal({
-        position: 'top-start',
-        icon: 'success',
-        title: 'Your work has been saved',
-        showConfirmButton: false,
-        timer: 1500,
-        customClass: {
-          confirmButton: 'btn btn-primary',
-        },
-        buttonsStyling: false,
-      })
-    },
-    // top end
-    topEnd() {
-      this.$swal({
-        position: 'top-end',
-        icon: 'success',
-        title: 'Your work has been saved',
-        showConfirmButton: false,
-        timer: 1500,
-        customClass: {
-          confirmButton: 'btn btn-primary',
-        },
-        buttonsStyling: false,
-      })
-    },
-    // bottom start
-    bottomStart() {
-      this.$swal({
-        position: 'bottom-start',
-        icon: 'success',
-        title: 'Your work has been saved',
-        showConfirmButton: false,
-        timer: 1500,
-        customClass: {
-          confirmButton: 'btn btn-primary',
-        },
-        buttonsStyling: false,
-      })
-    },
+    Serialport_Data.write(Buffer.from(hexData, 'hex'), (error) => {
+      if (error) {
+        reject(error);
+      } else {
+        resolve(hexData);
+      }
+    });
+  });
+};
 
-    // bottom end
-    bottomEnd() {
-      this.$swal({
-        position: 'bottom-end',
-        icon: 'success',
-        title: 'Your work has been saved',
-        showConfirmButton: false,
-        timer: 1500,
-        customClass: {
-          confirmButton: 'btn btn-primary',
-        },
-        buttonsStyling: false,
-      })
-    },
-  },
-}
-</script>
-`
+let accumulatedData = '';
+const handleSerialData = () => {
+  return new Promise((resolve, reject) => {
 
-export const codeAnimation = `
-<template>
-  <!-- trigger button -->
-  <div class="demo-inline-spacing">
-    <b-button
-      v-ripple.400="'rgba(113, 102, 240, 0.15)'"
-      variant="outline-primary"
-      @click="bounceIn"
-    >
-      Bounce In
-    </b-button>
-    <b-button
-      v-ripple.400="'rgba(113, 102, 240, 0.15)'"
-      variant="outline-primary"
-      @click="fadeIn"
-    >
-      Fade In
-    </b-button>
-    <b-button
-      v-ripple.400="'rgba(113, 102, 240, 0.15)'"
-      variant="outline-primary"
-      @click="flipIn"
-    >
-      Flip In
-    </b-button>
-    <b-button
-      v-ripple.400="'rgba(113, 102, 240, 0.15)'"
-      variant="outline-primary"
-      @click="tada"
-    >
-      Tada
-    </b-button>
-    <b-button
-      v-ripple.400="'rgba(113, 102, 240, 0.15)'"
-      variant="outline-primary"
-      @click="shake"
-    >
-      Shake
-    </b-button>
-  </div>
-</template>
+    Serialport_Data.on('data', (data) => {
+      try {
+        if (Buffer.isBuffer(data)) {
+          const newHexData = data.toString('hex');
 
-<script>
-import {  BButton } from 'bootstrap-vue'
-import Ripple from 'vue-ripple-directive'
-import 'animate.css'
+          resolve(newHexData);
+          // console.log("get the returndata:",newHexData)
 
-export default {
-  components: {
-    BCardCode,
-    BButton,
-  },
-  directives: {
-    Ripple,
-  },
-  methods: {
+        } else {
+          console.error('Invalid hex data:', data);
+          reject(new Error('Invalid hex data'));
+        }
+      } catch (error) {
+        console.error('Error handling serial data:', error);
+        reject(error);
+      }
+    });
+  });
+};
 
-    // bounce in method
-    bounceIn() {
-      this.$swal({
-        title: 'Bounce In Animation',
-        customClass: {
-          confirmButton: 'btn btn-primary',
-        },
-        showClass: {
-          popup: 'animate__animated animate__bounceIn',
-        },
-        buttonsStyling: false,
-      })
-    },
 
-    // fade in
-    fadeIn() {
-      this.$swal({
-        title: 'Fade In Animation',
-        customClass: {
-          confirmButton: 'btn btn-primary',
-        },
-        showClass: {
-          popup: 'animate__animated animate__fadeIn',
-        },
-        buttonsStyling: false,
-      })
-    },
+app.get('/data', async (req, res) => {
 
-    // flip in
-    flipIn() {
-      this.$swal({
-        title: 'Flip In Animation',
-        customClass: {
-          confirmButton: 'btn btn-primary',
-        },
-        showClass: {
-          popup: 'animate__animated animate__flipInX',
-        },
-        buttonsStyling: false,
-      })
-    },
+  try {
+    // 假设您已经接收到十六进制数据作为字符串
+    const data = await handleSerialData(sendSerialData());
 
-    // tada
-    tada() {
-      this.$swal({
-        title: 'Tada Animation',
-        customClass: {
-          confirmButton: 'btn btn-primary',
-        },
-        showClass: {
-          popup: 'animate__animated animate__tada',
-        },
-        buttonsStyling: false,
-      })
-    },
+    // Check if data is valid and has a length that is a multiple of 4
+    if (data && data.length >= 8 && data.length % 4 === 0) {
+      // 转化为10进制
+      const aPhaseVoltage = parseInt(data.slice(6, 10), 16) / 10;
+      const bPhaseVoltage = parseInt(data.slice(10, 14), 16) / 10;
+      const cPhaseVoltage = parseInt(data.slice(14, 18), 16) / 10;
+      const ablineVoltage = parseInt(data.slice(18, 22), 16) / 10;
+      const bclineVoltage = parseInt(data.slice(22, 26), 16) / 10;
+      const calineVoltage = parseInt(data.slice(26, 30), 16) / 10;
+      const aPhaseCurrent = parseInt(data.slice(30, 34), 16) / 1000;
+      const bPhaseCurrent = parseInt(data.slice(34, 38), 16) / 1000;
+      const cPhaseCurrent = parseInt(data.slice(38, 42), 16) / 1000;
+      const aphaseActivePower = parseInt(data.slice(42, 46), 16) / 10;
+      const bphaseActivePower = parseInt(data.slice(46, 50), 16) / 10;
 
-    // shake
-    shake() {
-      this.$swal({
-        title: 'Shake Animation',
-        customClass: {
-          confirmButton: 'btn btn-primary',
-        },
-        showClass: {
-          popup: 'animate__animated animate__shakeX',
-        },
-        buttonsStyling: false,
-      })
-    },
-  },
-}
-</script>
-`
+      const cphaseActivePower = parseInt(data.slice(50, 54), 16) / 10;
+      const TotalActivePower = parseInt(data.slice(54, 58), 16) / 10;
+      const aphaseReactivePower = parseInt(data.slice(58, 62), 16) / 10;
+      const bphaseReactivePower = parseInt(data.slice(62, 66), 16) / 10;
+      const cphaseReactivePower = parseInt(data.slice(66, 70), 16) / 10;
+      const totalReactivePower = parseInt(data.slice(70, 74), 16) / 10;
+      const aphaseApperantPower = parseInt(data.slice(74, 78), 16) / 10;
+      const bphaseApperantPower = parseInt(data.slice(78, 82), 16) / 10;
+      const cphaseApperantPower = parseInt(data.slice(82, 86), 16) / 10;
+      const TotalApperantPower = parseInt(data.slice(86, 90), 16) / 10;
+      const aphasePowerFactor = parseInt(data.slice(90, 94), 16) / 1000;
+      const bphasePowerFactor = parseInt(data.slice(94, 98), 16) / 1000;
+      const cphasePowerFactor = parseInt(data.slice(98, 102), 16) / 1000;
+      const PowerFactor = parseInt(data.slice(102, 106), 16) / 1000;
+      const Frequency = parseInt(data.slice(106, 110), 16) / 100;
+      const TotalKWH = parseInt(data.slice(110, 114), 16) / 100;
+      const TotalKWH2 = parseInt(data.slice(114, 118), 16) / 100;
+      const TotalKvarH = parseInt(data.slice(118, 122), 16) / 100;
+      const TotalKvarH2 = parseInt(data.slice(122, 126), 16) / 100;
+      // 打印上述所有信息
+      console.log("Received hex data:", data);
+        console.log("aPhaseVoltage:", aPhaseVoltage);
+        console.log("bPhaseVoltage:", bPhaseVoltage);
+        console.log("cPhaseVoltage:", cPhaseVoltage);
+        console.log("ablineVoltage:", ablineVoltage);
+        console.log("bclineVoltage:", bclineVoltage);
+        console.log("calineVoltage:", calineVoltage);
+        console.log("aPhaseCurrent:", aPhaseCurrent);
+        console.log("bPhaseCurrent:", bPhaseCurrent);
+        console.log("cPhaseCurrent:", cPhaseCurrent);
+        console.log("aphaseActivePower:", aphaseActivePower);
+        console.log("bphaseActivePower:", bphaseActivePower);
+        console.log("cphaseActivePower:", cphaseActivePower);
+        console.log("TotalActivePower:", TotalActivePower);
+        console.log("aphaseReactivePower:", aphaseReactivePower);
+        console.log("bphaseReactivePower:", bphaseReactivePower);
+        console.log("cphaseReactivePower:", cphaseReactivePower);
+        console.log("totalReactivePower:", totalReactivePower);
+        console.log("aphaseApperantPower:", aphaseApperantPower);
+        console.log("bphaseApperantPower:", bphaseApperantPower);
+        console.log("cphaseApperantPower:", cphaseApperantPower);
+        console.log("TotalApperantPower:", TotalApperantPower);
+        console.log("aphasePowerFactor:", aphasePowerFactor);
+        console.log("bphasePowerFactor:", bphasePowerFactor);
+        console.log("cphasePowerFactor:", cphasePowerFactor);
+        console.log("PowerFactor:", PowerFactor);
+        console.log("Frequency:", Frequency);
+        console.log("TotalKWH:", TotalKWH);
+        console.log("TotalKWH2:", TotalKWH2);
+        console.log("TotalKvarH:", TotalKvarH);
+        console.log("TotalKvarH2:", TotalKvarH2);
 
-export const codeTypes = `
-<template>
-  <!-- trigger button -->
-  <div class="demo-inline-spacing">
-    <b-button
-      v-ripple.400="'rgba(40, 199, 111, 0.15)'"
-      variant="outline-success"
-      @click="success"
-    >
-      Success
-    </b-button>
-    <b-button
-      v-ripple.400="'rgba(234, 84, 85, 0.15)'"
-      variant="outline-danger"
-      @click="error"
-    >
-      Error
-    </b-button>
-    <b-button
-      v-ripple.400="'rgba(255, 159, 67, 0.15)'"
-      variant="outline-warning"
-      @click="warning"
-    >
-      Warning
-    </b-button>
-    <b-button
-      v-ripple.400="'rgba(0, 207, 232, 0.15)'"
-      variant="outline-info"
-      @click="info"
-    >
-      Info
-    </b-button>
-  </div>
-</template>
 
-<script>
-import {  BButton } from 'bootstrap-vue'
-import Ripple from 'vue-ripple-directive'
 
-export default {
-  components: {
-    BCardCode,
-    BButton,
-  },
-  directives: {
-    Ripple,
-  },
-  methods: {
+      // 更新lastReceivedData对象
+      res.json({
+        aPhaseVoltage,
+        bPhaseVoltage,
+        cPhaseVoltage,
+        ablineVoltage,
+        bclineVoltage,
+        calineVoltage,
+        aPhaseCurrent,
+        bPhaseCurrent,
+        cPhaseCurrent,
+        aphaseActivePower,
+        bphaseActivePower,
+        cphaseActivePower,
+        TotalActivePower,
+        aphaseReactivePower,
+        bphaseReactivePower,
+        cphaseReactivePower,
+        totalReactivePower,
+        aphaseApperantPower,
+        bphaseApperantPower,
+        cphaseApperantPower,
+        TotalApperantPower,
+        aphasePowerFactor,
+        bphasePowerFactor,
+        cphasePowerFactor,
+        PowerFactor,
+        Frequency,
+        TotalKWH,
+        TotalKWH2,
+        TotalKvarH,
+        TotalKvarH2
+      });
 
-    // success
-    success() {
-      this.$swal({
-        title: 'Good job!',
-        text: 'You clicked the button!',
-        icon: 'success',
-        customClass: {
-          confirmButton: 'btn btn-primary',
-        },
-        buttonsStyling: false,
-      })
-    },
-
-    // error
-    error() {
-      this.$swal({
-        title: 'Error!',
-        text: ' You clicked the button!',
-        icon: 'error',
-        customClass: {
-          confirmButton: 'btn btn-primary',
-        },
-        buttonsStyling: false,
-      })
-    },
-
-    // warning
-    warning() {
-      this.$swal({
-        title: 'Warning!',
-        text: ' You clicked the button!',
-        icon: 'warning',
-        customClass: {
-          confirmButton: 'btn btn-primary',
-        },
-        buttonsStyling: false,
-      })
-    },
-
-    // info
-    info() {
-      this.$swal({
-        title: 'Info!',
-        text: 'You clicked the button!',
-        icon: 'info',
-        customClass: {
-          confirmButton: 'btn btn-primary',
-        },
-        buttonsStyling: false,
-      })
-    },
-  },
-}
-</script>
-`
-
-export const codeOptions = `
-<template>
-  <!-- trigger button -->
-  <div class="demo-inline-spacing">
-    <b-button
-      v-ripple.400="'rgba(113, 102, 240, 0.15)'"
-      variant="outline-primary"
-      @click="customImage"
-    >
-      Custom Image
-    </b-button>
-    <b-button
-      v-ripple.400="'rgba(113, 102, 240, 0.15)'"
-      variant="outline-primary"
-      @click="autoClose"
-    >
-      Auto Close
-    </b-button>
-    <b-button
-      v-ripple.400="'rgba(113, 102, 240, 0.15)'"
-      variant="outline-primary"
-      @click="clickOutside"
-    >
-      Click Outside
-    </b-button>
-    <b-button
-      v-ripple.400="'rgba(113, 102, 240, 0.15)'"
-      variant="outline-primary"
-      @click="ajax"
-    >
-      Ajax
-    </b-button>
-  </div>
-</template>
-
-<script>
-import { BButton } from 'bootstrap-vue'
-import Ripple from 'vue-ripple-directive'
-
-export default {
-  components: {
-    BButton,
-  },
-  directives: {
-    Ripple,
-  },
-  data() {
-    return {
-      timerInterval: null,
+    } else {
+      res.status(400).send('Invalid data received');
     }
-  },
-  methods: {
+  } catch (error) {
+    console.error('Error in route:', error);
+    res.status(500).send('Error handling serial data');
+  }
+});
 
-    // custom image
-    customImage() {
-      this.$swal({
-        title: 'Sweet!',
-        text: 'Modal with a custom image.',
-        // eslint-disable-next-line global-require
-        imageUrl: require('@/assets/images/slider/04.jpg'),
-        imageWidth: 400,
-        imageHeight: 200,
-        imageAlt: 'Custom image',
-        customClass: {
-          confirmButton: 'btn btn-primary',
-        },
-        buttonsStyling: false,
-      })
-    },
-
-    // auto close
-    autoClose() {
-      this.$swal({
-        title: 'Auto close alert!',
-        html: 'I will close in <strong>3</strong> seconds.',
-        timer: 3000,
-        customClass: {
-          confirmButton: 'btn btn-primary',
-        },
-        buttonsStyling: false,
-      })
-    },
-
-    // click out side
-    clickOutside() {
-      this.$swal({
-        title: 'Click outside to close!',
-        text: 'This is a cool message!',
-        allowOutsideClick: true,
-        customClass: {
-          confirmButton: 'btn btn-primary',
-        },
-        buttonsStyling: false,
-      })
-    },
-
-    // ajax
-    ajax() {
-      this.$swal({
-        title: 'Search for a user',
-        input: 'text',
-        customClass: {
-          confirmButton: 'btn btn-primary',
-          cancelButton: 'btn btn-outline-danger ml-1',
-        },
-        buttonsStyling: false,
-        inputAttributes: {
-          autocapitalize: 'off',
-        },
-        showCancelButton: true,
-        confirmButtonText: 'Look up',
-        showLoaderOnConfirm: true,
-        preConfirm(login) {
-          if (!login) return null
-          return fetch(\`//api.github.com/users/\${login}\`)
-            .then(response => {
-              if (!response.ok) {
-                throw new Error(response.statusText)
-              }
-              return response.json()
-            })
-            .catch(error => {
-              this.$swal.showValidationMessage(\`Request failed:  \${error}\`)
-            })
-        },
-      }).then(result => {
-        if (result.value) {
-          this.$swal({
-            title: \`\${result.value.login}'s avatar\`,
-            imageUrl: result.value.avatar_url,
-            customClass: { confirmButton: 'btn btn-primary' },
-          })
-        }
-      })
-    },
-  },
-}
-</script>
-`
-
-export const codeConfirm = `
-<template>
-  <!-- trigger buttons -->
-  <div class="demo-inline-spacing">
-    <div>
-      <h5>Confirm Button Text</h5>
-      <b-button
-        v-ripple.400="'rgba(113, 102, 240, 0.15)'"
-        variant="outline-primary"
-        @click="confirmText"
-      >
-        Confirm Text
-      </b-button>
-    </div>
-    <div>
-      <h5>Confirm Button Text</h5>
-      <b-button
-        v-ripple.400="'rgba(113, 102, 240, 0.15)'"
-        variant="outline-primary"
-        @click="confirmButtonColor"
-      >
-        Confirm Button Color
-      </b-button>
-    </div>
-  </div>
-</template>
-
-<script>
-import { BButton } from 'bootstrap-vue'
-import Ripple from 'vue-ripple-directive'
-
-export default {
-  components: {
-    BButton,
-  },
-  directives: {
-    Ripple,
-  },
-  methods: {
-    // confirm texrt
-    confirmText() {
-      this.$swal({
-        title: 'Are you sure?',
-        text: "You won't be able to revert this!",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonText: 'Yes, delete it!',
-        customClass: {
-          confirmButton: 'btn btn-primary',
-          cancelButton: 'btn btn-outline-danger ml-1',
-        },
-        buttonsStyling: false,
-      }).then(result => {
-        if (result.value) {
-          this.$swal({
-            icon: 'success',
-            title: 'Deleted!',
-            text: 'Your file has been deleted.',
-            customClass: {
-              confirmButton: 'btn btn-success',
-            },
-          })
-        }
-      })
-    },
-
-    // comfirm button color
-    confirmButtonColor() {
-      this.$swal({
-        title: 'Are you sure?',
-        text: "You won't be able to revert this!",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonText: 'Yes, delete it!',
-        customClass: {
-          confirmButton: 'btn btn-primary',
-          cancelButton: 'btn btn-outline-danger ml-1',
-        },
-        buttonsStyling: false,
-      }).then(result => {
-        if (result.value) {
-          this.$swal({
-            icon: 'success',
-            title: 'Deleted!',
-            text: 'Your file has been deleted.',
-            customClass: {
-              confirmButton: 'btn btn-success',
-            },
-          })
-        } else if (result.dismiss === 'cancel') {
-          this.$swal({
-            title: 'Cancelled',
-            text: 'Your imaginary file is safe :)',
-            icon: 'error',
-            customClass: {
-              confirmButton: 'btn btn-success',
-            },
-          })
-        }
-      })
-    },
-  },
-}
-</script>
-`
+// 启动HTTP服务器
+server.listen(10866, 'localhost', () => {
+  console.log('Server running at http://localhost:10866/');
+});

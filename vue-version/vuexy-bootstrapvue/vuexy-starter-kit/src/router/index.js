@@ -24,6 +24,34 @@ const router = new VueRouter({
         ],
       },
     },
+    {
+      path: '/BigData',
+      name: 'BigData',
+      component: () => import('@/views/BigData.vue'),
+      meta: {
+        pageTitle: '数据分析',
+        breadcrumb: [
+          {
+            text: '智能控制系统',
+            active: true,
+          },
+        ],
+      },
+    },
+    {
+      path: '/ThreeD',
+      name: 'ThreeD',
+      component: () => import('@/views/ThreeD.vue'),
+      meta: {
+        pageTitle: '3D模型图',
+        breadcrumb: [
+          {
+            text: '智能控制系统',
+            active: true,
+          },
+        ],
+      },
+    },
     // {
     //   path: '/second-page',
     //   name: 'second-page',
@@ -38,6 +66,20 @@ const router = new VueRouter({
     //     ],
     //   },
     // },
+    {
+      path: '/RealTimeVideo',
+      name: 'RealTimeVideo',
+      component: () => import('@/views/RealTimeVideo.vue'),
+      meta: {
+        pageTitle: 'RealTimeVideo',
+        breadcrumb: [
+          {
+            text: 'RealTimeVideo',
+            active: true,
+          },
+        ],
+      },
+    },
     {
       path: '/login',
       name: 'login',

@@ -64,10 +64,10 @@
                     rules="required|email"
                 >
                   <b-form-input
-                      id="login-email"
-                      v-model="userEmail"
+                    id="login-email"
+                    v-model="userEmail"
                       :state="errors.length > 0 ? false:null"
-                      name="login-email"
+                    name="login-email"
                       placeholder="john@example.com"
                   />
                   <small class="text-danger">{{ errors[0] }}</small>

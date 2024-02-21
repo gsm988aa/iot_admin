@@ -3,10 +3,10 @@
 
     <b-card
       title="是否要进行分闸操作？"
-      style="width: 100%;height: 200px"
+      style="width: 100%;height: 100%"
     >
-      <b-row style="margin-top: 50px">
-        <b-col cols="6">
+      <b-row style="margin-top: 50px;align-items: center;justify-content: center;margin-left: 50px">
+        <b-col cols="12" sm="12" md="6">
           <b-button
 
             pill
@@ -18,7 +18,7 @@
             是,立即分闸
           </b-button>
         </b-col>
-        <b-col cols="6">
+        <b-col cols="12" sm="12" md="6">
           <b-button
             v-ripple.400="'rgba(0, 207, 232, 0.15)'"
 
@@ -55,7 +55,7 @@
       </b-modal>
 
     </b-card>
-
+<!--                <img src="@/assets/images/222.png" style="scale: 0.2"/>-->
   </div>
 </template>
 
@@ -178,7 +178,7 @@ export default {
 .xxxl
 {
   font-size: 42px;
-  margin-left: 50px;
+  justify-content: center;
 }
 
 .mb-0{

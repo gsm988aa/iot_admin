@@ -1,7 +1,33 @@
 const path = require('path')
 
 module.exports = {
-  publicPath: '/',
+  devServer: {
+    // disableHostCheck: true,
+    allowedHosts: [
+      'wuxixinyidai.com', // 允许访问的域名地址，即花生壳内网穿透的地址
+      '.wuxixinyidai.com', // .是二级域名的通配符
+    ],
+    // 更换端口号
+    port: 8888,
+    proxy: {
+
+      '/gets': {
+     //   target: 'http://192.168.10.166/gets', // 单片机 HTTP 服务器地址
+        target: 'http://192.168.6.185/gets', // 单片机 HTTP 服务器地址
+        changeOrigin: true,
+        pathRewrite: {
+          '^/gets': '/gets',
+        },
+        headers: {
+         // 'Access-Control-Allow-Origin': 'http://192.168.10.227:8888', // 设置允许的源请求地址
+          'Access-Control-Allow-Origin': 'http://192.168.6.185:8888', // 设置允许的源请求地址
+        },
+      },
+
+    },
+  },
+
+  publicPath: './',
   lintOnSave: false,
   css: {
     loaderOptions: {
